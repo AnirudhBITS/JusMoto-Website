@@ -561,7 +561,7 @@
                 {
                     breakpoint: 992,
                     settings: {
-                        arrows: false,
+                        arrows: true,
                         dots: true,
                         slidesToShow: 2,
                         slidesToScroll: 1
@@ -570,7 +570,7 @@
                 {
                     breakpoint: 768,
                     settings: {
-                        arrows: false,
+                        arrows: true,
                         dots: true,
                         slidesToShow: 2,
                         slidesToScroll: 1
@@ -579,7 +579,7 @@
                 {
                     breakpoint: 580,
                     settings: {
-                        arrows: false,
+                        arrows: true,
                         dots: true,
                         slidesToShow: 2,
                         slidesToScroll: 1
@@ -655,7 +655,7 @@
                     settings: {
                         slidesToShow: 2,
                         slidesToScroll: 1,
-                        arrows: false,
+                        arrows: true,
                         dots: true
                     }
                 },
@@ -664,7 +664,7 @@
                     settings: {
                         slidesToShow: 2,
                         slidesToScroll: 1,
-                        arrows: false,
+                        arrows: true,
                         dots: true
                     }
                 },
@@ -673,14 +673,14 @@
                     settings: {
                         slidesToShow: 1,
                         slidesToScroll: 1,
-                        arrows: false,
+                        arrows: true,
                         dots: true
                     }
                 },
                 {
                     breakpoint: 580,
                     settings: {
-                        arrows: false,
+                        arrows: true,
                         dots: true,
                         slidesToShow: 1,
                         slidesToScroll: 1
@@ -766,8 +766,8 @@
                 {
                     breakpoint: 580,
                     settings: {
-                        arrows: false,
-                        dots: true,
+                        arrows: true,
+                        dots: false,
                         slidesToShow: 1,
                         slidesToScroll: 1
                     }
@@ -1503,4 +1503,318 @@
 
 
   
+    /* --------------------------------------------------------
+        Dynamic Services Fetching
+    -------------------------------------------------------- */
+    /* --------------------------------------------------------
+        Dynamic Services Fetching
+    -------------------------------------------------------- */
+    async function fetchServices() {
+        const container = $('#services-container');
+        const loading = $('#services-loading');
+        const error = $('#services-error');
+
+        if (!container.length) return;
+
+        try {
+            console.log('Fetching services from: http://localhost:3000/api/v1/services?type=0');
+            const response = await fetch('http://localhost:3000/api/v1/services?type=0');
+            
+            if (!response.ok) {
+                console.error(`API Error: ${response.status} ${response.statusText}`);
+                throw new Error(`Network response was not ok: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log('Services API Plain Response:', data);
+            
+            // Robustly extract services array
+            const services = data.data || (Array.isArray(data) ? data : []);
+            console.log('Extracted Services Array:', services);
+            
+            if (services.length === 0) {
+                console.warn('No services found in the API response.');
+            }
+
+            renderServices(services);
+            loading.addClass('d-none');
+            error.addClass('d-none');
+        } catch (err) {
+            console.error('Error fetching services:', err);
+            
+            if (err.name === 'TypeError' && err.message === 'Failed to fetch') {
+                console.error('CRITICAL: Failed to fetch. Check if the backend server (port 3000) is running AND if CORS is enabled.');
+                error.find('p').text('Connection failed. Please check if the API server is running and CORS is enabled.');
+            }
+
+            loading.addClass('d-none');
+            error.removeClass('d-none');
+        }
+    }
+
+    function renderServices(services) {
+        const container = $('#services-container');
+        let html = '';
+        services.forEach(service => {
+            const currentPrice = service.discountPrice || service.discount_price;
+            const originalPrice = service.price || service.original_price;
+            
+            let priceHtml = '';
+            if (currentPrice && originalPrice) {
+                priceHtml = `<span>₹${currentPrice}</span> <del>₹${originalPrice}</del>`;
+            } else {
+                priceHtml = `<span>₹${currentPrice || originalPrice}</span>`;
+            }
+
+            html += `
+                <div class="col-xl-3 col-lg-3 col-md-6 col-12">
+                    <div class="ltn__service-item-1">
+                        <div class="service-item-img">
+                            <img src="${service.image || 'img/slider/slider-banner-service-1.jpg'}" alt="${service.title}">
+                        </div>
+                        <div class="service-item-brief">
+                            <h3><a href="service-details.html">${service.title}</a></h3>
+                            <p>${service.description}</p>
+                            <div class="product-price">
+                                ${priceHtml}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        container.html(html);
+    }
+
+    /* --------------------------------------------------------
+        Dynamic Products Fetching (Car Best Deals)
+    -------------------------------------------------------- */
+    async function fetchProducts() {
+        const tabMenu = $('#product-category-tabs');
+        const tabContent = $('#product-tab-content');
+        const loading = $('#products-loading');
+        const tabsLoading = $('#products-tabs-loading');
+        const error = $('#products-error');
+
+        if (!tabMenu.length || !tabContent.length) return;
+
+        try {
+            console.log('Fetching products from: https://16.112.128.19.nip.io/api/v1/services?type=1');
+            const response = await fetch('https://16.112.128.19.nip.io/api/v1/services?type=1');
+            
+            if (!response.ok) {
+                console.error(`API Error: ${response.status} ${response.statusText}`);
+                throw new Error(`Network response was not ok: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log('Products API Plain Response:', data);
+            
+            // Robustly extract products array
+            const products = data.data || (Array.isArray(data) ? data : []);
+            console.log('Extracted Products Array:', products);
+            
+            if (products.length === 0) {
+                console.warn('No products found in the API response.');
+                loading.addClass('d-none');
+                error.removeClass('d-none').find('p').text('No products found.');
+                return;
+            }
+
+            // Group products by category
+            const groupedProducts = products.reduce((acc, product) => {
+                // Check if category is an object and extract name, otherwise use category string or 'Other'
+                const category = (product.category && typeof product.category === 'object') 
+                    ? product.category.name 
+                    : (product.category || 'Other');
+                
+                if (!acc[category]) acc[category] = [];
+                acc[category].push(product);
+                return acc;
+            }, {});
+
+            const categories = Object.keys(groupedProducts);
+
+            if (categories.length === 0) {
+                loading.addClass('d-none');
+                error.removeClass('d-none').find('p').text('No products categories found.');
+                return;
+            }
+
+            renderProductTabs(categories);
+            renderProductsByCategory(groupedProducts);
+            
+            loading.addClass('d-none');
+            tabsLoading.addClass('d-none');
+            error.addClass('d-none');
+            
+            // Initialize Slick sliders for dynamic content
+            initDynamicProductSliders();
+
+        } catch (err) {
+            console.error('Error fetching products:', err);
+            
+            if (err.name === 'TypeError' && err.message === 'Failed to fetch') {
+                console.error('CRITICAL: Failed to fetch products. Check CORS and server status.');
+            }
+
+            loading.addClass('d-none');
+            tabsLoading.addClass('d-none');
+            error.removeClass('d-none');
+        }
+    }
+
+    function renderProductTabs(categories) {
+        const tabMenu = $('#product-category-tabs');
+        let html = '';
+        
+        categories.forEach((category, index) => {
+            const isActive = index === 0 ? 'active show' : '';
+            const categoryId = category.toLowerCase().replace(/\s+/g, '_');
+            html += `<a class="${isActive}" data-bs-toggle="tab" href="#tab_${categoryId}">${category}</a>`;
+        });
+        
+        tabMenu.html(html);
+    }
+
+    function renderProductsByCategory(groupedProducts) {
+        const tabContent = $('#product-tab-content');
+        let html = '';
+        
+        Object.entries(groupedProducts).forEach(([category, products], index) => {
+            const isActive = index === 0 ? 'active show' : '';
+            const categoryId = category.toLowerCase().replace(/\s+/g, '_');
+            
+            html += `
+                <div class="tab-pane fade ${isActive}" id="tab_${categoryId}">
+                    <div class="ltn__product-tab-content-inner">
+                        <div class="row ltn__tab-product-slider-one-active slick-arrow-1">
+                            ${products.map(product => renderSingleProduct(product)).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        
+        tabContent.html(html);
+    }
+
+    function renderSingleProduct(product) {
+        const currentPrice = product.discountPrice || product.discount_price;
+        const originalPrice = product.price || product.original_price;
+        const badge = product.badge || 'New';
+        
+        let priceHtml = '';
+        if (currentPrice && originalPrice) {
+            priceHtml = `<span>₹${currentPrice}</span> <del>₹${originalPrice}</del>`;
+        } else {
+            priceHtml = `<span>₹${currentPrice || originalPrice}</span>`;
+        }
+
+        return `
+            <div class="col-lg-12">
+                <div class="ltn__product-item ltn__product-item-3 text-center">
+                    <div class="product-img">
+                        <a href="product-details.html"><img src="${product.image || 'img/product/1.png'}" alt="${product.title}"></a>
+                        <div class="product-badge">
+                            <ul>
+                                <li class="sale-badge">${badge}</li>
+                            </ul>
+                        </div>
+                        <div class="product-hover-action">
+                            <ul>
+                                <li>
+                                    <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                        <i class="far fa-eye"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                        <i class="far fa-heart"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-ratting">
+                            <ul>
+                                <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                <li><a href="#"><i class="fas fa-star"></i></a></li>
+                                <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+                                <li><a href="#"><i class="far fa-star"></i></a></li>
+                            </ul>
+                        </div>
+                        <h2 class="product-title"><a href="product-details.html">${product.title}</a></h2>
+                        <div class="product-price">
+                            ${priceHtml}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    function initDynamicProductSliders() {
+        $('.ltn__tab-product-slider-one-active').not('.slick-initialized').slick({
+            arrows: true,
+            dots: false,
+            infinite: true,
+            speed: 300,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            prevArrow: '<a class="slick-prev"><i class="fas fa-arrow-left" alt="Arrow Icon"></i></a>',
+            nextArrow: '<a class="slick-next"><i class="fas fa-arrow-right" alt="Arrow Icon"></i></a>',
+            responsive: [
+                {
+                    breakpoint: 1200,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 992,
+                    settings: {
+                        arrows: true,
+                        dots: true,
+                        slidesToShow: 2,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        arrows: true,
+                        dots: true,
+                        slidesToShow: 2,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 580,
+                    settings: {
+                        arrows: true,
+                        dots: true,
+                        slidesToShow: 1, // Fix: Changed to 1 for mobile for better layout
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        });
+    }
+
+    // Initialize services and products if containers exist
+    if ($('#services-container').length) {
+        fetchServices();
+    }
+    if ($('#product-category-tabs').length) {
+        fetchProducts();
+    }
+
 })(jQuery);

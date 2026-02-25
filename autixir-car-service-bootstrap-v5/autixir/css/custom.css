@@ -1,0 +1,557 @@
+/* =============================================================
+   JusMoto Custom CSS Overrides
+   ============================================================= */
+
+/* -------------------------------------------------------
+   1. SLIDER BANNER – Padding top/bottom inside each slide
+   ------------------------------------------------------- */
+
+/* The slide inner wrapper controls the vertical space
+   between the header and the dots/bottom of the slider.   */
+.ltn__slide-item-inner {
+    padding-top: 80px;
+    padding-bottom: 60px;
+}
+
+/* Tighten on tablets */
+@media (max-width: 1199px) {
+    .ltn__slide-item-inner {
+        padding-top: 40px;
+        padding-bottom: 30px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+    .ltn__slide-item-inner {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+}
+
+/* -------------------------------------------------------
+   2. ABOUT US – Left column image effects
+      Unify border/outline for all four images AND the
+      experience counter box.  Centre them inside the column.
+   ------------------------------------------------------- */
+
+/* Wrapper: make it flex so its children can be centred */
+.about-us-img-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* The parallax list is the direct container of the images */
+.ltn__parallax-effect-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    /* Keep list-style off */
+    padding: 0;
+    list-style: none;
+}
+
+/* Each effect image: give a consistent border */
+.ltn__effect-img img {
+    border: 4px solid var(--ltn__secondary-color);
+    border-radius: 4px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Experience counter box – match the same border size */
+.about-us-img-info {
+    border: 4px solid var(--ltn__secondary-color);
+    border-radius: 4px;
+    /* Keep existing positioning but centre it within its parent */
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* -------------------------------------------------------
+   3. ABOUT US – Right column vertical centering
+      The column already has `align-self-center` but ensure
+      the info wrap is vertically centered too.
+   ------------------------------------------------------- */
+.about-us-info-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+/* -------------------------------------------------------
+   4. NEED ASSISTANCE block – Reduce space above it
+      The `<hr>` above `.about-call-us` has 40 px top margin
+      by default (from .about-us-info-wrap hr).  Pull it in.
+   ------------------------------------------------------- */
+.about-us-info-wrap hr {
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+}
+
+/* Give the call-us block a subtle card look for
+   a more professional feel */
+.about-call-us {
+    background: var(--section-bg-1);
+    border-left: 4px solid var(--ltn__secondary-color);
+    padding: 16px 20px;
+    border-radius: 4px;
+    gap: 16px;
+}
+
+.about-call-us .call-us-icon img {
+    max-width: 48px;
+    min-width: 48px;
+    object-fit: contain;
+}
+
+.about-call-us .call-us-info p {
+    margin-bottom: 4px;
+    font-size: 14px;
+}
+
+.about-call-us .call-us-info h2 {
+    font-size: 26px;
+    margin-bottom: 0;
+    color: var(--ltn__heading-color);
+}
+
+/* =============================================================
+   5. SERVICE SECTION – Background, card spacing & responsive
+   ============================================================= */
+
+/* Remove the half-white strip that before-bg-1 adds at the bottom */
+.ltn__service-area.before-bg-1::before {
+    display: none !important;
+}
+
+/* Tighten section padding */
+.ltn__service-area,
+.ltn__product-tab-area,
+.ltn__feature-area,
+.ltn__testimonial-area,
+.ltn__blog-area,
+.ltn__brand-logo-area {
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
+}
+
+/* Specific compact padding for CTA section */
+.ltn__service-form-wrap-area {
+    padding-top: 50px !important;
+    padding-bottom: 50px !important;
+}
+
+/* Reduce row gap between cards */
+#services-container {
+    --bs-gutter-y: 24px;
+    row-gap: 24px;
+}
+
+/* Service card base */
+.ltn__service-item-1 {
+    background-color: var(--white);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin-bottom: 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    transition: box-shadow 0.3s ease;
+}
+
+.ltn__service-item-1:hover {
+    box-shadow: 0 6px 24px rgba(0,0,0,0.14);
+}
+
+/* Service card image – reduced height */
+.ltn__service-item-1 .service-item-img img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 0;
+}
+
+/* Card brief – tight, compact */
+.ltn__service-item-1 .service-item-brief {
+    padding: 18px 20px 16px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Title font size reduced */
+.ltn__service-item-1 .service-item-brief h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+    line-height: 1.35;
+}
+
+.ltn__service-item-1 .service-item-brief h3 a {
+    color: var(--ltn__heading-color);
+}
+
+.ltn__service-item-1 .service-item-brief h3 a:hover {
+    color: var(--ltn__secondary-color);
+}
+
+/* Description text compact */
+.ltn__service-item-1 .service-item-brief p {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    flex-grow: 1;
+    color: var(--ltn__paragraph-color);
+}
+
+/* Price row */
+.ltn__service-item-1 .product-price {
+    font-size: 15px;
+    font-weight: 700;
+    margin-top: auto;
+    color: var(--ltn__secondary-color);
+}
+
+.ltn__service-item-1 .product-price del {
+    font-size: 13px;
+    font-weight: 400;
+    color: #999;
+    margin-left: 6px;
+}
+
+/* ---- Responsive Table/Mobile Card Tweaks ---- */
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .ltn__service-item-1 .service-item-img img {
+        height: 170px;
+    }
+    .ltn__service-item-1 .service-item-brief {
+        padding: 14px 16px 12px;
+    }
+    .ltn__service-item-1 .service-item-brief h3 {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 991px) {
+    .ltn__service-item-1 .service-item-img img {
+        height: 220px;
+    }
+}
+
+@media (max-width: 767px) {
+    .ltn__service-item-1 .service-item-img img {
+        height: 200px;
+    }
+    .ltn__service-item-1 .service-item-brief {
+        padding: 16px 18px 14px;
+    }
+}
+
+/* Fix Call to Action overlap */
+.ltn__service-form-margin {
+    margin-top: 0 !important;
+}
+
+/* =============================================================
+   7. WHY CHOOSE US – Theme Update (Dark Background)
+   ============================================================= */
+
+.ltn__feature-area {
+    background-color: var(--ltn__primary-color);
+}
+
+.ltn__feature-area, 
+.ltn__feature-area .section-title,
+.ltn__feature-area .ltn__feature-info h2 a,
+.ltn__feature-area .ltn__feature-info p,
+.ltn__feature-area .section-brief-in p,
+.ltn__feature-area h1, .ltn__feature-area h2, .ltn__feature-area h3, 
+.ltn__feature-area h4, .ltn__feature-area h5, .ltn__feature-area h6,
+.ltn__feature-area p, .ltn__feature-area a {
+    color: var(--white) !important;
+}
+
+@media (max-width: 991px) {
+    .ltn__service-area,
+    .ltn__product-tab-area,
+    .ltn__feature-area,
+    .ltn__service-form-area,
+    .ltn__testimonial-area,
+    .ltn__blog-area,
+    .ltn__brand-logo-area {
+        padding-top: 50px !important;
+        padding-bottom: 50px !important;
+    }
+    .ltn__service-form-wrap-area {
+        padding-top: 40px !important;
+        padding-bottom: 40px !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .ltn__service-area,
+    .ltn__product-tab-area,
+    .ltn__feature-area,
+    .ltn__service-form-area,
+    .ltn__testimonial-area,
+    .ltn__blog-area,
+    .ltn__brand-logo-area {
+        padding-top: 40px !important;
+        padding-bottom: 40px !important;
+    }
+    .ltn__service-form-wrap-area {
+        padding-top: 30px !important;
+        padding-bottom: 30px !important;
+    }
+}
+
+/* -------------------------------------------------------
+   8. CTA FORM – Mobile layout (Fields side-by-side)
+   ------------------------------------------------------- */
+@media (max-width: 767px) {
+    .ltn__service-form-box {
+        padding: 0 10px !important;
+    }
+    .ltn__service-form-box ul {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        align-items: flex-start !important;
+        margin: 0 -5px !important;
+        padding: 0 !important;
+        width: calc(100% + 10px) !important;
+    }
+    .ltn__service-form-box ul li {
+        width: 100% !important;
+        margin-bottom: 10px !important;
+        margin-right: 0 !important; /* CRITICAL FIX: Remove right margin from base theme */
+        padding: 0 5px !important;
+        list-style: none !important;
+    }
+    /* Make first two fields (Service and Date) share the row */
+    .ltn__service-form-box ul li:nth-child(1),
+    .ltn__service-form-box ul li:nth-child(2) {
+        width: 50% !important;
+        flex: 0 0 50% !important;
+        margin-right: 0 !important; /* Ensure no margin here either */
+    }
+}
+
+@media (max-width: 480px) {
+    /* Ensure internal inputs and select boxes don't overflow */
+    .ltn__service-form-box .nice-select,
+    .ltn__service-form-box .input-item input,
+    .ltn__service-form-box .input-item {
+        width: 100% !important;
+        min-width: auto !important;
+        height: 40px !important;
+        line-height: 38px !important;
+        margin: 0 !important;
+    }
+    .ltn__service-form-box .nice-select {
+        padding-left: 10px !important;
+        padding-right: 20px !important;
+        font-size: 12px !important;
+    }
+    .ltn__service-form-box .nice-select:after {
+        right: 8px !important;
+    }
+    .ltn__service-form-box .input-item input {
+        /* padding: 0 10px !important; */
+        font-size: 12px !important;
+    }
+    /* Datepicker icon adjustment */
+    .ltn__datepicker .input-group-addon {
+        right: 10px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        position: absolute;
+        z-index: 2;
+        padding: 0 !important;
+        background: transparent !important;
+        border: none !important;
+        pointer-events: none;
+    }
+    .ltn__datepicker .input-group-addon i {
+        font-size: 14px !important;
+        color: var(--ltn__secondary-color) !important;
+    }
+    
+    /* Button refinement for 480px */
+    .ltn__service-form-box ul li:nth-child(3) {
+        width: 100% !important;
+        flex: 0 0 100% !important;
+        margin-top: 10px !important;
+        text-align: center !important;
+    }
+    .ltn__service-form-box .btn-wrapper .btn {
+        width: auto !important;
+        min-width: 180px !important;
+        padding: 8px 15px !important;
+        font-size: 13px !important;
+        display: inline-block !important;
+        border-radius: 4px !important;
+    }
+}
+
+/* =============================================================
+   9. FOOTER REDESIGN – 4-Column Responsive Layout
+   ============================================================= */
+
+/* Footer Top Area Spacing - Reduced height */
+.footer-top-area {
+    padding: 50px 0 20px;
+}
+
+/* Column titles - Compacter */
+.footer-title {
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    margin-bottom: 20px !important;
+    padding-bottom: 8px !important;
+    position: relative !important;
+    color: var(--white) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+}
+
+.footer-title::after {
+    position: absolute;
+    content: "";
+    left: 0;
+    bottom: 0;
+    width: 25px;
+    height: 2px;
+    background-color: var(--ltn__secondary-color);
+}
+
+/* Reduse space between columns */
+.footer-top-area .row {
+    --bs-gutter-x: 1.5rem; /* Standard Bootstrap gutter */
+}
+
+@media (min-width: 992px) {
+    .footer-top-area .row {
+        --bs-gutter-x: 30px;
+    }
+}
+
+/* Column 1: About Widget */
+.footer-about-widget .footer-logo {
+    margin-bottom: 15px;
+}
+
+.footer-about-widget p {
+    color: #b1b1b1;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+/* Column 2: Menu Widget */
+.footer-menu ul li {
+    margin-bottom: 8px;
+}
+
+.footer-menu ul li a {
+    color: #b1b1b1 !important;
+    transition: all 0.3s;
+    font-size: 14px;
+}
+
+/* Column 3: Address Widget */
+.footer-address ul li {
+    display: flex;
+    margin-bottom: 15px;
+    align-items: flex-start;
+}
+
+.footer-address-icon {
+    font-size: 16px;
+    color: var(--ltn__secondary-color);
+    margin-right: 12px;
+    margin-top: 2px;
+}
+
+.footer-address-info p {
+    margin-bottom: 0;
+    color: #b1b1b1;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+/* Column 4: Social Widget */
+.footer-social-widget .ltn__social-media {
+    margin-bottom: 15px;
+}
+
+.footer-social-widget .ltn__social-media ul li a {
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    font-size: 14px;
+}
+
+.footer-social-widget p {
+    color: #b1b1b1;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* Responsiveness tweaks for 1024px, 768px, 480px */
+@media (max-width: 1024px) {
+    .footer-top-area {
+        padding: 40px 0 20px;
+    }
+}
+
+@media (max-width: 991px) {
+    .footer-top-area .row > [class*="col-"] {
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-top-area {
+        padding: 30px 0 10px;
+    }
+    .footer-title {
+        font-size: 16px !important;
+        margin-bottom: 15px !important;
+    }
+    .footer-top-area .row {
+        --bs-gutter-x: 15px; /* Tighter gutter for mobile 2-col layout */
+    }
+    .footer-about-widget .footer-logo img {
+        max-width: 120px;
+    }
+    .footer-about-widget p, 
+    .footer-menu ul li a, 
+    .footer-address-info p,
+    .footer-social-widget p {
+        font-size: 13px;
+    }
+}
+
+/* Copyright Area - Reduced height */
+.ltn__copyright-area {
+    padding: 15px 0;
+}
+
+/* Developer link color */
+.ltn__copyright-design a {
+    color: var(--ltn__secondary-color);
+    font-weight: 600;
+}
+.ltn__copyright-design a:hover {
+    color: var(--white);
+    text-decoration: underline;
+}
