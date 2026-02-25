@@ -3098,7 +3098,7 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 ---------------------------------------------------- */
 .ltn__breadcrumb-area {
   background-color: var(--section-bg-1);
-  margin-bottom: 120px;
+  margin-bottom: 60px;
   padding-top: 80px;
   padding-bottom: 80px; }
 
@@ -3135,7 +3135,7 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 /* breadcrumb-area-2 */
 .ltn__breadcrumb-area-2 {
   padding-top: 250px;
-  padding-bottom: 130px; }
+  padding-bottom: 50px; }
 
 .ltn__breadcrumb-inner-2 {
   display: -webkit-box;
