@@ -1820,3 +1820,872 @@
 })(jQuery);
 
 
+
+
+
+
+
+    /* ============================================================
+        API BASE URL
+    ============================================================ */
+    var API_BASE = 'https://jusmoto.blackitechs.in/api/v1';
+
+
+    /* ============================================================
+        SHARED HELPER: Generate Star Icons from rating (0-5)
+    ============================================================ */
+    function generateStarIcons(rating) {
+        var html = '';
+        var r = parseFloat(rating) || 0;
+        for (var i = 1; i <= 5; i++) {
+            if (i <= Math.floor(r)) {
+                html += '<li><a href="#"><i class="fas fa-star"></i></a></li>';
+            } else if (i - r < 1 && i - r > 0) {
+                html += '<li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>';
+            } else {
+                html += '<li><a href="#"><i class="far fa-star"></i></a></li>';
+            }
+        }
+        return html;
+    }
+
+    /* ============================================================
+        SHARED HELPER: Calculate discount badge
+        e.g. price=6500, discount_price=5800 → "Sale -11%"
+    ============================================================ */
+    function getBadgeLabel(price, discountPrice) {
+        var p = parseFloat(price);
+        var d = parseFloat(discountPrice);
+        if (!p || !d || d >= p) return null;
+        var percent = Math.round(((p - d) / p) * 100);
+        return 'Sale -' + percent + '%';
+    }
+
+
+    /* ============================================================
+        37. Dynamic Services Fetching (Home page services section)
+        Requires: <div id="services-container"></div> in HTML
+    ============================================================ */
+    async function fetchServices() {
+        var container = $('#services-container');
+        var loading   = $('#services-loading');
+        var error     = $('#services-error');
+
+        if (!container.length) return;
+
+        try {
+            var response = await fetch(API_BASE + '/services?type=0');
+            if (!response.ok) throw new Error('API Error: ' + response.status);
+
+            var data     = await response.json();
+            var services = data.data || (Array.isArray(data) ? data : []);
+
+            renderServices(services);
+            loading.addClass('d-none');
+            error.addClass('d-none');
+
+        } catch (err) {
+            console.error('Error fetching services:', err);
+            loading.addClass('d-none');
+            error.removeClass('d-none');
+        }
+    }
+
+    function renderServices(services) {
+        var container = $('#services-container');
+        var html = '';
+
+        services.forEach(function(service) {
+            var price     = parseFloat(service.price || 0);
+            var discPrice = parseFloat(service.discount_price || 0);
+            var finalPrice = (discPrice > 0 && discPrice < price) ? discPrice : price;
+            var hasDiscount = discPrice > 0 && discPrice < price;
+
+            var priceHtml = hasDiscount
+                ? '<span>₹' + finalPrice.toFixed(2) + '</span> <del>₹' + price.toFixed(2) + '</del>'
+                : '<span>₹' + finalPrice.toFixed(2) + '</span>';
+
+            html += `
+                <div class="col-xl-3 col-lg-3 col-md-6 col-12">
+                    <div class="ltn__service-item-1">
+                        <div class="service-item-img">
+                            <img src="${service.image || 'img/slider/slider-banner-service-1.jpg'}" alt="${service.title}">
+                        </div>
+                        <div class="service-item-brief">
+                            <h3><a href="service-details.html?id=${service.slug || service.id}">${service.title}</a></h3>
+                            <p>${service.description || ''}</p>
+                            <div class="product-price">${priceHtml}</div>
+                        </div>
+                    </div>
+                </div>`;
+        });
+
+        container.html(html);
+    }
+
+
+    /* ============================================================
+        38. Dynamic Products Fetching — Home Page (Tab Slider)
+        Requires: #product-category-tabs and #product-tab-content in HTML
+    ============================================================ */
+    async function fetchProducts() {
+        var tabMenu     = $('#product-category-tabs');
+        var tabContent  = $('#product-tab-content');
+        var loading     = $('#products-loading');
+        var tabsLoading = $('#products-tabs-loading');
+        var error       = $('#products-error');
+
+        if (!tabMenu.length || !tabContent.length) return;
+
+        try {
+            var response = await fetch(API_BASE + '/services?type=1');
+            if (!response.ok) throw new Error('API Error: ' + response.status);
+
+            var data     = await response.json();
+            var products = data.data || (Array.isArray(data) ? data : []);
+
+            if (products.length === 0) {
+                loading.addClass('d-none');
+                error.removeClass('d-none').find('p').text('No products found.');
+                return;
+            }
+
+            // Group by category
+            var groupedProducts = products.reduce(function(acc, product) {
+                var category = (product.category && typeof product.category === 'object')
+                    ? product.category.name
+                    : (product.category || 'Other');
+                if (!acc[category]) acc[category] = [];
+                acc[category].push(product);
+                return acc;
+            }, {});
+
+            var categories = Object.keys(groupedProducts);
+            renderProductTabs(categories);
+            renderProductsByCategory(groupedProducts);
+
+            loading.addClass('d-none');
+            tabsLoading.addClass('d-none');
+            error.addClass('d-none');
+
+            initDynamicProductSliders();
+
+        } catch (err) {
+            console.error('Error fetching products:', err);
+            loading.addClass('d-none');
+            tabsLoading.addClass('d-none');
+            error.removeClass('d-none');
+        }
+    }
+
+    function renderProductTabs(categories) {
+        var tabMenu = $('#product-category-tabs');
+        var html = '';
+        categories.forEach(function(category, index) {
+            var isActive    = index === 0 ? 'active show' : '';
+            var categoryId  = category.toLowerCase().replace(/\s+/g, '_');
+            html += `<a class="${isActive}" data-bs-toggle="tab" href="#tab_${categoryId}">${category}</a>`;
+        });
+        tabMenu.html(html);
+    }
+
+    function renderProductsByCategory(groupedProducts) {
+        var tabContent = $('#product-tab-content');
+        var html = '';
+        Object.entries(groupedProducts).forEach(function([category, products], index) {
+            var isActive   = index === 0 ? 'active show' : '';
+            var categoryId = category.toLowerCase().replace(/\s+/g, '_');
+            html += `
+                <div class="tab-pane fade ${isActive}" id="tab_${categoryId}">
+                    <div class="ltn__product-tab-content-inner">
+                        <div class="row ltn__tab-product-slider-one-active slick-arrow-1">
+                            ${products.map(p => renderHomeProductCard(p)).join('')}
+                        </div>
+                    </div>
+                </div>`;
+        });
+        tabContent.html(html);
+    }
+
+    function renderHomeProductCard(product) {
+        var price      = parseFloat(product.price || 0);
+        var discPrice  = parseFloat(product.discount_price || 0);
+        var finalPrice = (discPrice > 0 && discPrice < price) ? discPrice : price;
+        var hasDiscount = discPrice > 0 && discPrice < price;
+        var badge      = getBadgeLabel(price, discPrice) || 'New';
+        var identifier = product.slug || product.id;
+
+        var priceHtml = hasDiscount
+            ? `<span>₹${finalPrice.toFixed(2)}</span> <del>₹${price.toFixed(2)}</del>`
+            : `<span>₹${finalPrice.toFixed(2)}</span>`;
+
+        return `
+            <div class="col-lg-12">
+                <div class="ltn__product-item ltn__product-item-3 text-center">
+                    <div class="product-img">
+                        <a href="product-details.html?id=${identifier}">
+                            <img src="${product.image || 'img/product/1.png'}" alt="${product.title}">
+                        </a>
+                        <div class="product-badge"><ul><li class="sale-badge">${badge}</li></ul></div>
+                        <div class="product-hover-action">
+                            <ul>
+                                <li><a href="product-details.html?id=${identifier}" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal"><i class="far fa-eye"></i></a></li>
+                                <li><a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal"><i class="fas fa-shopping-cart"></i></a></li>
+                                <li><a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal"><i class="far fa-heart"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-ratting">
+                            <ul>${generateStarIcons(product.average_rating)}</ul>
+                        </div>
+                        <h2 class="product-title"><a href="product-details.html?id=${identifier}">${product.title}</a></h2>
+                        <div class="product-price">${priceHtml}</div>
+                    </div>
+                </div>
+            </div>`;
+    }
+
+    function initDynamicProductSliders() {
+        $('.ltn__tab-product-slider-one-active').not('.slick-initialized').slick({
+            arrows: true,
+            dots: false,
+            infinite: true,
+            speed: 300,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            prevArrow: '<a class="slick-prev"><i class="fas fa-arrow-left" alt="Arrow Icon"></i></a>',
+            nextArrow: '<a class="slick-next"><i class="fas fa-arrow-right" alt="Arrow Icon"></i></a>',
+            responsive: [
+                { breakpoint: 1200, settings: { slidesToShow: 3, slidesToScroll: 1 } },
+                { breakpoint: 992,  settings: { arrows: true, dots: true, slidesToShow: 2, slidesToScroll: 1 } },
+                { breakpoint: 768,  settings: { arrows: true, dots: true, slidesToShow: 2, slidesToScroll: 1 } },
+                { breakpoint: 580,  settings: { arrows: true, dots: true, slidesToShow: 1, slidesToScroll: 1 } }
+            ]
+        });
+    }
+
+
+    /* ============================================================
+        39. Shop Page Products Fetching (shop.html)
+        Requires: #liton_product_grid and #liton_product_list in HTML
+        Products auto-populate grid & list view with API data
+        Pagination & sorting also handled dynamically
+    ============================================================ */
+    async function fetchShopProducts(page, sortBy) {
+        page   = page   || 1;
+        sortBy = sortBy || '';
+
+        var gridContainer = $('#liton_product_grid .ltn__product-grid-view .row');
+        var listContainer = $('#liton_product_list .ltn__product-list-view .row');
+
+        if (!gridContainer.length) return;
+
+        // Loading state
+        gridContainer.html(`
+            <div class="col-12 text-center py-60">
+                <div class="spinner-border" role="status" style="width:3rem;height:3rem;border-color:#ff5a00;border-right-color:transparent;"></div>
+                <p class="mt-15">Loading products...</p>
+            </div>`);
+        listContainer.html('');
+
+        try {
+            var url = API_BASE + '/services?type=1&page=' + page;
+            if (sortBy) url += '&sort=' + sortBy;
+
+            var response = await fetch(url);
+            if (!response.ok) throw new Error('API Error: ' + response.status);
+
+            var data       = await response.json();
+            var products   = Array.isArray(data.data) ? data.data : [];
+            var pagination = data.pagination || {
+                total: products.length, totalPages: 1, page: 1,
+                hasPrevPage: false, hasNextPage: false
+            };
+
+            if (products.length === 0) {
+                gridContainer.html('<div class="col-12 text-center py-40"><p>No products found.</p></div>');
+                listContainer.html('');
+                updateShowingText(pagination, 0);
+                return;
+            }
+
+            // Render both views
+            gridContainer.html(products.map(p => renderShopGridCard(p)).join(''));
+            listContainer.html(products.map(p => renderShopListCard(p)).join(''));
+
+            // Pagination & count
+            renderShopPagination(pagination, page);
+            updateShowingText(pagination, products.length);
+
+        } catch (err) {
+            console.error('Error fetching shop products:', err);
+            gridContainer.html(`
+                <div class="col-12 text-center py-40">
+                    <p class="text-danger">Failed to load products. Please try again.</p>
+                    <button class="btn theme-btn-1 mt-10" onclick="fetchShopProducts()">Retry</button>
+                </div>`);
+            listContainer.html('');
+        }
+    }
+
+    /* -- Shop: Grid Card -- */
+    function renderShopGridCard(product) {
+        var price      = parseFloat(product.price || 0);
+        var discPrice  = parseFloat(product.discount_price || 0);
+        var finalPrice = (discPrice > 0 && discPrice < price) ? discPrice : price;
+        var hasDiscount = discPrice > 0 && discPrice < price;
+        var badge      = getBadgeLabel(price, discPrice);
+        var identifier = product.slug || product.id;
+
+        var badgeHtml = badge
+            ? `<div class="product-badge"><ul><li class="sale-badge">${badge}</li></ul></div>`
+            : '';
+
+        var priceHtml = hasDiscount
+            ? `<span>₹${finalPrice.toFixed(2)}</span> <del>₹${price.toFixed(2)}</del>`
+            : `<span>₹${finalPrice.toFixed(2)}</span>`;
+
+        return `
+            <div class="col-xl-3 col-lg-4 col-sm-6 col-6">
+                <div class="ltn__product-item ltn__product-item-3 text-center">
+                    <div class="product-img">
+                        <a href="product-details.html?id=${identifier}">
+                            <img src="${product.image || 'img/product/1.png'}" alt="${product.title}">
+                        </a>
+                        ${badgeHtml}
+                        <div class="product-hover-action">
+                            <ul>
+                                <li><a href="product-details.html?id=${identifier}" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal"><i class="far fa-eye"></i></a></li>
+                                <li><a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal"><i class="fas fa-shopping-cart"></i></a></li>
+                                <li><a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal"><i class="far fa-heart"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-ratting">
+                            <ul>${generateStarIcons(product.average_rating)}</ul>
+                        </div>
+                        <h2 class="product-title"><a href="product-details.html?id=${identifier}">${product.title}</a></h2>
+                        <div class="product-price">${priceHtml}</div>
+                    </div>
+                </div>
+            </div>`;
+    }
+
+    /* -- Shop: List Card -- */
+    function renderShopListCard(product) {
+        var price      = parseFloat(product.price || 0);
+        var discPrice  = parseFloat(product.discount_price || 0);
+        var finalPrice = (discPrice > 0 && discPrice < price) ? discPrice : price;
+        var hasDiscount = discPrice > 0 && discPrice < price;
+        var badge      = getBadgeLabel(price, discPrice);
+        var identifier = product.slug || product.id;
+
+        var badgeHtml = badge
+            ? `<div class="product-badge"><ul><li class="sale-badge">${badge}</li></ul></div>`
+            : '';
+
+        var priceHtml = hasDiscount
+            ? `<span>₹${finalPrice.toFixed(2)}</span> <del>₹${price.toFixed(2)}</del>`
+            : `<span>₹${finalPrice.toFixed(2)}</span>`;
+
+        return `
+            <div class="col-lg-12">
+                <div class="ltn__product-item ltn__product-item-3">
+                    <div class="product-img">
+                        <a href="product-details.html?id=${identifier}">
+                            <img src="${product.image || 'img/product/1.png'}" alt="${product.title}">
+                        </a>
+                        ${badgeHtml}
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-title"><a href="product-details.html?id=${identifier}">${product.title}</a></h2>
+                        <div class="product-ratting">
+                            <ul>${generateStarIcons(product.average_rating)}</ul>
+                        </div>
+                        <div class="product-price">${priceHtml}</div>
+                        <div class="product-brief"><p>${product.description || ''}</p></div>
+                        <div class="product-hover-action">
+                            <ul>
+                                <li><a href="product-details.html?id=${identifier}" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal"><i class="far fa-eye"></i></a></li>
+                                <li><a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal"><i class="fas fa-shopping-cart"></i></a></li>
+                                <li><a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal"><i class="far fa-heart"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+    }
+
+    /* -- Shop: Pagination -- */
+    function renderShopPagination(pagination, currentPage) {
+        var total   = pagination.totalPages || 1;
+        var hasPrev = pagination.hasPrevPage;
+        var hasNext = pagination.hasNextPage;
+
+        if (total <= 1) { $('.ltn__pagination-area').hide(); return; }
+
+        var html = '<ul>';
+        html += `<li><a href="#" class="page-btn" data-page="${currentPage - 1}" ${!hasPrev ? 'style="pointer-events:none;opacity:0.4"' : ''}><i class="fas fa-angle-double-left"></i></a></li>`;
+
+        for (var i = 1; i <= total; i++) {
+            if (total > 7 && i > 3 && i < total - 1 && Math.abs(i - currentPage) > 1) {
+                if (i === 4) html += '<li><a href="#">...</a></li>';
+                continue;
+            }
+            html += `<li class="${i === currentPage ? 'active' : ''}"><a href="#" class="page-btn" data-page="${i}">${i}</a></li>`;
+        }
+
+        html += `<li><a href="#" class="page-btn" data-page="${currentPage + 1}" ${!hasNext ? 'style="pointer-events:none;opacity:0.4"' : ''}><i class="fas fa-angle-double-right"></i></a></li>`;
+        html += '</ul>';
+
+        $('.ltn__pagination').html(html);
+        $('.ltn__pagination-area').show();
+    }
+
+    /* -- Shop: Showing X of Y results -- */
+    function updateShowingText(pagination, count) {
+        var total = pagination.total || count;
+        $('.showing-product-number span').text('Showing ' + count + ' of ' + total + ' results');
+    }
+
+    /* -- Shop: Sort dropdown value → API param -- */
+    function getSortParam(label) {
+        var map = {
+            'Sort by popularity'         : 'popularity',
+            'Sort by new arrivals'       : 'newest',
+            'Sort by price: low to high' : 'price_asc',
+            'Sort by price: high to low' : 'price_desc'
+        };
+        return map[label] || '';
+    }
+
+    /* -- Shop: Pagination click -- */
+    $(document).on('click', '.page-btn', function(e) {
+        e.preventDefault();
+        var page = parseInt($(this).data('page'));
+        if (!page || page < 1) return;
+        var sortLabel = $('.short-by select').val();
+        fetchShopProducts(page, getSortParam(sortLabel));
+        $('html, body').animate({ scrollTop: $('.ltn__product-area').offset().top - 80 }, 400);
+    });
+
+    /* -- Shop: Sort dropdown change -- */
+    $(document).on('change', '.short-by select', function() {
+        fetchShopProducts(1, getSortParam($(this).val()));
+    });
+
+
+    /* ============================================================
+        40. Product Details Page Fetching (product-details.html)
+        Reads ?id= or ?slug= from URL and calls /api/v1/services/:id
+        Populates: title, price, images, rating, category,
+                   description, reviews, FAQs, specs, includes
+    ============================================================ */
+    function getProductIdentifier() {
+        var params = new URLSearchParams(window.location.search);
+        return params.get('id') || params.get('slug') || null;
+    }
+
+    async function fetchProductDetails() {
+        var identifier = getProductIdentifier();
+        if (!identifier) {
+            console.error('No product ID/slug in URL.');
+            showProductError('Product not found.');
+            return;
+        }
+
+        showProductLoading(true);
+
+        try {
+            var response = await fetch(API_BASE + '/services/' + identifier);
+            if (!response.ok) throw new Error('API Error: ' + response.status);
+
+            var data    = await response.json();
+            var product = data.data || data;
+
+            if (!product || !product.id) throw new Error('Invalid product data.');
+
+            renderProductDetails(product);
+            renderProductReviews(product.reviews || [], product.average_rating || 0);
+            renderProductFAQs(product.faqs || []);
+            renderProductSpecifications(product.specifications || []);
+            renderProductIncludes(product.includes || []);
+
+            showProductLoading(false);
+
+        } catch (err) {
+            console.error('Error fetching product details:', err);
+            showProductLoading(false);
+            showProductError('Failed to load product. Please try again.');
+        }
+    }
+
+    function renderProductDetails(product) {
+        // Title
+        $('.ltn__shop-details-inner h3').text(product.title || 'Product');
+        $('.ltn__breadcrumb-title').text(product.title || 'Product');
+
+        // Price
+        var price      = parseFloat(product.price || 0);
+        var discPrice  = parseFloat(product.discount_price || 0);
+        var finalPrice = (discPrice > 0 && discPrice < price) ? discPrice : price;
+        var hasDiscount = discPrice > 0 && discPrice < price;
+
+        var priceHtml = hasDiscount
+            ? `<span>₹${finalPrice.toFixed(2)}</span> <del>₹${price.toFixed(2)}</del>`
+            : `<span>₹${finalPrice.toFixed(2)}</span>`;
+
+        $('.modal-product-info .product-price, .shop-details-info .product-price').html(priceHtml);
+
+        // Rating
+        var avgRating   = parseFloat(product.average_rating || 0);
+        var reviewCount = (product.reviews || []).length || product.review_count || 0;
+        $('.modal-product-info .product-ratting ul').html(
+            generateStarIcons(avgRating) +
+            `<li class="review-total"><a href="#"> ( ${reviewCount} Reviews )</a></li>`
+        );
+
+        // Category
+        var categoryName = (product.category && typeof product.category === 'object')
+            ? product.category.name : (product.category || 'General');
+        $('.modal-product-info .modal-product-meta span').html(`<a href="#">${categoryName}</a>`);
+
+        // Description
+        if (product.description) {
+            $('#liton_tab_details_1_1 .ltn__shop-details-tab-content-inner').html(`
+                <h4 class="title-2">${product.title}</h4>
+                <p>${product.description}</p>`);
+        }
+
+        // Images
+        renderProductImages(product);
+    }
+
+    function renderProductImages(product) {
+        var largeImgContainer = $('.ltn__shop-details-large-img');
+        var smallImgContainer = $('.ltn__shop-details-small-img');
+        if (!largeImgContainer.length) return;
+
+        var images = [];
+        if (product.image) images.push(product.image);
+        if (product.gallery_images && Array.isArray(product.gallery_images)) {
+            product.gallery_images.forEach(function(img) {
+                var url = typeof img === 'object' ? (img.url || img.image) : img;
+                if (url && !images.includes(url)) images.push(url);
+            });
+        }
+
+        if (images.length === 0) return;
+
+        // Destroy existing slick before re-init
+        if (largeImgContainer.hasClass('slick-initialized')) largeImgContainer.slick('unslick');
+        if (smallImgContainer.hasClass('slick-initialized')) smallImgContainer.slick('unslick');
+
+        var largeHtml = '', smallHtml = '';
+        images.forEach(function(imgUrl) {
+            largeHtml += `<div class="single-large-img"><a href="${imgUrl}" data-rel="lightcase:myCollection"><img src="${imgUrl}" alt="Product Image"></a></div>`;
+            smallHtml += `<div class="single-small-img"><img src="${imgUrl}" alt="Product Image"></div>`;
+        });
+
+        largeImgContainer.html(largeHtml);
+        smallImgContainer.html(smallHtml);
+
+        // Re-init slick
+        largeImgContainer.slick({ slidesToShow: 1, slidesToScroll: 1, arrows: false, fade: true, asNavFor: '.ltn__shop-details-small-img' });
+        smallImgContainer.slick({
+            slidesToShow: 4, slidesToScroll: 1, asNavFor: '.ltn__shop-details-large-img',
+            dots: false, arrows: true, focusOnSelect: true,
+            prevArrow: '<a class="slick-prev"><i class="fas fa-arrow-left"></i></a>',
+            nextArrow: '<a class="slick-next"><i class="fas fa-arrow-right"></i></a>'
+        });
+
+        // Re-init lightcase
+        $('a[data-rel^=lightcase]').lightcase({ transition: 'elastic', swipe: true, maxWidth: 1170, maxHeight: 600 });
+    }
+
+    function renderProductReviews(reviews, avgRating) {
+        var reviewsTab = $('#liton_tab_details_1_2 .ltn__shop-details-tab-content-inner');
+        if (!reviewsTab.length) return;
+
+        reviewsTab.find('.product-ratting ul').first().html(
+            generateStarIcons(avgRating) +
+            `<li class="review-total"><a href="#"> ( ${reviews.length} Reviews )</a></li>`
+        );
+
+        var commentList = reviewsTab.find('.ltn__comment-inner ul');
+        if (!commentList.length) return;
+
+        if (reviews.length === 0) {
+            commentList.html('<li><p>No reviews yet. Be the first to review!</p></li>');
+            return;
+        }
+
+        var html = '';
+        reviews.forEach(function(review) {
+            var userName = (review.user && review.user.name) ? review.user.name : (review.name || 'Anonymous');
+            var userImg  = (review.user && review.user.avatar) ? review.user.avatar : 'img/testimonial/1.jpg';
+            var comment  = review.comment || review.review || '';
+            var date     = review.created_at ? new Date(review.created_at).toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
+
+            html += `
+                <li>
+                    <div class="ltn__comment-item clearfix">
+                        <div class="ltn__commenter-img"><img src="${userImg}" alt="${userName}"></div>
+                        <div class="ltn__commenter-comment">
+                            <h6><a href="#">${userName}</a></h6>
+                            <div class="product-ratting"><ul>${generateStarIcons(review.rating || 0)}</ul></div>
+                            <p>${comment}</p>
+                            <span class="ltn__comment-reply-btn">${date}</span>
+                        </div>
+                    </div>
+                </li>`;
+        });
+        commentList.html(html);
+    }
+
+    function renderProductFAQs(faqs) {
+        var faqContainer = $('#product-faqs-container');
+        if (!faqContainer.length || faqs.length === 0) return;
+
+        var html = '<div class="ltn__faq-inner ltn__faq-inner-2"><div id="accordion_faqs">';
+        faqs.forEach(function(faq, index) {
+            var collapseId = 'faq_item_' + index;
+            var isShow     = index === 0 ? 'show' : '';
+            html += `
+                <div class="card">
+                    <h6 class="${index === 0 ? '' : 'collapsed'} ltn__card-title" data-bs-toggle="collapse" data-bs-target="#${collapseId}" aria-expanded="${index === 0}">
+                        ${faq.question || faq.title || 'FAQ'}
+                    </h6>
+                    <div id="${collapseId}" class="collapse ${isShow}" data-bs-parent="#accordion_faqs">
+                        <div class="card-body"><p>${faq.answer || faq.content || ''}</p></div>
+                    </div>
+                </div>`;
+        });
+        html += '</div></div>';
+        faqContainer.html(html);
+    }
+
+    function renderProductSpecifications(specifications) {
+        var specContainer = $('#product-specifications-container');
+        if (!specContainer.length || specifications.length === 0) return;
+
+        var html = '<table class="table"><tbody>';
+        specifications.forEach(function(spec) {
+            html += `<tr><th>${spec.key || spec.name || ''}</th><td>${spec.value || ''}</td></tr>`;
+        });
+        html += '</tbody></table>';
+        specContainer.html(html);
+    }
+
+    function renderProductIncludes(includes) {
+        var includesContainer = $('#product-includes-container');
+        if (!includesContainer.length || includes.length === 0) return;
+
+        var html = '<ul class="ltn__list-item-2 ltn__list-item-2-before">';
+        includes.forEach(function(item) {
+            var text = typeof item === 'object' ? (item.name || item.title || item.text) : item;
+            html += `<li><i class="fas fa-check-circle"></i> ${text}</li>`;
+        });
+        html += '</ul>';
+        includesContainer.html(html);
+    }
+
+    function showProductLoading(show) {
+        if (show) {
+            $('#product-details-loading').removeClass('d-none');
+            $('.ltn__shop-details-inner').addClass('d-none');
+        } else {
+            $('#product-details-loading').addClass('d-none');
+            $('.ltn__shop-details-inner').removeClass('d-none');
+        }
+    }
+
+    function showProductError(message) {
+        $('#product-details-error').removeClass('d-none').find('p').text(message);
+        $('.ltn__shop-details-inner').addClass('d-none');
+    }
+
+
+    /* ============================================================
+        Initialize all dynamic sections based on page containers
+    ============================================================ */
+    // Home page: Services section
+    if ($('#services-container').length) {
+        fetchServices();
+    }
+
+    // Home page: Products tab section
+    if ($('#product-category-tabs').length) {
+        fetchProducts();
+    }
+
+    // Shop listing page
+    if ($('#liton_product_grid').length) {
+        fetchShopProducts(1);
+    }
+
+    // Product details page
+    if ($('.ltn__shop-details-area').length) {
+        fetchProductDetails();
+    }
+
+    // Expose globally for retry buttons / external use
+    window.fetchShopProducts    = fetchShopProducts;
+    window.fetchProductDetails  = fetchProductDetails;
+
+(jQuery);
+
+
+// ─── PRODUCT DETAILS - API FETCH ──────────────────────────────────────────────
+
+function generateStars(rating, maxStars = 5) {
+    let starsHtml = "";
+    for (let i = 1; i <= maxStars; i++) {
+        if (i <= Math.floor(rating)) {
+            starsHtml += `<li><a href="#"><i class="fas fa-star"></i></a></li>`;
+        } else if (i === Math.ceil(rating) && rating % 1 !== 0) {
+            starsHtml += `<li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>`;
+        } else {
+            starsHtml += `<li><a href="#"><i class="far fa-star"></i></a></li>`;
+        }
+    }
+    return starsHtml;
+}
+
+async function fetchProductDetails() {
+   
+    const params = new URLSearchParams(window.location.search);
+    const idOrSlug = params.get("id") || params.get("slug");
+
+    if (!idOrSlug) {
+        console.warn("No product id or slug found in URL");
+        return;
+    }
+
+    try {
+        const response = await fetch(`https://jusmoto.blackitechs.in/api/v1/services/${idOrSlug}`);
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        const result = await response.json();
+        if (!result.success) throw new Error("API returned unsuccessful response");
+        populateProductDetails(result.data);
+    } catch (error) {
+        console.error("Error fetching product details:", error);
+    }
+}
+
+function populateProductDetails(data) {
+    // Gallery Images
+    const images = data.gallery_images?.length > 0 ? data.gallery_images : [data.image];
+    const largeImgContainer = document.querySelector(".ltn__shop-details-large-img");
+    const smallImgContainer = document.querySelector(".ltn__shop-details-small-img");
+
+    if (largeImgContainer) {
+        largeImgContainer.innerHTML = images.map(img => `
+            <div class="single-large-img">
+                <a href="${img}" data-rel="lightcase:myCollection">
+                    <img src="${img}" alt="${data.title}">
+                </a>
+            </div>`).join("");
+    }
+    if (smallImgContainer) {
+        smallImgContainer.innerHTML = images.map(img => `
+            <div class="single-small-img">
+                <img src="${img}" alt="${data.title}">
+            </div>`).join("");
+    }
+
+    // Title
+    const titleEl = document.querySelector(".modal-product-info h3");
+    if (titleEl) titleEl.textContent = data.title;
+
+    // Price
+    const priceContainer = document.querySelector(".product-price");
+    if (priceContainer) {
+        priceContainer.innerHTML = `
+            <span>₹${parseFloat(data.final_price).toFixed(2)}</span>
+            ${data.discount_price && data.price !== data.discount_price
+                ? `<del>₹${parseFloat(data.price).toFixed(2)}</del>`
+                : ""}`;
+    }
+
+    // Star Rating
+    const rating = parseFloat(data.average_rating) || 0;
+    const reviewCount = data.review_count || 0;
+    const starsWithCount = generateStars(rating) + `<li class="review-total"><a href="#"> ( ${reviewCount} Reviews )</a></li>`;
+    document.querySelectorAll(".product-ratting ul").forEach(ul => {
+        ul.innerHTML = starsWithCount;
+    });
+
+    // Category
+    const categorySpan = document.querySelector(".modal-product-meta span");
+    if (categorySpan && data.category) {
+        categorySpan.innerHTML = `<a href="#">${data.category.name}</a>`;
+        if (data.subCategory) {
+            categorySpan.innerHTML += ` <a href="#">${data.subCategory.name}</a>`;
+        }
+    }
+
+    // Max Qty
+    const qtyInput = document.querySelector(".cart-plus-minus-box");
+    if (qtyInput) qtyInput.value = data.max_qty || 1;
+
+    // Description Tab
+    const descTab = document.querySelector("#liton_tab_details_1_1 .ltn__shop-details-tab-content-inner");
+    if (descTab) {
+        let html = `<h4 class="title-2">${data.title}</h4><p>${data.description}</p>`;
+
+        if (data.includes?.length > 0) {
+            html += `<h5>What's Included</h5><ul>`;
+            data.includes.forEach(item => { html += `<li>✔ ${item.title}</li>`; });
+            html += `</ul>`;
+        }
+        if (data.excludes?.length > 0) {
+            html += `<h5>Not Included</h5><ul>`;
+            data.excludes.forEach(item => { html += `<li>✖ ${item.title}</li>`; });
+            html += `</ul>`;
+        }
+        if (data.specifications?.length > 0) {
+            html += `<h5>Specifications</h5><table class="table ltn__table-responsive">`;
+            data.specifications.forEach(spec => { html += `<tr><th>${spec.title}</th><td>${spec.value}</td></tr>`; });
+            html += `</table>`;
+        }
+        if (data.additional_info?.length > 0) {
+            data.additional_info.forEach(info => { html += `<h5>${info.title}</h5><p>${info.description}</p>`; });
+        }
+        if (data.faqs?.length > 0) {
+            html += `<h5>Frequently Asked Questions</h5>`;
+            data.faqs.forEach(faq => { html += `<div class="ltn__faq-item"><strong>Q: ${faq.question}</strong><p>A: ${faq.answer}</p></div>`; });
+        }
+        descTab.innerHTML = html;
+    }
+
+    // Reviews Tab
+    const reviewsContainer = document.querySelector(".ltn__comment-inner ul");
+    if (reviewsContainer) {
+        if (data.reviews?.length > 0) {
+            reviewsContainer.innerHTML = data.reviews.map(review => `
+                <li>
+                    <div class="ltn__comment-item clearfix">
+                        <div class="ltn__commenter-img">
+                            <img src="${review.user_image || 'img/testimonial/1.jpg'}" alt="${review.user_name}">
+                        </div>
+                        <div class="ltn__commenter-comment">
+                            <h6><a href="#">${review.user_name}</a></h6>
+                            <div class="product-ratting"><ul>${generateStars(review.rating)}</ul></div>
+                            <p>${review.comment}</p>
+                            <span class="ltn__comment-reply-btn">${new Date(review.created_at).toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                        </div>
+                    </div>
+                </li>`).join("");
+        } else {
+            reviewsContainer.innerHTML = `<li><p>No reviews yet. Be the first to review!</p></li>`;
+        }
+    }
+}
+
+
+document.addEventListener("DOMContentLoaded", fetchProductDetails);
+// ─────────────────────────────────────────────────────────────────────────────
+
