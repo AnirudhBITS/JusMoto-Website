@@ -1517,17 +1517,36 @@
         if (!container.length) return;
 
         try {
-            // Updated to explicitly handle type=0 for services
+            console.log('Fetching services from: http://localhost:3000/api/v1/services?type=0');
             const response = await fetch('http://localhost:3000/api/v1/services?type=0');
-            if (!response.ok) throw new Error('Network response was not ok');
+            
+            if (!response.ok) {
+                console.error(`API Error: ${response.status} ${response.statusText}`);
+                throw new Error(`Network response was not ok: ${response.status}`);
+            }
+
             const data = await response.json();
+            console.log('Services API Plain Response:', data);
             
-            const services = data.data || data;
+            // Robustly extract services array
+            const services = data.data || (Array.isArray(data) ? data : []);
+            console.log('Extracted Services Array:', services);
             
+            if (services.length === 0) {
+                console.warn('No services found in the API response.');
+            }
+
             renderServices(services);
             loading.addClass('d-none');
+            error.addClass('d-none');
         } catch (err) {
             console.error('Error fetching services:', err);
+            
+            if (err.name === 'TypeError' && err.message === 'Failed to fetch') {
+                console.error('CRITICAL: Failed to fetch. Check if the backend server (port 3000) is running AND if CORS is enabled.');
+                error.find('p').text('Connection failed. Please check if the API server is running and CORS is enabled.');
+            }
+
             loading.addClass('d-none');
             error.removeClass('d-none');
         }
@@ -1580,13 +1599,28 @@
         if (!tabMenu.length || !tabContent.length) return;
 
         try {
-            // Fetching products using type=1
-            const response = await fetch('http://localhost:3000/api/v1/services?type=1');
-            if (!response.ok) throw new Error('Network response was not ok');
+            console.log('Fetching products from: https://16.112.128.19.nip.io/api/v1/services?type=1');
+            const response = await fetch('https://16.112.128.19.nip.io/api/v1/services?type=1');
+            
+            if (!response.ok) {
+                console.error(`API Error: ${response.status} ${response.statusText}`);
+                throw new Error(`Network response was not ok: ${response.status}`);
+            }
+
             const data = await response.json();
+            console.log('Products API Plain Response:', data);
             
-            const products = data.data || data;
+            // Robustly extract products array
+            const products = data.data || (Array.isArray(data) ? data : []);
+            console.log('Extracted Products Array:', products);
             
+            if (products.length === 0) {
+                console.warn('No products found in the API response.');
+                loading.addClass('d-none');
+                error.removeClass('d-none').find('p').text('No products found.');
+                return;
+            }
+
             // Group products by category
             const groupedProducts = products.reduce((acc, product) => {
                 // Check if category is an object and extract name, otherwise use category string or 'Other'
@@ -1603,7 +1637,7 @@
 
             if (categories.length === 0) {
                 loading.addClass('d-none');
-                error.removeClass('d-none').find('p').text('No products found.');
+                error.removeClass('d-none').find('p').text('No products categories found.');
                 return;
             }
 
@@ -1612,12 +1646,18 @@
             
             loading.addClass('d-none');
             tabsLoading.addClass('d-none');
+            error.addClass('d-none');
             
             // Initialize Slick sliders for dynamic content
             initDynamicProductSliders();
 
         } catch (err) {
             console.error('Error fetching products:', err);
+            
+            if (err.name === 'TypeError' && err.message === 'Failed to fetch') {
+                console.error('CRITICAL: Failed to fetch products. Check CORS and server status.');
+            }
+
             loading.addClass('d-none');
             tabsLoading.addClass('d-none');
             error.removeClass('d-none');
