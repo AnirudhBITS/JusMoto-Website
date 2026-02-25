@@ -1517,8 +1517,8 @@
         if (!container.length) return;
 
         try {
-            console.log('Fetching services from: http://localhost:3000/api/v1/services?type=0');
-            const response = await fetch('http://localhost:3000/api/v1/services?type=0');
+            console.log('Fetching services from: https://jusmoto.blackitechs.in/api/v1/services?type=0');
+            const response = await fetch('https://jusmoto.blackitechs.in/api/v1/services?type=0');
             
             if (!response.ok) {
                 console.error(`API Error: ${response.status} ${response.statusText}`);
@@ -1599,8 +1599,8 @@
         if (!tabMenu.length || !tabContent.length) return;
 
         try {
-            console.log('Fetching products from: https://16.112.128.19.nip.io/api/v1/services?type=1');
-            const response = await fetch('https://16.112.128.19.nip.io/api/v1/services?type=1');
+            console.log('Fetching products from: https://jusmoto.blackitechs.in/api/v1/services?type=1');
+            const response = await fetch('https://jusmoto.blackitechs.in/api/v1/services?type=1');
             
             if (!response.ok) {
                 console.error(`API Error: ${response.status} ${response.statusText}`);
@@ -1818,3 +1818,5 @@
     }
 
 })(jQuery);
+
+
