@@ -19,6 +19,609 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- Responsive css -->
     <link rel="stylesheet" href="css/responsive.css">
+
+    <style>
+        /* ==================================================
+   LARGE DEVICES (1200px ↓)
+================================================== */
+
+@media (max-width: 1199px) {
+
+    .ltn__main-menu ul {
+        gap: 18px;
+    }
+
+}
+
+/* ==================================================
+   TABLET DEVICES (991px ↓)
+================================================== */
+
+@media (max-width: 991px) {
+
+    /* Hide desktop menu */
+    .header-menu-column {
+        display: none;
+    }
+
+    /* Show mobile menu */
+    .mobile-menu-toggle {
+        display: block;
+    }
+
+    /* Hide support */
+    .get-support {
+        display: none;
+    }
+
+    .site-logo-wrap {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+}
+
+/* ==================================================
+   MOBILE DEVICES (767px ↓)
+================================================== */
+
+@media (max-width: 767px) {
+
+    /* TOP BAR STACK */
+    .ltn__header-top-area .row {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .top-bar-right {
+        justify-content: center;
+    }
+
+    .ltn__top-bar-menu ul {
+        justify-content: center;
+    }
+
+    .ltn__social-media ul {
+        justify-content: center;
+    }
+
+    /* HEADER MIDDLE */
+    .ltn__header-middle-area .row {
+        flex-wrap: nowrap;
+    }
+
+    .site-logo img {
+        max-width: 150px;
+    }
+
+}
+
+/* ==================================================
+   SMALL MOBILE (575px ↓)
+================================================== */
+
+@media (max-width: 575px) {
+
+    .ltn__top-bar-menu ul {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .site-logo img {
+        max-width: 130px;
+    }
+
+}
+
+/* ==================================================
+   EXTRA SMALL MOBILE (480px ↓)
+================================================== */
+
+@media (max-width: 480px) {
+
+    .ltn__top-bar-menu li a {
+        font-size: 13px;
+    }
+
+    .ltn__social-media ul {
+        gap: 8px;
+    }
+
+    .mobile-menu-toggle svg {
+        width: 35px;
+        height: 35px;
+    }
+
+}
+.ltn__breadcrumb-area {
+    background-color: var(--section-bg-1);
+    margin-bottom: 40px;
+}
+
+/* =========================================
+   ABOUT US SECTION - FULL RESPONSIVE
+========================================= */
+
+/* ---------- DEFAULT / DESKTOP (>992px) ---------- */
+.ltn__about-us-area {
+    padding-top: 40px !important;
+    padding-bottom: 90px !important;
+}
+
+.ltn__about-us-area .section-title-area h1,
+.ltn__about-us-area .section-title-area h6 {
+    text-align: left;
+}
+
+.ltn__about-us-area p {
+    text-align: justify;
+    line-height: 1.7;
+}
+
+.about-us-img-wrap {
+    position: relative;
+}
+
+.about-us-img-wrap img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+
+
+.about-us-img-info-inner h1 {
+    font-size: 40px;
+    margin-bottom: 0;
+    font-weight: 700;
+}
+
+.about-us-img-info-inner h6 {
+    margin: 0;
+    font-size: 16px;
+}
+
+
+/* ---------- TABLET (768px - 991px) ---------- */
+@media (min-width: 768px) and (max-width: 991px) {
+    .ltn__about-us-area {
+        padding-top: 30px !important;
+        padding-bottom: 30px !important;
+    }
+
+    .ltn__about-us-area .row {
+        display: flex;
+        flex-wrap: nowrap; /* Keep left-right layout */
+        align-items: center;
+    }
+
+    .ltn__about-us-area .col-lg-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+    /* Image left, content right */
+    .ltn__about-us-area .col-lg-6:nth-child(1) {
+        order: 1;
+    }
+    .ltn__about-us-area .col-lg-6:nth-child(2) {
+        order: 2;
+        text-align: left;
+    }
+
+    .about-us-img-info {
+        bottom: 20px;
+        right: 20px;
+        padding: 15px 20px;
+    }
+
+    .about-us-img-info-inner h1 {
+        font-size: 32px;
+    }
+
+    .ltn__about-us-area .btn-wrapper {
+        text-align: left;
+        margin-top: 0;
+    }
+}
+
+/* ---------- MOBILE (<768px) ---------- */
+@media (max-width: 767px) {
+    .ltn__about-us-area {
+        padding-top: 25px !important;
+        padding-bottom: 25px !important;
+    }
+
+    /* Stack columns vertically */
+    .ltn__about-us-area .row {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Content first */
+    .ltn__about-us-area .col-lg-6:nth-child(2) {
+        order: 1;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    /* Image second */
+    .ltn__about-us-area .col-lg-6:nth-child(1) {
+        order: 2;
+    }
+
+    .ltn__about-us-area .section-title-area h1,
+    .ltn__about-us-area .section-title-area h6 {
+        text-align: center !important;
+    }
+
+    .ltn__about-us-area p {
+        text-align: justify !important;
+    }
+
+    .ltn__about-us-area .btn-wrapper {
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .about-us-img-info {
+        bottom: 15px;
+        right: 15px;
+        padding: 12px 15px;
+    }
+
+    .about-us-img-info-inner h1 {
+        font-size: 28px;
+    }
+
+    .about-us-img-info-inner h6 {
+        font-size: 14px;
+    }
+
+    .section-title {
+        font-size: 26px;
+    }
+}
+
+/* ---------- SMALL MOBILE (<575px) ---------- */
+@media (max-width: 575px) {
+    .ltn__about-us-area {
+        padding-top: 20px !important;
+        padding-bottom: 20px !important;
+    }
+
+    .about-us-img-info {
+        bottom: 10px;
+        right: 10px;
+        padding: 10px 12px;
+    }
+
+    .about-us-img-info-inner h1 {
+        font-size: 24px;
+    }
+
+    .section-title {
+        font-size: 22px;
+    }
+}
+
+/* =========================================
+   FEATURE AREA - FULL RESPONSIVE (Left-aligned text)
+========================================= */
+
+/* ---------- DEFAULT / DESKTOP (>992px) ---------- */
+.ltn__feature-area .ltn__feature-item {
+    text-align: left; /* Left align text by default */
+}
+
+.ltn__feature-item .ltn__feature-icon {
+    font-size: 50px;
+    color: #ff6f61;
+    margin-bottom: 15px;
+}
+
+.ltn__feature-item h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.ltn__feature-item p {
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* ---------- TABLET (768px - 991px) ---------- */
+@media (min-width: 768px) and (max-width: 991px) {
+    .ltn__feature-area .col-lg-4 {
+        flex: 0 0 50%;
+        max-width: 50%;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-bottom: 20px;
+    }
+
+    .ltn__feature-item {
+        text-align: left; /* Keep left aligned on tablet */
+    }
+
+    .ltn__feature-item h3 {
+        font-size: 20px;
+    }
+
+    .ltn__feature-item p {
+        font-size: 14px;
+    }
+
+    .ltn__feature-item .ltn__feature-icon {
+        font-size: 45px;
+    }
+}
+
+/* ---------- MOBILE (<768px) ---------- */
+@media (max-width: 767px) {
+    .ltn__feature-area .col-lg-4,
+    .ltn__feature-area .col-sm-6,
+    .ltn__feature-area .col-12 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-bottom: 20px;
+    }
+
+    .ltn__feature-item {
+        text-align: left; /* Keep left aligned on mobile */
+    }
+
+    .ltn__feature-item h3 {
+        font-size: 18px;
+    }
+
+    .ltn__feature-item p {
+        font-size: 14px;
+    }
+
+    .ltn__feature-item .ltn__feature-icon {
+        font-size: 40px;
+    }
+}
+
+/* ---------- SMALL MOBILE (<575px) ---------- */
+@media (max-width: 575px) {
+    .ltn__feature-item h3 {
+        font-size: 16px;
+    }
+
+    .ltn__feature-item p {
+        font-size: 13px;
+    }
+
+    .ltn__feature-item .ltn__feature-icon {
+        font-size: 35px;
+    }
+}
+
+/* ================================
+   LAPTOP (992px – 1199px)
+================================ */
+@media (max-width: 1199px) {
+    .section-title-area h1 {
+        font-size: 36px;
+    }
+
+    .ltn__video-bg-img {
+        height: 420px;
+    }
+}
+/* ================================
+   TABLET (768px – 991px)
+   Stack Layout (Content First)
+================================ */
+@media (max-width: 991px) and (min-width: 768px) {
+
+    .ltn__progress-bar-area {
+        padding: 80px 0;
+    }
+
+    /* Make single column */
+    .ltn__progress-bar-area .col-lg-6 {
+        width: 100%;
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+
+    /* Content Section */
+    .ltn__progress-bar-wrap {
+        padding-right: 0;
+        margin-bottom: 40px;
+        text-align: left;
+    }
+
+    .section-title-area h1 {
+        font-size: 32px;
+        text-align: center;
+    }
+
+    .section-title-area p {
+        text-align: justify;
+    }
+    .section-subtitle{
+        text-align: center;
+    }
+
+    /* Video Section */
+    .ltn__video-bg-img {
+        height: 350px;
+        margin-left: 0;
+    }
+}
+/* ================================
+   MOBILE (Below 768px)
+   Stack Layout + Center Heading
+================================ */
+@media (max-width: 767px) {
+
+    .ltn__progress-bar-area {
+        padding: 60px 0;
+    }
+
+    .ltn__progress-bar-area .col-lg-6 {
+        width: 100%;
+    }
+
+    .ltn__progress-bar-wrap {
+        padding-right: 0;
+        text-align: center;
+    }
+
+    .section-title-area h1 {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .section-title-area p {
+        text-align: justify;
+        font-size: 15px;
+    }
+
+    .ltn__progress-bar-item p {
+        text-align: left;
+    }
+
+    .ltn__video-bg-img {
+        height: 280px;
+        margin-top: 30px;
+        margin-left: 0;
+    }
+
+    .progress-bar span {
+        font-size: 12px;
+        top: -22px;
+    }
+}
+
+/* ================================
+   EXTRA SMALL MOBILE (Below 480px)
+================================ */
+@media (max-width: 480px) {
+
+    .section-title-area h1 {
+        font-size: 20px;
+    }
+
+    .section-title-area p {
+        font-size: 14px;
+    }
+
+    .ltn__video-icon-2 {
+        width: 55px;
+        height: 55px;
+        line-height: 55px;
+        font-size: 16px;
+    }
+
+    .ltn__video-bg-img {
+        height: 220px;
+    }
+}
+/* ===============================
+   TESTIMONIAL RESPONSIVE FIX
+================================= */
+
+/* ===== Desktop Default ===== */
+.ltn__testimonial-slider-3-active {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.ltn__testimonial-slider-3-active .col-lg-12 {
+    width: 30%; /* 3 columns desktop */
+}
+
+/* Desktop → Keep content LEFT aligned */
+.ltn__testimonial-item-4 {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: left;   /* IMPORTANT */
+    height: 100%;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+/* ===============================
+   Tablet (2 Columns)
+================================= */
+@media (max-width: 991px) {
+
+    .ltn__testimonial-slider-3-active {
+        justify-content: center;
+    }
+
+    .ltn__testimonial-slider-3-active .col-lg-12 {
+        width: 48%; /* 2 columns */
+    }
+}
+
+/* ===============================
+   Mobile (1 Column + Center Content)
+================================= */
+@media (max-width: 767px) {
+
+    .ltn__testimonial-slider-3-active .col-lg-12 {
+        width: 100%;
+    }
+
+    /* Center ONLY on Mobile */
+    .ltn__testimonial-item-4 {
+        text-align: center;
+    }
+
+    .ltn__testimoni-img {
+        text-align: center;
+    }
+
+    .ltn__testimoni-img img {
+        margin: 0 auto 15px;
+        display: block;
+    }
+
+    .section-title {
+        font-size: 26px;
+    }
+
+    .section-subtitle {
+        font-size: 14px;
+    }
+}
+
+/* ===============================
+   Small Mobile
+================================= */
+@media (max-width: 480px) {
+
+    .section-title {
+        font-size: 22px;
+    }
+
+    .ltn__testimonial-item-4 {
+        padding: 20px 15px;
+    }
+}
+@media (max-width: 767px) {
+    .ltn__testimoni-img {
+        display: flex;
+        justify-content: center;
+    }
+
+    .ltn__testimoni-img img {
+        display: block;
+        margin: 0 auto 15px;
+    }
+}
+
+    </style>
 </head>
 
 <body>
@@ -31,7 +634,7 @@
 <!-- Body main wrapper start -->
 <div class="body-wrapper">
 
-     <!-- HEADER AREA START (header-4) -->
+      <!-- HEADER AREA START (header-4) -->
     <header class="ltn__header-area ltn__header-4 ltn__header-6 ltn__header-transparent gradient-color-2">
         <!-- ltn__header-top-area start -->
         <div class="ltn__header-top-area top-area-color-white">
@@ -113,7 +716,7 @@
                                     <ul>
                                         <li><a href="home.html">Home</a>
                                         </li>
-                                        <li><a href="about.html">About</a>
+                                        <li><a href="about-us.html">About</a>
                                         </li>
                                         <li><a href="#">Shop</a>
                                         </li>
@@ -182,8 +785,8 @@
         <!-- ltn__header-middle-area end -->
     </header>
     <!-- HEADER AREA END -->
-    
-    <!-- Utilize Cart Menu Start -->
+
+       <!-- Utilize Cart Menu Start -->
     <div id="ltn__utilize-cart-menu" class="ltn__utilize ltn__utilize-cart-menu">
         <div class="ltn__utilize-menu-inner ltn__scrollbar">
             <div class="ltn__utilize-menu-head">
@@ -395,7 +998,7 @@
     <div class="ltn__utilize-overlay"></div>
 
     <!-- BREADCRUMB AREA START -->
-    <div class="ltn__breadcrumb-area ltn__breadcrumb-area-2 ltn__breadcrumb-color-white bg-overlay-theme-black-70 bg-image" data-bs-bg="img/slider/about-us-banner.webp">
+    <div class="ltn__breadcrumb-area ltn__breadcrumb-area-2 ltn__breadcrumb-color-white bg-overlay-theme-black-60 bg-image" data-bs-bg="img/slider/about-banner2.webp">
         <div class="container" style="margin-top: -30px;">
             <div class="row">
                 <div class="col-lg-12">
@@ -406,7 +1009,7 @@
                         </div>
                         <div class="ltn__breadcrumb-list">
                             <ul>
-                                <li><a href="home.html">Home</a></li>
+                                <li><a href="home.html" style="color: white;">Home</a></li>
                                 <li>About Us</li>
                             </ul>
                         </div>
@@ -417,8 +1020,8 @@
     </div>
     <!-- BREADCRUMB AREA END -->
 
-    <!-- ABOUT US AREA START -->
-    <div class="ltn__about-us-area pb-60">
+     <!-- ABOUT US AREA START -->
+    <div class="ltn__about-us-area pb-100">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 align-self-center">
@@ -437,7 +1040,7 @@
                     <div class="about-us-info-wrap">
                         <div class="section-title-area ltn__section-title-2">
                             <h6 class="section-subtitle ltn__secondary-color">// About Us</h6>
-                            <h1 class="section-title"><span>Reliable Service at Your Doorstep</span></h1>
+                            <h1 class="section-title">Reliable Service at Your Doorstep<span></span></h1>
                             <p>Jusmoto makes bike and car servicing easy with hassle-free pickup and drop.</p>
                         </div>
 
@@ -453,15 +1056,14 @@ With skilled technicians and reliable support, Jusmoto ensures quality service a
         </div>
     </div>
     <!-- ABOUT US AREA END -->
-
-    <!-- FEATURE AREA START ( Feature - 6) -->
-    <div class="ltn__feature-area section-bg-1 pt-115 pb-90">
+      <!-- FEATURE AREA START ( Feature - 6) -->
+    <div class="ltn__feature-area section-bg-1 pt-80 pb-40">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title-area ltn__section-title-2 text-center">
-                        <h6 class="section-subtitle ltn__secondary-color">//  Why Choose Us  //</h6>
-                        <h1 class="section-title">The Smarter Way to Service Your Vehicle<span>.</span></h1>
+                        <h6 class="section-subtitle ltn__secondary-color">//  Why Choose Us </h6>
+                        <h1 class="section-title">The Smarter Way to Service Your Vehicle<span></span></h1>
                     </div>
                 </div>
             </div>
@@ -501,7 +1103,7 @@ With skilled technicians and reliable support, Jusmoto ensures quality service a
                             <h3><a href="service-details.html">Doorstep Pickup & Drop</a></h3>
                         </div>
                         <div class="ltn__feature-info">
-                            <p>Enjoy hassle-free servicing with our convenient doorstep pickup and drop facility — saving your time and effort.</p>
+                            <p>Enjoy hassle-free pickup and drop service, saving your time and effort.</p>
                         </div>
                     </div>
                 </div>
@@ -510,7 +1112,7 @@ With skilled technicians and reliable support, Jusmoto ensures quality service a
     </div>
     <!-- FEATURE AREA END -->
 
-    <!-- CALL TO ACTION START (call-to-action-5) -->
+      <!-- CALL TO ACTION START (call-to-action-5) -->
     <div class="call-to-action-area call-to-action-5 bg-image bg-overlay-theme-90 pt-40 pb-25" data-bs-bg="img/bg/13.jpg">
         <div class="container">
             <div class="row">
@@ -524,40 +1126,39 @@ With skilled technicians and reliable support, Jusmoto ensures quality service a
     </div>
     <!-- CALL TO ACTION END -->
 
-    <!-- PROGRESS BAR AREA START -->
+       <!-- PROGRESS BAR AREA START -->
     <div class="ltn__progress-bar-area before-bg-right pt-115 pb-95">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="ltn__progress-bar-wrap">
                         <div class="section-title-area ltn__section-title-2">
-                            <h6 class="section-subtitle ltn__secondary-color">// skills</h6>
-                            <h1 class="section-title">We Have A Skillest
-                                Team Ever<span>.</span></h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore</p>
+                            <h6 class="section-subtitle ltn__secondary-color">// Our Service Excellence</h6>
+                            <h1 class="section-title">Delivering Performance Beyond Expectations<span></span></h1>
+                            <p>Jusmoto redefines vehicle servicing with modern technology and expert care.</p>
                         </div>
                         <div class="ltn__progress-bar-inner">
                             <div class="ltn__progress-bar-item">
-                                <p>Car Repair</p>
+                                <p>Service Quality Standards</p>
                                 <div class="progress">
                                     <div class="progress-bar wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay=".5s" role="progressbar" style="width: 72%">
-                                        <span>72%</span>
+                                        <span>96%</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="ltn__progress-bar-item">
-                                <p>Car Rental Service</p>
+                                <p>Advanced Diagnostic Tools</p>
                                 <div class="progress">
                                     <div class="progress-bar wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay=".5s" role="progressbar" style="width: 74%">
-                                        <span>74%</span>
+                                        <span>90%</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="ltn__progress-bar-item">
-                                <p>Car Cleaning & Parts</p>
+                                <p>Affordable Service Plans</p>
                                 <div class="progress">
                                     <div class="progress-bar wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay=".5s" role="progressbar" style="width: 81%">
-                                        <span>81%</span>
+                                        <span>93%</span>
                                     </div>
                                 </div>
                             </div>
@@ -565,7 +1166,7 @@ With skilled technicians and reliable support, Jusmoto ensures quality service a
                     </div>
                 </div>
                 <div class="col-lg-6 align-self-center">
-                    <div class="ltn__video-bg-img ltn__video-popup-height-500 bg-overlay-black-50-- bg-image ml-30" data-bs-bg="img/others/5.jpg">
+                    <div class="ltn__video-bg-img ltn__video-popup-height-500 bg-overlay-black-50-- bg-image ml-30" data-bs-bg="img/slider/1242.webp">
                         <a class="ltn__video-icon-2 ltn__video-icon-2-border---" href="https://www.youtube.com/embed/eWUxqVFBq74?autoplay=1&showinfo=0" data-rel="lightcase:myCollection">
                             <i class="fa fa-play"></i>
                         </a>
@@ -577,13 +1178,13 @@ With skilled technicians and reliable support, Jusmoto ensures quality service a
     <!-- PROGRESS BAR AREA END -->
 
     <!-- TESTIMONIAL AREA START (testimonial-4) -->
-    <div class="ltn__testimonial-area bg-image pt-115 pb-70" data-bs-bg="img/bg/8.jpg">
+    <div class="ltn__testimonial-area bg-image pt-70 pb-40" data-bs-bg="img/bg/8.jpg">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title-area ltn__section-title-2 text-center">
                         <h6 class="section-subtitle ltn__secondary-color">//  Testimonials</h6>
-                        <h1 class="section-title">Clients Feedbacks<span>.</span></h1>
+                        <h1 class="section-title">What Our Customers Say<span></span></h1>
                     </div>
                 </div>
             </div>
@@ -591,12 +1192,12 @@ With skilled technicians and reliable support, Jusmoto ensures quality service a
                 <div class="col-lg-12">
                     <div class="ltn__testimonial-item ltn__testimonial-item-4">
                         <div class="ltn__testimoni-img">
-                            <img src="img/testimonial/6.jpg" alt="#">
+                          <img src="img/slider/36332651_836.webp" alt="#">
                         </div>
                         <div class="ltn__testimoni-info">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipi sicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                            <h4>Rosalina D. William</h4>
-                            <h6>Founder</h6>
+                            <p>Excellent service with clear communication and timely delivery. The team handled my vehicle with care. </p>
+                            <h4>Ramesh Kumar</h4>
+                            <h6>Customer</h6>
                         </div>
                         <div class="ltn__testimoni-bg-icon">
                             <i class="far fa-comments"></i>
@@ -606,12 +1207,12 @@ With skilled technicians and reliable support, Jusmoto ensures quality service a
                 <div class="col-lg-12">
                     <div class="ltn__testimonial-item ltn__testimonial-item-4">
                         <div class="ltn__testimoni-img">
-                            <img src="img/testimonial/7.jpg" alt="#">
+                         <img src="img/slider/36332651_836.webp" alt="#">
                         </div>
                         <div class="ltn__testimoni-info">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipi sicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                            <h4>Rosalina D. William</h4>
-                            <h6>Founder</h6>
+                            <p>Transparent pricing and honest recommendations. My car performance improved after servicing.</p>
+                            <h4>Priya Sharma</h4>
+                            <h6>Regular Client</h6>
                         </div>
                         <div class="ltn__testimoni-bg-icon">
                             <i class="far fa-comments"></i>
@@ -621,12 +1222,12 @@ With skilled technicians and reliable support, Jusmoto ensures quality service a
                 <div class="col-lg-12">
                     <div class="ltn__testimonial-item ltn__testimonial-item-4">
                         <div class="ltn__testimoni-img">
-                            <img src="img/testimonial/1.jpg" alt="#">
+                           <img src="img/slider/36332651_836.webp" alt="#">
                         </div>
                         <div class="ltn__testimoni-info">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipi sicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                            <h4>Rosalina D. William</h4>
-                            <h6>Founder</h6>
+                            <p>The technicians are highly skilled and use advanced diagnostic tools. I felt confident leaving my vehicle in their capable hands.</p>
+                            <h4>Aravind Raj</h4>
+                            <h6>Business Owner</h6>
                         </div>
                         <div class="ltn__testimoni-bg-icon">
                             <i class="far fa-comments"></i>
@@ -636,12 +1237,12 @@ With skilled technicians and reliable support, Jusmoto ensures quality service a
                 <div class="col-lg-12">
                     <div class="ltn__testimonial-item ltn__testimonial-item-4">
                         <div class="ltn__testimoni-img">
-                            <img src="img/testimonial/2.jpg" alt="#">
+                           <img src="img/slider/36332651_836.webp" alt="#">
                         </div>
                         <div class="ltn__testimoni-info">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipi sicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                            <h4>Rosalina D. William</h4>
-                            <h6>Founder</h6>
+                            <p>Professional staff, reliable service, and great support throughout the process. Highly recommended for vehicle maintenance.</p>
+                            <h4>Karthik Nair</h4>
+                            <h6>Satisfied Customer</h6>
                         </div>
                         <div class="ltn__testimoni-bg-icon">
                             <i class="far fa-comments"></i>
@@ -651,12 +1252,12 @@ With skilled technicians and reliable support, Jusmoto ensures quality service a
                 <div class="col-lg-12">
                     <div class="ltn__testimonial-item ltn__testimonial-item-4">
                         <div class="ltn__testimoni-img">
-                            <img src="img/testimonial/5.jpg" alt="#">
+                            <img src="img/slider/36332651_836.webp" alt="#">
                         </div>
                         <div class="ltn__testimoni-info">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipi sicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                            <h4>Rosalina D. William</h4>
-                            <h6>Founder</h6>
+                            <p>Affordable service plans and quick turnaround time. Jusmoto focuses on customer satisfaction and quality work. </p>
+                            <h4>Sneha Menon</h4>
+                            <h6>Car Owner</h6>
                         </div>
                         <div class="ltn__testimoni-bg-icon">
                             <i class="far fa-comments"></i>
@@ -669,255 +1270,127 @@ With skilled technicians and reliable support, Jusmoto ensures quality service a
     </div>
     <!-- TESTIMONIAL AREA END -->
 
-    <!-- BLOG AREA START (blog-4) -->
-    <div class="ltn__blog-area pt-115 pb-90">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title-area ltn__section-title-2 text-center">
-                        <h6 class="section-subtitle ltn__secondary-color">// blog & insights</h6>
-                        <h1 class="section-title">News Feeds<span>.</span></h1>
-                    </div>
-                </div>
-            </div>
-            <div class="row  ltn__blog-slider-one-active slick-arrow-1">
-                <div class="col-lg-12">
-                    <div class="ltn__blog-item ltn__blog-item-4 bg-image" data-bs-bg="img/blog/1.jpg">
-                        <div class="ltn__blog-brief">
-                            <div class="ltn__blog-meta">
-                                <ul>
-                                    <li class="ltn__blog-author">
-                                        <a href="#"><i class="far fa-user"></i>by: Admin</a>
-                                    </li>
-                                    <li class="ltn__blog-tags">
-                                        <a href="#"><i class="fas fa-tags"></i>Services</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <h3 class="ltn__blog-title"><a href="blog-details.html">Electric Car Maintenance, Servicing & Repairs</a></h3>
-                            <p>Lorem ipsum labore et dolore mag na aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-                            <div class="ltn__blog-meta-btn">
-                                <div class="ltn__blog-meta">
-                                    <ul>
-                                        <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i> June 24, 2020</li>
-                                    </ul>
-                                </div>
-                                <div class="ltn__blog-btn">
-                                    <a href="blog-details.html">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="ltn__blog-item ltn__blog-item-4 bg-image" data-bs-bg="img/blog/2.jpg">
-                        <div class="ltn__blog-brief">
-                            <div class="ltn__blog-meta">
-                                <ul>
-                                    <li class="ltn__blog-author">
-                                        <a href="#"><i class="far fa-user"></i>by: Admin</a>
-                                    </li>
-                                    <li class="ltn__blog-tags">
-                                        <a href="#"><i class="fas fa-tags"></i>Services</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <h3 class="ltn__blog-title"><a href="blog-details.html">Common Engine Oil Problems and Solutions</a></h3>
-                            <p>Lorem ipsum labore et dolore mag na aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-                            <div class="ltn__blog-meta-btn">
-                                <div class="ltn__blog-meta">
-                                    <ul>
-                                        <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i> June 24, 2020</li>
-                                    </ul>
-                                </div>
-                                <div class="ltn__blog-btn">
-                                    <a href="blog-details.html">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="ltn__blog-item ltn__blog-item-4 bg-image" data-bs-bg="img/blog/3.jpg">
-                        <div class="ltn__blog-brief">
-                            <div class="ltn__blog-meta">
-                                <ul>
-                                    <li class="ltn__blog-author">
-                                        <a href="#"><i class="far fa-user"></i>by: Admin</a>
-                                    </li>
-                                    <li class="ltn__blog-tags">
-                                        <a href="#"><i class="fas fa-tags"></i>Services</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <h3 class="ltn__blog-title"><a href="blog-details.html">How to Prepare for your First Track Day!</a></h3>
-                            <p>Lorem ipsum labore et dolore mag na aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-                            <div class="ltn__blog-meta-btn">
-                                <div class="ltn__blog-meta">
-                                    <ul>
-                                        <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i> June 24, 2020</li>
-                                    </ul>
-                                </div>
-                                <div class="ltn__blog-btn">
-                                    <a href="blog-details.html">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="ltn__blog-item ltn__blog-item-4 bg-image" data-bs-bg="img/blog/4.jpg">
-                        <div class="ltn__blog-brief">
-                            <div class="ltn__blog-meta">
-                                <ul>
-                                    <li class="ltn__blog-author">
-                                        <a href="#"><i class="far fa-user"></i>by: Admin</a>
-                                    </li>
-                                    <li class="ltn__blog-tags">
-                                        <a href="#"><i class="fas fa-tags"></i>Services</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <h3 class="ltn__blog-title"><a href="blog-details.html">The branch of biology that deals with the normal.</a></h3>
-                            <p>Lorem ipsum labore et dolore mag na aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-                            <div class="ltn__blog-meta-btn">
-                                <div class="ltn__blog-meta">
-                                    <ul>
-                                        <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i> June 24, 2020</li>
-                                    </ul>
-                                </div>
-                                <div class="ltn__blog-btn">
-                                    <a href="blog-details.html">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="ltn__blog-item ltn__blog-item-4">
-                        <div class="ltn__blog-brief">
-                            <div class="ltn__blog-meta">
-                                <ul>
-                                    <li class="ltn__blog-author">
-                                        <a href="#"><i class="far fa-user"></i>by: Admin</a>
-                                    </li>
-                                    <li class="ltn__blog-tags">
-                                        <a href="#"><i class="fas fa-tags"></i>Services</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <h3 class="ltn__blog-title"><a href="blog-details.html">How to: Make Your Tires Last Longer</a></h3>
-                            <p>Lorem ipsum labore et dolore mag na aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-                            <div class="ltn__blog-meta-btn">
-                                <div class="ltn__blog-meta">
-                                    <ul>
-                                        <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i> June 24, 2020</li>
-                                    </ul>
-                                </div>
-                                <div class="ltn__blog-btn">
-                                    <a href="blog-details.html">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- BLOG AREA END -->
-
-    <!-- FOOTER AREA START (ltn__footer-2 ltn__footer-color-1) -->
-    <footer class="ltn__footer-area ltn__footer-2 ltn__footer-color-1">
+      <!-- FOOTER AREA START -->
+    <footer class="ltn__footer-area  ">
         <div class="footer-top-area  section-bg-2">
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-4 col-md-5">
-                        <div class="footer-widget ltn__footer-timeline-widget ltn__footer-timeline-widget-1 bg-image bg-overlay-theme-black-90" data-bs-bg="img/bg/4.jpg">
-                            <h6 class="ltn__secondary-color text-uppercase">// time shedule</h6>
-                            <h4 class="footer-title">Meet In Timeline.</h4>
-                            <ul>
-                                <li>Monday <span>07:00AM - 20:00PM</span></li>
-                                <li>Tuesday <span>07:00AM - 20:00PM</span></li>
-                                <li>Wednesday <span>07:00AM - 20:00PM</span></li>
-                                <li>Thursday <span>07:00AM - 20:00PM</span></li>
-                                <li>Friday <span>07:00AM - 20:00PM</span></li>
-                                <li>Saturday <span>07:00AM - 20:00PM</span></li>
-                                <li>Sunday <span>Official Holiday</span></li>
-                            </ul>
+                    <div class="col-xl-3 col-md-6 col-sm-6 col-12">
+                        <div class="footer-widget footer-about-widget">
+                            <div class="footer-logo">
+                                <div class="site-logo">
+                                    <img src="img/header-logo.png" alt="Logo">
+                                </div>
+                            </div>
+                            <p>JustMoto – Your trusted partner for hassle-free car service and maintenance.</p>
+                            <div class="footer-address">
+                                <ul>
+                                    <li>
+                                        <div class="footer-address-icon">
+                                            <i class="icon-placeholder"></i>
+                                        </div>
+                                        <div class="footer-address-info">
+                                            <p>#12, Murugappa Road, Kotturpuram, Chennai - 600085</p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="footer-address-icon">
+                                            <i class="icon-call"></i>
+                                        </div>
+                                        <div class="footer-address-info">
+                                            <p><a href="tel:+917871787196">+91 7871787196</a></p>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="footer-address-icon">
+                                            <i class="icon-mail"></i>
+                                        </div>
+                                        <div class="footer-address-info">
+                                            <p><a href="mailto:hello@jusmoto.com">hello@jusmoto.com</a></p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="ltn__social-media mt-20">
+                                <ul>
+                                    <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
+                                    <li><a href="#" title="Youtube"><i class="fab fa-youtube"></i></a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-xl-5 col-md-7">
-                        <div class="footer-widget footer-menu-widget footer-menu-widget-2-column clearfix">
+                    <div class="col-xl-2 col-md-6 col-sm-6 col-12">
+                        <div class="footer-widget footer-menu-widget clearfix">
+                            <h4 class="footer-title">Company</h4>
+                            <div class="footer-menu">
+                                <ul>
+                                    <li><a href="about.html">About</a></li>
+                                    <li><a href="blog.html">Blog</a></li>
+                                    <li><a href="shop.html">All Products</a></li>
+                                    <li><a href="locations.html">Locations Map</a></li>
+                                    <li><a href="faq.html">FAQ</a></li>
+                                    <li><a href="contact.html">Contact us</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-6 col-sm-6 col-12">
+                        <div class="footer-widget footer-menu-widget clearfix">
                             <h4 class="footer-title">Services.</h4>
                             <div class="footer-menu">
                                 <ul>
-                                    <li><a href="service.html">Engine Diagnostics</a></li>
-                                    <li><a href="service.html">Vehicles Damaged</a></li>
-                                    <li><a href="service.html">Air Conditioning Evac</a></li>
-                                    <li><a href="service.html">Anti Lock Brake Service</a></li>
-                                    <li><a href="service.html">Computer Diagnostics</a></li>
-                                    <li><a href="service.html">Performance Upgrades</a></li>
-                                </ul>
-                            </div>
-                            <div class="footer-menu">
-                                <ul>
-                                    <li><a href="service.html">Car Wash & Cleaning</a></li>
-                                    <li><a href="service.html">Choose your Repairs</a></li>
-                                    <li><a href="service.html">Free Consultancy</a></li>
-                                    <li><a href="service.html">Emergency Time</a></li>
+                                    <li><a href="order-tracking.html">Order tracking</a></li>
+                                    <li><a href="wishlist.html">Wish List</a></li>
+                                    <li><a href="login.html">Login</a></li>
+                                    <li><a href="account.html">My account</a></li>
+                                    <li><a href="about.html">Terms & Conditions</a></li>
+                                    <li><a href="about.html">Promotional Offers</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-md-6">
-                        <div class="footer-widget footer-blog-widget">
-                            <h4 class="footer-title">News Feeds.</h4>
-                            <div class="ltn__footer-blog-item">
-                                <div class="ltn__blog-meta">
-                                    <ul>
-                                        <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i> June 24, 2020</li>
-                                    </ul>
-                                </div>
-                                <h4 class="ltn__blog-title"><a href="blog-details.html">The branch of biology that
-                                    deals with the normal.</a></h4>
+                    <div class="col-xl-2 col-md-6 col-sm-6 col-12">
+                        <div class="footer-widget footer-menu-widget clearfix">
+                            <h4 class="footer-title">Customer Care</h4>
+                            <div class="footer-menu">
+                                <ul>
+                                    <li><a href="login.html">Login</a></li>
+                                    <li><a href="account.html">My account</a></li>
+                                    <li><a href="wishlist.html">Wish List</a></li>
+                                    <li><a href="order-tracking.html">Order tracking</a></li>
+                                    <li><a href="faq.html">FAQ</a></li>
+                                    <li><a href="contact.html">Contact us</a></li>
+                                </ul>
                             </div>
-                            <div class="ltn__footer-blog-item">
-                                <div class="ltn__blog-meta">
-                                    <ul>
-                                        <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i> June 24, 2020</li>
-                                    </ul>
-                                </div>
-                                <h4 class="ltn__blog-title"><a href="blog-details.html">The branch of biology that
-                                    deals with the normal.</a></h4>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-sm-12 col-12">
+                        <div class="footer-widget footer-newsletter-widget">
+                            <h4 class="footer-title">Newsletter</h4>
+                            <p>Subscribe to our weekly Newsletter and receive updates via email.</p>
+                            <div class="footer-newsletter">
+                                <form action="#">
+                                    <input type="email" name="email" placeholder="Email*">
+                                    <div class="btn-wrapper">
+                                        <button class="theme-btn-1 btn" type="submit"><i class="fas fa-location-arrow"></i></button>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="ltn__footer-blog-item">
-                                <div class="ltn__blog-meta">
-                                    <ul>
-                                        <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i> June 24, 2020</li>
-                                    </ul>
-                                </div>
-                                <h4 class="ltn__blog-title"><a href="blog-details.html">The branch of biology that
-                                    deals with the normal.</a></h4>
-                            </div>
+                            <h5 class="mt-30">We Accept</h5>
+                            <img src="img/icons/payment-4.png" alt="Payment Image">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="ltn__copyright-area ltn__copyright-2">
-            <div class="container">
+        <div class="ltn__copyright-area ltn__copyright-2 section-bg-2 plr--5">
+            <div class="container-fluid ltn__border-top-2">
                 <div class="row">
                     <div class="col-md-6 col-12">
-                        <div class="site-logo-wrap">
-                            <div class="site-logo">
-                                <a href="index.html"><img src="img/logo-2.png" alt="Logo"></a>
-                            </div>
-                            <div class="get-support ltn__copyright-design clearfix">
-                                <div class="get-support-info">
-                                    <h6>Copyright & Design By</h6>
-                                    <h4>Company - <span class="current-year"></span></h4>
-                                </div>
-                            </div>
+                        <div class="ltn__copyright-design clearfix">
+                            <p>All Rights Reserved @ Company <span class="current-year"></span></p>
                         </div>
                     </div>
                     <div class="col-md-6 col-12 align-self-center">
@@ -935,7 +1408,7 @@ With skilled technicians and reliable support, Jusmoto ensures quality service a
     </footer>
     <!-- FOOTER AREA END -->
 
-</div>
+    </div>
 <!-- Body main wrapper end -->
 
     <!-- preloader area start -->
@@ -956,4 +1429,3 @@ With skilled technicians and reliable support, Jusmoto ensures quality service a
   
 </body>
 </html>
-
