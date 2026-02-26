@@ -1,3 +1,4 @@
+
 /*================================================
 [  Table of contents  ]
 ================================================
@@ -1703,6 +1704,7 @@
         const currentPrice = product.discountPrice || product.discount_price;
         const originalPrice = product.price || product.original_price;
         const badge = product.badge || 'New';
+        const identifier = product.slug || product.id;
         
         let priceHtml = '';
         if (currentPrice && originalPrice) {
@@ -1715,7 +1717,7 @@
             <div class="col-lg-12">
                 <div class="ltn__product-item ltn__product-item-3 text-center">
                     <div class="product-img">
-                        <a href="product-details.html"><img src="${product.image || 'img/product/1.png'}" alt="${product.title}"></a>
+                        <a href="product-details.html?id=${identifier}"><img src="${product.image || 'img/product/1.png'}" alt="${product.title}"></a>
                         <div class="product-badge">
                             <ul>
                                 <li class="sale-badge">${badge}</li>
@@ -1729,12 +1731,12 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal">
+                                    <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal" data-product-id="${identifier}">
                                         <i class="fas fa-shopping-cart"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                    <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal" data-product-id="${identifier}">
                                         <i class="far fa-heart"></i></a>
                                 </li>
                             </ul>
@@ -1750,7 +1752,7 @@
                                 <li><a href="#"><i class="far fa-star"></i></a></li>
                             </ul>
                         </div>
-                        <h2 class="product-title"><a href="product-details.html">${product.title}</a></h2>
+                        <h2 class="product-title"><a href="product-details.html?id=${identifier}">${product.title}</a></h2>
                         <div class="product-price">
                             ${priceHtml}
                         </div>
@@ -1820,11 +1822,6 @@
 })(jQuery);
 
 
-
-
-
-
-
     /* ============================================================
         API BASE URL
     ============================================================ */
@@ -1862,208 +1859,7 @@
     }
 
 
-    /* ============================================================
-        37. Dynamic Services Fetching (Home page services section)
-        Requires: <div id="services-container"></div> in HTML
-    ============================================================ */
-    async function fetchServices() {
-        var container = $('#services-container');
-        var loading   = $('#services-loading');
-        var error     = $('#services-error');
-
-        if (!container.length) return;
-
-        try {
-            var response = await fetch(API_BASE + '/services?type=0');
-            if (!response.ok) throw new Error('API Error: ' + response.status);
-
-            var data     = await response.json();
-            var services = data.data || (Array.isArray(data) ? data : []);
-
-            renderServices(services);
-            loading.addClass('d-none');
-            error.addClass('d-none');
-
-        } catch (err) {
-            console.error('Error fetching services:', err);
-            loading.addClass('d-none');
-            error.removeClass('d-none');
-        }
-    }
-
-    function renderServices(services) {
-        var container = $('#services-container');
-        var html = '';
-
-        services.forEach(function(service) {
-            var price     = parseFloat(service.price || 0);
-            var discPrice = parseFloat(service.discount_price || 0);
-            var finalPrice = (discPrice > 0 && discPrice < price) ? discPrice : price;
-            var hasDiscount = discPrice > 0 && discPrice < price;
-
-            var priceHtml = hasDiscount
-                ? '<span>₹' + finalPrice.toFixed(2) + '</span> <del>₹' + price.toFixed(2) + '</del>'
-                : '<span>₹' + finalPrice.toFixed(2) + '</span>';
-
-            html += `
-                <div class="col-xl-3 col-lg-3 col-md-6 col-12">
-                    <div class="ltn__service-item-1">
-                        <div class="service-item-img">
-                            <img src="${service.image || 'img/slider/slider-banner-service-1.jpg'}" alt="${service.title}">
-                        </div>
-                        <div class="service-item-brief">
-                            <h3><a href="service-details.html?id=${service.slug || service.id}">${service.title}</a></h3>
-                            <p>${service.description || ''}</p>
-                            <div class="product-price">${priceHtml}</div>
-                        </div>
-                    </div>
-                </div>`;
-        });
-
-        container.html(html);
-    }
-
-
-    /* ============================================================
-        38. Dynamic Products Fetching — Home Page (Tab Slider)
-        Requires: #product-category-tabs and #product-tab-content in HTML
-    ============================================================ */
-    async function fetchProducts() {
-        var tabMenu     = $('#product-category-tabs');
-        var tabContent  = $('#product-tab-content');
-        var loading     = $('#products-loading');
-        var tabsLoading = $('#products-tabs-loading');
-        var error       = $('#products-error');
-
-        if (!tabMenu.length || !tabContent.length) return;
-
-        try {
-            var response = await fetch(API_BASE + '/services?type=1');
-            if (!response.ok) throw new Error('API Error: ' + response.status);
-
-            var data     = await response.json();
-            var products = data.data || (Array.isArray(data) ? data : []);
-
-            if (products.length === 0) {
-                loading.addClass('d-none');
-                error.removeClass('d-none').find('p').text('No products found.');
-                return;
-            }
-
-            // Group by category
-            var groupedProducts = products.reduce(function(acc, product) {
-                var category = (product.category && typeof product.category === 'object')
-                    ? product.category.name
-                    : (product.category || 'Other');
-                if (!acc[category]) acc[category] = [];
-                acc[category].push(product);
-                return acc;
-            }, {});
-
-            var categories = Object.keys(groupedProducts);
-            renderProductTabs(categories);
-            renderProductsByCategory(groupedProducts);
-
-            loading.addClass('d-none');
-            tabsLoading.addClass('d-none');
-            error.addClass('d-none');
-
-            initDynamicProductSliders();
-
-        } catch (err) {
-            console.error('Error fetching products:', err);
-            loading.addClass('d-none');
-            tabsLoading.addClass('d-none');
-            error.removeClass('d-none');
-        }
-    }
-
-    function renderProductTabs(categories) {
-        var tabMenu = $('#product-category-tabs');
-        var html = '';
-        categories.forEach(function(category, index) {
-            var isActive    = index === 0 ? 'active show' : '';
-            var categoryId  = category.toLowerCase().replace(/\s+/g, '_');
-            html += `<a class="${isActive}" data-bs-toggle="tab" href="#tab_${categoryId}">${category}</a>`;
-        });
-        tabMenu.html(html);
-    }
-
-    function renderProductsByCategory(groupedProducts) {
-        var tabContent = $('#product-tab-content');
-        var html = '';
-        Object.entries(groupedProducts).forEach(function([category, products], index) {
-            var isActive   = index === 0 ? 'active show' : '';
-            var categoryId = category.toLowerCase().replace(/\s+/g, '_');
-            html += `
-                <div class="tab-pane fade ${isActive}" id="tab_${categoryId}">
-                    <div class="ltn__product-tab-content-inner">
-                        <div class="row ltn__tab-product-slider-one-active slick-arrow-1">
-                            ${products.map(p => renderHomeProductCard(p)).join('')}
-                        </div>
-                    </div>
-                </div>`;
-        });
-        tabContent.html(html);
-    }
-
-    function renderHomeProductCard(product) {
-        var price      = parseFloat(product.price || 0);
-        var discPrice  = parseFloat(product.discount_price || 0);
-        var finalPrice = (discPrice > 0 && discPrice < price) ? discPrice : price;
-        var hasDiscount = discPrice > 0 && discPrice < price;
-        var badge      = getBadgeLabel(price, discPrice) || 'New';
-        var identifier = product.slug || product.id;
-
-        var priceHtml = hasDiscount
-            ? `<span>₹${finalPrice.toFixed(2)}</span> <del>₹${price.toFixed(2)}</del>`
-            : `<span>₹${finalPrice.toFixed(2)}</span>`;
-
-        return `
-            <div class="col-lg-12">
-                <div class="ltn__product-item ltn__product-item-3 text-center">
-                    <div class="product-img">
-                        <a href="product-details.html?id=${identifier}">
-                            <img src="${product.image || 'img/product/1.png'}" alt="${product.title}">
-                        </a>
-                        <div class="product-badge"><ul><li class="sale-badge">${badge}</li></ul></div>
-                        <div class="product-hover-action">
-                            <ul>
-                                <li><a href="product-details.html?id=${identifier}" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal"><i class="far fa-eye"></i></a></li>
-                                <li><a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal"><i class="fas fa-shopping-cart"></i></a></li>
-                                <li><a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal"><i class="far fa-heart"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-ratting">
-                            <ul>${generateStarIcons(product.average_rating)}</ul>
-                        </div>
-                        <h2 class="product-title"><a href="product-details.html?id=${identifier}">${product.title}</a></h2>
-                        <div class="product-price">${priceHtml}</div>
-                    </div>
-                </div>
-            </div>`;
-    }
-
-    function initDynamicProductSliders() {
-        $('.ltn__tab-product-slider-one-active').not('.slick-initialized').slick({
-            arrows: true,
-            dots: false,
-            infinite: true,
-            speed: 300,
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            prevArrow: '<a class="slick-prev"><i class="fas fa-arrow-left" alt="Arrow Icon"></i></a>',
-            nextArrow: '<a class="slick-next"><i class="fas fa-arrow-right" alt="Arrow Icon"></i></a>',
-            responsive: [
-                { breakpoint: 1200, settings: { slidesToShow: 3, slidesToScroll: 1 } },
-                { breakpoint: 992,  settings: { arrows: true, dots: true, slidesToShow: 2, slidesToScroll: 1 } },
-                { breakpoint: 768,  settings: { arrows: true, dots: true, slidesToShow: 2, slidesToScroll: 1 } },
-                { breakpoint: 580,  settings: { arrows: true, dots: true, slidesToShow: 1, slidesToScroll: 1 } }
-            ]
-        });
-    }
+    
 
 
     /* ============================================================
@@ -2072,62 +1868,93 @@
         Products auto-populate grid & list view with API data
         Pagination & sorting also handled dynamically
     ============================================================ */
-    async function fetchShopProducts(page, sortBy) {
-        page   = page   || 1;
-        sortBy = sortBy || '';
+ async function fetchShopProducts(page, sortBy) {
+    page   = page   || 1;
+    sortBy = sortBy || '';
 
-        var gridContainer = $('#liton_product_grid .ltn__product-grid-view .row');
-        var listContainer = $('#liton_product_list .ltn__product-list-view .row');
+    var gridContainer = $('#liton_product_grid .ltn__product-grid-view .row');
+    var listContainer = $('#liton_product_list .ltn__product-list-view .row');
 
-        if (!gridContainer.length) return;
+    if (!gridContainer.length) return;
 
-        // Loading state
+    gridContainer.html(`
+        <div class="col-12 text-center py-60">
+            <div class="spinner-border" role="status" style="width:3rem;height:3rem;border-color:#ff5a00;border-right-color:transparent;"></div>
+            <p class="mt-15">Loading products...</p>
+        </div>`);
+    listContainer.html('');
+
+    try {
+        var url = API_BASE + '/services?type=1&page=' + page;
+        var response = await fetch(url);
+        if (!response.ok) throw new Error('API Error: ' + response.status);
+
+      var data       = await response.json();
+var products   = Array.isArray(data.data) ? data.data : [];
+
+console.log('Pagination from API:', data.pagination); // check this in browser console
+
+var pagination = data.pagination || {};
+
+// If API doesn't return pagination, build it manually
+if (!pagination.totalPages) {
+    var perPage = 12; // adjust to however many your API returns per page
+    var totalCount = pagination.total || products.length;
+    pagination = {
+        total:       totalCount,
+        totalPages:  Math.ceil(totalCount / perPage) || 1,
+        page:        page,
+        hasPrevPage: page > 1,
+        hasNextPage: page < Math.ceil(totalCount / perPage)
+    };
+}
+
+        if (products.length === 0) {
+            gridContainer.html('<div class="col-12 text-center py-40"><p>No products found.</p></div>');
+            listContainer.html('');
+            updateShowingText(pagination, 0);
+            return;
+        }
+
+        // ── CLIENT-SIDE SORTING ──
+        if (sortBy === 'price_asc') {
+            products.sort(function(a, b) {
+                var aPrice = parseFloat(a.discount_price || a.price || 0);
+                var bPrice = parseFloat(b.discount_price || b.price || 0);
+                return aPrice - bPrice;
+            });
+        } else if (sortBy === 'price_desc') {
+            products.sort(function(a, b) {
+                var aPrice = parseFloat(a.discount_price || a.price || 0);
+                var bPrice = parseFloat(b.discount_price || b.price || 0);
+                return bPrice - aPrice;
+            });
+        } else if (sortBy === 'newest') {
+            products.sort(function(a, b) {
+                return new Date(b.created_at || 0) - new Date(a.created_at || 0);
+            });
+        } else if (sortBy === 'popularity') {
+            products.sort(function(a, b) {
+                return parseFloat(b.average_rating || 0) - parseFloat(a.average_rating || 0);
+            });
+        }
+
+        gridContainer.html(products.map(p => renderShopGridCard(p)).join(''));
+        listContainer.html(products.map(p => renderShopListCard(p)).join(''));
+
+        renderShopPagination(pagination, page);
+        updateShowingText(pagination, products.length);
+
+    } catch (err) {
+        console.error('Error fetching shop products:', err);
         gridContainer.html(`
-            <div class="col-12 text-center py-60">
-                <div class="spinner-border" role="status" style="width:3rem;height:3rem;border-color:#ff5a00;border-right-color:transparent;"></div>
-                <p class="mt-15">Loading products...</p>
+            <div class="col-12 text-center py-40">
+                <p class="text-danger">Failed to load products. Please try again.</p>
+                <button class="btn theme-btn-1 mt-10" onclick="fetchShopProducts()">Retry</button>
             </div>`);
         listContainer.html('');
-
-        try {
-            var url = API_BASE + '/services?type=1&page=' + page;
-            if (sortBy) url += '&sort=' + sortBy;
-
-            var response = await fetch(url);
-            if (!response.ok) throw new Error('API Error: ' + response.status);
-
-            var data       = await response.json();
-            var products   = Array.isArray(data.data) ? data.data : [];
-            var pagination = data.pagination || {
-                total: products.length, totalPages: 1, page: 1,
-                hasPrevPage: false, hasNextPage: false
-            };
-
-            if (products.length === 0) {
-                gridContainer.html('<div class="col-12 text-center py-40"><p>No products found.</p></div>');
-                listContainer.html('');
-                updateShowingText(pagination, 0);
-                return;
-            }
-
-            // Render both views
-            gridContainer.html(products.map(p => renderShopGridCard(p)).join(''));
-            listContainer.html(products.map(p => renderShopListCard(p)).join(''));
-
-            // Pagination & count
-            renderShopPagination(pagination, page);
-            updateShowingText(pagination, products.length);
-
-        } catch (err) {
-            console.error('Error fetching shop products:', err);
-            gridContainer.html(`
-                <div class="col-12 text-center py-40">
-                    <p class="text-danger">Failed to load products. Please try again.</p>
-                    <button class="btn theme-btn-1 mt-10" onclick="fetchShopProducts()">Retry</button>
-                </div>`);
-            listContainer.html('');
-        }
     }
+}
 
     /* -- Shop: Grid Card -- */
     function renderShopGridCard(product) {
@@ -2157,8 +1984,8 @@
                         <div class="product-hover-action">
                             <ul>
                                 <li><a href="product-details.html?id=${identifier}" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal"><i class="far fa-eye"></i></a></li>
-                                <li><a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal"><i class="fas fa-shopping-cart"></i></a></li>
-                                <li><a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal"><i class="far fa-heart"></i></a></li>
+                                <li><a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal" data-product-id="${identifier}"><i class="fas fa-shopping-cart"></i></a></li>
+                                <li><a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal" data-product-id="${identifier}"><i class="far fa-heart"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -2209,8 +2036,8 @@
                         <div class="product-hover-action">
                             <ul>
                                 <li><a href="product-details.html?id=${identifier}" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal"><i class="far fa-eye"></i></a></li>
-                                <li><a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal"><i class="fas fa-shopping-cart"></i></a></li>
-                                <li><a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal"><i class="far fa-heart"></i></a></li>
+                                <li><a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal" data-product-id="${identifier}"><i class="fas fa-shopping-cart"></i></a></li>
+                                <li><a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal" data-product-id="${identifier}"><i class="far fa-heart"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -2219,30 +2046,35 @@
     }
 
     /* -- Shop: Pagination -- */
-    function renderShopPagination(pagination, currentPage) {
-        var total   = pagination.totalPages || 1;
-        var hasPrev = pagination.hasPrevPage;
-        var hasNext = pagination.hasNextPage;
+  function renderShopPagination(pagination, currentPage) {
+    var total   = pagination.totalPages || 1;
+    var hasPrev = currentPage > 1;
+    var hasNext = currentPage < total;
 
-        if (total <= 1) { $('.ltn__pagination-area').hide(); return; }
+    // Always show pagination area
+    $('.ltn__pagination-area').show();
 
-        var html = '<ul>';
-        html += `<li><a href="#" class="page-btn" data-page="${currentPage - 1}" ${!hasPrev ? 'style="pointer-events:none;opacity:0.4"' : ''}><i class="fas fa-angle-double-left"></i></a></li>`;
-
-        for (var i = 1; i <= total; i++) {
-            if (total > 7 && i > 3 && i < total - 1 && Math.abs(i - currentPage) > 1) {
-                if (i === 4) html += '<li><a href="#">...</a></li>';
-                continue;
-            }
-            html += `<li class="${i === currentPage ? 'active' : ''}"><a href="#" class="page-btn" data-page="${i}">${i}</a></li>`;
-        }
-
-        html += `<li><a href="#" class="page-btn" data-page="${currentPage + 1}" ${!hasNext ? 'style="pointer-events:none;opacity:0.4"' : ''}><i class="fas fa-angle-double-right"></i></a></li>`;
-        html += '</ul>';
-
-        $('.ltn__pagination').html(html);
-        $('.ltn__pagination-area').show();
+    if (total <= 1) {
+        $('.ltn__pagination').html('');
+        return;
     }
+
+    var html = '<ul>';
+    html += '<li><a href="#" class="page-btn" data-page="' + (currentPage - 1) + '"' + (!hasPrev ? ' style="pointer-events:none;opacity:0.4"' : '') + '><i class="fas fa-angle-double-left"></i></a></li>';
+
+    for (var i = 1; i <= total; i++) {
+        if (total > 7 && i > 3 && i < total - 1 && Math.abs(i - currentPage) > 1) {
+            if (i === 4) html += '<li><a href="#">...</a></li>';
+            continue;
+        }
+        html += '<li class="' + (i === currentPage ? 'active' : '') + '"><a href="#" class="page-btn" data-page="' + i + '">' + i + '</a></li>';
+    }
+
+    html += '<li><a href="#" class="page-btn" data-page="' + (currentPage + 1) + '"' + (!hasNext ? ' style="pointer-events:none;opacity:0.4"' : '') + '><i class="fas fa-angle-double-right"></i></a></li>';
+    html += '</ul>';
+
+    $('.ltn__pagination').html(html);
+}
 
     /* -- Shop: Showing X of Y results -- */
     function updateShowingText(pagination, count) {
@@ -2271,10 +2103,16 @@
         $('html, body').animate({ scrollTop: $('.ltn__product-area').offset().top - 80 }, 400);
     });
 
-    /* -- Shop: Sort dropdown change -- */
-    $(document).on('change', '.short-by select', function() {
-        fetchShopProducts(1, getSortParam($(this).val()));
-    });
+/* -- Shop: Sort dropdown change (nice-select compatible) -- */
+$(document).on('click', '.short-by .nice-select .option', function() {
+    var sortValue = $(this).data('value');
+    fetchShopProducts(1, sortValue);
+});
+
+/* -- Also keep the regular change handler as fallback -- */
+$(document).on('change', '#sort-select', function() {
+    fetchShopProducts(1, $(this).val());
+});
 
 
     /* ============================================================
@@ -2312,6 +2150,9 @@
             renderProductFAQs(product.faqs || []);
             renderProductSpecifications(product.specifications || []);
             renderProductIncludes(product.includes || []);
+
+            // ── SET CURRENT PRODUCT FOR CART/WISHLIST ──
+            currentProduct = product;
 
             showProductLoading(false);
 
@@ -2604,7 +2445,7 @@ function populateProductDetails(data) {
     const priceContainer = document.querySelector(".product-price");
     if (priceContainer) {
         priceContainer.innerHTML = `
-            <span>₹${parseFloat(data.final_price).toFixed(2)}</span>
+            <span>₹${parseFloat(data.final_price || data.discount_price || data.price).toFixed(2)}</span>
             ${data.discount_price && data.price !== data.discount_price
                 ? `<del>₹${parseFloat(data.price).toFixed(2)}</del>`
                 : ""}`;
@@ -2629,7 +2470,11 @@ function populateProductDetails(data) {
 
     // Max Qty
     const qtyInput = document.querySelector(".cart-plus-minus-box");
-    if (qtyInput) qtyInput.value = data.max_qty || 1;
+ if (qtyInput) {
+    qtyInput.value = 1;
+    qtyInput.setAttribute('max', data.max_qty || 99);
+}
+
 
     // Description Tab
     const descTab = document.querySelector("#liton_tab_details_1_1 .ltn__shop-details-tab-content-inner");
@@ -2683,9 +2528,560 @@ function populateProductDetails(data) {
             reviewsContainer.innerHTML = `<li><p>No reviews yet. Be the first to review!</p></li>`;
         }
     }
+
+    // ── SET CURRENT PRODUCT FOR CART/WISHLIST ──
+    currentProduct = data;
+
+    // ── FETCH RELATED PRODUCTS ──  ← ADD THIS LINE
+    if (data.category_id) {
+        fetchRelatedProducts(data.category_id, data.id);
+    }
 }
 
 
-document.addEventListener("DOMContentLoaded", fetchProductDetails);
-// ─────────────────────────────────────────────────────────────────────────────
 
+/* ============================================================
+    41. Related Products
+============================================================ */
+function getBadgeLabel(price, discPrice) {
+    var p = parseFloat(price || 0);
+    var d = parseFloat(discPrice || 0);
+    if (d > 0 && d < p) {
+        var pct = Math.round(((p - d) / p) * 100);
+        return pct + '% Off';
+    }
+    return 'New';
+}
+
+function generateStarIcons(rating) {
+    var r = parseFloat(rating) || 0;
+    var html = '';
+    for (var i = 1; i <= 5; i++) {
+        if (r >= i) {
+            html += '<li><a href="#"><i class="fas fa-star"></i></a></li>';
+        } else if (r >= i - 0.5) {
+            html += '<li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>';
+        } else {
+            html += '<li><a href="#"><i class="far fa-star"></i></a></li>';
+        }
+    }
+    return html;
+}
+
+function renderRelatedProductCard(product) {
+    var price     = parseFloat(product.price || 0);
+    var discPrice = parseFloat(product.discount_price || 0);
+
+    // Only treat as discounted if discount_price is LESS than price
+    var hasDiscount = discPrice > 0 && discPrice < price;
+    var finalPrice  = hasDiscount ? discPrice : price;
+    var badgeLabel  = getBadgeLabel(price, discPrice);
+    var identifier  = product.slug || product.id;
+
+    var badgeHtml = '<div class="product-badge"><ul><li class="sale-badge">' + badgeLabel + '</li></ul></div>';
+
+    var priceHtml = hasDiscount
+        ? '<span>₹' + finalPrice.toFixed(2) + '</span> <del>₹' + price.toFixed(2) + '</del>'
+        : '<span>₹' + finalPrice.toFixed(2) + '</span>';
+
+    var imgSrc = (product.image && product.image !== 'null')
+        ? product.image
+        : 'img/product/1.png';  // fallback image
+
+    return '<div class="col-lg-12">' +
+        '<div class="ltn__product-item ltn__product-item-3 text-center">' +
+            '<div class="product-img">' +
+                '<a href="product-details.html?id=' + identifier + '">' +
+                    '<img src="' + imgSrc + '" alt="' + product.title + '">' +
+                '</a>' +
+                badgeHtml +
+                '<div class="product-hover-action"><ul>' +
+                    '<li><a href="product-details.html?id=' + identifier + '" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal"><i class="far fa-eye"></i></a></li>' +
+                    '<li><a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal" data-product-id="' + identifier + '"><i class="fas fa-shopping-cart"></i></a></li>' +
+                    '<li><a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal" data-product-id="' + identifier + '"><i class="far fa-heart"></i></a></li>' +
+                '</ul></div>' +
+            '</div>' +
+            '<div class="product-info">' +
+                '<div class="product-ratting"><ul>' + generateStarIcons(product.average_rating) + '</ul></div>' +
+                '<h2 class="product-title"><a href="product-details.html?id=' + identifier + '">' + product.title + '</a></h2>' +
+                '<div class="product-price">' + priceHtml + '</div>' +
+            '</div>' +
+        '</div>' +
+    '</div>';
+}
+
+async function fetchRelatedProducts(categoryId, currentId) {
+    var container = document.getElementById('related-products-container');
+    if (!container || !categoryId) return;
+
+    // Show loading spinner
+    container.innerHTML = '<div class="col-12 text-center py-60">' +
+        '<div class="spinner-border" role="status" style="width:3rem;height:3rem;border-color:#ff5a00;border-right-color:transparent;"></div>' +
+        '<p class="mt-15">Loading related products...</p></div>';
+
+    try {
+        var relRes = await fetch(API_BASE + '/services?type=1&category_id=' + categoryId);
+        if (!relRes.ok) throw new Error('API Error: ' + relRes.status);
+
+        var relData  = await relRes.json();
+        var products = Array.isArray(relData.data) ? relData.data : [];
+
+        // Exclude the current product
+        products = products.filter(function(p) { return p.id !== currentId; });
+
+        if (products.length === 0) {
+            container.innerHTML = '<div class="col-12 text-center py-40"><p>No related products found.</p></div>';
+            return;
+        }
+
+        // Render up to 6 products
+        container.innerHTML = products.slice(0, 6)
+            .map(function(p) { return renderRelatedProductCard(p); })
+            .join('');
+
+        // Re-init Slick slider
+        var $slider = $('.ltn__related-product-slider-one-active');
+        if ($slider.hasClass('slick-initialized')) $slider.slick('unslick');
+
+        $slider.slick({
+            arrows: true,
+            dots: false,
+            infinite: true,
+            speed: 300,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            prevArrow: '<a class="slick-prev"><i class="fas fa-arrow-left"></i></a>',
+            nextArrow: '<a class="slick-next"><i class="fas fa-arrow-right"></i></a>',
+            responsive: [
+                { breakpoint: 992, settings: { slidesToShow: 3, slidesToScroll: 1 } },
+                { breakpoint: 768, settings: { arrows: false, dots: true, slidesToShow: 2, slidesToScroll: 1 } },
+                { breakpoint: 580, settings: { arrows: false, dots: true, slidesToShow: 2, slidesToScroll: 1 } }
+            ]
+        });
+
+    } catch (err) {
+        console.error('Error fetching related products:', err);
+        container.innerHTML = '<div class="col-12 text-center py-40">' +
+            '<p class="text-danger">Failed to load related products.</p>' +
+            '<button class="btn theme-btn-1 mt-10" onclick="fetchRelatedProducts(' + categoryId + ',' + currentId + ')">Retry</button>' +
+            '</div>';
+    }
+}
+
+window.fetchRelatedProducts = fetchRelatedProducts;
+
+/* ============================================================
+    43. CART, WISHLIST & MINI CART — UNIFIED SYSTEM
+    Single storage key: "cart" and "wishlist" everywhere
+    item shape: { id, slug, title, price, image, quantity }
+============================================================ */
+
+var currentProduct = null;
+
+/* ── Storage ── */
+function getCart()       { try { return JSON.parse(localStorage.getItem('cart')     || '[]'); } catch(e) { return []; } }
+function saveCart(c)     { localStorage.setItem('cart',     JSON.stringify(c)); }
+function getWishlist()   { try { return JSON.parse(localStorage.getItem('wishlist') || '[]'); } catch(e) { return []; } }
+function saveWishlist(w) { localStorage.setItem('wishlist', JSON.stringify(w)); }
+
+function addToCart(product, qty) {
+    if (!product) return;
+    qty = parseInt(qty) || 1;
+    var maxQty = parseInt(product.max_qty) || 99;
+    var price = parseFloat(product.discount_price || product.final_price || product.price || 0);
+    var cart  = getCart();
+    var existing = cart.find(function(i) { return i.id === product.id; });
+
+    if (existing) {
+        var newQty = existing.quantity + qty;
+        if (newQty > maxQty) {
+            alert('Sorry! Only ' + maxQty + ' units available for "' + product.title + '".');
+            existing.quantity = maxQty; // cap at max
+        } else {
+            existing.quantity = newQty;
+        }
+    } else {
+        if (qty > maxQty) qty = maxQty;
+        cart.push({
+            id: product.id,
+            slug: product.slug || '',
+            title: product.title,
+            price: price,
+            image: product.image || 'img/product/1.png',
+            quantity: qty,
+            max_qty: maxQty  // store max_qty in cart item
+        });
+    }
+
+    saveCart(cart);
+    loadMiniCart();
+    updateCartModal(product);
+}
+
+/* ── Add to Wishlist ── */
+function addToWishlist(product) {
+    if (!product) return;
+    var wishlist = getWishlist();
+    var already  = !!wishlist.find(function(i) { return i.id === product.id; });
+    if (!already) {
+        wishlist.push({ id: product.id, slug: product.slug || '', title: product.title, price: parseFloat(product.discount_price || product.final_price || product.price || 0), image: product.image || 'img/product/1.png' });
+        saveWishlist(wishlist);
+        updateWishlistCount();
+    }
+    updateWishlistModal(product, already);
+}
+
+/* ── Update modals ── */
+function updateCartModal(product) {
+    var identifier = product.slug || product.id;
+    $('#add_to_cart_modal .modal-product-img img').attr('src', product.image || 'img/product/1.png');
+    $('#add_to_cart_modal .modal-product-info h5 a').text(product.title).attr('href', 'product-details.html?id=' + identifier);
+    $('#add_to_cart_modal .modal-product-info .added-cart').html('<i class="fa fa-check-circle"></i> Successfully added to your Cart');
+}
+function updateWishlistModal(product, alreadyIn) {
+    var identifier = product.slug || product.id;
+    $('#liton_wishlist_modal .modal-product-img img').attr('src', product.image || 'img/product/1.png');
+    $('#liton_wishlist_modal .modal-product-info h5 a').text(product.title).attr('href', 'product-details.html?id=' + identifier);
+    $('#liton_wishlist_modal .modal-product-info .added-cart').html(
+        alreadyIn ? '<i class="fa fa-info-circle"></i> Already in your Wishlist' : '<i class="fa fa-check-circle"></i> Successfully added to your Wishlist'
+    );
+}
+
+/* ── Header badge counts ── */
+function updateCartUI() {
+    var count = getCart().reduce(function(s, i) { return s + i.quantity; }, 0);
+    var el = document.getElementById('cartCount');
+    if (el) el.innerText = count;
+    $('.mini-cart-item-count').text(count);
+}
+function updateWishlistCount() {
+    var count = getWishlist().length;
+    $('.mini-wishlist-item-count').text(count);
+    var el = document.getElementById('wishlistCount');
+    if (el) el.innerText = count;
+}
+
+/* ── Mini Cart Sidebar ── */
+function loadMiniCart() {
+    var cart       = getCart();
+    var container  = document.getElementById('miniCartContainer');
+    var subtotalEl = document.querySelector('.mini-cart-sub-total span');
+    if (container) {
+        container.innerHTML = '';
+        var subtotal = 0;
+        cart.forEach(function(item, index) {
+            subtotal += item.price * item.quantity;
+            container.innerHTML +=
+                '<div class="mini-cart-item clearfix">' +
+                    '<div class="mini-cart-img">' +
+                        '<a href="product-details.html?id=' + (item.slug || item.id) + '"><img src="' + item.image + '" alt="' + item.title + '"></a>' +
+                        '<span class="mini-cart-item-delete" onclick="removeFromCart(' + index + ')" style="cursor:pointer;"><i class="icon-cancel"></i></span>' +
+                    '</div>' +
+                    '<div class="mini-cart-info"><h6>' + item.title + '</h6>' +
+                        '<span class="mini-cart-quantity">' + item.quantity + ' x ₹' + item.price.toFixed(2) + '</span>' +
+                    '</div>' +
+                '</div>';
+        });
+        if (subtotalEl) subtotalEl.innerText = '₹' + subtotal.toFixed(2);
+    }
+    updateCartUI();
+}
+
+/* ── Remove from mini cart ── */
+function removeFromCart(index) {
+    var cart = getCart();
+    cart.splice(index, 1);
+    saveCart(cart);
+    loadMiniCart();
+}
+
+/* ── Fetch product then add (shop/related/home cards) ── */
+async function fetchAndActOnProduct(idOrSlug, action) {
+    try {
+        var res     = await fetch(API_BASE + '/services/' + idOrSlug);
+        if (!res.ok) throw new Error('API Error');
+        var data    = await res.json();
+        var product = data.data || data;
+        if (action === 'cart') { addToCart(product, 1); }
+        else                   { addToWishlist(product); }
+    } catch(err) { console.error('fetchAndActOnProduct error:', err); }
+}
+
+/* ── Cart Page ── */
+function loadCartPage() {
+    var cart             = getCart();
+    var tableBody        = document.getElementById('cartTableBody');
+    var cartTotalsSection = document.querySelector('.shoping-cart-total');
+    if (!tableBody) return;
+    tableBody.innerHTML = '';
+    if (cart.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:40px;">🛒 Your cart is empty.</td></tr>';
+        if (cartTotalsSection) cartTotalsSection.style.display = 'none';
+        return;
+    }
+    if (cartTotalsSection) cartTotalsSection.style.display = 'block';
+    var subtotal = 0;
+    cart.forEach(function(item, index) {
+        var price   = parseFloat(item.price);
+        var qty     = parseInt(item.quantity);
+        var lineTot = price * qty;
+        subtotal += lineTot;
+        tableBody.insertAdjacentHTML('beforeend',
+            '<tr>' +
+                '<td class="cart-product-remove"><span onclick="removeCartItem(' + index + ')" style="cursor:pointer;">x</span></td>' +
+                '<td class="cart-product-image"><img src="' + item.image + '" alt="' + item.title + '"></td>' +
+                '<td class="cart-product-info"><h4>' + item.title + '</h4></td>' +
+                '<td class="cart-product-price">₹' + price.toFixed(2) + '</td>' +
+                '<td class="cart-product-quantity"><div class="cart-plus-minus"><input type="number" value="' + qty + '" min="1" class="cart-plus-minus-box" data-index="' + index + '"></div></td>' +
+                '<td class="cart-product-subtotal">₹' + lineTot.toFixed(2) + '</td>' +
+            '</tr>'
+        );
+    });
+    updateCartTotals(subtotal);
+}
+
+function removeCartItem(index) {
+    var cart = getCart();
+    cart.splice(index, 1);
+    saveCart(cart);
+    loadCartPage();
+    loadMiniCart();
+}
+
+function updateQuantity(index, qty) {
+    var cart = getCart();
+    qty = parseInt(qty);
+    if (isNaN(qty) || qty < 1) qty = 1;
+
+    var maxQty = parseInt(cart[index].max_qty) || 99;
+    if (qty > maxQty) {
+        qty = maxQty;
+        alert('Sorry! Only ' + maxQty + ' units available for this product.');
+        // Reset the input visually
+        var rows = document.querySelectorAll('#cartTableBody tr');
+        if (rows[index]) {
+            var input = rows[index].querySelector('.cart-plus-minus-box');
+            if (input) input.value = maxQty;
+        }
+    }
+
+    cart[index].quantity = qty;
+    saveCart(cart);
+    var rows = document.querySelectorAll('#cartTableBody tr');
+    if (rows[index]) rows[index].querySelector('.cart-product-subtotal').innerText = '₹' + (parseFloat(cart[index].price) * qty).toFixed(2);
+    recalculateCartTotal();
+    loadMiniCart();
+}
+
+function recalculateCartTotal() {
+    updateCartTotals(getCart().reduce(function(s, i) { return s + parseFloat(i.price) * parseInt(i.quantity); }, 0));
+}
+
+function updateCartTotals(subtotal) {
+    var shipping = subtotal > 0 ? 15 : 0;
+    var tbody    = document.querySelector('.shoping-cart-total tbody');
+    if (!tbody) return;
+    tbody.innerHTML =
+        '<tr><td>Cart Subtotal</td><td>₹' + subtotal.toFixed(2) + '</td></tr>' +
+        '<tr><td>Shipping and Handling</td><td>₹' + shipping.toFixed(2) + '</td></tr>' +
+        '<tr><td>Vat</td><td>₹0.00</td></tr>' +
+        '<tr><td><strong>Order Total</strong></td><td><strong>₹' + (subtotal + shipping).toFixed(2) + '</strong></td></tr>';
+}
+
+/* ── Checkout Page ── */
+function renderCheckoutSummary() {
+    var cart   = getCart();
+    var $tbody = $('.ltn__checkout-area .ltn__order-overview table tbody, #checkout-product-summary');
+    if (!$tbody.length) return;
+    if (cart.length === 0) {
+        $tbody.html('<tr><td colspan="2">Your cart is empty. <a href="shop.html">Continue Shopping</a></td></tr>');
+        return;
+    }
+    var html = '', subTotal = 0;
+    cart.forEach(function(item) {
+        var line = item.price * item.quantity;
+        subTotal += line;
+        html += '<tr><td class="ltn__product-title"><a href="product-details.html?id=' + (item.slug || item.id) + '">' + item.title + '</a> <strong class="product-quantity">× ' + item.quantity + '</strong></td><td class="ltn__product-total">₹' + line.toFixed(2) + '</td></tr>';
+    });
+    var shipping = subTotal > 0 ? 15 : 0;
+    html += '<tr><td><strong>Cart Subtotal</strong></td><td><strong>₹' + subTotal.toFixed(2) + '</strong></td></tr>';
+    html += '<tr><td><strong>Shipping</strong></td><td><strong>₹' + shipping.toFixed(2) + '</strong></td></tr>';
+    html += '<tr><td><strong>Order Total</strong></td><td><strong>₹' + (subTotal + shipping).toFixed(2) + '</strong></td></tr>';
+    $tbody.html(html);
+}
+
+/* ── Wishlist Page ── */
+function loadWishlistPage() {
+    var wishlist  = getWishlist();
+    var tableBody = document.getElementById('wishlistTableBody');
+    if (!tableBody) return;
+    tableBody.innerHTML = '';
+    if (wishlist.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:40px;">💔 Your wishlist is empty.</td></tr>';
+        return;
+    }
+    wishlist.forEach(function(item, index) {
+        tableBody.innerHTML +=
+            '<tr>' +
+                '<td class="cart-product-remove"><span onclick="removeFromWishlist(' + index + ')" style="cursor:pointer;">x</span></td>' +
+                '<td class="cart-product-image"><a href="product-details.html?id=' + (item.slug || item.id) + '"><img src="' + item.image + '" alt="' + item.title + '"></a></td>' +
+                '<td class="cart-product-info"><h4><a href="product-details.html?id=' + (item.slug || item.id) + '">' + item.title + '</a></h4></td>' +
+                '<td class="cart-product-price">₹' + item.price.toFixed(2) + '</td>' +
+                '<td class="cart-product-stock">In Stock</td>' +
+                '<td class="cart-product-add-cart"><a class="submit-button-1" href="#" onclick="moveToCart(' + index + '); return false;">Add to Cart</a></td>' +
+            '</tr>';
+    });
+}
+
+function removeFromWishlist(index) {
+    var wishlist = getWishlist();
+    wishlist.splice(index, 1);
+    saveWishlist(wishlist);
+    loadWishlistPage();
+    updateWishlistCount();
+}
+
+function moveToCart(index) {
+    var wishlist = getWishlist();
+    var product  = wishlist[index];
+    var cart     = getCart();
+    var existing = cart.find(function(i) { return i.id === product.id; });
+    if (existing) { existing.quantity += 1; }
+    else { cart.push({ id: product.id, slug: product.slug || '', title: product.title, price: product.price, image: product.image, quantity: 1 }); }
+    saveCart(cart);
+    wishlist.splice(index, 1);
+    saveWishlist(wishlist);
+    loadWishlistPage();
+    loadMiniCart();
+    updateWishlistCount();
+}
+
+/* ── SINGLE DOMContentLoaded for all page inits ── */
+document.addEventListener('DOMContentLoaded', function() {
+    loadMiniCart();
+    updateWishlistCount();
+    if (document.getElementById('top-rated-products-list')) fetchTopRatedProducts();
+    if (document.getElementById('cartTableBody'))           loadCartPage();
+    if (document.getElementById('wishlistTableBody'))       loadWishlistPage();
+    if (document.querySelector('.ltn__checkout-area'))      renderCheckoutSummary();
+
+    /* Cart page: quantity input */
+    document.addEventListener('input', function(e) {
+        if (e.target.classList.contains('cart-plus-minus-box')) {
+            var idx = e.target.getAttribute('data-index');
+            if (idx !== null) updateQuantity(parseInt(idx), e.target.value);
+        }
+    });
+
+    /* Cart page: +/- buttons */
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('qtybutton')) {
+            setTimeout(function() {
+                var input = e.target.parentElement.querySelector('.cart-plus-minus-box');
+                if (!input) return;
+                var idx = input.getAttribute('data-index');
+                if (idx !== null) updateQuantity(parseInt(idx), input.value);
+            }, 100);
+        }
+    });
+});
+
+/* ── jQuery click handlers ── */
+$(document).ready(function() {
+    /* Product Details: Add to Cart */
+    $(document).on('click', '.ltn__product-details-menu-2 a[data-bs-target="#add_to_cart_modal"]', function() {
+        if (!currentProduct) return;
+        var qty = parseInt($('.cart-plus-minus-box').val()) || 1;
+        addToCart(currentProduct, qty);
+    });
+    /* Product Details: Wishlist */
+    $(document).on('click', '.ltn__product-details-menu-3 a[data-bs-target="#liton_wishlist_modal"]', function() {
+        if (!currentProduct) return;
+        addToWishlist(currentProduct);
+    });
+    /* Shop/Related/Home cards: Add to Cart */
+    $(document).on('click', 'a[data-bs-target="#add_to_cart_modal"][data-product-id]', function() {
+        var id = $(this).data('product-id');
+        if (id) fetchAndActOnProduct(id, 'cart');
+    });
+    /* Shop/Related/Home cards: Wishlist */
+    $(document).on('click', 'a[data-bs-target="#liton_wishlist_modal"][data-product-id]', function() {
+        var id = $(this).data('product-id');
+        if (id) fetchAndActOnProduct(id, 'wishlist');
+    });
+});
+
+
+// ── Star Rating Helper (required by fetchTopRatedProducts) ──
+function generateStars(rating) {
+    var stars = '<ul>';
+    rating = Math.round(rating || 5);
+    for (var i = 1; i <= 5; i++) {
+        stars += i <= rating ? '<li><i class="fas fa-star"></i></li>' : '<li><i class="far fa-star"></i></li>';
+    }
+    return stars + '</ul>';
+}
+
+// ── Fetch & Render Featured (Top Rated) Products ──
+async function fetchTopRatedProducts() {
+    try {
+        var response = await fetch('https://jusmoto.blackitechs.in/api/v1/services?type=1');
+        var result   = await response.json();
+        if (!result.success) return;
+        var container = document.getElementById('top-rated-products-list');
+        if (!container) return;
+
+        var list = result.data.filter(function(p) { return p.is_featured == 1; });
+
+        container.innerHTML = '';
+        list.forEach(function(product) {
+            var identifier   = product.slug || product.id;
+            var imgSrc       = product.image || 'img/product/1.png';
+            var price        = parseFloat(product.price || 0);
+            var discPrice    = parseFloat(product.discount_price || 0);
+            var displayPrice = (discPrice > 0 && discPrice < price) ? discPrice : price;
+            var hasDiscount  = discPrice > 0 && discPrice < price;
+
+            container.innerHTML +=
+                '<li><div class="top-rated-product-item clearfix">' +
+                    '<div class="top-rated-product-img">' +
+                        '<a href="product-details.html?id=' + identifier + '">' +
+                            '<img src="' + imgSrc + '" alt="' + product.title + '">' +
+                        '</a>' +
+                    '</div>' +
+                    '<div class="top-rated-product-info">' +
+                        '<div class="product-ratting">' + generateStars(product.average_rating) + '</div>' +
+                        '<h6><a href="product-details.html?id=' + identifier + '">' + product.title + '</a></h6>' +
+                        '<div class="product-price">' +
+                            '<span>₹' + displayPrice.toFixed(2) + '</span>' +
+                            (hasDiscount ? '<del>₹' + price.toFixed(2) + '</del>' : '') +
+                        '</div>' +
+                    '</div>' +
+                '</div></li>';
+        });
+    } catch (err) {
+        console.error('Error fetching top rated products:', err);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    if (document.getElementById('top-rated-products-list')) {
+        fetchTopRatedProducts();
+    }
+});
+
+/* ── Global exports ── */
+window.addToCart             = addToCart;
+window.addToWishlist         = addToWishlist;
+window.removeFromCart        = removeFromCart;
+window.removeCartItem        = removeCartItem;
+window.removeFromWishlist    = removeFromWishlist;
+window.moveToCart            = moveToCart;
+window.updateQuantity        = updateQuantity;
+window.getCart               = getCart;
+window.getWishlist           = getWishlist;
+window.loadMiniCart          = loadMiniCart;
+window.loadCartPage          = loadCartPage;
+window.loadWishlistPage      = loadWishlistPage;
+window.renderCheckoutSummary = renderCheckoutSummary;
+window.fetchRelatedProducts  = fetchRelatedProducts;
