@@ -1591,9 +1591,9 @@
                     </div>
                 `;
             } else {
-                // Default style used in home.html
+                // Default style used in home.html — mirrors testimonial card layout
                 html += `
-                    <div class="col-xl-3 col-lg-3 col-md-6 col-12">
+                    <div class="col-lg-4 col-md-6 col-12">
                         <div class="ltn__service-item-1">
                             <div class="service-item-img">
                                 <img src="${service.image || 'img/slider/slider-banner-service-1.jpg'}" alt="${service.title}">

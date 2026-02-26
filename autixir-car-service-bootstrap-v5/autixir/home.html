@@ -22,43 +22,77 @@
     <!-- Custom overrides -->
     <link rel="stylesheet" href="css/custom.css">
     <style>
-        /* Unify service section image sizes and content alignment */
+        /* ======================================================
+           Service Section — Mirrors Testimonial Card Layout
+        ====================================================== */
+
         .ltn__service-item-1 {
-            height: 100%;
             display: flex;
             flex-direction: column;
+            height: 100%;
+            margin-bottom: 0;
+            background-color: transparent;
+            box-shadow: none;
+        }
+
+        /* Top image — same style as testimonial background image */
+        .ltn__service-item-1 .service-item-img {
             background-color: var(--white);
-            margin-bottom: 10px; /* Base margin */
+            border-radius: 10px 10px 0 0;
         }
         .ltn__service-item-1 .service-item-img img {
             width: 100%;
-            height: 280px; /* Uniform height for service images */
+            height: 260px;
             object-fit: cover;
+            border-radius: 10px 10px 0 0;
         }
+
+        /* Overlapping white info card — mirrors .ltn__testimoni-info */
         .ltn__service-item-1 .service-item-brief {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
+            margin: -50px 20px 20px 20px;
+            padding: 25px 25px 20px;
+            background-color: var(--white);
+            box-shadow: var(--ltn__box-shadow-4);
+            z-index: 2;
+            position: relative;
+            border-radius: 10px;
         }
+
         .ltn__service-item-1 .service-item-brief h3 {
-            min-height: 50px; /* Reduced title height */
-            margin-bottom: 2px; /* Reduced margin above description */
-            display: flex;
-            align-items: center;
+            font-size: 18px;
+            margin-bottom: 10px;
+            line-height: 1.3;
         }
+
+        .ltn__service-item-1 .service-item-brief h3 a {
+            color: var(--ltn__heading-color);
+        }
+
+        .ltn__service-item-1 .service-item-brief h3 a:hover {
+            color: var(--ltn__secondary-color);
+        }
+
         .ltn__service-item-1 .service-item-brief p {
-            min-height: 80px; /* Unify description height */
-            margin-bottom: 10px; /* Reduced space below description */
+            flex-grow: 1;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: var(--ltn__paragraph-color);
         }
+
         .ltn__service-item-1 .product-price {
             margin-top: auto;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
             color: var(--ltn__secondary-color);
         }
+
         .ltn__service-item-1 .product-price del {
-            font-size: 20px;
-            margin-left: 10px;
+            font-size: 16px;
+            margin-left: 8px;
             color: var(--ltn__secondary-color);
             font-weight: 700;
         }
@@ -103,61 +137,68 @@
             margin-top: auto;
         }
 
-        /* Testimonial Alignment Fixes */
-        .ltn__testimonial-slider-2-active .slick-track {
-            display: flex !important;
-        }
-        .ltn__testimonial-slider-2-active .slick-slide {
-            height: inherit !important;
-            display: flex !important;
-            justify-content: center;
-        }
-        .ltn__testimonial-item-3 {
+        /* ======================================================
+           Testimonial Section — Matches about-us.html Layout
+        ====================================================== */
+
+        /* Desktop: 3 columns */
+        .ltn__testimonial-slider-3-active {
             display: flex;
-            flex-direction: column;
-            height: 100%;
-            width: 100%;
-            margin-bottom: 0;
-            background-color: transparent !important;
-            box-shadow: none !important;
+            flex-wrap: wrap;
+            gap: 30px;
         }
-        .ltn__testimonial-item-3 .ltn__testimonial-img img {
-            width: 100%;
-            height: 280px; /* Uniform height for testimonial background images */
-            object-fit: cover;
-            border-radius: 10px 10px 0 0;
+        .ltn__testimonial-slider-3-active .col-lg-12 {
+            width: 30%;
         }
-        .ltn__testimonial-item-3 .ltn__testimoni-info {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            margin: -60px 20px 20px 20px;
+
+        /* Flat white card — left aligned text */
+        .ltn__testimonial-item-4 {
+            background: #fff;
             padding: 30px;
-            background-color: var(--white);
-            box-shadow: var(--ltn__box-shadow-4);
-            z-index: 2;
-            position: relative;
             border-radius: 10px;
+            text-align: left;
+            height: 100%;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
         }
-        .ltn__testimonial-item-3 .ltn__testimoni-info p {
-            flex-grow: 1;
-            margin-bottom: 20px;
+
+        /* Avatar image sizing */
+        .ltn__testimonial-item-4 .ltn__testimoni-img img {
+            width: 65px;
+            height: 65px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 15px;
         }
-        .ltn__testimoni-info-inner {
-            margin-top: auto;
-            display: flex;
-            align-items: center;
+
+        /* Tablet: 2 columns */
+        @media (max-width: 991px) {
+            .ltn__testimonial-slider-3-active {
+                justify-content: center;
+            }
+            .ltn__testimonial-slider-3-active .col-lg-12 {
+                width: 48%;
+            }
         }
-        .ltn__testimoni-info-inner .ltn__testimoni-img img {
-            width: 60px !important;
-            height: 60px !important;
-            object-fit: cover !important;
-            border-radius: 50% !important;
-            margin-right: 15px;
-            margin-bottom: 0;
+
+        /* Mobile: 1 column + center content */
+        @media (max-width: 767px) {
+            .ltn__testimonial-slider-3-active .col-lg-12 {
+                width: 100%;
+            }
+            .ltn__testimonial-item-4 {
+                text-align: center;
+            }
+            .ltn__testimonial-item-4 .ltn__testimoni-img img {
+                margin: 0 auto 15px;
+                display: block;
+            }
         }
-        .ltn__testimoni-bg-icon {
-            bottom: 15px !important;
+
+        /* Small mobile */
+        @media (max-width: 480px) {
+            .ltn__testimonial-item-4 {
+                padding: 20px 15px;
+            }
         }
 
         /* Responsive adjustments for 1024px, 768px, and Mobile */
@@ -167,10 +208,6 @@
             .pt-100 { padding-top: 60px !important; }
             .pb-250 { padding-bottom: 120px !important; }
             .pb-50 { padding-bottom: 30px !important; }
-            
-            /* Revert testimonial section padding to fix arrow overlap */
-            .ltn__testimonial-area.pt-120 { padding-top: 120px !important; }
-            .ltn__testimonial-area.pb-120 { padding-bottom: 120px !important; }
 
             /* Banner image resize */
             .ltn__slider-area .slide-item-img img {
@@ -182,24 +219,7 @@
                 margin-bottom: 30px;
             }
 
-            /* Testimonial Arrow Positioning Standard */
-            .slick-arrow-3 .slick-arrow {
-                top: -110px !important;
-                height: 50px !important;
-                width: 50px !important;
-                line-height: 48px !important;
-                display: block !important;
-                opacity: 1 !important;
-                visibility: visible !important;
-            }
-            .slick-arrow-3 .slick-next {
-                right: 15px !important;
-            }
-            .slick-arrow-3 .slick-prev {
-                right: 75px !important;
-            }
-
-            /* Ensure arrows are always visible for Blog and Car Deals */
+            /* Ensure arrows always visible */
             .slick-arrow-1 .slick-arrow {
                 display: block !important;
                 opacity: 1 !important;
@@ -221,12 +241,7 @@
             .pt-120 { padding-top: 60px !important; }
             .pb-120 { padding-bottom: 60px !important; }
             .pb-250 { padding-bottom: 80px !important; }
-            .pb-80 {padding-top:20px !important;}
-
-            
-            /* Keep testimonial padding consistent for arrow spacing */
-            .ltn__testimonial-area.pt-120 { padding-top: 120px !important; }
-            .ltn__testimonial-area.pb-120 { padding-bottom: 120px !important; }
+            .pb-80 { padding-top: 20px !important; }
 
             .ltn__slider-area .slide-item-img img {
                 max-width: 90%;
@@ -238,23 +253,6 @@
             .pb-120 { padding-bottom: 50px !important; }
             .pt-100 { padding-top: 40px !important; }
             .pb-250 { padding-bottom: 60px !important; }
-            
-            /* Keep testimonial arrows consistent on small mobile */
-            .slick-arrow-3 .slick-arrow {
-                top: -110px !important;
-                height: 50px !important;
-                width: 50px !important;
-                line-height: 48px !important;
-                display: block !important;
-                opacity: 1 !important;
-                visibility: visible !important;
-            }
-            .slick-arrow-3 .slick-next {
-                right: 15px !important;
-            }
-            .slick-arrow-3 .slick-prev {
-                right: 75px !important;
-            }
 
             .ltn__slider-area .slide-item-img img {
                 max-width: 100%;
@@ -846,125 +844,90 @@
     <!-- FEATURE AREA END -->
 
 
-    <!-- TESTIMONIAL AREA START (testimonial-3) -->
-    <div class="ltn__testimonial-area bg-image pt-120 pb-120" data-bs-bg="img/bg/8.jpg">
-        <div class="container">
+    <!-- TESTIMONIAL AREA START (testimonial-4) -->
+    <div class="ltn__testimonial-area bg-image pt-70 pb-40" data-bs-bg="img/bg/8.jpg">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="section-title-area ltn__section-title-2">
+                    <div class="section-title-area ltn__section-title-2 text-center">
                         <h6 class="section-subtitle ltn__secondary-color">//  Testimonials</h6>
                         <h1 class="section-title">Clients Feedbacks</h1>
                     </div>
                 </div>
             </div>
-            <div class="row ltn__testimonial-slider-2-active slick-arrow-3">
+            <div class="row ltn__testimonial-slider-3-active slick-arrow-1 slick-arrow-1-inner">
                 <div class="col-lg-12">
-                    <div class="ltn__testimonial-item ltn__testimonial-item-3">
-                        <div class="ltn__testimonial-img">
-                            <img src="img/testimonial/r-1.jpg" alt="#">
+                    <div class="ltn__testimonial-item ltn__testimonial-item-4">
+                        <div class="ltn__testimoni-img">
+                            <img src="img/testimonial/t-1.png" alt="#">
                         </div>
                         <div class="ltn__testimoni-info">
-                            <p>"JusMoto has made car servicing so easy! I booked a full service for my SUV, and the pickup and drop-off was seamless. "</p>
-                            <div class="ltn__testimoni-info-inner">
-                                <div class="ltn__testimoni-img">
-                                    <img src="img/testimonial/t-1.png" alt="#">
-                                </div>
-                                <div class="ltn__testimoni-name-designation">
-                                    <h4>Arjun Mehta (Software Engineer)</h4>
-                                    <h6> Focus on Car Service</h6>
-                                </div>
-                            </div>
-                            <div class="ltn__testimoni-bg-icon">
-                                <i class="far fa-comments"></i>
-                            </div>
+                            <p>"JusMoto has made car servicing so easy! I booked a full service for my SUV, and the pickup and drop-off was seamless."</p>
+                            <h4>Arjun Mehta (Software Engineer)</h4>
+                            <h6>Focus on Car Service</h6>
+                        </div>
+                        <div class="ltn__testimoni-bg-icon">
+                            <i class="far fa-comments"></i>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-12">
-                    <div class="ltn__testimonial-item ltn__testimonial-item-3">
-                        <div class="ltn__testimonial-img">
-                            <img src="img/testimonial/r-2.jpg" alt="#">
+                    <div class="ltn__testimonial-item ltn__testimonial-item-4">
+                        <div class="ltn__testimoni-img">
+                            <img src="img/testimonial/t-2.png" alt="#">
                         </div>
                         <div class="ltn__testimoni-info">
                             <p>Finding a reliable service center for my premium bike was a struggle until I found JusMoto.</p>
-                            <div class="ltn__testimoni-info-inner">
-                                <div class="ltn__testimoni-img">
-                                    <img src="img/testimonial/t-2.png" alt="#">
-                                </div>
-                                <div class="ltn__testimoni-name-designation">
-                                    <h4>Priya Sharma (Marketing Manager) </h4>
-                                    <h6>Focus on Bike Service</h6>
-                                </div>
-                            </div>
-                            <div class="ltn__testimoni-bg-icon">
-                                <i class="far fa-comments"></i>
-                            </div>
+                            <h4>Priya Sharma (Marketing Manager)</h4>
+                            <h6>Focus on Bike Service</h6>
+                        </div>
+                        <div class="ltn__testimoni-bg-icon">
+                            <i class="far fa-comments"></i>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-12">
-                    <div class="ltn__testimonial-item ltn__testimonial-item-3">
-                        <div class="ltn__testimonial-img">
-                            <img src="img/testimonial/r-3.jpg" alt="#">
+                    <div class="ltn__testimonial-item ltn__testimonial-item-4">
+                        <div class="ltn__testimoni-img">
+                            <img src="img/testimonial/t-3.png" alt="#">
                         </div>
                         <div class="ltn__testimoni-info">
-                            <p>JusMoto offers unmatched convenience, handling both car maintenance and bike check-ups with complete professionalism. </p>
-                            <div class="ltn__testimoni-info-inner">
-                                <div class="ltn__testimoni-img">
-                                    <img src="img/testimonial/t-3.png" alt="#">
-                                </div>
-                                <div class="ltn__testimoni-name-designation">
-                                    <h4>Rahul Verma (Business Owner) </h4>
-                                    <h6>Focus on Mixed Fleet (Car & Bike)</h6>
-                                </div>
-                            </div>
-                            <div class="ltn__testimoni-bg-icon">
-                                <i class="far fa-comments"></i>
-                            </div>
+                            <p>JusMoto offers unmatched convenience, handling both car maintenance and bike check-ups with complete professionalism.</p>
+                            <h4>Rahul Verma (Business Owner)</h4>
+                            <h6>Focus on Mixed Fleet (Car &amp; Bike)</h6>
+                        </div>
+                        <div class="ltn__testimoni-bg-icon">
+                            <i class="far fa-comments"></i>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-12">
-                    <div class="ltn__testimonial-item ltn__testimonial-item-3">
-                        <div class="ltn__testimonial-img">
-                            <img src="img/blog/1.jpg" alt="#">
+                    <div class="ltn__testimonial-item ltn__testimonial-item-4">
+                        <div class="ltn__testimoni-img">
+                            <img src="img/testimonial/1.jpg" alt="#">
                         </div>
                         <div class="ltn__testimoni-info">
-                            <p>Lorem ipsum ctetur elit, sed do eius mod tempor incididunt ut labore et dolore magna aliqua. </p>
-                            <div class="ltn__testimoni-info-inner">
-                                <div class="ltn__testimoni-img">
-                                    <img src="img/testimonial/1.jpg" alt="#">
-                                </div>
-                                <div class="ltn__testimoni-name-designation">
-                                    <h4>Liam Mason</h4>
-                                    <h6>Officer</h6>
-                                </div>
-                            </div>
-                            <div class="ltn__testimoni-bg-icon">
-                                <i class="far fa-comments"></i>
-                            </div>
+                            <p>Lorem ipsum ctetur elit, sed do eius mod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <h4>Liam Mason</h4>
+                            <h6>Officer</h6>
+                        </div>
+                        <div class="ltn__testimoni-bg-icon">
+                            <i class="far fa-comments"></i>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-12">
-                    <div class="ltn__testimonial-item ltn__testimonial-item-3">
-                        <div class="ltn__testimonial-img">
-                            <img src="img/blog/2.jpg" alt="#">
+                    <div class="ltn__testimonial-item ltn__testimonial-item-4">
+                        <div class="ltn__testimoni-img">
+                            <img src="img/testimonial/1.jpg" alt="#">
                         </div>
                         <div class="ltn__testimoni-info">
-                            <p>Lorem ipsum ctetur elit, sed do eius mod tempor incididunt ut labore et dolore magna aliqua. </p>
-                            <div class="ltn__testimoni-info-inner">
-                                <div class="ltn__testimoni-img">
-                                    <img src="img/testimonial/1.jpg" alt="#">
-                                </div>
-                                <div class="ltn__testimoni-name-designation">
-                                    <h4>Noah Alexander</h4>
-                                    <h6>Professor</h6>
-                                </div>
-                            </div>
-                            <div class="ltn__testimoni-bg-icon">
-                                <i class="far fa-comments"></i>
-                            </div>
+                            <p>Lorem ipsum ctetur elit, sed do eius mod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <h4>Noah Alexander</h4>
+                            <h6>Professor</h6>
+                        </div>
+                        <div class="ltn__testimoni-bg-icon">
+                            <i class="far fa-comments"></i>
                         </div>
                     </div>
                 </div>
