@@ -425,16 +425,51 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="account-login-inner">
-                        <form action="#" class="ltn__form-box contact-form-box">
-                            <input type="text" name="email" placeholder="Email*">
-                            <input type="password" name="password" placeholder="Password*">
+                        <form id="login-form" action="#" class="ltn__form-box contact-form-box">
+                            <input type="text" id="email" name="email" placeholder="Email*" required>
+                            <input type="password" id="password" name="password" placeholder="Password*" required>
+                            <div id="login-message" class="mt-10 mb-10"></div>
                             <div class="btn-wrapper mt-0">
-                                <button class="theme-btn-1 btn btn-block w-100" type="submit">SIGN IN</button>
+                                <button id="login-btn" class="theme-btn-1 btn btn-block w-100" type="submit">SIGN IN</button>
                             </div>
                             <div class="go-to-btn mt-20">
                                 <a href="#" title="Wishlist" data-bs-toggle ="modal" data-bs-target="#ltn_forget_password_modal"><small>FORGOTTEN YOUR PASSWORD?</small></a>
                             </div>
                         </form>
+
+                        <script src="js/auth-utils.js"></script>
+                        <script>
+                            document.getElementById('login-form').addEventListener('submit', async (e) => {
+                                e.preventDefault();
+                                
+                                const email = document.getElementById('email').value;
+                                const password = document.getElementById('password').value;
+                                const messageDiv = document.getElementById('login-message');
+                                const loginBtn = document.getElementById('login-btn');
+
+                                // Clear previous messages
+                                messageDiv.innerHTML = '';
+                                messageDiv.className = 'mt-10 mb-10';
+
+                                // Disable button
+                                loginBtn.disabled = true;
+                                loginBtn.innerHTML = 'SIGNING IN...';
+
+                                try {
+                                    const result = await AuthService.login(email, password);
+                                    if (result.success) {
+                                        messageDiv.innerHTML = '<span style="color: green;">Login successful! Redirecting to home...</span>';
+                                        setTimeout(() => {
+                                            AuthService.setSession(result.user.accessToken || result.accessToken, result.user, true);
+                                        }, 1000);
+                                    }
+                                } catch (error) {
+                                    messageDiv.innerHTML = `<span style="color: red;">${error.message}</span>`;
+                                    loginBtn.disabled = false;
+                                    loginBtn.innerHTML = 'SIGN IN';
+                                }
+                            });
+                        </script>
                     </div>
                 </div>
                 <div class="col-lg-6">

@@ -1506,9 +1506,8 @@
     /* --------------------------------------------------------
         Dynamic Services Fetching
     -------------------------------------------------------- */
-    /* --------------------------------------------------------
-        Dynamic Services Fetching
-    -------------------------------------------------------- */
+    // const API_BASE_URL = 'http://localhost:3000/api/v1';
+
     async function fetchServices() {
         const container = $('#services-container');
         const loading = $('#services-loading');
@@ -1517,8 +1516,8 @@
         if (!container.length) return;
 
         try {
-            console.log('Fetching services from: https://16.112.128.19.nip.io/api/v1/services?type=0');
-            const response = await fetch('https://16.112.128.19.nip.io/api/v1/services?type=0');
+            console.log('Fetching services from: https://jusmoto.blackitechs.in/api/v1/api/v1/services?type=0');
+            const response = await fetch('https://jusmoto.blackitechs.in/api/v1/services?type=0');
             
             if (!response.ok) {
                 console.error(`API Error: ${response.status} ${response.statusText}`);
@@ -1554,7 +1553,9 @@
 
     function renderServices(services) {
         const container = $('#services-container');
+        const layoutStyle = container.data('layout') || 'style-1';
         let html = '';
+        
         services.forEach(service => {
             const currentPrice = service.discountPrice || service.discount_price;
             const originalPrice = service.price || service.original_price;
@@ -1566,22 +1567,48 @@
                 priceHtml = `<span>₹${currentPrice || originalPrice}</span>`;
             }
 
-            html += `
-                <div class="col-xl-3 col-lg-3 col-md-6 col-12">
-                    <div class="ltn__service-item-1">
-                        <div class="service-item-img">
-                            <img src="${service.image || 'img/slider/slider-banner-service-1.jpg'}" alt="${service.title}">
-                        </div>
-                        <div class="service-item-brief">
-                            <h3><a href="service-details.html">${service.title}</a></h3>
-                            <p>${service.description}</p>
-                            <div class="product-price">
-                                ${priceHtml}
+            const categoryName = (service.category && typeof service.category === 'object') 
+                ? service.category.name 
+                : (service.category || '');
+
+            if (layoutStyle === 'style-2') {
+                // Style used in service.html
+                html += `
+                    <div class="col-lg-4 col-md-6">
+                        <div class="ltn__service-item-2 white-bg">
+                            <div class="service-item-icon">
+                                <img src="${service.image || 'img/slider/slider-banner-service-1.jpg'}" alt="${service.title}">
+                            </div>
+                            <div class="service-item-brief">
+                                ${categoryName ? `<h6 class="ltn__secondary-color">${categoryName}</h6>` : ''}
+                                <h3><a href="service_details.html?id=${service.id}">${service.title}</a></h3>
+                                <ul>
+                                    <li> ${service.description ? service.description.substring(0, 50) + '...' : 'Professional Care'}</li>
+                                    <li> ${priceHtml}</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                </div>
-            `;
+                `;
+            } else {
+                // Default style used in home.html
+                html += `
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-12">
+                        <div class="ltn__service-item-1">
+                            <div class="service-item-img">
+                                <img src="${service.image || 'img/slider/slider-banner-service-1.jpg'}" alt="${service.title}">
+                            </div>
+                            <div class="service-item-brief">
+                                <h3><a href="service_details.html?id=${service.id}">${service.title}</a></h3>
+                                <p>${service.description}</p>
+                                <div class="product-price">
+                                    ${priceHtml}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
         });
         container.html(html);
     }
@@ -1599,8 +1626,8 @@
         if (!tabMenu.length || !tabContent.length) return;
 
         try {
-            console.log('Fetching products from: https://16.112.128.19.nip.io/api/v1/services?type=1');
-            const response = await fetch('https://16.112.128.19.nip.io/api/v1/services?type=1');
+            console.log('Fetching products from: https://jusmoto.blackitechs.in/api/v1/api/v1/services?type=1');
+            const response = await fetch('https://jusmoto.blackitechs.in/api/v1/services?type=1');
             
             if (!response.ok) {
                 console.error(`API Error: ${response.status} ${response.statusText}`);
@@ -1750,7 +1777,7 @@
                                 <li><a href="#"><i class="far fa-star"></i></a></li>
                             </ul>
                         </div>
-                        <h2 class="product-title"><a href="product-details.html">${product.title}</a></h2>
+                        <h2 class="product-title"><a href="service_details.html?id=${product.id}">${product.title}</a></h2>
                         <div class="product-price">
                             ${priceHtml}
                         </div>
