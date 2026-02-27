@@ -1517,11 +1517,7 @@
         if (!container.length) return;
 
         try {
-<<<<<<< HEAD
             console.log('Fetching services from: https://jusmoto.blackitechs.in/api/v1/services?type=0');
-=======
-            console.log('Fetching services from: https://jusmoto.blackitechs.in/api/v1/api/v1/services?type=0');
->>>>>>> car-01
             const response = await fetch('https://jusmoto.blackitechs.in/api/v1/services?type=0');
             
             if (!response.ok) {
@@ -1631,11 +1627,7 @@
         if (!tabMenu.length || !tabContent.length) return;
 
         try {
-<<<<<<< HEAD
             console.log('Fetching products from: https://jusmoto.blackitechs.in/api/v1/services?type=1');
-=======
-            console.log('Fetching products from: https://jusmoto.blackitechs.in/api/v1/api/v1/services?type=1');
->>>>>>> car-01
             const response = await fetch('https://jusmoto.blackitechs.in/api/v1/services?type=1');
             
             if (!response.ok) {
@@ -1760,11 +1752,7 @@
                         </div>
                         <div class="product-hover-action">
                             <ul>
-                                <li>
-                                    <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
-                                        <i class="far fa-eye"></i>
-                                    </a>
-                                </li>
+                            
                                 <li>
                                     <a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal" data-product-id="${identifier}">
                                         <i class="fas fa-shopping-cart"></i>
@@ -1778,20 +1766,8 @@
                         </div>
                     </div>
                     <div class="product-info">
-                        <div class="product-ratting">
-                            <ul>
-                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                <li><a href="#"><i class="far fa-star"></i></a></li>
-                            </ul>
-                        </div>
-<<<<<<< HEAD
+                       
                         <h2 class="product-title"><a href="product-details.html?id=${identifier}">${product.title}</a></h2>
-=======
-                        <h2 class="product-title"><a href="service_details.html?id=${product.id}">${product.title}</a></h2>
->>>>>>> car-01
                         <div class="product-price">
                             ${priceHtml}
                         </div>
@@ -2022,7 +1998,7 @@ if (!pagination.totalPages) {
                         ${badgeHtml}
                         <div class="product-hover-action">
                             <ul>
-                                <li><a href="product-details.html?id=${identifier}" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal"><i class="far fa-eye"></i></a></li>
+                               
                                 <li><a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal" data-product-id="${identifier}"><i class="fas fa-shopping-cart"></i></a></li>
                                 <li><a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal" data-product-id="${identifier}"><i class="far fa-heart"></i></a></li>
                             </ul>
@@ -2074,7 +2050,7 @@ if (!pagination.totalPages) {
                         <div class="product-brief"><p>${product.description || ''}</p></div>
                         <div class="product-hover-action">
                             <ul>
-                                <li><a href="product-details.html?id=${identifier}" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal"><i class="far fa-eye"></i></a></li>
+                               
                                 <li><a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal" data-product-id="${identifier}"><i class="fas fa-shopping-cart"></i></a></li>
                                 <li><a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal" data-product-id="${identifier}"><i class="far fa-heart"></i></a></li>
                             </ul>
@@ -2635,7 +2611,7 @@ function renderRelatedProductCard(product) {
                 '</a>' +
                 badgeHtml +
                 '<div class="product-hover-action"><ul>' +
-                    '<li><a href="product-details.html?id=' + identifier + '" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal"><i class="far fa-eye"></i></a></li>' +
+                  
                     '<li><a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal" data-product-id="' + identifier + '"><i class="fas fa-shopping-cart"></i></a></li>' +
                     '<li><a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal" data-product-id="' + identifier + '"><i class="far fa-heart"></i></a></li>' +
                 '</ul></div>' +
@@ -3124,3 +3100,423 @@ window.loadCartPage          = loadCartPage;
 window.loadWishlistPage      = loadWishlistPage;
 window.renderCheckoutSummary = renderCheckoutSummary;
 window.fetchRelatedProducts  = fetchRelatedProducts;
+
+/* ================================================================
+   SHOP PAGE: SEARCH + CATEGORY FILTER
+   Works with your existing fetchShopProducts() in main.js
+================================================================ */
+
+var API_PRODUCTS_URL = 'https://jusmoto.blackitechs.in/api/v1/services?type=1';
+
+// ── Shared filter state ──
+var shopFilter = {
+    search:   '',
+    category: 'all',  // category id or 'all'
+    maxPrice: 10000,
+    page:     1,
+    sort:     ''
+};
+
+// ── Store all products locally for client-side filtering ──
+var allShopProducts = [];
+var shopCategories  = {}; // { id: { name, count } }
+
+/* ----------------------------------------------------------------
+   INIT: Fetch all products once, build sidebar, render
+---------------------------------------------------------------- */
+async function initShopPage() {
+    showShopLoading(true);
+
+    try {
+        var res  = await fetch(API_PRODUCTS_URL);
+        var json = await res.json();
+        allShopProducts = Array.isArray(json.data) ? json.data : [];
+
+        buildCategoryFilter();
+        setMaxPrice();
+        applyFiltersAndRender();
+
+    } catch(err) {
+        console.error('initShopPage error:', err);
+        showShopError();
+    }
+}
+
+/* ----------------------------------------------------------------
+   BUILD CATEGORY SIDEBAR
+---------------------------------------------------------------- */
+function buildCategoryFilter() {
+    shopCategories = { all: { name: 'All Products', count: allShopProducts.length } };
+
+    allShopProducts.forEach(function(p) {
+        if (p.category) {
+            var id   = p.category.id;
+            var name = p.category.name;
+            if (!shopCategories[id]) shopCategories[id] = { name: name, count: 0 };
+            shopCategories[id].count++;
+        }
+    });
+
+    var ul = document.getElementById('sidebar-category-list');
+    if (!ul) return;
+
+    var html = '<li class="active" data-cat="all" onclick="selectCategory(\'all\', this)">' +
+        '<a>All Products <span class="cat-count-badge" id="cat-badge-all">' + shopCategories.all.count + '</span></a></li>';
+
+    Object.entries(shopCategories).forEach(function(entry) {
+        var id  = entry[0];
+        var cat = entry[1];
+        if (id === 'all') return;
+        html += '<li data-cat="' + id + '" onclick="selectCategory(\'' + id + '\', this)">' +
+            '<a>' +
+                '<span><i class="fas fa-chevron-right" style="font-size:10px;margin-right:6px;opacity:.5;"></i>' + cat.name + '</span>' +
+                '<span class="cat-count-badge">' + cat.count + '</span>' +
+            '</a>' +
+        '</li>';
+    });
+
+    ul.innerHTML = html;
+}
+
+/* ----------------------------------------------------------------
+   SET PRICE RANGE MAX FROM DATA
+---------------------------------------------------------------- */
+function setMaxPrice() {
+    var maxP = Math.max.apply(null, allShopProducts.map(function(p) {
+        return parseFloat(p.discount_price || p.price || 0);
+    }));
+    var rounded = Math.ceil((maxP || 10000) / 1000) * 1000;
+
+    var range = document.getElementById('sidebarPriceRange');
+    var label = document.getElementById('sidebarPriceLabel');
+    if (range) { range.max = rounded; range.value = rounded; }
+    if (label) label.textContent = 'Up to ₹' + rounded.toLocaleString('en-IN');
+    shopFilter.maxPrice = rounded;
+}
+
+/* ----------------------------------------------------------------
+   CATEGORY SELECT
+---------------------------------------------------------------- */
+window.selectCategory = function(catId, el) {
+    document.querySelectorAll('#sidebar-category-list li').forEach(function(li) {
+        li.classList.remove('active');
+    });
+    el.classList.add('active');
+    shopFilter.category = catId;
+    shopFilter.page     = 1;
+    applyFiltersAndRender();
+    updateActiveFiltersUI();
+};
+
+/* ----------------------------------------------------------------
+   SEARCH
+---------------------------------------------------------------- */
+function doShopSearch() {
+    var val = document.getElementById('shopSearchInput').value.trim();
+    shopFilter.search = val;
+    shopFilter.page   = 1;
+
+    var clearBtn = document.getElementById('searchClearBtn');
+    if (clearBtn) clearBtn.style.display = val ? 'inline-block' : 'none';
+
+    applyFiltersAndRender();
+    updateActiveFiltersUI();
+}
+
+window.clearShopSearch = function() {
+    document.getElementById('shopSearchInput').value = '';
+    shopFilter.search = '';
+    document.getElementById('searchClearBtn').style.display = 'none';
+    applyFiltersAndRender();
+    updateActiveFiltersUI();
+};
+
+window.clearAllFilters = function() {
+    // Reset state
+    shopFilter.search   = '';
+    shopFilter.category = 'all';
+    shopFilter.page     = 1;
+
+    // Reset UI
+    document.getElementById('shopSearchInput').value = '';
+    document.getElementById('searchClearBtn').style.display = 'none';
+
+    // Reset category list
+    document.querySelectorAll('#sidebar-category-list li').forEach(function(li) {
+        li.classList.toggle('active', li.dataset.cat === 'all');
+    });
+
+    // Reset price
+    var range = document.getElementById('sidebarPriceRange');
+    if (range) {
+        shopFilter.maxPrice = parseInt(range.max);
+        range.value = range.max;
+        document.getElementById('sidebarPriceLabel').textContent =
+            'Up to ₹' + shopFilter.maxPrice.toLocaleString('en-IN');
+    }
+
+    applyFiltersAndRender();
+    updateActiveFiltersUI();
+};
+
+/* ----------------------------------------------------------------
+   FILTER + SORT + PAGINATE → RENDER
+---------------------------------------------------------------- */
+function applyFiltersAndRender() {
+    var list = allShopProducts.slice(); // copy
+
+    // 1. Category
+    if (shopFilter.category !== 'all') {
+        list = list.filter(function(p) {
+            return p.category && String(p.category.id) === String(shopFilter.category);
+        });
+    }
+
+    // 2. Search
+    var q = shopFilter.search.toLowerCase();
+    if (q) {
+        list = list.filter(function(p) {
+            return (p.title         && p.title.toLowerCase().includes(q))        ||
+                   (p.description   && p.description.toLowerCase().includes(q))  ||
+                   (p.category && p.category.name && p.category.name.toLowerCase().includes(q));
+        });
+    }
+
+    // 3. Price
+    list = list.filter(function(p) {
+        var price = parseFloat(p.discount_price || p.price || 0);
+        return price <= shopFilter.maxPrice;
+    });
+
+    // 4. Sort
+    var sort = shopFilter.sort;
+    if (sort === 'price_asc') {
+        list.sort(function(a, b) {
+            return parseFloat(a.discount_price || a.price || 0) - parseFloat(b.discount_price || b.price || 0);
+        });
+    } else if (sort === 'price_desc') {
+        list.sort(function(a, b) {
+            return parseFloat(b.discount_price || b.price || 0) - parseFloat(a.discount_price || a.price || 0);
+        });
+    } else if (sort === 'newest') {
+        list.sort(function(a, b) { return new Date(b.created_at || 0) - new Date(a.created_at || 0); });
+    } else if (sort === 'popularity') {
+        list.sort(function(a, b) { return parseFloat(b.average_rating || 0) - parseFloat(a.average_rating || 0); });
+    }
+
+    // 5. Paginate
+    var perPage    = 12;
+    var totalCount = list.length;
+    var totalPages = Math.max(1, Math.ceil(totalCount / perPage));
+    if (shopFilter.page > totalPages) shopFilter.page = 1;
+
+    var start  = (shopFilter.page - 1) * perPage;
+    var paged  = list.slice(start, start + perPage);
+
+    // 6. Render
+    renderFilteredProducts(paged, q);
+    renderShopPaginationFiltered(totalPages, shopFilter.page);
+    updateShowingText({ total: totalCount, totalPages: totalPages, page: shopFilter.page }, paged.length);
+    showShopLoading(false);
+}
+
+/* ----------------------------------------------------------------
+   RENDER PRODUCTS (reuses your existing helper functions)
+---------------------------------------------------------------- */
+function renderFilteredProducts(products, searchQuery) {
+    // Use the correct container IDs from your HTML
+    var gridContainer = document.querySelector('#liton_product_grid .ltn__product-grid-view .row');
+    var listContainer = document.querySelector('#liton_product_list .ltn__product-list-view .row');
+
+    if (!gridContainer) {
+        // fallback to direct row ids
+        gridContainer = document.getElementById('grid-product-row');
+        listContainer = document.getElementById('list-product-row');
+    }
+
+    if (!gridContainer) return;
+
+    if (products.length === 0) {
+        var noResultsHtml = '<div class="col-12 no-products-found">' +
+            '<i class="fas fa-search-minus"></i>' +
+            '<h5>No products found</h5>' +
+            '<p>Try adjusting your search term or selecting a different category.</p>' +
+            '<button class="btn theme-btn-1 mt-10" onclick="clearAllFilters()">Clear Filters</button>' +
+        '</div>';
+        gridContainer.innerHTML = noResultsHtml;
+        if (listContainer) listContainer.innerHTML = noResultsHtml;
+        return;
+    }
+
+    // Use your existing renderShopGridCard / renderShopListCard if available
+    if (typeof renderShopGridCard === 'function') {
+        var gridHtml = products.map(function(p) {
+            return highlightProductCard(renderShopGridCard(p), searchQuery);
+        }).join('');
+        var listHtml = products.map(function(p) {
+            return highlightProductCard(renderShopListCard(p), searchQuery);
+        }).join('');
+        gridContainer.innerHTML = gridHtml;
+        if (listContainer) listContainer.innerHTML = listHtml;
+    }
+}
+
+/* ── Highlight search query in rendered card HTML ── */
+function highlightProductCard(html, query) {
+    if (!query) return html;
+    // Only highlight inside product-title tags
+    return html.replace(/(<h2 class="product-title">[\s\S]*?<\/h2>)/g, function(match) {
+        var re = new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+        return match.replace(re, '<mark style="background:rgba(255,90,0,.15);color:#ff5a00;border-radius:3px;padding:0 2px;">$1</mark>');
+    });
+}
+
+/* ----------------------------------------------------------------
+   PAGINATION (filtered version)
+---------------------------------------------------------------- */
+function renderShopPaginationFiltered(totalPages, currentPage) {
+    var hasPrev = currentPage > 1;
+    var hasNext = currentPage < totalPages;
+
+    if (totalPages <= 1) {
+        document.querySelector('.ltn__pagination').innerHTML = '';
+        return;
+    }
+
+    var html = '<ul>';
+    html += '<li><a href="#" class="filter-page-btn" data-page="' + (currentPage - 1) + '"' +
+        (!hasPrev ? ' style="pointer-events:none;opacity:.4"' : '') + '><i class="fas fa-angle-double-left"></i></a></li>';
+
+    for (var i = 1; i <= totalPages; i++) {
+        if (totalPages > 7 && i > 3 && i < totalPages - 1 && Math.abs(i - currentPage) > 1) {
+            if (i === 4) html += '<li><a href="#">...</a></li>';
+            continue;
+        }
+        html += '<li class="' + (i === currentPage ? 'active' : '') + '">' +
+            '<a href="#" class="filter-page-btn" data-page="' + i + '">' + i + '</a></li>';
+    }
+
+    html += '<li><a href="#" class="filter-page-btn" data-page="' + (currentPage + 1) + '"' +
+        (!hasNext ? ' style="pointer-events:none;opacity:.4"' : '') + '><i class="fas fa-angle-double-right"></i></a></li>';
+    html += '</ul>';
+
+    document.querySelector('.ltn__pagination').innerHTML = html;
+}
+
+/* ----------------------------------------------------------------
+   ACTIVE FILTERS INDICATOR
+---------------------------------------------------------------- */
+function updateActiveFiltersUI() {
+    var widget = document.getElementById('activeFiltersWidget');
+    var list   = document.getElementById('activeFiltersList');
+    if (!widget || !list) return;
+
+    var chips = '';
+
+    if (shopFilter.search) {
+        chips += '<span class="active-filter-chip">Search: "' + shopFilter.search + '" ' +
+            '<button onclick="clearShopSearch()"><i class="fas fa-times"></i></button></span>';
+    }
+
+    if (shopFilter.category !== 'all' && shopCategories[shopFilter.category]) {
+        chips += '<span class="active-filter-chip">Category: ' + shopCategories[shopFilter.category].name + ' ' +
+            '<button onclick="selectCategory(\'all\', document.querySelector(\'[data-cat=\\\"all\\\"]\')); updateActiveFiltersUI();"><i class="fas fa-times"></i></button></span>';
+    }
+
+    widget.style.display = chips ? 'block' : 'none';
+    list.innerHTML = chips;
+}
+
+/* ----------------------------------------------------------------
+   LOADING / ERROR STATES
+---------------------------------------------------------------- */
+function showShopLoading(show) {
+    var gridContainer = document.querySelector('#liton_product_grid .ltn__product-grid-view .row') ||
+                        document.getElementById('grid-product-row');
+    if (!gridContainer) return;
+    if (show) {
+        gridContainer.innerHTML = '<div class="col-12 text-center py-60">' +
+            '<div class="spinner-border" role="status" style="width:3rem;height:3rem;border-color:#ff5a00;border-right-color:transparent;"></div>' +
+            '<p class="mt-15">Loading products…</p></div>';
+    }
+}
+
+function showShopError() {
+    var gridContainer = document.querySelector('#liton_product_grid .ltn__product-grid-view .row') ||
+                        document.getElementById('grid-product-row');
+    if (gridContainer) {
+        gridContainer.innerHTML = '<div class="col-12 text-center py-40">' +
+            '<p class="text-danger">Failed to load products. Please try again.</p>' +
+            '<button class="btn theme-btn-1 mt-10" onclick="initShopPage()">Retry</button></div>';
+    }
+}
+
+/* ----------------------------------------------------------------
+   EVENT LISTENERS
+---------------------------------------------------------------- */
+document.addEventListener('DOMContentLoaded', function() {
+
+    // Search: button click
+    var searchBtn = document.getElementById('shopSearchBtn');
+    if (searchBtn) searchBtn.addEventListener('click', doShopSearch);
+
+    // Search: Enter key
+    var searchInput = document.getElementById('shopSearchInput');
+    if (searchInput) {
+        searchInput.addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') { doShopSearch(); return; }
+            // Live search (debounced 350ms)
+            clearTimeout(window._shopSearchDebounce);
+            window._shopSearchDebounce = setTimeout(doShopSearch, 350);
+        });
+    }
+
+    // Price range
+    var priceRange = document.getElementById('sidebarPriceRange');
+    if (priceRange) {
+        priceRange.addEventListener('input', function() {
+            shopFilter.maxPrice = parseInt(this.value);
+            var label = document.getElementById('sidebarPriceLabel');
+            if (label) label.textContent = 'Up to ₹' + shopFilter.maxPrice.toLocaleString('en-IN');
+            clearTimeout(window._priceDebounce);
+            window._priceDebounce = setTimeout(function() {
+                shopFilter.page = 1;
+                applyFiltersAndRender();
+                updateActiveFiltersUI();
+            }, 300);
+        });
+    }
+
+    // Sort select (nice-select: option click)
+    $(document).on('click', '.short-by .nice-select .option', function() {
+        shopFilter.sort = $(this).data('value');
+        shopFilter.page = 1;
+        applyFiltersAndRender();
+    });
+
+    // Sort select (native fallback)
+    $(document).on('change', '#sort-select', function() {
+        shopFilter.sort = $(this).val();
+        shopFilter.page = 1;
+        applyFiltersAndRender();
+    });
+
+    // Filtered pagination clicks
+    $(document).on('click', '.filter-page-btn', function(e) {
+        e.preventDefault();
+        var page = parseInt($(this).data('page'));
+        if (!page || page < 1) return;
+        shopFilter.page = page;
+        applyFiltersAndRender();
+        $('html, body').animate({ scrollTop: $('.ltn__product-area').offset().top - 80 }, 400);
+    });
+
+    // Start
+    if (document.getElementById('sidebar-category-list')) {
+        initShopPage();
+    }
+
+    
+});
+
+

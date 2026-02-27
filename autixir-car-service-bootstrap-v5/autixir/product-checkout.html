@@ -19,6 +19,182 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- Responsive css -->
     <link rel="stylesheet" href="css/responsive.css">
+    <style>.payzapp-box {
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    padding: 18px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    background: #fff;
+}
+
+.payzapp-box:hover {
+    border-color: #28a745;
+}
+
+.payzapp-box.active-payment {
+    border-color: #28a745;
+    background: #f6fff8;
+}
+
+.payment-icon {
+    width: 45px;
+    height: 45px;
+    background: #28a745;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 18px;
+}
+
+.check-circle {
+    width: 28px;
+    height: 28px;
+    background: #28a745;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+/* Reduce spacing inside order summary */
+
+.order-summary-card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+.summary-title {
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+/* PRODUCT LIST */
+.product-list {
+    max-height: 220px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+.product-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.product-number {
+    font-weight: 600;
+    margin-right: 6px;
+}
+
+/* COUPON */
+.coupon-box {
+    display: flex;
+    height: 42px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.coupon-box input {
+    flex: 1;
+    border: none;
+    padding: 0 10px;
+    outline: none;
+}
+
+.coupon-box button {
+    border: none;
+    background: #e60023;
+    color: #fff;
+    padding: 0 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* PRICE SECTION */
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.discount-row {
+    color: #28a745;
+}
+
+.total-row {
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.total-price {
+    color: #e60023;
+    font-size: 19px;
+}
+
+/* PAYMENT */
+.payment-section {
+    margin-top: 18px;
+    margin-bottom: 15px;
+}
+
+.payment-option {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.payment-option input {
+    margin-right: 10px;
+}
+
+.payment-option.active,
+.payment-option:hover {
+    border-color: #e60023;
+    background: #fff5f7;
+}
+
+.payment-title {
+    font-weight: 600;
+    display: block;
+}
+
+.payment-sub {
+    font-size: 12px;
+    color: #666;
+}
+
+/* PLACE ORDER BUTTON */
+.place-order-btn {
+    width: 100%;
+    height: 46px;
+    background: #e60023;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.place-order-btn:hover {
+    background: #c4001d;
+}
+</style>
 </head>
 
 <body>
@@ -408,84 +584,112 @@
                     </div>
 
                     <!-- PAYMENT METHOD -->
-                    <div class="ltn__checkout-payment-method mt-50">
-                        <h4 class="title-2"><i class="fas fa-credit-card me-2"></i>Payment Method</h4>
-                        <!-- PayZapp Only -->
-                        <div class="card payment-card active-payment">
-                            <h5 class="ltn__card-title d-flex align-items-center gap-2">
-                                <span class="payment-radio selected"></span>
-                                <img src="img/icons/payzapp.png" alt="PayZapp" style="height:24px;">
-                                PayZapp
-                                <small class="text-muted fw-normal ms-2">UPI, Cards, Net Banking &amp; Wallets</small>
-                            </h5>
-                            <div class="card-body">
-                                <p>Pay securely via PayZapp using UPI, Credit/Debit Cards, Net Banking, or Wallets.</p>
-                            </div>
-                        </div>
+<div class="ltn__checkout-payment-method mt-50">
+    <h4 class="title-2">
+        <i class="fas fa-credit-card me-2"></i>Payment Method
+    </h4>
 
-                        <div class="ltn__payment-note mt-30 mb-30">
-                            <p>Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.</p>
-                        </div>
-                    </div>
-
+    <div class="payzapp-box active-payment" id="payzappBox">
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+                <div class="payment-icon">
+                    <i class="fas fa-wallet"></i>
                 </div>
-            </div>
-
-            <!-- RIGHT COLUMN: Order Summary -->
-            <div class="col-lg-4">
-                <div class="shoping-cart-total mt-50 order-summary-box">
-                    <h4 class="title-2">Order Summary</h4>
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td>Castrol MAGNATEC 3416662 Stop-St... <strong>×1</strong></td>
-                                <td>₹2,100</td>
-                            </tr>
-                            <tr>
-                                <td>Tata Green Batteries | TG550R 12V &amp;... <strong>×1</strong></td>
-                                <td>₹5,300</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <!-- Coupon Code -->
-                    <div class="coupon-row d-flex gap-2 mb-3">
-                        <input type="text" class="form-control" placeholder="Coupon code">
-                        <button class="btn theme-btn-2 btn-effect-2 text-uppercase px-3">Apply</button>
-                    </div>
-
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td>Subtotal</td>
-                                <td>₹7,400</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Total</strong></td>
-                                <td><strong class="text-danger" style="font-size:1.3em;">₹7,400</strong></td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <div class="paying-via-box d-flex justify-content-between align-items-center mb-3 p-2 border rounded">
-                        <span class="text-muted">Paying via:</span>
-                        <strong class="text-success">PayZapp</strong>
-                    </div>
-
-                    <button class="btn theme-btn-1 btn-effect-1 text-uppercase w-100" type="submit">
-                        ✓ Place Order &amp; Pay
-                    </button>
-
-                    <p class="text-center mt-2 text-muted small">
-                        <i class="fas fa-lock me-1"></i> Secure checkout
+                <div>
+                    <strong>PayZapp</strong>
+                    <p class="mb-0 text-muted small">
+                        Pay via UPI, Cards, Net Banking & Wallets
                     </p>
                 </div>
             </div>
 
+            <div class="check-circle">
+                <i class="fas fa-check"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="ltn__payment-note mt-30 mb-30">
+        <p>Your personal data will be used to process your order securely.</p>
+    </div>
+</div>
+
+                </div>
+            </div>
+
+          <!-- RIGHT COLUMN: ORDER SUMMARY -->
+<div class="order-summary-card">
+
+    <h4 class="summary-title">Order Summary</h4>
+
+    <!-- Product List -->
+    <div id="product_list" class="product-list">
+        <!-- Products will load here -->
+    </div>
+
+    <!-- Coupon -->
+    <div class="coupon-box">
+        <input type="text" id="coupon_code" placeholder="Enter coupon code">
+        <button id="apply_coupon_btn">Apply</button>
+    </div>
+
+    <!-- Price Details -->
+    <div class="price-section">
+
+        <div class="price-row">
+            <span>Subtotal</span>
+            <span>₹ <span id="subtotal">0</span></span>
+        </div>
+
+        <div class="price-row discount-row">
+            <span>Discount</span>
+            <span>- ₹ <span id="discount">0</span></span>
+        </div>
+
+        <div class="price-row total-row">
+            <span>Total</span>
+            <span class="total-price">₹ <span id="total">0</span></span>
+        </div>
+
+    </div>
+
+    <!-- Payment Method -->
+    <div class="payment-section">
+        <label class="payment-option active">
+            <input type="radio" name="payment_method" value="payzapp" checked>
+            <div class="payment-content">
+                <span class="payment-title">PayZapp</span>
+                <span class="payment-sub">Fast & Secure Payment</span>
+            </div>
+        </label>
+    </div>
+
+    <!-- Place Order Button -->
+    <button id="place_order_btn" class="place-order-btn">
+        Place Order
+    </button>
+
+</div>
+
         </div>
     </div>
 </div>
-<!-- CHECKOUT AREA END -->->
+<!-- CHECKOUT AREA END -->
+ <!-- PROFESSIONAL POPUP MODAL -->
+<div class="modal fade" id="customPopupModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body text-center p-4">
+        <h5 id="popupTitle" class="mb-3"></h5>
+        <p id="popupMessage"></p>
+        <button type="button" class="btn theme-btn-1 mt-3"
+                data-bs-dismiss="modal">
+          OK
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
       <!-- FOOTER AREA START (ltn__footer-2 ltn__footer-color-1) -->
@@ -799,6 +1003,197 @@
     <script src="js/plugins.js"></script>
     <!-- Main JS -->
     <script src="js/main.js"></script>
+    
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    /* =========================
+       POPUP FUNCTION
+    ========================== */
+    function showPopup(title, message) {
+        document.getElementById("popupTitle").innerText = title;
+        document.getElementById("popupMessage").innerText = message;
+
+        var modal = new bootstrap.Modal(
+            document.getElementById("customPopupModal")
+        );
+        modal.show();
+    }
+
+    /* =========================
+       CART FUNCTIONS
+    ========================== */
+    function getCart() {
+        return JSON.parse(localStorage.getItem("cart")) || [];
+    }
+
+    let discountAmount = 0;
+    let selectedPayment = "PayZapp";
+
+
+    
+
+    /* =========================
+       RENDER CHECKOUT
+    ========================== */
+    function renderCheckout() {
+        const cart = getCart();
+        const tbody = document.getElementById("checkout_cart_items");
+
+        if (!tbody) return;
+
+        if (cart.length === 0) {
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="2" class="text-center">
+                        Your cart is empty.
+                        <br><a href="shop.html">Continue Shopping</a>
+                    </td>
+                </tr>
+            `;
+            document.getElementById("checkout_subtotal").innerText = "₹0.00";
+            document.getElementById("checkout_total").innerText = "₹0.00";
+            return;
+        }
+
+        let subtotal = 0;
+      let html = "";
+
+cart.forEach(item => {
+    const line = parseFloat(item.price) * parseInt(item.quantity);
+    subtotal += line;
+
+    html += `
+        <div class="product-item">
+            <span>${item.title} × ${item.quantity}</span>
+            <span>₹${line.toFixed(2)}</span>
+        </div>
+    `;
+});
+
+tbody.innerHTML = html;
+
+        document.getElementById("checkout_subtotal").innerText =
+            "₹" + subtotal.toFixed(2);
+
+        updateTotal(subtotal);
+    }
+
+    function updateTotal(subtotal) {
+        const total = subtotal - discountAmount;
+
+        document.getElementById("checkout_discount").innerText =
+            "₹" + discountAmount.toFixed(2);
+
+        document.getElementById("checkout_total").innerText =
+            "₹" + total.toFixed(2);
+    }
+
+    /* =========================
+       COUPON
+    ========================== */
+    document.getElementById("apply_coupon_btn")
+        .addEventListener("click", function () {
+
+        const code = document.getElementById("coupon_code").value.trim();
+        const subtotalText =
+            document.getElementById("checkout_subtotal").innerText;
+
+        const subtotal = parseFloat(subtotalText.replace("₹", ""));
+
+        const message = document.getElementById("coupon_message");
+
+        if (code === "JUS10") {
+            discountAmount = subtotal * 0.10;
+            message.innerText = "Coupon applied! 10% discount.";
+            message.classList.remove("text-danger");
+            message.classList.add("text-success");
+        } else {
+            discountAmount = 0;
+            message.innerText = "Invalid coupon code.";
+            message.classList.remove("text-success");
+            message.classList.add("text-danger");
+        }
+
+        updateTotal(subtotal);
+    });
+
+    /* =========================
+       PAYMENT SELECTION
+    ========================== */
+    const paymentCard = document.querySelector(".payment-card");
+
+    if (paymentCard) {
+        paymentCard.addEventListener("click", function () {
+            document.querySelectorAll(".payment-card")
+                .forEach(card => card.classList.remove("active-payment"));
+
+            this.classList.add("active-payment");
+            selectedPayment = "PayZapp";
+        });
+    }
+
+    /* =========================
+       VALIDATE FORM
+    ========================== */
+    function validateForm() {
+
+        const fullName = document.querySelector("input[name='full_name']").value.trim();
+        const phone = document.querySelector("input[name='phone']").value.trim();
+        const address = document.querySelector("input[name='address']").value.trim();
+        const city = document.querySelector("input[name='city']").value.trim();
+        const state = document.querySelector("input[name='state']").value.trim();
+        const pincode = document.querySelector("input[name='pincode']").value.trim();
+
+        if (!fullName || !phone || !address || !city || !state || !pincode) {
+            showPopup("Missing Details", "Please fill all required delivery details.");
+            return false;
+        }
+
+        if (!selectedPayment) {
+            showPopup("Payment Required", "Please select a payment method.");
+            return false;
+        }
+
+        return true;
+    }
+
+    /* =========================
+       PLACE ORDER
+    ========================== */
+    document.getElementById("place_order_btn")
+        .addEventListener("click", function () {
+
+        const cart = getCart();
+
+        if (cart.length === 0) {
+            showPopup("Cart Empty", "Your cart is empty!");
+            return;
+        }
+
+        if (!validateForm()) {
+            return;
+        }
+
+        showPopup("Processing", "Redirecting to PayZapp...");
+
+        setTimeout(function () {
+
+            showPopup("Success", "Payment Successful! Order Placed.");
+
+            localStorage.removeItem("cart");
+
+            setTimeout(function () {
+                window.location.href = "shop.html";
+            }, 2000);
+
+        }, 1500);
+    });
+
+    renderCheckout();
+
+});
+</script>
   
 </body>
 </html>
