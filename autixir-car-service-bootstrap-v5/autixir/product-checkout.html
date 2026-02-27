@@ -344,63 +344,151 @@
     </div>
     <!-- BREADCRUMB AREA END -->
 
+<!-- CHECKOUT AREA START -->
+<div class="ltn__checkout-area mb-105">
+    <div class="container">
+        <div class="row">
+            <!-- LEFT COLUMN: Delivery + Payment -->
+            <div class="col-lg-8">
+                <div class="ltn__checkout-inner">
 
-       <!-- SHOPING CART AREA START -->
-    <div class="liton__shoping-cart-area mb-120">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="shoping-cart-inner">
-                        <div class="shoping-cart-table table-responsive">
-                            <table class="table">
-                                <!-- <thead>
-                                    <th class="cart-product-remove">Remove</th>
-                                    <th class="cart-product-image">Image</th>
-                                    <th class="cart-product-info">Product</th>
-                                    <th class="cart-product-price">Price</th>
-                                    <th class="cart-product-quantity">Quantity</th>
-                                    <th class="cart-product-subtotal">Subtotal</th>
-                                </thead> -->
-                              <tbody id="cartTableBody">
-                                 
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="shoping-cart-total mt-50">
-                            <h4>Cart Totals</h4>
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td>Cart Subtotal</td>
-                                        <td>$618.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Shipping and Handing</td>
-                                        <td>$15.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Vat</td>
-                                        <td>$00.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Order Total</strong></td>
-                                        <td><strong>$633.00</strong></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="btn-wrapper text-right">
-                                <a href="product-checkout.html" class="theme-btn-1 btn btn-effect-1">Proceed to checkout</a>
-                            </div>
+                    <p class="checkout-subtitle text-muted mb-4">Review your order and complete payment</p>
+
+                    <!-- DELIVERY ADDRESS -->
+                    <div class="ltn__checkout-single-content mt-30">
+                        <h4 class="title-2"><i class="fas fa-map-marker-alt me-2"></i>Delivery Address</h4>
+                        <div class="ltn__checkout-single-content-info">
+                            <form action="#">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Full Name <span class="text-danger">*</span></label>
+                                        <div class="input-item input-item-name ltn__custom-icon">
+                                            <input type="text" name="full_name" placeholder="Full Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Phone <span class="text-danger">*</span></label>
+                                        <div class="input-item input-item-phone ltn__custom-icon">
+                                            <input type="text" name="phone" placeholder="Phone Number">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label>Email</label>
+                                        <div class="input-item input-item-email ltn__custom-icon">
+                                            <input type="email" name="email" placeholder="Email Address">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label>Address <span class="text-danger">*</span></label>
+                                        <div class="input-item">
+                                            <input type="text" name="address" placeholder="House/Flat No., Street, Area">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>City <span class="text-danger">*</span></label>
+                                        <div class="input-item">
+                                            <input type="text" name="city" placeholder="City">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>State <span class="text-danger">*</span></label>
+                                        <div class="input-item">
+                                            <input type="text" name="state" placeholder="State">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>PIN Code <span class="text-danger">*</span></label>
+                                        <div class="input-item">
+                                            <input type="text" name="pincode" placeholder="PIN Code">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
+
+                    <!-- PAYMENT METHOD -->
+                    <div class="ltn__checkout-payment-method mt-50">
+                        <h4 class="title-2"><i class="fas fa-credit-card me-2"></i>Payment Method</h4>
+                        <!-- PayZapp Only -->
+                        <div class="card payment-card active-payment">
+                            <h5 class="ltn__card-title d-flex align-items-center gap-2">
+                                <span class="payment-radio selected"></span>
+                                <img src="img/icons/payzapp.png" alt="PayZapp" style="height:24px;">
+                                PayZapp
+                                <small class="text-muted fw-normal ms-2">UPI, Cards, Net Banking &amp; Wallets</small>
+                            </h5>
+                            <div class="card-body">
+                                <p>Pay securely via PayZapp using UPI, Credit/Debit Cards, Net Banking, or Wallets.</p>
+                            </div>
+                        </div>
+
+                        <div class="ltn__payment-note mt-30 mb-30">
+                            <p>Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
+
+            <!-- RIGHT COLUMN: Order Summary -->
+            <div class="col-lg-4">
+                <div class="shoping-cart-total mt-50 order-summary-box">
+                    <h4 class="title-2">Order Summary</h4>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>Castrol MAGNATEC 3416662 Stop-St... <strong>×1</strong></td>
+                                <td>₹2,100</td>
+                            </tr>
+                            <tr>
+                                <td>Tata Green Batteries | TG550R 12V &amp;... <strong>×1</strong></td>
+                                <td>₹5,300</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Coupon Code -->
+                    <div class="coupon-row d-flex gap-2 mb-3">
+                        <input type="text" class="form-control" placeholder="Coupon code">
+                        <button class="btn theme-btn-2 btn-effect-2 text-uppercase px-3">Apply</button>
+                    </div>
+
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>Subtotal</td>
+                                <td>₹7,400</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Total</strong></td>
+                                <td><strong class="text-danger" style="font-size:1.3em;">₹7,400</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="paying-via-box d-flex justify-content-between align-items-center mb-3 p-2 border rounded">
+                        <span class="text-muted">Paying via:</span>
+                        <strong class="text-success">PayZapp</strong>
+                    </div>
+
+                    <button class="btn theme-btn-1 btn-effect-1 text-uppercase w-100" type="submit">
+                        ✓ Place Order &amp; Pay
+                    </button>
+
+                    <p class="text-center mt-2 text-muted small">
+                        <i class="fas fa-lock me-1"></i> Secure checkout
+                    </p>
+                </div>
+            </div>
+
         </div>
     </div>
-    <!-- SHOPING CART AREA END -->
+</div>
+<!-- CHECKOUT AREA END -->->
 
 
-     <!-- FOOTER AREA START (ltn__footer-2 ltn__footer-color-1) -->
+      <!-- FOOTER AREA START (ltn__footer-2 ltn__footer-color-1) -->
     <footer class="ltn__footer-area ltn__footer-2 ltn__footer-color-1">
         <div class="footer-top-area  section-bg-2">
             <div class="container">
@@ -714,4 +802,5 @@
   
 </body>
 </html>
+
 
