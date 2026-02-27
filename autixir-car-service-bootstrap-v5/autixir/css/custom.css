@@ -35,43 +35,91 @@
       experience counter box.  Centre them inside the column.
    ------------------------------------------------------- */
 
-/* Wrapper: make it flex so its children can be centred */
+/* Wrapper: ensure column matches height */
 .about-us-img-wrap {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* The parallax list is the direct container of the images */
-.ltn__parallax-effect-wrap {
-    position: relative;
-    width: 100%;
-    max-width: 500px;
-    margin: 0 auto;
-    /* Keep list-style off */
-    padding: 0;
-    list-style: none;
-}
-
-/* Each effect image: give a consistent border */
-.ltn__effect-img img {
-    border: 4px solid var(--ltn__secondary-color);
-    border-radius: 4px;
     display: block;
+    width: 100%;
+}
+
+/* Modern Grid Layout for Images */
+.about-us-img-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 20px;
+    align-items: center;
+    position: relative;
+    padding: 20px;
+}
+
+/* Individual Grid Items */
+.about-grid-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border: 4px solid var(--ltn__secondary-color);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
 }
 
-/* Experience counter box – match the same border size */
-.about-us-img-info {
+.about-grid-item:hover img {
+    transform: translateY(-5px);
+}
+
+/* Center Experience Card */
+.about-experience-card {
+    grid-column: 1 / span 2;
+    grid-row: 1 / span 2;
+    justify-self: center;
+    align-self: center;
+    z-index: 2;
+    background: var(--white);
     border: 4px solid var(--ltn__secondary-color);
-    border-radius: 4px;
-    /* Keep existing positioning but centre it within its parent */
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    width: 160px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.about-experience-card h1 {
+    font-size: 48px;
+    margin-bottom: 0;
+    line-height: 1;
+}
+
+.about-experience-card h6 {
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-top: 5px;
+    color: var(--ltn__paragraph-color);
+}
+
+/* Layout adjustments for desktop */
+@media (min-width: 1025px) {
+    .about-us-img-grid {
+        grid-template-columns: 200px 160px 200px;
+        grid-template-rows: 180px 180px;
+        justify-content: center;
+    }
+    .about-grid-item:nth-child(1) { grid-column: 1; grid-row: 1; }
+    .about-grid-item:nth-child(2) { grid-column: 3; grid-row: 1; }
+    .about-grid-item:nth-child(3) { grid-column: 1; grid-row: 2; }
+    .about-grid-item:nth-child(4) { grid-column: 3; grid-row: 2; }
+    .about-experience-card { grid-column: 2; grid-row: 1 / span 2; }
+}
+
+/* 1024px Tablet */
+@media (max-width: 1024px) {
+    .about-us-img-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    .about-experience-card {
+        width: 140px;
+        padding: 15px;
+    }
 }
 
 /* -------------------------------------------------------
@@ -228,6 +276,85 @@
     margin-left: 6px;
 }
 
+/* -------------------------------------------------------
+   6. SERVICE ITEM 2 (Icon Layout converted to Image Layout)
+   ------------------------------------------------------- */
+
+/* Restore original card layout padding */
+.ltn__service-item-2 {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin-bottom: 0px; 
+    border-radius: 8px;
+    padding: 30px !important; /* Restore padding to the card itself */
+    transition: all 0.3s ease 0s;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+}
+
+.ltn__service-item-2:hover {
+    box-shadow: var(--ltn__box-shadow-1);
+}
+
+/* Image enforcement as an ICON */
+.ltn__service-item-2 .service-item-icon {
+    margin-bottom: 20px; /* Space between icon and title */
+}
+
+.ltn__service-item-2 .service-item-icon img {
+    width: 65px; /* Tiny size like an icon */
+    height: 65px;
+    object-fit: contain; /* Ensure the whole logo/icon shows */
+    border-radius: 4px;
+    font-size: 14px; /* Fix huge alt text bug inherited from original icon font size */
+    color: var(--ltn__paragraph-color);
+    line-height: 1.5;
+}
+
+/* Base content layout */
+.ltn__service-item-2 .service-item-brief {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ensure price is pushed to the bottom if descriptions vary */
+.ltn__service-item-2 .service-item-brief ul {
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.ltn__service-item-2 .service-item-brief ul li {
+    margin-bottom: 8px; /* Slightly tighten spacing between list items */
+    color: var(--ltn__paragraph-color);
+}
+
+/* Target the last li which is the price */
+.ltn__service-item-2 .service-item-brief ul li:last-child {
+    margin-top: auto;
+    padding-top: 10px;
+    margin-bottom: 0; /* Kill white space below price */
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ltn__secondary-color);
+}
+
+/* Hide the old decorative // slash IF it exists, but do NOT hide the price span */
+.ltn__service-item-2 .service-item-brief ul li:last-child span.slash-decorator {
+    display: none; 
+}
+
+/* Strikethrough original price formatting */
+.ltn__service-item-2 .service-item-brief ul li:last-child del { 
+    font-size: 14px;
+    font-weight: 400;
+    color: #999;
+    margin-left: 8px;
+}
+
+
 /* ---- Responsive Table/Mobile Card Tweaks ---- */
 
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -295,6 +422,35 @@
     .ltn__service-form-wrap-area {
         padding-top: 40px !important;
         padding-bottom: 40px !important;
+    }
+    
+    /* About Section Mobile Stacking */
+    .about-us-img-grid {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-us-img-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 5px;
+    }
+    .about-grid-item img {
+        height: 140px; /* Reduced fixed height for mobile consistency */
+        border-width: 3px;
+    }
+    .about-experience-card {
+        grid-column: 1 / span 2;
+        grid-row: 2; /* Move it to the middle row area or keep it centered */
+        position: relative;
+        width: 120px;
+        padding: 10px;
+        margin: -40px 0; /* Overlap effect */
+    }
+    .about-experience-card h1 {
+        font-size: 32px;
     }
 }
 

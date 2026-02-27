@@ -427,7 +427,7 @@
                                             <a data-bs-toggle ="tab" href="#liton_tab_1_3">Downloads <i class="fas fa-arrow-down"></i></a>
                                             <a data-bs-toggle ="tab" href="#liton_tab_1_4">address <i class="fas fa-map-marker-alt"></i></a>
                                             <a data-bs-toggle ="tab" href="#liton_tab_1_5">Account Details <i class="fas fa-user"></i></a>
-                                            <a href="login.html">Logout <i class="fas fa-sign-out-alt"></i></a>
+                                            <a href="#" id="account-logout-btn">Logout <i class="fas fa-sign-out-alt"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -435,7 +435,7 @@
                                     <div class="tab-content">
                                         <div class="tab-pane fade active show" id="liton_tab_1_1">
                                             <div class="ltn__myaccount-tab-content-inner">
-                                                <p>Hello <strong>UserName</strong> (not <strong>UserName</strong>? <small><a href="login-register.html">Log out</a></small> )</p>
+                                                <p>Hello <strong id="account-name">User</strong> — <small><a href="#" id="account-inline-logout">Log out</a></small></p>
                                                 <p>From your account dashboard you can view your <span>recent orders</span>, manage your <span>shipping and billing addresses</span>, and <span>edit your password and account details</span>.</p>
                                             </div>
                                         </div>
@@ -708,8 +708,19 @@
 
     <!-- All JS Plugins -->
     <script src="js/plugins.js"></script>
+    <!-- Auth Utils -->
+    <script src="js/auth-utils.js"></script>
     <!-- Main JS -->
     <script src="js/main.js"></script>
+    
+    <script>
+        // Populate profile data when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof AuthService !== 'undefined') {
+                AuthService.populateAccountPage();
+            }
+        });
+    </script>
   
 </body>
 </html>
