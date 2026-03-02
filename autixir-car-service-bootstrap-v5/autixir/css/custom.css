@@ -59,7 +59,7 @@
     object-fit: cover;
     border: 4px solid var(--ltn__secondary-color);
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
 
@@ -80,7 +80,7 @@
     padding: 20px;
     text-align: center;
     width: 160px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
 .about-experience-card h1 {
@@ -103,11 +103,31 @@
         grid-template-rows: 180px 180px;
         justify-content: center;
     }
-    .about-grid-item:nth-child(1) { grid-column: 1; grid-row: 1; }
-    .about-grid-item:nth-child(2) { grid-column: 3; grid-row: 1; }
-    .about-grid-item:nth-child(3) { grid-column: 1; grid-row: 2; }
-    .about-grid-item:nth-child(4) { grid-column: 3; grid-row: 2; }
-    .about-experience-card { grid-column: 2; grid-row: 1 / span 2; }
+
+    .about-grid-item:nth-child(1) {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .about-grid-item:nth-child(2) {
+        grid-column: 3;
+        grid-row: 1;
+    }
+
+    .about-grid-item:nth-child(3) {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .about-grid-item:nth-child(4) {
+        grid-column: 3;
+        grid-row: 2;
+    }
+
+    .about-experience-card {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+    }
 }
 
 /* 1024px Tablet */
@@ -116,6 +136,7 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;
     }
+
     .about-experience-card {
         width: 140px;
         padding: 15px;
@@ -212,12 +233,12 @@
     flex-direction: column;
     height: 100%;
     margin-bottom: 0;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
     transition: box-shadow 0.3s ease;
 }
 
 .ltn__service-item-1:hover {
-    box-shadow: 0 6px 24px rgba(0,0,0,0.14);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.14);
 }
 
 /* Service card image – reduced height */
@@ -285,9 +306,10 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    margin-bottom: 0px; 
+    margin-bottom: 0px;
     border-radius: 8px;
-    padding: 30px !important; /* Restore padding to the card itself */
+    padding: 30px !important;
+    /* Restore padding to the card itself */
     transition: all 0.3s ease 0s;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
 }
@@ -298,15 +320,19 @@
 
 /* Image enforcement as an ICON */
 .ltn__service-item-2 .service-item-icon {
-    margin-bottom: 20px; /* Space between icon and title */
+    margin-bottom: 20px;
+    /* Space between icon and title */
 }
 
 .ltn__service-item-2 .service-item-icon img {
-    width: 65px; /* Tiny size like an icon */
+    width: 65px;
+    /* Tiny size like an icon */
     height: 65px;
-    object-fit: contain; /* Ensure the whole logo/icon shows */
+    object-fit: contain;
+    /* Ensure the whole logo/icon shows */
     border-radius: 4px;
-    font-size: 14px; /* Fix huge alt text bug inherited from original icon font size */
+    font-size: 14px;
+    /* Fix huge alt text bug inherited from original icon font size */
     color: var(--ltn__paragraph-color);
     line-height: 1.5;
 }
@@ -327,7 +353,8 @@
 }
 
 .ltn__service-item-2 .service-item-brief ul li {
-    margin-bottom: 8px; /* Slightly tighten spacing between list items */
+    margin-bottom: 8px;
+    /* Slightly tighten spacing between list items */
     color: var(--ltn__paragraph-color);
 }
 
@@ -335,7 +362,8 @@
 .ltn__service-item-2 .service-item-brief ul li:last-child {
     margin-top: auto;
     padding-top: 10px;
-    margin-bottom: 0; /* Kill white space below price */
+    margin-bottom: 0;
+    /* Kill white space below price */
     font-size: 16px;
     font-weight: 700;
     color: var(--ltn__secondary-color);
@@ -343,11 +371,11 @@
 
 /* Hide the old decorative // slash IF it exists, but do NOT hide the price span */
 .ltn__service-item-2 .service-item-brief ul li:last-child span.slash-decorator {
-    display: none; 
+    display: none;
 }
 
 /* Strikethrough original price formatting */
-.ltn__service-item-2 .service-item-brief ul li:last-child del { 
+.ltn__service-item-2 .service-item-brief ul li:last-child del {
     font-size: 14px;
     font-weight: 400;
     color: #999;
@@ -361,9 +389,11 @@
     .ltn__service-item-1 .service-item-img img {
         height: 170px;
     }
+
     .ltn__service-item-1 .service-item-brief {
         padding: 14px 16px 12px;
     }
+
     .ltn__service-item-1 .service-item-brief h3 {
         font-size: 15px;
     }
@@ -379,6 +409,7 @@
     .ltn__service-item-1 .service-item-img img {
         height: 200px;
     }
+
     .ltn__service-item-1 .service-item-brief {
         padding: 16px 18px 14px;
     }
@@ -397,18 +428,24 @@
     background-color: var(--ltn__primary-color);
 }
 
-.ltn__feature-area, 
+.ltn__feature-area,
 .ltn__feature-area .section-title,
 .ltn__feature-area .ltn__feature-info h2 a,
 .ltn__feature-area .ltn__feature-info p,
 .ltn__feature-area .section-brief-in p,
-.ltn__feature-area h1, .ltn__feature-area h2, .ltn__feature-area h3, 
-.ltn__feature-area h4, .ltn__feature-area h5, .ltn__feature-area h6,
-.ltn__feature-area p, .ltn__feature-area a {
+.ltn__feature-area h1,
+.ltn__feature-area h2,
+.ltn__feature-area h3,
+.ltn__feature-area h4,
+.ltn__feature-area h5,
+.ltn__feature-area h6,
+.ltn__feature-area p,
+.ltn__feature-area a {
     color: var(--white) !important;
 }
 
 @media (max-width: 991px) {
+
     .ltn__service-area,
     .ltn__product-tab-area,
     .ltn__feature-area,
@@ -419,11 +456,12 @@
         padding-top: 50px !important;
         padding-bottom: 50px !important;
     }
+
     .ltn__service-form-wrap-area {
         padding-top: 40px !important;
         padding-bottom: 40px !important;
     }
-    
+
     /* About Section Mobile Stacking */
     .about-us-img-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -437,24 +475,31 @@
         gap: 12px;
         padding: 5px;
     }
+
     .about-grid-item img {
-        height: 140px; /* Reduced fixed height for mobile consistency */
+        height: 140px;
+        /* Reduced fixed height for mobile consistency */
         border-width: 3px;
     }
+
     .about-experience-card {
         grid-column: 1 / span 2;
-        grid-row: 2; /* Move it to the middle row area or keep it centered */
+        grid-row: 2;
+        /* Move it to the middle row area or keep it centered */
         position: relative;
         width: 120px;
         padding: 10px;
-        margin: -40px 0; /* Overlap effect */
+        margin: -40px 0;
+        /* Overlap effect */
     }
+
     .about-experience-card h1 {
         font-size: 32px;
     }
 }
 
 @media (max-width: 767px) {
+
     .ltn__service-area,
     .ltn__product-tab-area,
     .ltn__feature-area,
@@ -465,6 +510,7 @@
         padding-top: 40px !important;
         padding-bottom: 40px !important;
     }
+
     .ltn__service-form-wrap-area {
         padding-top: 30px !important;
         padding-bottom: 30px !important;
@@ -478,6 +524,7 @@
     .ltn__service-form-box {
         padding: 0 10px !important;
     }
+
     .ltn__service-form-box ul {
         display: flex !important;
         flex-wrap: wrap !important;
@@ -486,23 +533,28 @@
         padding: 0 !important;
         width: calc(100% + 10px) !important;
     }
+
     .ltn__service-form-box ul li {
         width: 100% !important;
         margin-bottom: 10px !important;
-        margin-right: 0 !important; /* CRITICAL FIX: Remove right margin from base theme */
+        margin-right: 0 !important;
+        /* CRITICAL FIX: Remove right margin from base theme */
         padding: 0 5px !important;
         list-style: none !important;
     }
+
     /* Make first two fields (Service and Date) share the row */
     .ltn__service-form-box ul li:nth-child(1),
     .ltn__service-form-box ul li:nth-child(2) {
         width: 50% !important;
         flex: 0 0 50% !important;
-        margin-right: 0 !important; /* Ensure no margin here either */
+        margin-right: 0 !important;
+        /* Ensure no margin here either */
     }
 }
 
 @media (max-width: 480px) {
+
     /* Ensure internal inputs and select boxes don't overflow */
     .ltn__service-form-box .nice-select,
     .ltn__service-form-box .input-item input,
@@ -513,18 +565,22 @@
         line-height: 38px !important;
         margin: 0 !important;
     }
+
     .ltn__service-form-box .nice-select {
         padding-left: 10px !important;
         padding-right: 20px !important;
         font-size: 12px !important;
     }
+
     .ltn__service-form-box .nice-select:after {
         right: 8px !important;
     }
+
     .ltn__service-form-box .input-item input {
         /* padding: 0 10px !important; */
         font-size: 12px !important;
     }
+
     /* Datepicker icon adjustment */
     .ltn__datepicker .input-group-addon {
         right: 10px !important;
@@ -537,11 +593,12 @@
         border: none !important;
         pointer-events: none;
     }
+
     .ltn__datepicker .input-group-addon i {
         font-size: 14px !important;
         color: var(--ltn__secondary-color) !important;
     }
-    
+
     /* Button refinement for 480px */
     .ltn__service-form-box ul li:nth-child(3) {
         width: 100% !important;
@@ -549,6 +606,7 @@
         margin-top: 10px !important;
         text-align: center !important;
     }
+
     .ltn__service-form-box .btn-wrapper .btn {
         width: auto !important;
         min-width: 180px !important;
@@ -592,7 +650,8 @@
 
 /* Reduse space between columns */
 .footer-top-area .row {
-    --bs-gutter-x: 1.5rem; /* Standard Bootstrap gutter */
+    --bs-gutter-x: 1.5rem;
+    /* Standard Bootstrap gutter */
 }
 
 @media (min-width: 992px) {
@@ -670,7 +729,7 @@
 }
 
 @media (max-width: 991px) {
-    .footer-top-area .row > [class*="col-"] {
+    .footer-top-area .row>[class*="col-"] {
         margin-bottom: 30px;
     }
 }
@@ -679,18 +738,23 @@
     .footer-top-area {
         padding: 30px 0 10px;
     }
+
     .footer-title {
         font-size: 16px !important;
         margin-bottom: 15px !important;
     }
+
     .footer-top-area .row {
-        --bs-gutter-x: 15px; /* Tighter gutter for mobile 2-col layout */
+        --bs-gutter-x: 15px;
+        /* Tighter gutter for mobile 2-col layout */
     }
+
     .footer-about-widget .footer-logo img {
         max-width: 120px;
     }
-    .footer-about-widget p, 
-    .footer-menu ul li a, 
+
+    .footer-about-widget p,
+    .footer-menu ul li a,
     .footer-address-info p,
     .footer-social-widget p {
         font-size: 13px;
@@ -707,7 +771,253 @@
     color: var(--ltn__secondary-color);
     font-weight: 600;
 }
+
 .ltn__copyright-design a:hover {
     color: var(--white);
     text-decoration: underline;
+}
+
+/* =============================================================
+   10. MODERN HEADER COMPONENTS (Search, User, Cart)
+   ============================================================= */
+
+.ltn__header-options-2 {
+    display: flex !important;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Modern Search Pill */
+.modern-search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 30px;
+    padding: 4px 15px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modern-search-container:focus-within {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--ltn__secondary-color);
+    box-shadow: 0 0 15px rgba(229, 62, 41, 0.25);
+    width: 200px;
+    /* Expand slightly on focus */
+}
+
+.modern-search-container form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.modern-search-container input {
+    background: transparent !important;
+    border: none !important;
+    color: white !important;
+    padding: 2px 5px !important;
+    width: 130px;
+    font-size: 14px !important;
+    height: auto !important;
+    margin: 0 !important;
+}
+
+.modern-search-container input:focus {
+    box-shadow: none !important;
+}
+
+.modern-search-container input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.modern-search-container button {
+    background: transparent !important;
+    border: none !important;
+    color: white !important;
+    padding: 0 !important;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.modern-search-container button:hover {
+    color: var(--ltn__secondary-color) !important;
+}
+
+/* Modern Circular Buttons for User & Cart */
+.modern-icon-btn {
+    width: 42px;
+    height: 42px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    color: white !important;
+    transition: all 0.3s ease !important;
+    position: relative;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.modern-icon-btn:hover {
+    background: var(--ltn__secondary-color) !important;
+    border-color: var(--ltn__secondary-color) !important;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(229, 62, 41, 0.3);
+}
+
+.modern-icon-btn i {
+    font-size: 18px !important;
+    margin: 0 !important;
+}
+
+/* Floating Badge for Cart */
+.modern-cart-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: var(--ltn__secondary-color);
+    color: white;
+    font-size: 10px;
+    font-weight: 800;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border: 2px solid #000;
+    line-height: 1;
+}
+
+/* User Menu Dropdown Positioning Fix */
+.user-menu .modern-icon-btn+ul {
+    top: 55px !important;
+    border-top: none !important;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4) !important;
+    border-radius: 12px !important;
+    padding: 15px 0 !important;
+    min-width: 220px !important;
+    background: #111 !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    transform-origin: top center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    display: block !important;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+}
+
+.user-menu:hover .modern-icon-btn+ul {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.user-menu ul ul li {
+    margin: 0 !important;
+    padding: 2px 15px !important;
+}
+
+.user-menu ul ul li a {
+    display: flex !important;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 15px !important;
+    border-radius: 8px !important;
+    font-size: 14px !important;
+    color: #ccc !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease !important;
+}
+
+.user-menu ul ul li a i {
+    width: 20px;
+    text-align: center;
+    font-size: 16px;
+    color: var(--ltn__secondary-color);
+    opacity: 0.8;
+}
+
+.user-menu ul ul li a:hover {
+    background: rgba(229, 62, 41, 0.1) !important;
+    color: white !important;
+}
+
+.user-menu ul ul li a:hover i {
+    opacity: 1;
+}
+
+/* Optimized Header Middle Spacing */
+.ltn__header-middle-area {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+
+/* Get Support Layout - Two Lines */
+.get-support-info {
+    display: block !important;
+}
+
+.get-support-info h6 {
+    margin: 0 0 2px !important;
+    font-size: 14px !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.8;
+}
+
+.get-support-info h4 {
+    margin: 0 !important;
+    font-size: 18px !important;
+    white-space: nowrap !important;
+    /* Ensure number stays in one line */
+}
+
+/* Header Logo Size - Balanced "Good Size" */
+.ltn__header-middle-area .site-logo img {
+    height: 40px !important;
+    /* Balanced size for prominence without bulk */
+    max-height: none !important;
+    width: auto !important;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+/* Ensure container doesn't crop */
+.site-logo {
+    height: auto !important;
+    min-width: auto !important;
+}
+
+@media (max-width: 991px) {
+    .site-logo img {
+        max-height: 55px !important;
+    }
+}
+
+.get-support-info h4 a {
+    color: #fff !important;
+    font-weight: 700 !important;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 767px) {
+    .modern-search-container {
+        width: 140px;
+    }
+
+    .modern-search-container:focus-within {
+        width: 170px;
+    }
+
+    .modern-icon-btn {
+        width: 38px;
+        height: 38px;
+    }
 }

@@ -16,81 +16,343 @@
     <link rel="stylesheet" href="css/custom.css">
     <link rel="stylesheet" href="css/responsive.css">
     <style>
+        /* Modern Header Styles */
+        .modern-search-container {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            overflow: hidden;
+            padding: 0 4px 0 14px;
+            margin-right: 6px;
+        }
+
+        .modern-search-container input {
+            background: transparent !important;
+            border: none !important;
+            outline: none !important;
+            color: #fff !important;
+            font-size: 13px;
+            width: 140px;
+            padding: 6px 8px !important;
+        }
+
+        .modern-search-container input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .modern-search-container button {
+            background: var(--ltn__secondary-color);
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            cursor: pointer;
+            flex-shrink: 0;
+            font-size: 13px;
+        }
+
+        .modern-icon-btn {
+            display: inline-flex !important;
+            align-items: center;
+            justify-content: center;
+            width: 38px !important;
+            height: 38px !important;
+            border-radius: 50% !important;
+            background: rgba(255, 255, 255, 0.12) !important;
+            border: 1px solid rgba(255, 255, 255, 0.25) !important;
+            color: #fff !important;
+            font-size: 16px !important;
+            transition: background 0.25s, border-color 0.25s !important;
+            margin: 0 3px !important;
+        }
+
+        .modern-icon-btn:hover {
+            background: var(--ltn__secondary-color) !important;
+            border-color: var(--ltn__secondary-color) !important;
+        }
+
+        .modern-cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--ltn__secondary-color);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        @media (max-width: 1199px) {
+            .modern-search-container {
+                display: none !important;
+            }
+        }
+    </style>
+    <style>
         /* --- General Cleanup --- */
         .service-loading-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255,255,255,1); display: flex; flex-direction: column;
-            justify-content: center; align-items: center; z-index: 9999;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
         }
-        
+
         /* Fix spacing below description */
-        #service-description { margin-bottom: 0px; padding-bottom: 10px; line-height: 1.6; color: #666; font-size: 16px; }
-        .section-separator { border-top: 1px solid #f0f0f0; margin: 20px 0; }
-        
-        .service-item-title { font-weight: 700; margin-bottom: 15px; color: #111; letter-spacing: -0.5px; }
-        .service-item-title::after { content: ''; display: block; width: 40px; height: 3px; background: #dc3545; margin-top: 8px; }
+        #service-description {
+            margin-bottom: 0px;
+            padding-bottom: 10px;
+            line-height: 1.6;
+            color: #666;
+            font-size: 16px;
+        }
+
+        .section-separator {
+            border-top: 1px solid #f0f0f0;
+            margin: 20px 0;
+        }
+
+        .service-item-title {
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #111;
+            letter-spacing: -0.5px;
+        }
+
+        .service-item-title::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 3px;
+            background: #dc3545;
+            margin-top: 8px;
+        }
 
         /* --- Specifications: Professional Alignment --- */
-        .spec-card { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 25px; }
-        #specifications-list { display: flex; flex-direction: column; gap: 0; }
-        .spec-item { 
-            display: flex; justify-content: space-between; align-items: center; 
-            padding: 12px 0; border-bottom: 1px dashed #eee; 
+        .spec-card {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 25px;
         }
-        .spec-item:last-child { border-bottom: none; }
-        .spec-title { font-size: 13px; text-transform: uppercase; color: #888; font-weight: 700; letter-spacing: 0.5px; }
-        .spec-value { font-size: 14px; color: #222; font-weight: 600; text-align: right; }
+
+        #specifications-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .spec-item:last-child {
+            border-bottom: none;
+        }
+
+        .spec-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            color: #888;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .spec-value {
+            font-size: 14px;
+            color: #222;
+            font-weight: 600;
+            text-align: right;
+        }
 
         /* --- Included List: Compact & Neat --- */
-        #includes-list, #excludes-list { list-style: none; padding: 0; margin: 0; }
-        #includes-list li, #excludes-list li { 
-            padding: 8px 0; font-size: 15px; color: #444; 
-            border-bottom: 1px solid #fafafa; display: flex; align-items: flex-start;
+        #includes-list,
+        #excludes-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
         }
-        #includes-list li i, #excludes-list li i { margin-top: 4px; font-size: 16px; margin-right: 15px; }
+
+        #includes-list li,
+        #excludes-list li {
+            padding: 8px 0;
+            font-size: 15px;
+            color: #444;
+            border-bottom: 1px solid #fafafa;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        #includes-list li i,
+        #excludes-list li i {
+            margin-top: 4px;
+            font-size: 16px;
+            margin-right: 15px;
+        }
 
         /* --- Additional Info: Sidebar Layout --- */
-        #additional-info-container { display: flex; flex-direction: column; gap: 15px; }
-        .info-card { 
-            background: #fff; border: 1px solid #f0f0f0; padding: 15px; 
-            border-radius: 12px; transition: all 0.3s;
-            display: flex; gap: 12px; align-items: flex-start;
+        #additional-info-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
-        .info-card:hover { border-color: #dc3545; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .info-icon-wrap { 
-            background: #fff5f5; color: #dc3545; min-width: 35px; height: 35px; 
-            border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px;
+
+        .info-card {
+            background: #fff;
+            border: 1px solid #f0f0f0;
+            padding: 15px;
+            border-radius: 12px;
+            transition: all 0.3s;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
         }
-        .info-content h5 { margin: 0 0 3px 0; font-size: 15px; font-weight: 700; color: #111; }
-        .info-content p { margin: 0; font-size: 13px; color: #777; line-height: 1.4; }
+
+        .info-card:hover {
+            border-color: #dc3545;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .info-icon-wrap {
+            background: #fff5f5;
+            color: #dc3545;
+            min-width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .info-content h5 {
+            margin: 0 0 3px 0;
+            font-size: 15px;
+            font-weight: 700;
+            color: #111;
+        }
+
+        .info-content p {
+            margin: 0;
+            font-size: 13px;
+            color: #777;
+            line-height: 1.4;
+        }
 
         /* --- FAQs --- */
-        .faq-item { background: #f9f9f9; border-radius: 10px; margin-bottom: 12px; cursor: pointer; border: 1px solid transparent; }
-        .faq-item.active { border-color: #dc3545; background: #fff; }
-        .faq-head { padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
-        .faq-head h6 { margin: 0; font-size: 15px; font-weight: 600; }
-        .faq-ans { padding: 0 20px; max-height: 0; overflow: hidden; transition: all 0.3s ease; font-size: 14px; color: #666; }
-        .faq-item.active .faq-ans { padding-bottom: 15px; max-height: 300px; }
+        .faq-item {
+            background: #f9f9f9;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .faq-item.active {
+            border-color: #dc3545;
+            background: #fff;
+        }
+
+        .faq-head {
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-head h6 {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .faq-ans {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .faq-item.active .faq-ans {
+            padding-bottom: 15px;
+            max-height: 300px;
+        }
 
         /* --- Gallery --- */
-        .gallery-item { border-radius: 12px; overflow: hidden; height: 180px; margin-bottom: 20px; }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+        .gallery-item {
+            border-radius: 12px;
+            overflow: hidden;
+            height: 180px;
+            margin-bottom: 20px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
         /* --- Responsive Queries --- */
         @media (max-width: 1024px) {
-            .ltn__page-details-inner { padding: 0; }
-        }
-        @media (max-width: 768px) {
-            .spec-card { margin-top: 30px; }
-            #page-title-main { font-size: 30px; }
-        }
-        @media (max-width: 480px) {
-            .info-card { flex-direction: row; align-items: center; } /* Keep row on mobile but maybe smaller font */
-            .info-content h5 { font-size: 14px; }
-            .info-content p { font-size: 12px; }
+            .ltn__page-details-inner {
+                padding: 0;
+            }
         }
 
-        .ltn__blog-img img { border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+        @media (max-width: 768px) {
+            .spec-card {
+                margin-top: 30px;
+            }
+
+            #page-title-main {
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .info-card {
+                flex-direction: row;
+                align-items: center;
+            }
+
+            /* Keep row on mobile but maybe smaller font */
+            .info-content h5 {
+                font-size: 14px;
+            }
+
+            .info-content p {
+                font-size: 12px;
+            }
+        }
+
+        .ltn__blog-img img {
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 
@@ -109,8 +371,10 @@
                         <div class="col-md-7">
                             <div class="ltn__top-bar-menu">
                                 <ul>
-                                    <li><a href="mailto:hello@jusmoto.com"><i class="fas fa-envelope"></i> hello@jusmoto.com</a></li>
-                                    <li><a href="locations.html"><i class="fas fa-map-marker-alt"></i> #12, Murugappa Road, Kotturpuram, Chennai - 600085</a></li>
+                                    <li><a href="mailto:hello@jusmoto.com"><i class="fas fa-envelope"></i>
+                                            hello@jusmoto.com</a></li>
+                                    <li><a href="locations.html"><i class="fas fa-map-marker-alt"></i> #12, Murugappa
+                                            Road, Kotturpuram, Chennai - 600085</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -119,31 +383,15 @@
                                 <div class="ltn__top-bar-menu">
                                     <ul>
                                         <li>
-                                            <!-- ltn__language-menu -->
-                                            <div class="ltn__drop-menu ltn__currency-menu ltn__language-menu">
-                                                <ul>
-                                                    <li><a href="#" class="dropdown-toggle"><span class="active-currency">English</span></a>
-                                                        <ul>
-                                                            <li><a href="#">Arabic</a></li>
-                                                            <li><a href="#">Bengali</a></li>
-                                                            <li><a href="#">Chinese</a></li>
-                                                            <li><a href="#">English</a></li>
-                                                            <li><a href="#">French</a></li>
-                                                            <li><a href="#">Hindi</a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li>
                                             <!-- ltn__social-media -->
                                             <div class="ltn__social-media">
                                                 <ul>
-                                                    <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                                                    <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-                                                    
-                                                    <li><a href="#" title="Instagram"><i class="fab fa-instagram"></i></a></li>
-                                                    <li><a href="#" title="Dribbble"><i class="fab fa-dribbble"></i></a></li>
+                                                    <li><a href="#" title="Facebook"><i
+                                                                class="fab fa-facebook-f"></i></a></li>
+                                                    <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                                                    </li>
+                                                    <li><a href="#" title="Instagram"><i
+                                                                class="fab fa-instagram"></i></a></li>
                                                 </ul>
                                             </div>
                                         </li>
@@ -162,7 +410,7 @@
                         <div class="col">
                             <div class="site-logo-wrap">
                                 <div class="site-logo">
-                                    <a href="index.html"><img src="img/header-logo.png" alt="Logo"></a>
+                                    <a href="home.html"><img src="img/header-logo.png" alt="Logo"></a>
                                 </div>
                                 <div class="get-support clearfix get-support-color-white">
                                     <div class="get-support-icon">
@@ -180,296 +428,227 @@
                                 <nav>
                                     <div class="ltn__main-menu">
                                         <ul>
-                                            <li><a href="./home.html">Home</a>
+                                            <li><a href="home.html">Home</a>
                                             </li>
                                             <li><a href="about-us.html">About</a>
                                             </li>
-                                            <li><a href="#">Services</a>
+                                            <li><a href="service.html">Services</a>
                                             </li>
-                                            <li><a href="#">Products</a>
+                                            <li><a href="products.html">Products</a>
                                             </li>
-                                            <li><a href="./contact-us.html">Contact</a>
+                                            <li><a href="contact-us.html">Contact</a>
                                             </li>
-     <div class="ltn__header-options ltn__header-options-2">
-                            <!-- header-search-1 -->
-                            <div class="header-search-wrap">
-                                <div class="header-search-1">
-                                    <div class="search-icon">
-                                        <i class="icon-search for-search-show"></i>
-                                        <i class="icon-cancel  for-search-close"></i>
-                                    </div>
-                                </div>
-                                <div class="header-search-1-form">
-                                    <form id="#" method="get"  action="#">
-                                        <input type="text" name="search" value="" placeholder="Search here..."/>
-                                        <button type="submit">
-                                            <span><i class="icon-search"></i></span>
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                            <!-- user-menu -->
-                            <div class="ltn__drop-menu user-menu">
-                                <ul>
-                                    <li>
-                                        <a href="#"><i class="icon-user"></i></a>
-                                        <ul>
-                                            <li><a href="login.html">Sign in</a></li>
-                                            <li><a href="register.html">Register</a></li>
-                                            <li><a href="account.html">My Account</a></li>
-                                            <li><a href="wishlist.html">Wishlist</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- mini-cart -->
-                            <div class="mini-cart-icon">
-                                <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
-                                    <i class="icon-shopping-cart"></i>
-                                    <sup>2</sup>
-                                </a>
-                            </div>
-                            <!-- mini-cart -->
+                                            <div class="ltn__header-options ltn__header-options-2">
+                                                <!-- Modern Search Pill -->
+                                                <div class="modern-search-container">
+                                                    <form action="#">
+                                                        <input type="text" name="search" placeholder="Search..." />
+                                                        <button type="submit"><i class="icon-search"></i></button>
+                                                    </form>
+                                                </div>
+                                                <!-- User Account btn -->
+                                                <div class="ltn__drop-menu user-menu">
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#" class="modern-icon-btn"><i
+                                                                    class="icon-user"></i></a>
+                                                            <ul>
+                                                                <li><a href="login.html"><i
+                                                                            class="fas fa-sign-in-alt"></i> Sign in</a>
+                                                                </li>
+                                                                <li><a href="register.html"><i
+                                                                            class="fas fa-user-plus"></i> Register</a>
+                                                                </li>
+                                                                <li><a href="account.html"><i
+                                                                            class="fas fa-user-circle"></i> My
+                                                                        Account</a></li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <!-- Modern Mini Cart btn -->
+                                                <div class="mini-cart-icon" style="position:relative;">
+                                                    <a href="#ltn__utilize-cart-menu"
+                                                        class="ltn__utilize-toggle modern-icon-btn">
+                                                        <i class="icon-shopping-cart"></i>
+                                                    </a>
+                                                    <sup id="cartCount"
+                                                        class="mini-cart-item-count modern-cart-badge">0</sup>
+                                                </div>
+                                            </div>
                                         </ul>
                                     </div>
                                 </nav>
                             </div>
                         </div>
-                        <!-- Mobile Menu Button -->
-                        <div class="mobile-menu-toggle menu-btn-white menu-btn-border--- d-xl-none">
-                            <a href="#ltn__utilize-mobile-menu" class="ltn__utilize-toggle">
-                                <svg viewBox="0 0 800 600">
-                                    <path d="M300,220 C300,220 520,220 540,220 C740,220 640,540 520,420 C440,340 300,200 300,200" id="top"></path>
-                                    <path d="M300,320 L540,320" id="middle"></path>
-                                    <path d="M300,210 C300,210 520,210 540,210 C740,210 640,530 520,410 C440,330 300,190 300,190" id="bottom" transform="translate(480, 320) scale(1, -1) translate(-480, -318) "></path>
-                                </svg>
-                            </a>
+                    </div>
+                    <!-- MOBILE OPTIONS (Cart) -->
+                    <div class="col-auto d-xl-none">
+                        <div class="ltn__header-options ltn__header-options-2"
+                            style="background: transparent; box-shadow: none; padding: 0; margin-right: 15px;">
+                            <div class="mini-cart-icon" style="position:relative;">
+                                <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle modern-icon-btn">
+                                    <i class="icon-shopping-cart"></i>
+                                </a>
+                                <sup id="cartCountMobile" class="mini-cart-item-count modern-cart-badge">0</sup>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Mobile Menu Button -->
+                    <div class="mobile-menu-toggle menu-btn-white menu-btn-border--- d-xl-none">
+                        <a href="#ltn__utilize-mobile-menu" class="ltn__utilize-toggle">
+                            <svg viewBox="0 0 800 600">
+                                <path
+                                    d="M300,220 C300,220 520,220 540,220 C740,220 640,540 520,420 C440,340 300,200 300,200"
+                                    id="top"></path>
+                                <path d="M300,320 L540,320" id="middle"></path>
+                                <path
+                                    d="M300,210 C300,210 520,210 540,210 C740,210 640,530 520,410 C440,330 300,190 300,190"
+                                    id="bottom" transform="translate(480, 320) scale(1, -1) translate(-480, -318) ">
+                                </path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Utilize Cart Menu Start -->
+        <div id="ltn__utilize-cart-menu" class="ltn__utilize ltn__utilize-cart-menu">
+            <div class="ltn__utilize-menu-inner ltn__scrollbar">
+                <div class="ltn__utilize-menu-head">
+                    <span class="ltn__utilize-menu-title">Cart</span>
+                    <button class="ltn__utilize-close">×</button>
+                </div>
+                <div class="mini-cart-product-area ltn__scrollbar">
+                    <div class="mini-cart-item clearfix">
+                        <div class="mini-cart-img">
+                            <a href="#"><img src="img/product/1.png" alt="Image"></a>
+                            <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
+                        </div>
+                        <div class="mini-cart-info">
+                            <h6><a href="#">Wheel Bearing Retainer</a></h6>
+                            <span class="mini-cart-quantity">1 x ₹65.00</span>
+                        </div>
+                    </div>
+                    <div class="mini-cart-item clearfix">
+                        <div class="mini-cart-img">
+                            <a href="#"><img src="img/product/2.png" alt="Image"></a>
+                            <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
+                        </div>
+                        <div class="mini-cart-info">
+                            <h6><a href="#">Brake Conversion Kit</a></h6>
+                            <span class="mini-cart-quantity">1 x ₹85.00</span>
+                        </div>
+                    </div>
+                    <div class="mini-cart-item clearfix">
+                        <div class="mini-cart-img">
+                            <a href="#"><img src="img/product/3.png" alt="Image"></a>
+                            <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
+                        </div>
+                        <div class="mini-cart-info">
+                            <h6><a href="#">OE Replica Wheels</a></h6>
+                            <span class="mini-cart-quantity">1 x ₹92.00</span>
+                        </div>
+                    </div>
+                    <div class="mini-cart-item clearfix">
+                        <div class="mini-cart-img">
+                            <a href="#"><img src="img/product/4.png" alt="Image"></a>
+                            <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
+                        </div>
+                        <div class="mini-cart-info">
+                            <h6><a href="#">Shock Mount Insulator</a></h6>
+                            <span class="mini-cart-quantity">1 x ₹68.00</span>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- ltn__header-middle-area end -->
-        </header>
+                <div class="mini-cart-footer">
+                    <div class="mini-cart-sub-total">
+                        <h5>Subtotal: <span>₹310.00</span></h5>
+                    </div>
+                    <div class="btn-wrapper">
+                        <a href="Product-cart.html" class="theme-btn-1 btn btn-effect-1">View Cart</a>
+                        <a href="Product-cart.html" class="theme-btn-2 btn btn-effect-2">Checkout</a>
+                    </div>
+                    <p>Free Shipping on All Orders Over ₹100!</p>
+                </div>
 
-    <!-- Utilize Cart Menu Start -->
-    <div id="ltn__utilize-cart-menu" class="ltn__utilize ltn__utilize-cart-menu">
-        <div class="ltn__utilize-menu-inner ltn__scrollbar">
-            <div class="ltn__utilize-menu-head">
-                <span class="ltn__utilize-menu-title">Cart</span>
-                <button class="ltn__utilize-close">×</button>
-            </div>
-            <div class="mini-cart-product-area ltn__scrollbar">
-                <div class="mini-cart-item clearfix">
-                    <div class="mini-cart-img">
-                        <a href="#"><img src="img/product/1.png" alt="Image"></a>
-                        <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
-                    </div>
-                    <div class="mini-cart-info">
-                        <h6><a href="#">Wheel Bearing Retainer</a></h6>
-                        <span class="mini-cart-quantity">1 x ₹65.00</span>
-                    </div>
-                </div>
-                <div class="mini-cart-item clearfix">
-                    <div class="mini-cart-img">
-                        <a href="#"><img src="img/product/2.png" alt="Image"></a>
-                        <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
-                    </div>
-                    <div class="mini-cart-info">
-                        <h6><a href="#">Brake Conversion Kit</a></h6>
-                        <span class="mini-cart-quantity">1 x ₹85.00</span>
-                    </div>
-                </div>
-                <div class="mini-cart-item clearfix">
-                    <div class="mini-cart-img">
-                        <a href="#"><img src="img/product/3.png" alt="Image"></a>
-                        <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
-                    </div>
-                    <div class="mini-cart-info">
-                        <h6><a href="#">OE Replica Wheels</a></h6>
-                        <span class="mini-cart-quantity">1 x ₹92.00</span>
-                    </div>
-                </div>
-                <div class="mini-cart-item clearfix">
-                    <div class="mini-cart-img">
-                        <a href="#"><img src="img/product/4.png" alt="Image"></a>
-                        <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
-                    </div>
-                    <div class="mini-cart-info">
-                        <h6><a href="#">Shock Mount Insulator</a></h6>
-                        <span class="mini-cart-quantity">1 x ₹68.00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="mini-cart-footer">
-                <div class="mini-cart-sub-total">
-                    <h5>Subtotal: <span>₹310.00</span></h5>
-                </div>
-                <div class="btn-wrapper">
-                    <a href="cart.html" class="theme-btn-1 btn btn-effect-1">View Cart</a>
-                    <a href="cart.html" class="theme-btn-2 btn btn-effect-2">Checkout</a>
-                </div>
-                <p>Free Shipping on All Orders Over ₹100!</p>
-            </div>
-
-        </div>
-    </div>
-    <!-- Utilize Cart Menu End -->
-
-    <!-- Utilize Mobile Menu Start -->
-    <div id="ltn__utilize-mobile-menu" class="ltn__utilize ltn__utilize-mobile-menu">
-        <div class="ltn__utilize-menu-inner ltn__scrollbar">
-            <div class="ltn__utilize-menu-head">
-                <div class="site-logo">
-                    <a href="index.html"><img src="img/logo.png" alt="Logo"></a>
-                </div>
-                <button class="ltn__utilize-close">×</button>
-            </div>
-            <div class="ltn__utilize-menu-search-form">
-                <form action="#">
-                    <input type="text" placeholder="Search...">
-                    <button><i class="fas fa-search"></i></button>
-                </form>
-            </div>
-            <div class="ltn__utilize-menu">
-                <ul>
-                    <li><a href="#">Home</a>
-                        <ul class="sub-menu">
-                            <li><a href="index.html">Home Style - 01</a></li>
-                            <li><a href="index-2.html">Home Style - 02</a></li>
-                            <li><a href="index-3.html">Home Style - 03</a></li>
-                            <li><a href="index-4.html">Home Style - 04</a></li>
-                            <li><a href="index-5.html">Home Style - 05 <span class="menu-item-badge">video</span></a></li>
-                            <li><a href="index-6.html">Home Style - 06</a></li>
-                            <li><a href="index-7.html">Home Style - 07</a></li>
-                            <li><a href="index-8.html">Home Style - 08 <span class="menu-item-badge">Map</span></a></li>
-                            <li><a href="index-9.html">Home Style - 09</a></li>
-                            <li><a href="index-10.html">Home Style - 10</a></li>
-                            <li><a href="index-11.html">Home Style - 11</a></li>
-                            <li><a href="index-12.html">Home Style - 12</a></li>
-                            <li><a href="index-13.html">Home Style - 13</a></li>
-                            <li><a href="index-14.html">Home Style - 14</a></li>
-                            <li><a href="index-15.html">Home Style - 15</a></li>
-                            <li><a href="index-16.html">Home Style - 16</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">About</a>
-                        <ul class="sub-menu">
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="service.html">Services</a></li>
-                            <li><a href="service-details.html">Service Details</a></li>
-                            <li><a href="portfolio.html">Portfolio</a></li>
-                            <li><a href="portfolio-2.html">Portfolio - 02</a></li>
-                            <li><a href="portfolio-details.html">Portfolio Details</a></li>
-                            <li><a href="team.html">Team</a></li>
-                            <li><a href="team-details.html">Team Details</a></li>
-                            <li><a href="faq.html">FAQ</a></li>
-                            <li><a href="locations.html">Google Map Locations</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Shop</a>
-                        <ul class="sub-menu">
-                            <li><a href="shop.html">Shop</a></li>
-                            <li><a href="shop-grid.html">Shop Grid</a></li>
-                            <li><a href="shop-left-sidebar.html">Shop Left sidebar</a></li>
-                            <li><a href="shop-right-sidebar.html">Shop right sidebar</a></li>
-                            <li><a href="product-details.html">Shop details </a></li>
-                            <li><a href="product-details-2.html">Shop details 02</a></li>
-                            <li><a href="shop-car-grid.html">Shop Car Grid</a></li>
-                            <li><a href="shop-car-left-sidebar.html">Shop Car Left sidebar</a></li>
-                            <li><a href="shop-car-right-sidebar.html">Shop Car right sidebar</a></li>
-                            <li><a href="product-details-3.html">Shop Car details </a></li>
-                            <li><a href="cart.html">Cart</a></li>
-                            <li><a href="wishlist.html">Wishlist</a></li>
-                            <li><a href="checkout.html">Checkout</a></li>
-                            <li><a href="order-tracking.html">Order Tracking</a></li>
-                            <li><a href="account.html">My Account</a></li>
-                            <li><a href="login.html">Sign in</a></li>
-                            <li><a href="register.html">Register</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">News</a>
-                        <ul class="sub-menu">
-                            <li><a href="blog.html">News</a></li>
-                            <li><a href="blog-grid.html">News Grid</a></li>
-                            <li><a href="blog-left-sidebar.html">News Left sidebar</a></li>
-                            <li><a href="blog-right-sidebar.html">News Right sidebar</a></li>
-                            <li><a href="blog-details.html">News details</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Pages</a>
-                        <ul class="sub-menu">
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="service.html">Services</a></li>
-                            <li><a href="service-details.html">Service Details</a></li>
-                            <li><a href="portfolio.html">Portfolio</a></li>
-                            <li><a href="portfolio-2.html">Portfolio - 02</a></li>
-                            <li><a href="portfolio-details.html">Portfolio Details</a></li>
-                            <li><a href="team.html">Team</a></li>
-                            <li><a href="team-details.html">Team Details</a></li>
-                            <li><a href="faq.html">FAQ</a></li>
-                            <li><a href="history.html">History</a></li>
-                            <li><a href="appointment.html">Appointment</a></li>
-                            <li><a href="locations.html">Google Map Locations</a></li>
-                            <li><a href="404.html">404</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                            <li><a href="coming-soon.html">Coming Soon</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <div class="ltn__utilize-buttons ltn__utilize-buttons-2">
-                <ul>
-                    <li>
-                        <a href="account.html" title="My Account">
-                            <span class="utilize-btn-icon">
-                                <i class="far fa-user"></i>
-                            </span>
-                            My Account
-                        </a>
-                    </li>
-                    <li>
-                        <a href="wishlist.html" title="Wishlist">
-                            <span class="utilize-btn-icon">
-                                <i class="far fa-heart"></i>
-                                <sup>3</sup>
-                            </span>
-                            Wishlist
-                        </a>
-                    </li>
-                    <li>
-                        <a href="cart.html" title="Shoping Cart">
-                            <span class="utilize-btn-icon">
-                                <i class="fas fa-shopping-cart"></i>
-                                <sup>5</sup>
-                            </span>
-                            Shoping Cart
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="ltn__social-media-2">
-                <ul>
-                    <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                    <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-                    <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
-                    <li><a href="#" title="Instagram"><i class="fab fa-instagram"></i></a></li>
-                </ul>
             </div>
         </div>
-    </div>
-    <!-- Utilize Mobile Menu End -->
+        <!-- Utilize Cart Menu End -->
+
+        <!-- Utilize Mobile Menu Start -->
+        <div id="ltn__utilize-mobile-menu" class="ltn__utilize ltn__utilize-mobile-menu">
+            <div class="ltn__utilize-menu-inner ltn__scrollbar">
+                <div class="ltn__utilize-menu-head">
+                    <div class="site-logo">
+                        <a href="home.html"><img src="img/header-logo.png" alt="Logo"></a>
+                    </div>
+                    <button class="ltn__utilize-close">×</button>
+                </div>
+                <div class="ltn__utilize-menu-search-form">
+                    <form action="#">
+                        <input type="text" placeholder="Search...">
+                        <button><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="ltn__utilize-menu">
+                    <ul>
+                        <li><a href="home.html">Home</a>
+                        </li>
+                        <li><a href="about-us.html">About</a>
+                        </li>
+                        <li><a href="service.html">Services</a>
+                        </li>
+                        <li><a href="products.html">Products</a>
+                        </li>
+                        <li><a href="contact-us.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="ltn__utilize-buttons ltn__utilize-buttons-2">
+                    <ul>
+                        <li>
+                            <a href="account.html" title="My Account">
+                                <span class="utilize-btn-icon">
+                                    <i class="far fa-user"></i>
+                                </span>
+                                My Account
+                            </a>
+                        </li>
+                        <li>
+                            <a href="Product-cart.html" title="Shoping Cart">
+                                <span class="utilize-btn-icon">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    <sup class="mini-cart-item-count">0</sup>
+                                </span>
+                                Shoping Cart
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="ltn__social-media-2">
+                    <ul>
+                        <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
+                        <li><a href="#" title="Instagram"><i class="fab fa-instagram"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Utilize Mobile Menu End -->
 
         <div class="ltn__utilize-overlay"></div>
 
         <!-- BREADCRUMB AREA START -->
-        <div class="ltn__breadcrumb-area ltn__breadcrumb-area-2 ltn__breadcrumb-color-white bg-overlay-theme-black-90 bg-image" data-bs-bg="img/banner/images.jpg">
+        <div class="ltn__breadcrumb-area ltn__breadcrumb-area-2 ltn__breadcrumb-color-white bg-overlay-theme-black-90 bg-image"
+            data-bs-bg="img/banner/images.jpg">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="ltn__breadcrumb-inner ltn__breadcrumb-inner-2 justify-content-between">
                             <div class="section-title-area ltn__section-title-2">
-                                <h6 class="section-subtitle ltn__secondary-color">//  JusMoto Premium Services</h6>
+                                <h6 class="section-subtitle ltn__secondary-color">// JusMoto Premium Services</h6>
                                 <h1 class="section-title white-color">Service Details</h1>
                             </div>
                             <div class="ltn__breadcrumb-list">
@@ -493,10 +672,10 @@
                             <div class="ltn__blog-img mb-30">
                                 <img id="service-main-image" src="img/service/21.jpg" alt="Service Banner">
                             </div>
-                            
+
                             <h2 id="service-title" class="service-item-title">Wash Service</h2>
                             <div id="service-description">Professional car wash service...</div>
-                            
+
                             <div class="section-separator"></div>
 
                             <!-- Integrated Features: Included / Excluded -->
@@ -537,14 +716,20 @@
 
                             <!-- Pricing -->
                             <div class="widget ltn__menu-widget ltn__menu-widget-2 mb-30">
-                                <div class="pricing-card text-center p-4" style="background: #111; color: #fff; border-radius: 12px; position:relative; overflow:hidden;">
-                                    <div style="position:absolute; top:-10px; right:-10px; background:rgba(220,53,69,0.2); width:80px; height:80px; border-radius:50%;"></div>
-                                    <span class="text-uppercase small font-weight-bold" style="color: #dc3545;" id="category-name">CAR WASH</span>
+                                <div class="pricing-card text-center p-4"
+                                    style="background: #111; color: #fff; border-radius: 12px; position:relative; overflow:hidden;">
+                                    <div
+                                        style="position:absolute; top:-10px; right:-10px; background:rgba(220,53,69,0.2); width:80px; height:80px; border-radius:50%;">
+                                    </div>
+                                    <span class="text-uppercase small font-weight-bold" style="color: #dc3545;"
+                                        id="category-name">CAR WASH</span>
                                     <div class="mt-2" style="font-size: 40px; font-weight: 800; line-height: 1;">
                                         <span id="service-price-main">₹0</span>
-                                        <del class="d-block text-muted" id="service-old-price" style="font-size: 16px; margin-top:5px; display:none;">₹0</del>
+                                        <del class="d-block text-muted" id="service-old-price"
+                                            style="font-size: 16px; margin-top:5px; display:none;">₹0</del>
                                     </div>
-                                    <a href="contact.html" class="theme-btn-1 btn btn-block mt-3 px-0">BOOK APPOINTMENT</a>
+                                    <a href="contact.html" class="theme-btn-1 btn btn-block mt-3 px-0">BOOK
+                                        APPOINTMENT</a>
                                 </div>
                             </div>
 
@@ -559,118 +744,121 @@
             </div>
         </div>
 
-     <!-- FOOTER AREA START -->
-    <footer class="ltn__footer-area">
-        <div class="footer-top-area section-bg-2">
-            <div class="container">
-                <div class="row">
-                    <!-- Column 1: Logo & About -->
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-6">
-                        <div class="footer-widget footer-about-widget">
-                            <div class="footer-logo">
-                                <div class="site-logo">
-                                    <img src="img/header-logo.png" alt="Logo">
+        <!-- FOOTER AREA START -->
+        <footer class="ltn__footer-area">
+            <div class="footer-top-area section-bg-2">
+                <div class="container">
+                    <div class="row">
+                        <!-- Column 1: Logo & About -->
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-6">
+                            <div class="footer-widget footer-about-widget">
+                                <div class="footer-logo">
+                                    <div class="site-logo">
+                                        <img src="img/header-logo.png" alt="Logo">
+                                    </div>
+                                </div>
+                                <p>JusMoto – Your trusted partner for hassle-free car service and maintenance across the
+                                    city, delivering reliable, affordable, and professional automotive care every time.
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Column 2: Quick Links -->
+                        <div class="col-lg-2 col-md-6 col-sm-6 col-6">
+                            <div class="footer-widget footer-menu-widget clearfix">
+                                <h4 class="footer-title">Quick Links</h4>
+                                <div class="footer-menu">
+                                    <ul>
+                                        <li><a href="home.html">Home</a></li>
+                                        <li><a href="about.html">About</a></li>
+                                        <li><a href="#">Services</a></li>
+                                        <li><a href="#">Products</a></li>
+                                        <li><a href="contact-us.html">Contact</a></li>
+                                    </ul>
                                 </div>
                             </div>
-                            <p>JusMoto – Your trusted partner for hassle-free car service and maintenance across the city, delivering reliable, affordable, and professional automotive care every time.</p>
                         </div>
-                    </div>
-                    <!-- Column 2: Quick Links -->
-                    <div class="col-lg-2 col-md-6 col-sm-6 col-6">
-                        <div class="footer-widget footer-menu-widget clearfix">
-                            <h4 class="footer-title">Quick Links</h4>
-                            <div class="footer-menu">
-                                <ul>
-                                    <li><a href="home.html">Home</a></li>
-                                    <li><a href="about.html">About</a></li>
-                                    <li><a href="#">Services</a></li>
-                                    <li><a href="#">Products</a></li>
-                                    <li><a href="contact-us.html">Contact</a></li>
-                                </ul>
+                        <!-- Column 3: Contact Details -->
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                            <div class="footer-widget footer-address-widget">
+                                <h4 class="footer-title">Get in Touch</h4>
+                                <div class="footer-address">
+                                    <ul>
+                                        <li>
+                                            <div class="footer-address-icon">
+                                                <i class="icon-placeholder"></i>
+                                            </div>
+                                            <div class="footer-address-info">
+                                                <p>#12, Murugappa Road, Kotturpuram, <br>Chennai - 600085</p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="footer-address-icon">
+                                                <i class="icon-call"></i>
+                                            </div>
+                                            <div class="footer-address-info">
+                                                <p><a href="tel:+917871787196">+91 7871787196</a></p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="footer-address-icon">
+                                                <i class="icon-mail"></i>
+                                            </div>
+                                            <div class="footer-address-info">
+                                                <p><a href="mailto:hello@jusmoto.com">hello@jusmoto.com</a></p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Column 3: Contact Details -->
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                        <div class="footer-widget footer-address-widget">
-                            <h4 class="footer-title">Get in Touch</h4>
-                            <div class="footer-address">
-                                <ul>
-                                    <li>
-                                        <div class="footer-address-icon">
-                                            <i class="icon-placeholder"></i>
-                                        </div>
-                                        <div class="footer-address-info">
-                                            <p>#12, Murugappa Road, Kotturpuram, <br>Chennai - 600085</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="footer-address-icon">
-                                            <i class="icon-call"></i>
-                                        </div>
-                                        <div class="footer-address-info">
-                                            <p><a href="tel:+917871787196">+91 7871787196</a></p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="footer-address-icon">
-                                            <i class="icon-mail"></i>
-                                        </div>
-                                        <div class="footer-address-info">
-                                            <p><a href="mailto:hello@jusmoto.com">hello@jusmoto.com</a></p>
-                                        </div>
-                                    </li>
-                                </ul>
+                        <!-- Column 4: Follow Us -->
+                        <div class="col-lg-2 col-md-6 col-sm-6 col-6">
+                            <div class="footer-widget footer-social-widget">
+                                <h4 class="footer-title">Follow Us</h4>
+                                <div class="ltn__social-media">
+                                    <ul>
+                                        <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                                        <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
+                                        <li><a href="#" title="Instagram"><i class="fab fa-instagram"></i></a></li>
+                                    </ul>
+                                </div>
+                                <p class="mt-20">Connect with us on social media for latest updates and offers.</p>
                             </div>
-                        </div>
-                    </div>
-                    <!-- Column 4: Follow Us -->
-                    <div class="col-lg-2 col-md-6 col-sm-6 col-6">
-                        <div class="footer-widget footer-social-widget">
-                            <h4 class="footer-title">Follow Us</h4>
-                            <div class="ltn__social-media">
-                                <ul>
-                                    <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
-                                    <li><a href="#" title="Instagram"><i class="fab fa-instagram"></i></a></li>
-                                </ul>
-                            </div>
-                            <p class="mt-20">Connect with us on social media for latest updates and offers.</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="ltn__copyright-area ltn__copyright-2 section-bg-2 plr--5">
-            <div class="container-fluid ltn__border-top-2">
-                <div class="row">
-                    <div class="col-md-6 col-12">
-                        <div class="ltn__copyright-design clearfix">
-                            <p>Developed by <a href="https://blackitechs.com/" target="_blank">Black I Technology and Solutions</a> @ <span class="current-year"></span></p>
+            <div class="ltn__copyright-area ltn__copyright-2 section-bg-2 plr--5">
+                <div class="container-fluid ltn__border-top-2">
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <div class="ltn__copyright-design clearfix">
+                                <p>Developed by <a href="https://blackitechs.com/" target="_blank">Black I Technology
+                                        and Solutions</a> @ <span class="current-year"></span></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 col-12 align-self-center">
-                        <div class="ltn__copyright-menu text-end">
-                            <ul>
-                                <li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="#">Claim</a></li>
-                                <li><a href="#">Privacy & Policy</a></li>
-                            </ul>
+                        <div class="col-md-6 col-12 align-self-center">
+                            <div class="ltn__copyright-menu text-end">
+                                <ul>
+                                    <li><a href="#">Terms & Conditions</a></li>
+                                    <li><a href="#">Claim</a></li>
+                                    <li><a href="#">Privacy & Policy</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </footer>
-    <!-- FOOTER AREA END -->
+        </footer>
+        <!-- FOOTER AREA END -->
     </div>
 
     <script src="js/plugins.js"></script>
     <script src="js/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             const urlParams = new URLSearchParams(window.location.search);
             const serviceId = urlParams.get('id');
             const apiBaseUrl = 'http://jusmoto.blackitechs.in/api/v1';
@@ -688,7 +876,7 @@
                     $('#service-description').html(s.description);
                     $('#service-main-image').attr('src', s.image);
                     $('#category-name').text(s.category?.name || 'SERVICES');
-                    
+
                     // Pricing
                     $('#service-price-main').text(`₹${parseFloat(s.discount_price || s.price).toFixed(2)}`);
                     if (s.discount_price && parseFloat(s.price) > parseFloat(s.discount_price)) {
@@ -706,7 +894,7 @@
 
                     // Included (Compact)
                     $('#includes-list').html(s.includes?.map(x => `<li><i class="fas fa-check-circle"></i> ${x.title}</li>`).join('') || 'Contact us for details.');
-                    
+
                     // Excluded
                     if (s.excludes?.length) {
                         $('#excludes-list').html(s.excludes.map(x => `<li><i class="fas fa-times-circle"></i> ${x.title}</li>`).join(''));
@@ -755,4 +943,5 @@
         });
     </script>
 </body>
+
 </html>
