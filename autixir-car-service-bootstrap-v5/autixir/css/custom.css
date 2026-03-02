@@ -132,6 +132,7 @@
     flex-direction: column;
     justify-content: center;
     height: 100%;
+    margin-left: 30px;
 }
 
 /* -------------------------------------------------------
@@ -239,7 +240,7 @@
 
 /* Title font size reduced */
 .ltn__service-item-1 .service-item-brief h3 {
-    font-size: 16px;
+    font-size: 22px;
     margin-bottom: 8px;
     line-height: 1.35;
 }
@@ -254,7 +255,7 @@
 
 /* Description text compact */
 .ltn__service-item-1 .service-item-brief p {
-    font-size: 13px;
+    font-size: 16px;
     line-height: 1.6;
     margin-bottom: 10px;
     flex-grow: 1;
@@ -365,7 +366,7 @@
         padding: 14px 16px 12px;
     }
     .ltn__service-item-1 .service-item-brief h3 {
-        font-size: 15px;
+        font-size: 22px;
     }
 }
 
@@ -496,7 +497,7 @@
     /* Make first two fields (Service and Date) share the row */
     .ltn__service-form-box ul li:nth-child(1),
     .ltn__service-form-box ul li:nth-child(2) {
-        width: 50% !important;
+        width: 100% !important;
         flex: 0 0 50% !important;
         margin-right: 0 !important; /* Ensure no margin here either */
     }

@@ -19,6 +19,277 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- Responsive css -->
     <link rel="stylesheet" href="css/responsive.css">
+    <style>/* ===== Wishlist Table Alignment Fix ===== */
+
+.shoping-cart-table table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.shoping-cart-table tbody tr {
+    vertical-align: middle;
+}
+
+.shoping-cart-table td {
+    vertical-align: middle !important;
+    padding: 25px 10px;
+}
+
+/* Serial Number */
+.shoping-cart-table td:nth-child(1) {
+    width: 60px;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Product Image */
+.cart-product-image {
+    width: 110px;
+    text-align: center;
+}
+
+.cart-product-image img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+}
+
+/* Product Title */
+.cart-product-info {
+    width: 40%;
+    padding-left: 10px;
+}
+
+.cart-product-info h4 {
+    font-size: 18px;
+    margin: 0;
+}
+
+/* Price */
+.cart-product-price {
+    width: 150px;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Action Column */
+.shoping-cart-table td:last-child {
+    width: 220px;
+    text-align: right;
+}
+
+/* Add to cart button spacing */
+.submit-button-1 {
+    padding: 10px 22px;
+}
+
+/* Delete icon spacing */
+.shoping-cart-table button {
+    margin-left: 12px;
+}
+/* ===== Keep Same Desktop UI For All Devices ===== */
+
+.shoping-cart-table {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.shoping-cart-table table {
+    width: 100%;
+    min-width: 950px; /* Important - prevents wrapping */
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.shoping-cart-table tbody tr {
+    white-space: nowrap; /* Prevent row breaking */
+}
+
+.shoping-cart-table td {
+    vertical-align: middle !important;
+    padding: 20px 12px;
+}
+
+/* Column widths */
+.shoping-cart-table td:nth-child(1) {
+    width: 60px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.cart-product-image {
+    width: 100px;
+    text-align: center;
+}
+
+.cart-product-image img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+}
+
+.cart-product-info {
+    width: 40%;
+    white-space: normal;
+}
+
+.cart-product-price {
+    width: 150px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.shoping-cart-table td:last-child {
+    width: 220px;
+    text-align: right;
+}
+
+/* Action buttons */
+.wishlist-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+}
+/* ===================================================== */
+/* MOBILE WISHLIST UI - Meesho Style Layout              */
+/* Desktop & Tablet remain unchanged                     */
+/* ===================================================== */
+
+@media only screen and (max-width: 767px) {
+
+    /* Hide table header */
+    .shoping-cart-table thead {
+        display: none !important;
+    }
+
+    /* Make table block */
+    .shoping-cart-table table,
+    .shoping-cart-table tbody,
+    .shoping-cart-table tr,
+    .shoping-cart-table td {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    /* Each row = card */
+    .shoping-cart-table tbody tr {
+        background: #ffffff;
+        border: 1px solid #e8e8e8;
+        border-radius: 10px;
+        margin-bottom: 12px;
+        padding: 12px !important;
+        position: relative;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+        overflow: hidden;
+    }
+
+    /* Hide serial number */
+    .shoping-cart-table td.cart-serial {
+        display: none !important;
+    }
+
+    /* Remove borders from all td */
+    .shoping-cart-table td {
+        border: none !important;
+        padding: 2px 0 !important;
+    }
+
+    /* IMAGE — float left */
+    .shoping-cart-table td.cart-product-image {
+        float: left !important;
+        width: 90px !important;
+        margin-right: 12px !important;
+    }
+
+    .shoping-cart-table td.cart-product-image img {
+        width: 90px !important;
+        height: 90px !important;
+        object-fit: cover !important;
+        border-radius: 8px !important;
+        display: block !important;
+    }
+
+    /* NAME — right of image */
+    .shoping-cart-table td.cart-product-info {
+        margin-left: 105px !important;
+    }
+
+    .shoping-cart-table td.cart-product-info h4 {
+        font-size: 13px !important;
+        font-weight: 600 !important;
+        color: #222 !important;
+        margin: 0 !important;
+        line-height: 1.4 !important;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .shoping-cart-table td.cart-product-info h4 a {
+        color: #222 !important;
+        text-decoration: none !important;
+    }
+
+    /* PRICE — right of image */
+    .shoping-cart-table td.cart-product-price {
+        margin-left: 105px !important;
+        font-size: 15px !important;
+        font-weight: 700 !important;
+        color: #333 !important;
+        padding-bottom: 8px !important;
+    }
+
+    /* ACTIONS ROW — Add to Cart + Delete */
+    .shoping-cart-table td.cart-product-actions {
+        clear: both !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 10px !important;
+        padding-top: 10px !important;
+        border-top: 1px solid #f0f0f0 !important;
+        margin-top: 6px !important;
+    }
+
+    .shoping-cart-table td.cart-product-actions .submit-button-1 {
+        flex: 1 !important;
+        display: block !important;
+        text-align: center !important;
+        padding: 9px 0 !important;
+        background: #9b2d8e !important;
+        color: #fff !important;
+        font-size: 13px !important;
+        font-weight: 600 !important;
+        border-radius: 6px !important;
+        text-decoration: none !important;
+    }
+
+    .shoping-cart-table td.cart-product-actions button {
+        width: 40px !important;
+        height: 40px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border: 1px solid #ffcccc !important;
+        border-radius: 6px !important;
+        background: #fff5f5 !important;
+        color: #e53935 !important;
+        font-size: 16px !important;
+        cursor: pointer !important;
+        flex-shrink: 0 !important;
+    }
+
+    /* Clear floats */
+    .shoping-cart-table tbody tr::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+
+</style>
 </head>
 
 <body>
@@ -40,7 +311,7 @@
                         <div class="ltn__top-bar-menu">
                             <ul>
                                 <li><a href="mailto:hello@jusmoto.com"><i class="fas fa-envelope"></i> hello@jusmoto.com</a></li>
-                                <li><a href="locations.html"><i class="fas fa-map-marker-alt"></i> #12, Murugappa Road, Kotturpuram, Chennai - 600085</a></li>
+                                <li><a href="locations.html"><i class="fas fa-map-marker-alt"></i> 12, Murugappa Road, Kotturpuram, Chennai - 600085</a></li>
                             </ul>
                         </div>
                     </div>
@@ -328,7 +599,7 @@
                 <div class="col-lg-12">
                     <div class="ltn__breadcrumb-inner ltn__breadcrumb-inner-2 justify-content-between">
                         <div class="section-title-area ltn__section-title-2">
-                            <h6 class="section-subtitle ltn__secondary-color">//  Welcome to our company</h6>
+                            <h6 class="section-subtitle ltn__secondary-color">//  A Collection of Possibilities</h6>
                             <h1 class="section-title white-color">Wishlist</h1>
                         </div>
                         <div class="ltn__breadcrumb-list">
@@ -377,31 +648,61 @@
 
 
    <!-- FOOTER AREA START -->
-    <footer class="ltn__footer-area  ">
-        <div class="footer-top-area  section-bg-2">
+    <footer class="ltn__footer-area">
+        <div class="footer-top-area section-bg-2">
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-3 col-md-6 col-sm-6 col-12">
+                    <!-- Column 1: Logo & About -->
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-6">
                         <div class="footer-widget footer-about-widget">
                             <div class="footer-logo">
                                 <div class="site-logo">
                                     <img src="img/header-logo.png" alt="Logo">
                                 </div>
                             </div>
-                            <p>JustMoto – Your trusted partner for hassle-free car service and maintenance.</p>
+                            <p>JusMoto – Your trusted partner for hassle-free car service and maintenance across the city, delivering reliable, affordable, and professional automotive care every time.</p>
+                        </div>
+                    </div>
+                    <!-- Column 2: Quick Links -->
+                    <div class="col-lg-2 col-md-6 col-sm-6 col-6">
+                        <div class="footer-widget footer-menu-widget clearfix">
+                            <h4 class="footer-title">Quick Links</h4>
+                            <div class="footer-menu">
+                                <ul>
+                                    <li><a href="home.html">Home</a></li>
+                                    <li><a href="about-us.html">About</a></li>
+                                    <li><a href="service.html">Services</a></li>
+                                    <li><a href="products.html">Products</a></li>
+                                    <li><a href="contact-us.html">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column 3: Contact Details -->
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                        <div class="footer-widget footer-address-widget">
+                            <h4 class="footer-title">Get in Touch</h4>
                             <div class="footer-address">
                                 <ul>
                                     <li>
                                         <div class="footer-address-icon">
-                                            <i class="icon-placeholder"></i>
+                                            <i class="fas fa-map-marked-alt"></i>
                                         </div>
-                                        <div class="footer-address-info">
-                                            <p>#12, Murugappa Road, Kotturpuram, Chennai - 600085</p>
-                                        </div>
+                                       <div class="footer-address-info">
+    <p>
+        <a href="https://www.google.com/maps/search/?api=1&query=12+Murugappa+Road+Kotturpuram+Chennai+600085" 
+           target="_blank" 
+           style="text-decoration: none; color: inherit;">
+           12, Murugappa Road, Kotturpuram, <br>
+           Chennai - 600085
+        </a>
+    </p>
+</div>
+
                                     </li>
                                     <li>
                                         <div class="footer-address-icon">
-                                            <i class="icon-call"></i>
+                                            <i class="fas fa-phone-volume"></i>
                                         </div>
                                         <div class="footer-address-info">
                                             <p><a href="tel:+917871787196">+91 7871787196</a></p>
@@ -409,7 +710,7 @@
                                     </li>
                                     <li>
                                         <div class="footer-address-icon">
-                                            <i class="icon-mail"></i>
+                                            <i class="fas fa-envelope-open-text"></i>
                                         </div>
                                         <div class="footer-address-info">
                                             <p><a href="mailto:hello@jusmoto.com">hello@jusmoto.com</a></p>
@@ -417,100 +718,44 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="ltn__social-media mt-20">
-                                <ul>
-                                    <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
-                                    <li><a href="#" title="Youtube"><i class="fab fa-youtube"></i></a></li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
-                    <div class="col-xl-2 col-md-6 col-sm-6 col-12">
-                        <div class="footer-widget footer-menu-widget clearfix">
-                            <h4 class="footer-title">Company</h4>
-                            <div class="footer-menu">
+                    <!-- Column 4: Follow Us -->
+                    <div class="col-lg-2 col-md-6 col-sm-6 col-6">
+                        <div class="footer-widget footer-social-widget">
+                            <h4 class="footer-title">Follow Us</h4>
+                            <div class="ltn__social-media">
                                 <ul>
-                                    <li><a href="about.html">About</a></li>
-                                    <li><a href="blog.html">Blog</a></li>
-                                    <li><a href="shop.html">All Products</a></li>
-                                    <li><a href="locations.html">Locations Map</a></li>
-                                    <li><a href="faq.html">FAQ</a></li>
-                                    <li><a href="contact.html">Contact us</a></li>
+                                    <li><a href="https://www.facebook.com/jusmotoofficial#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="https://x.com/jusmoto1" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                                    
+                                    <li><a href="https://www.instagram.com/p/B9G1oVgppYh/" title="Instagram"><i class="fab fa-instagram"></i></a></li>
                                 </ul>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-6 col-sm-6 col-12">
-                        <div class="footer-widget footer-menu-widget clearfix">
-                            <h4 class="footer-title">Services.</h4>
-                            <div class="footer-menu">
-                                <ul>
-                                    <li><a href="order-tracking.html">Order tracking</a></li>
-                                    <li><a href="product-wishlist.html">Wish List</a></li>
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="account.html">My account</a></li>
-                                    <li><a href="about.html">Terms & Conditions</a></li>
-                                    <li><a href="about.html">Promotional Offers</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-6 col-sm-6 col-12">
-                        <div class="footer-widget footer-menu-widget clearfix">
-                            <h4 class="footer-title">Customer Care</h4>
-                            <div class="footer-menu">
-                                <ul>
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="account.html">My account</a></li>
-                                    <li><a href="product-wishlist.html">Wish List</a></li>
-                                    <li><a href="order-tracking.html">Order tracking</a></li>
-                                    <li><a href="faq.html">FAQ</a></li>
-                                    <li><a href="contact.html">Contact us</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6 col-sm-12 col-12">
-                        <div class="footer-widget footer-newsletter-widget">
-                            <h4 class="footer-title">Newsletter</h4>
-                            <p>Subscribe to our weekly Newsletter and receive updates via email.</p>
-                            <div class="footer-newsletter">
-                                <form action="#">
-                                    <input type="email" name="email" placeholder="Email*">
-                                    <div class="btn-wrapper">
-                                        <button class="theme-btn-1 btn" type="submit"><i class="fas fa-location-arrow"></i></button>
-                                    </div>
-                                </form>
-                            </div>
-                            <h5 class="mt-30">We Accept</h5>
-                            <img src="img/icons/payment-4.png" alt="Payment Image">
+                            <p class="mt-20">Connect with us on social media for latest updates and offers.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="ltn__copyright-area ltn__copyright-2 section-bg-2 plr--5">
-            <div class="container-fluid ltn__border-top-2">
-                <div class="row">
-                    <div class="col-md-6 col-12">
-                        <div class="ltn__copyright-design clearfix">
-                            <p>All Rights Reserved @ Company <span class="current-year"></span></p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-12 align-self-center">
-                        <div class="ltn__copyright-menu text-end">
-                            <ul>
-                                <li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="#">Claim</a></li>
-                                <li><a href="#">Privacy & Policy</a></li>
-                            </ul>
-                        </div>
-                    </div>
+       <div class="ltn__copyright-area ltn__copyright-2 section-bg-2 plr--5">
+    <div class="container-fluid ltn__border-top-2">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-12 text-center">
+                <div class="ltn__copyright-design clearfix">
+                    <p>
+                        Developed by 
+                        <a href="https://blackitechs.com/" target="_blank">
+                            Black I Technology and Solutions
+                        </a> 
+                        @ <span class="current-year"></span>
+                    </p>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
     </footer>
     <!-- FOOTER AREA END -->
 

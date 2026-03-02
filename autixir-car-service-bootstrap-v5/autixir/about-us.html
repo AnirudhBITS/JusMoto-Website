@@ -138,6 +138,45 @@
     background-color: var(--section-bg-1);
     margin-bottom: 40px;
 }
+/* ===== FEATURE ITEM HOVER ===== */
+.ltn__feature-item-7 {
+  transition: all 0.3s ease;
+}
+
+.ltn__feature-item-7:hover {
+  transform: translateY(-8px);
+}
+
+/* ===== ICON STYLE ===== */
+.ltn__feature-icon span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #f5f5f5;
+  font-size: 34px;
+  color: var(--ltn__secondary-color);
+  transition: all 0.4s ease;
+  animation: floatIcon 3s ease-in-out infinite;
+}
+
+/* Hover Effect */
+.ltn__feature-item-7:hover .ltn__feature-icon span {
+  background: var(--ltn__secondary-color);
+  color: #fff;
+  transform: scale(1.15) rotate(6deg);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+/* Floating Animation */
+@keyframes floatIcon {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0px); }
+}
+
 
 /* =========================================
    ABOUT US SECTION - FULL RESPONSIVE
@@ -157,6 +196,7 @@
 .ltn__about-us-area p {
     text-align: justify;
     line-height: 1.7;
+    margin-top: 30px;
 }
 
 .about-us-img-wrap {
@@ -525,101 +565,205 @@
         height: 220px;
     }
 }
+ /* ======================================================
+           Testimonial Section — Matches about-us.html Layout
+        ====================================================== */
+
+        /* Desktop: 3 columns */
+        .ltn__testimonial-slider-3-active {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .ltn__testimonial-slider-3-active .col-lg-12 {
+            width: 30%;
+        }
+
+        /* Flat white card — left aligned text */
+        .ltn__testimonial-item-4 {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: left;
+            height: 100%;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        /* Avatar image sizing */
+        .ltn__testimonial-item-4 .ltn__testimoni-img img {
+            width: 65px;
+            height: 65px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
+        /* Tablet: 2 columns */
+        @media (max-width: 991px) {
+            .ltn__testimonial-slider-3-active {
+                justify-content: center;
+            }
+            .ltn__testimonial-slider-3-active .col-lg-12 {
+                width: 48%;
+            }
+        }
+
+        /* Mobile: 1 column + center content */
+        @media (max-width: 767px) {
+            .ltn__testimonial-slider-3-active .col-lg-12 {
+                width: 100%;
+            }
+            .ltn__testimonial-item-4 {
+                text-align: center;
+            }
+            .ltn__testimonial-item-4 .ltn__testimoni-img img {
+                margin: 0 auto 15px;
+                display: block;
+            }
+        }
+
+        /* Small mobile */
+        @media (max-width: 480px) {
+            .ltn__testimonial-item-4 {
+                padding: 20px 15px;
+            }
+        }
+        
+
 /* ===============================
-   TESTIMONIAL RESPONSIVE FIX
+   FEATURE RESPONSIVE FIXES
 ================================= */
 
-/* ===== Desktop Default ===== */
-.ltn__testimonial-slider-3-active {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-}
-
-.ltn__testimonial-slider-3-active .col-lg-12 {
-    width: 30%; /* 3 columns desktop */
-}
-
-/* Desktop → Keep content LEFT aligned */
-.ltn__testimonial-item-4 {
-    background: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    text-align: left;   /* IMPORTANT */
+/* Desktop (lg and up) — 3 columns */
+.ltn__feature-item-7 {
     height: 100%;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    padding: 30px 25px;
+    transition: 0.3s ease;
 }
 
-/* ===============================
-   Tablet (2 Columns)
-================================= */
-@media (max-width: 991px) {
-
-    .ltn__testimonial-slider-3-active {
-        justify-content: center;
+/* Tablet (md) — force 2 columns per row cleanly */
+@media (min-width: 768px) and (max-width: 991px) {
+    .ltn__feature-area .row {
+        --bs-gutter-x: 1.5rem; /* control horizontal spacing if needed */
     }
 
-    .ltn__testimonial-slider-3-active .col-lg-12 {
-        width: 48%; /* 2 columns */
+    .ltn__feature-area .row > .col-md-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+    .ltn__feature-item-7 {
+        margin-bottom: 2rem;     /* consistent spacing between rows */
+        height: 100%;
+    }
+
+    /* Remove unwanted top margin if any */
+    .mt-30, .mt-4, .mt-md-5 {
+        margin-top: 0 !important;
     }
 }
 
-/* ===============================
-   Mobile (1 Column + Center Content)
-================================= */
+/* Mobile (below md) */
+@media (max-width: 767px) {
+    .ltn__feature-area {
+        padding-top: 60px;
+        padding-bottom: 30px;
+    }
+
+    .ltn__feature-item-7 {
+        text-align: center;
+        padding: 20px 15px;
+        margin-bottom: 1.5rem;
+    }
+
+    .ltn__feature-icon {
+        margin-bottom: 15px;
+    }
+
+    .ltn__feature-icon span {
+        font-size: 2.2rem;   /* ≈35px */
+    }
+
+    .ltn__feature-item-7 h3 {
+        font-size: 1.1rem;
+    }
+
+    .ltn__feature-item-7 p {
+        font-size: 0.875rem;
+        line-height: 1.6;
+    }
+}
+
+/* Tablet font/icon size adjustment (optional but cleaner) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .ltn__feature-icon span {
+        font-size: 2.3rem;
+    }
+    .ltn__feature-item-7 h3 {
+        font-size: 1.25rem;
+    }
+    .ltn__feature-item-7 p {
+        font-size: 0.95rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .ltn__feature-area .row.justify-content-center > div {
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+    }
+
+    .ltn__feature-item-7 {
+        height: 100%;
+        margin-bottom: 0 !important;   /* row gutter handles spacing */
+    }
+
+    /* Optional: smaller text/icons on tablet if feels too big */
+    .ltn__feature-icon span { font-size: 2.5rem; }
+    .ltn__feature-item-7 h3  { font-size: 1.25rem; }
+}
+
+@media (min-width: 992px) {
+    .ltn__feature-item-7 {
+        padding: 32px 24px;
+    }
+}
+
+/* Mobile: 1 column + center image properly */
 @media (max-width: 767px) {
 
     .ltn__testimonial-slider-3-active .col-lg-12 {
         width: 100%;
     }
 
-    /* Center ONLY on Mobile */
     .ltn__testimonial-item-4 {
         text-align: center;
     }
 
-    .ltn__testimoni-img {
-        text-align: center;
+    /* 🔥 IMPORTANT FIX */
+    .ltn__testimonial-item-4 .ltn__testimoni-img {
+        float: none !important;
+        text-align: center !important;
+        margin: 0 auto 15px auto !important;
     }
 
-    .ltn__testimoni-img img {
-        margin: 0 auto 15px;
+    .ltn__testimonial-item-4 .ltn__testimoni-img img {
         display: block;
-    }
-
-    .section-title {
-        font-size: 26px;
-    }
-
-    .section-subtitle {
-        font-size: 14px;
+        margin: 0 auto;
     }
 }
-
-/* ===============================
-   Small Mobile
-================================= */
-@media (max-width: 480px) {
-
-    .section-title {
-        font-size: 22px;
-    }
-
-    .ltn__testimonial-item-4 {
-        padding: 20px 15px;
-    }
+/* Make slick arrows always visible */
+.ltn__testimonial-slider-3-active .slick-arrow {
+    opacity: 1 !important;
+    visibility: visible !important;
 }
-@media (max-width: 767px) {
-    .ltn__testimoni-img {
-        display: flex;
-        justify-content: center;
-    }
 
-    .ltn__testimoni-img img {
-        display: block;
-        margin: 0 auto 15px;
-    }
+/* Remove hover-only behavior */
+.ltn__testimonial-slider-3-active:hover .slick-arrow {
+    opacity: 1 !important;
 }
+
+
 
     </style>
 </head>
@@ -634,7 +778,7 @@
 <!-- Body main wrapper start -->
 <div class="body-wrapper">
 
-    <!-- HEADER AREA START (header-4) -->
+   <!-- HEADER AREA START (header-4) -->
     <header class="ltn__header-area ltn__header-4 ltn__header-6 ltn__header-transparent gradient-color-2">
         <!-- ltn__header-top-area start -->
         <div class="ltn__header-top-area top-area-color-white">
@@ -644,7 +788,7 @@
                         <div class="ltn__top-bar-menu">
                             <ul>
                                 <li><a href="mailto:hello@jusmoto.com"><i class="fas fa-envelope"></i> hello@jusmoto.com</a></li>
-                                <li><a href="locations.html"><i class="fas fa-map-marker-alt"></i> #12, Murugappa Road, Kotturpuram, Chennai - 600085</a></li>
+                                <li><a href="locations.html"><i class="fas fa-map-marker-alt"></i> 12, Murugappa Road, Kotturpuram, Chennai - 600085</a></li>
                             </ul>
                         </div>
                     </div>
@@ -786,7 +930,7 @@
     </header>
     <!-- HEADER AREA END -->
 
-       <!-- Utilize Cart Menu Start -->
+    <!-- Utilize Cart Menu Start -->
     <div id="ltn__utilize-cart-menu" class="ltn__utilize ltn__utilize-cart-menu">
         <div class="ltn__utilize-menu-inner ltn__scrollbar">
             <div class="ltn__utilize-menu-head">
@@ -801,7 +945,7 @@
                     </div>
                     <div class="mini-cart-info">
                         <h6><a href="#">Wheel Bearing Retainer</a></h6>
-                        <span class="mini-cart-quantity">1 x $65.00</span>
+                        <span class="mini-cart-quantity">1 x ₹65.00</span>
                     </div>
                 </div>
                 <div class="mini-cart-item clearfix">
@@ -811,7 +955,7 @@
                     </div>
                     <div class="mini-cart-info">
                         <h6><a href="#">Brake Conversion Kit</a></h6>
-                        <span class="mini-cart-quantity">1 x $85.00</span>
+                        <span class="mini-cart-quantity">1 x ₹85.00</span>
                     </div>
                 </div>
                 <div class="mini-cart-item clearfix">
@@ -821,7 +965,7 @@
                     </div>
                     <div class="mini-cart-info">
                         <h6><a href="#">OE Replica Wheels</a></h6>
-                        <span class="mini-cart-quantity">1 x $92.00</span>
+                        <span class="mini-cart-quantity">1 x ₹92.00</span>
                     </div>
                 </div>
                 <div class="mini-cart-item clearfix">
@@ -831,19 +975,19 @@
                     </div>
                     <div class="mini-cart-info">
                         <h6><a href="#">Shock Mount Insulator</a></h6>
-                        <span class="mini-cart-quantity">1 x $68.00</span>
+                        <span class="mini-cart-quantity">1 x ₹68.00</span>
                     </div>
                 </div>
             </div>
             <div class="mini-cart-footer">
                 <div class="mini-cart-sub-total">
-                    <h5>Subtotal: <span>$310.00</span></h5>
+                    <h5>Subtotal: <span>₹310.00</span></h5>
                 </div>
                 <div class="btn-wrapper">
                     <a href="cart.html" class="theme-btn-1 btn btn-effect-1">View Cart</a>
                     <a href="cart.html" class="theme-btn-2 btn btn-effect-2">Checkout</a>
                 </div>
-                <p>Free Shipping on All Orders Over $100!</p>
+                <p>Free Shipping on All Orders Over ₹100!</p>
             </div>
 
         </div>
@@ -855,7 +999,7 @@
         <div class="ltn__utilize-menu-inner ltn__scrollbar">
             <div class="ltn__utilize-menu-head">
                 <div class="site-logo">
-                    <a href="index.html"><img src="img/logo.png" alt="Logo"></a>
+                    <a href="index.html"><img src="img/header-logo.png" alt="Logo"></a>
                 </div>
                 <button class="ltn__utilize-close">×</button>
             </div>
@@ -868,87 +1012,14 @@
             <div class="ltn__utilize-menu">
                 <ul>
                     <li><a href="#">Home</a>
-                        <ul class="sub-menu">
-                            <li><a href="index.html">Home Style - 01</a></li>
-                            <li><a href="index-2.html">Home Style - 02</a></li>
-                            <li><a href="index-3.html">Home Style - 03</a></li>
-                            <li><a href="index-4.html">Home Style - 04</a></li>
-                            <li><a href="index-5.html">Home Style - 05 <span class="menu-item-badge">video</span></a></li>
-                            <li><a href="index-6.html">Home Style - 06</a></li>
-                            <li><a href="index-7.html">Home Style - 07</a></li>
-                            <li><a href="index-8.html">Home Style - 08 <span class="menu-item-badge">Map</span></a></li>
-                            <li><a href="index-9.html">Home Style - 09</a></li>
-                            <li><a href="index-10.html">Home Style - 10</a></li>
-                            <li><a href="index-11.html">Home Style - 11</a></li>
-                            <li><a href="index-12.html">Home Style - 12</a></li>
-                            <li><a href="index-13.html">Home Style - 13</a></li>
-                            <li><a href="index-14.html">Home Style - 14</a></li>
-                            <li><a href="index-15.html">Home Style - 15</a></li>
-                            <li><a href="index-16.html">Home Style - 16</a></li>
-                        </ul>
                     </li>
                     <li><a href="#">About</a>
-                        <ul class="sub-menu">
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="service.html">Services</a></li>
-                            <li><a href="service-details.html">Service Details</a></li>
-                            <li><a href="portfolio.html">Portfolio</a></li>
-                            <li><a href="portfolio-2.html">Portfolio - 02</a></li>
-                            <li><a href="portfolio-details.html">Portfolio Details</a></li>
-                            <li><a href="team.html">Team</a></li>
-                            <li><a href="team-details.html">Team Details</a></li>
-                            <li><a href="faq.html">FAQ</a></li>
-                            <li><a href="locations.html">Google Map Locations</a></li>
-                        </ul>
                     </li>
                     <li><a href="#">Shop</a>
-                        <ul class="sub-menu">
-                            <li><a href="shop.html">Shop</a></li>
-                            <li><a href="shop-grid.html">Shop Grid</a></li>
-                            <li><a href="shop-left-sidebar.html">Shop Left sidebar</a></li>
-                            <li><a href="shop-right-sidebar.html">Shop right sidebar</a></li>
-                            <li><a href="product-details.html">Shop details </a></li>
-                            <li><a href="product-details-2.html">Shop details 02</a></li>
-                            <li><a href="shop-car-grid.html">Shop Car Grid</a></li>
-                            <li><a href="shop-car-left-sidebar.html">Shop Car Left sidebar</a></li>
-                            <li><a href="shop-car-right-sidebar.html">Shop Car right sidebar</a></li>
-                            <li><a href="product-details-3.html">Shop Car details </a></li>
-                            <li><a href="cart.html">Cart</a></li>
-                            <li><a href="wishlist.html">Wishlist</a></li>
-                            <li><a href="product-checkout.html">Checkout</a></li>
-                            <li><a href="order-tracking.html">Order Tracking</a></li>
-                            <li><a href="account.html">My Account</a></li>
-                            <li><a href="login.html">Sign in</a></li>
-                            <li><a href="register.html">Register</a></li>
-                        </ul>
                     </li>
                     <li><a href="#">News</a>
-                        <ul class="sub-menu">
-                            <li><a href="blog.html">News</a></li>
-                            <li><a href="blog-grid.html">News Grid</a></li>
-                            <li><a href="blog-left-sidebar.html">News Left sidebar</a></li>
-                            <li><a href="blog-right-sidebar.html">News Right sidebar</a></li>
-                            <li><a href="blog-details.html">News details</a></li>
-                        </ul>
                     </li>
                     <li><a href="#">Pages</a>
-                        <ul class="sub-menu">
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="service.html">Services</a></li>
-                            <li><a href="service-details.html">Service Details</a></li>
-                            <li><a href="portfolio.html">Portfolio</a></li>
-                            <li><a href="portfolio-2.html">Portfolio - 02</a></li>
-                            <li><a href="portfolio-details.html">Portfolio Details</a></li>
-                            <li><a href="team.html">Team</a></li>
-                            <li><a href="team-details.html">Team Details</a></li>
-                            <li><a href="faq.html">FAQ</a></li>
-                            <li><a href="history.html">History</a></li>
-                            <li><a href="appointment.html">Appointment</a></li>
-                            <li><a href="locations.html">Google Map Locations</a></li>
-                            <li><a href="404.html">404</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                            <li><a href="coming-soon.html">Coming Soon</a></li>
-                        </ul>
                     </li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
@@ -1030,7 +1101,7 @@
                         <div class="about-us-img-info about-us-img-info-2">
                             <div class="about-us-img-info-inner">
                                 <h1>20<span>+</span></h1>
-                                <h6>Years Experience</h6>
+                                <h6>Service</h6>
                                 <!-- <span class="dots-bottom"></span> -->
                             </div>
                         </div>
@@ -1047,70 +1118,150 @@
                         <p>We connect you with trusted service experts, offer real-time service tracking through our app, and provide transparent, customized solutions at affordable prices.
 
 With skilled technicians and reliable support, Jusmoto ensures quality service and complete peace of mind. </p>
-                        <div class="btn-wrapper">
-                            <a href="service.html" class="theme-btn-3 btn btn-effect-4">OUR SERVICES</a>
-                        </div>
+                        <div class="about-btn-wrap">
+    <a href="products.html" 
+       class="btn theme-btn-1 btn-effect-1 ab3-btn">
+       view More
+    </a>
+</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- ABOUT US AREA END -->
-      <!-- FEATURE AREA START ( Feature - 6) -->
-    <div class="ltn__feature-area section-bg-1 pt-80 pb-40">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title-area ltn__section-title-2 text-center">
-                        <h6 class="section-subtitle ltn__secondary-color">//  Why Choose Us </h6>
-                        <h1 class="section-title">The Smarter Way to Service Your Vehicle<span></span></h1>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-4 col-sm-6 col-12">
-                    <div class="ltn__feature-item ltn__feature-item-7">
-                        <div class="ltn__feature-icon-title">
-                            <div class="ltn__feature-icon">
-                                <span><i class="icon-car-parts-3"></i></span>
-                            </div>
-                            <h3><a href="service-details.html">All Vehicle Brands</a></h3>
-                        </div>
-                        <div class="ltn__feature-info">
-                            <p>We service all major bike and car brands through our trusted professional network.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6 col-12">
-                    <div class="ltn__feature-item ltn__feature-item-7">
-                        <div class="ltn__feature-icon-title">
-                            <div class="ltn__feature-icon">
-      <span><i class="icon-clock"></i></span>
-                            </div>
-                            <h3><a href="service-details.html">Real-Time Service Updates</a></h3>
-                        </div>
-                        <div class="ltn__feature-info">
-                            <p>Track your vehicle service live with complete transparency through our mobile app.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6 col-12">
-                    <div class="ltn__feature-item ltn__feature-item-7">
-                        <div class="ltn__feature-icon-title">
-                            <div class="ltn__feature-icon">
-                              <span><i class="icon-car-service"></i></span>
-                            </div>
-                            <h3><a href="service-details.html">Doorstep Pickup & Drop</a></h3>
-                        </div>
-                        <div class="ltn__feature-info">
-                            <p>Enjoy hassle-free pickup and drop service, saving your time and effort.</p>
-                        </div>
-                    </div>
+<!-- FEATURE AREA START -->
+<div class="ltn__feature-area section-bg-1 pt-80 pb-40">
+    <div class="container">
+
+        <!-- Section Title -->
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <div class="section-title-area ltn__section-title-2">
+                    <h6 class="section-subtitle ltn__secondary-color">// Why Choose Us</h6>
+                    <h1 class="section-title">
+                        The Smarter Way to Service Your Vehicle<span></span>
+                    </h1>
                 </div>
             </div>
         </div>
+
+        <!-- Feature Cards (Single Row for Proper Grid Alignment) -->
+        <div class="row justify-content-center">
+
+            <!-- Card 1 -->
+            <div class="col-lg-4 col-md-6 col-12 mb-4">
+                <div class="ltn__feature-item ltn__feature-item-7 h-100">
+                    <div class="ltn__feature-icon-title">
+                        <div class="ltn__feature-icon">
+                            <span><i class="icon-car-parts-3"></i></span>
+                        </div>
+                        <h3><a href="service-details.html">All Automobile Needs</a></h3>
+                    </div>
+                    <div class="ltn__feature-info">
+                        <p>
+                            Jusmoto caters to all the automobile needs of your bike and car,
+                            making vehicle service completely hassle-free for you.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="col-lg-4 col-md-6 col-12 mb-4">
+                <div class="ltn__feature-item ltn__feature-item-7 h-100">
+                    <div class="ltn__feature-icon-title">
+                        <div class="ltn__feature-icon">
+                            <span><i class="icon-car-service"></i></span>
+                        </div>
+                        <h3><a href="service-details.html">Doorstep Pickup & Drop</a></h3>
+                    </div>
+                    <div class="ltn__feature-info">
+                        <p>
+                            We work with a network of service stations that come to your
+                            doorstep to pick up your vehicle and drop it off after servicing.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="col-lg-4 col-md-6 col-12 mb-4">
+                <div class="ltn__feature-item ltn__feature-item-7 h-100">
+                    <div class="ltn__feature-icon-title">
+                        <div class="ltn__feature-icon">
+                            <span><i class="icon-clock"></i></span>
+                        </div>
+                        <h3><a href="service-details.html">Real-Time Service Updates</a></h3>
+                    </div>
+                    <div class="ltn__feature-info">
+                        <p>
+                            Stay informed at every step — customers receive real-time service
+                            updates directly through our easy-to-use mobile app.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="col-lg-4 col-md-6 col-12 mb-4">
+                <div class="ltn__feature-item ltn__feature-item-7 h-100">
+                    <div class="ltn__feature-icon-title">
+                        <div class="ltn__feature-icon">
+                            <span><i class="icon-mechanic"></i></span>
+                        </div>
+                        <h3><a href="service-details.html">Expert Technicians</a></h3>
+                    </div>
+                    <div class="ltn__feature-info">
+                        <p>
+                            Our partner service stations are tech-enabled and staffed with
+                            skilled technicians and field experts across the city.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="col-lg-4 col-md-6 col-12 mb-4">
+                <div class="ltn__feature-item ltn__feature-item-7 h-100">
+                    <div class="ltn__feature-icon-title">
+                        <div class="ltn__feature-icon">
+                            <span><i class="icon-cog"></i></span>
+                        </div>
+                        <h3><a href="service-details.html">Customized Services</a></h3>
+                    </div>
+                    <div class="ltn__feature-info">
+                        <p>
+                            We render fully customized vehicle services tailored to your
+                            specific needs, ensuring you get exactly what your bike or car requires.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="col-lg-4 col-md-6 col-12 mb-4">
+                <div class="ltn__feature-item ltn__feature-item-7 h-100">
+                    <div class="ltn__feature-icon-title">
+                        <div class="ltn__feature-icon">
+                            <span><i class="icon-tag"></i></span>
+                        </div>
+                        <h3><a href="service-details.html">Reasonable Pricing</a></h3>
+                    </div>
+                    <div class="ltn__feature-info">
+                        <p>
+                            Quality service doesn’t have to be expensive. We offer pricing
+                            that fits your pocket without compromising quality.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
     </div>
-    <!-- FEATURE AREA END -->
+</div>
+<!-- FEATURE AREA END -->
+
 
       <!-- CALL TO ACTION START (call-to-action-5) -->
     <div class="call-to-action-area call-to-action-5 bg-image bg-overlay-theme-90 pt-40 pb-25" data-bs-bg="img/bg/13.jpg">
@@ -1118,7 +1269,7 @@ With skilled technicians and reliable support, Jusmoto ensures quality service a
             <div class="row">
                 <div class="col-lg-12">
                     <div class="call-to-action-inner call-to-action-inner-5 text-center">
-                        <h2 class="white-color text-decoration">24/7 Availability, Make <a href="appointment.html">An Appointment</a></h2>
+                        <h2 class="white-color text-decoration">24/7 Availability, Speak With <a href="contact-us.html"> Our Support Team</a></h2>
                     </div>
                 </div>
             </div>
@@ -1132,12 +1283,13 @@ With skilled technicians and reliable support, Jusmoto ensures quality service a
             <div class="row">
                 <div class="col-lg-6">
                     <div class="ltn__progress-bar-wrap">
-                        <div class="section-title-area ltn__section-title-2">
+                        <div class="section-title-area ltn__section-title-2"  >
                             <h6 class="section-subtitle ltn__secondary-color">// Our Service Excellence</h6>
-                            <h1 class="section-title">Delivering Performance Beyond Expectations<span></span></h1>
-                            <p>Jusmoto redefines vehicle servicing with modern technology and expert care.</p>
+                            <h1 class="section-title" >Delivering Performance Beyond Expectations<span></span></h1>
+                            <p style="padding-top: 20px;">Jusmoto redefines vehicle servicing with modern technology and expert care.
+Delivering reliability, transparency, and performance you can trust every mile.</p>
                         </div>
-                        <div class="ltn__progress-bar-inner">
+                        <div class="ltn__progress-bar-inner" style="padding-top: 30px;">
                             <div class="ltn__progress-bar-item">
                                 <p>Service Quality Standards</p>
                                 <div class="progress">
@@ -1177,101 +1329,8 @@ With skilled technicians and reliable support, Jusmoto ensures quality service a
     </div>
     <!-- PROGRESS BAR AREA END -->
 
-    <!-- TESTIMONIAL AREA START (testimonial-4) -->
-    <div class="ltn__testimonial-area bg-image pt-70 pb-40" data-bs-bg="img/bg/8.jpg">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title-area ltn__section-title-2 text-center">
-                        <h6 class="section-subtitle ltn__secondary-color">//  Testimonials</h6>
-                        <h1 class="section-title">What Our Customers Say<span></span></h1>
-                    </div>
-                </div>
-            </div>
-            <div class="row ltn__testimonial-slider-3-active slick-arrow-1 slick-arrow-1-inner">
-                <div class="col-lg-12">
-                    <div class="ltn__testimonial-item ltn__testimonial-item-4">
-                        <div class="ltn__testimoni-img">
-                          <img src="img/slider/36332651_836.webp" alt="#">
-                        </div>
-                        <div class="ltn__testimoni-info">
-                            <p>Excellent service with clear communication and timely delivery. The team handled my vehicle with care. </p>
-                            <h4>Ramesh Kumar</h4>
-                            <h6>Customer</h6>
-                        </div>
-                        <div class="ltn__testimoni-bg-icon">
-                            <i class="far fa-comments"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="ltn__testimonial-item ltn__testimonial-item-4">
-                        <div class="ltn__testimoni-img">
-                         <img src="img/slider/36332651_836.webp" alt="#">
-                        </div>
-                        <div class="ltn__testimoni-info">
-                            <p>Transparent pricing and honest recommendations. My car performance improved after servicing.</p>
-                            <h4>Priya Sharma</h4>
-                            <h6>Regular Client</h6>
-                        </div>
-                        <div class="ltn__testimoni-bg-icon">
-                            <i class="far fa-comments"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="ltn__testimonial-item ltn__testimonial-item-4">
-                        <div class="ltn__testimoni-img">
-                           <img src="img/slider/36332651_836.webp" alt="#">
-                        </div>
-                        <div class="ltn__testimoni-info">
-                            <p>The technicians are highly skilled and use advanced diagnostic tools. I felt confident leaving my vehicle in their capable hands.</p>
-                            <h4>Aravind Raj</h4>
-                            <h6>Business Owner</h6>
-                        </div>
-                        <div class="ltn__testimoni-bg-icon">
-                            <i class="far fa-comments"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="ltn__testimonial-item ltn__testimonial-item-4">
-                        <div class="ltn__testimoni-img">
-                           <img src="img/slider/36332651_836.webp" alt="#">
-                        </div>
-                        <div class="ltn__testimoni-info">
-                            <p>Professional staff, reliable service, and great support throughout the process. Highly recommended for vehicle maintenance.</p>
-                            <h4>Karthik Nair</h4>
-                            <h6>Satisfied Customer</h6>
-                        </div>
-                        <div class="ltn__testimoni-bg-icon">
-                            <i class="far fa-comments"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="ltn__testimonial-item ltn__testimonial-item-4">
-                        <div class="ltn__testimoni-img">
-                            <img src="img/slider/36332651_836.webp" alt="#">
-                        </div>
-                        <div class="ltn__testimoni-info">
-                            <p>Affordable service plans and quick turnaround time. Jusmoto focuses on customer satisfaction and quality work. </p>
-                            <h4>Sneha Menon</h4>
-                            <h6>Car Owner</h6>
-                        </div>
-                        <div class="ltn__testimoni-bg-icon">
-                            <i class="far fa-comments"></i>
-                        </div>
-                    </div>
-                </div>
-                <!--  -->
-            </div>
-        </div>
-    </div>
-    <!-- TESTIMONIAL AREA END -->
-
-      <!-- BRAND LOGO AREA START -->
-    <div class="ltn__brand-logo-area ltn__brand-logo-1 pt-0 pb-120">
+       <!-- BRAND LOGO AREA START -->
+    <div class="ltn__brand-logo-area ltn__brand-logo-1 pt-120 pb-120">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -1327,32 +1386,189 @@ With skilled technicians and reliable support, Jusmoto ensures quality service a
     </div>
     <!-- BRAND LOGO AREA END -->
 
-      <!-- FOOTER AREA START -->
-    <footer class="ltn__footer-area  ">
-        <div class="footer-top-area  section-bg-2">
+<!-- TESTIMONIAL AREA START (testimonial-4) -->
+<div class="ltn__testimonial-area bg-image pt-70 pb-40" data-bs-bg="img/bg/8.jpg">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title-area ltn__section-title-2 text-center">
+                    <h6 class="section-subtitle ltn__secondary-color">// Testimonials</h6>
+                    <h1 class="section-title">Trusted by Vehicle Owners</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row ltn__testimonial-slider-3-active slick-arrow-1 slick-arrow-1-inner">
+
+            <!-- Testimonial 1 -->
+            <div class="col-lg-12">
+                <div class="ltn__testimonial-item ltn__testimonial-item-4">
+                    <div class="ltn__testimoni-img">
+                        <img src="img/testimonial/t-1.png" alt="Siddharth Nair">
+                    </div>
+                    <div class="ltn__testimoni-info">
+                        <p>
+                            "I used to spend hours with local garages. With JusMoto, everything is booked online, confirmed instantly, and completed on time — modern servicing made simple."
+                        </p>
+                        <h4>Siddharth Nair</h4>
+                        <h6>Product Manager</h6>
+                    </div>
+                    <div class="ltn__testimoni-bg-icon">
+                        <i class="far fa-comments"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 2 -->
+            <div class="col-lg-12">
+                <div class="ltn__testimonial-item ltn__testimonial-item-4">
+                    <div class="ltn__testimoni-img">
+                        <img src="img/testimonial/t-2.png" alt="Megha Desai">
+                    </div>
+                    <div class="ltn__testimoni-info">
+                        <p>
+                            "The biggest difference I noticed was accountability.
+                            I received proper updates, billing breakdown, and service
+                            documentation. That level of transparency builds real trust."
+                        </p>
+                        <h4>Megha Desai</h4>
+                        <h6>Chartered Accountant</h6>
+                    </div>
+                    <div class="ltn__testimoni-bg-icon">
+                        <i class="far fa-comments"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div class="col-lg-12">
+                <div class="ltn__testimonial-item ltn__testimonial-item-4">
+                    <div class="ltn__testimoni-img">
+                        <img src="img/testimonial/t-3.png" alt="Ankit Bansal">
+                    </div>
+                    <div class="ltn__testimoni-info">
+                        <p>
+                            "My bike had recurring engine issues that two workshops
+                            couldn’t fix properly. JusMoto connected me to the right
+                            technicians and resolved it in one go. That expertise matters."
+                        </p>
+                        <h4>Ankit Bansal</h4>
+                        <h6>Sales Director</h6>
+                    </div>
+                    <div class="ltn__testimoni-bg-icon">
+                        <i class="far fa-comments"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 4 -->
+            <div class="col-lg-12">
+                <div class="ltn__testimonial-item ltn__testimonial-item-4">
+                    <div class="ltn__testimoni-img">
+                        <img src="img/testimonial/t-2.png" alt="Ritika Malhotra">
+                    </div>
+                    <div class="ltn__testimoni-info">
+                        <p>
+                            "The convenience of doorstep pickup is a game changer.
+                            I didn’t have to rearrange my meetings or wait at a service
+                            center. My car was returned cleaned, serviced, and on schedule."
+                        </p>
+                        <h4>Ritika Malhotra</h4>
+                        <h6>HR Head</h6>
+                    </div>
+                    <div class="ltn__testimoni-bg-icon">
+                        <i class="far fa-comments"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 5 -->
+            <div class="col-lg-12">
+                <div class="ltn__testimonial-item ltn__testimonial-item-4">
+                    <div class="ltn__testimoni-img">
+                        <img src="img/testimonial/t-3.png" alt="Vivek Sharma">
+                    </div>
+                    <div class="ltn__testimoni-info">
+                        <p>
+                            "What impressed me most was the consistency.
+                            Every interaction — booking, support, servicing —
+                            was smooth and professional. It’s rare to find that
+                            reliability in this industry."
+                        </p>
+                        <h4>Vivek Sharma</h4>
+                        <h6>Operations Manager</h6>
+                    </div>
+                    <div class="ltn__testimoni-bg-icon">
+                        <i class="far fa-comments"></i>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- TESTIMONIAL AREA END -->
+
+
+
+   
+    <!-- FOOTER AREA START -->
+    <footer class="ltn__footer-area">
+        <div class="footer-top-area section-bg-2">
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-3 col-md-6 col-sm-6 col-12">
+                    <!-- Column 1: Logo & About -->
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-6">
                         <div class="footer-widget footer-about-widget">
                             <div class="footer-logo">
                                 <div class="site-logo">
                                     <img src="img/header-logo.png" alt="Logo">
                                 </div>
                             </div>
-                            <p>JustMoto – Your trusted partner for hassle-free car service and maintenance.</p>
+                            <p>JusMoto – Your trusted partner for hassle-free car service and maintenance across the city, delivering reliable, affordable, and professional automotive care every time.</p>
+                        </div>
+                    </div>
+                    <!-- Column 2: Quick Links -->
+                    <div class="col-lg-2 col-md-6 col-sm-6 col-6">
+                        <div class="footer-widget footer-menu-widget clearfix">
+                            <h4 class="footer-title">Quick Links</h4>
+                            <div class="footer-menu">
+                                <ul>
+                                    <li><a href="home.html">Home</a></li>
+                                    <li><a href="about-us.html">About</a></li>
+                                    <li><a href="service.html">Services</a></li>
+                                    <li><a href="products.html">Products</a></li>
+                                    <li><a href="contact-us.html">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column 3: Contact Details -->
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                        <div class="footer-widget footer-address-widget">
+                            <h4 class="footer-title">Get in Touch</h4>
                             <div class="footer-address">
                                 <ul>
                                     <li>
                                         <div class="footer-address-icon">
-                                            <i class="icon-placeholder"></i>
+                                            <i class="fas fa-map-marked-alt"></i>
                                         </div>
-                                        <div class="footer-address-info">
-                                            <p>#12, Murugappa Road, Kotturpuram, Chennai - 600085</p>
-                                        </div>
+                                       <div class="footer-address-info">
+    <p>
+        <a href="https://www.google.com/maps/search/?api=1&query=12+Murugappa+Road+Kotturpuram+Chennai+600085" 
+           target="_blank" 
+           style="text-decoration: none; color: inherit;">
+           12, Murugappa Road, Kotturpuram, <br>
+           Chennai - 600085
+        </a>
+    </p>
+</div>
+
                                     </li>
                                     <li>
                                         <div class="footer-address-icon">
-                                            <i class="icon-call"></i>
+                                            <i class="fas fa-phone-volume"></i>
                                         </div>
                                         <div class="footer-address-info">
                                             <p><a href="tel:+917871787196">+91 7871787196</a></p>
@@ -1360,7 +1576,7 @@ With skilled technicians and reliable support, Jusmoto ensures quality service a
                                     </li>
                                     <li>
                                         <div class="footer-address-icon">
-                                            <i class="icon-mail"></i>
+                                            <i class="fas fa-envelope-open-text"></i>
                                         </div>
                                         <div class="footer-address-info">
                                             <p><a href="mailto:hello@jusmoto.com">hello@jusmoto.com</a></p>
@@ -1368,100 +1584,44 @@ With skilled technicians and reliable support, Jusmoto ensures quality service a
                                     </li>
                                 </ul>
                             </div>
-                            <div class="ltn__social-media mt-20">
-                                <ul>
-                                    <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
-                                    <li><a href="#" title="Youtube"><i class="fab fa-youtube"></i></a></li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
-                    <div class="col-xl-2 col-md-6 col-sm-6 col-12">
-                        <div class="footer-widget footer-menu-widget clearfix">
-                            <h4 class="footer-title">Company</h4>
-                            <div class="footer-menu">
+                    <!-- Column 4: Follow Us -->
+                    <div class="col-lg-2 col-md-6 col-sm-6 col-6">
+                        <div class="footer-widget footer-social-widget">
+                            <h4 class="footer-title">Follow Us</h4>
+                            <div class="ltn__social-media">
                                 <ul>
-                                    <li><a href="about.html">About</a></li>
-                                    <li><a href="blog.html">Blog</a></li>
-                                    <li><a href="shop.html">All Products</a></li>
-                                    <li><a href="locations.html">Locations Map</a></li>
-                                    <li><a href="faq.html">FAQ</a></li>
-                                    <li><a href="contact.html">Contact us</a></li>
+                                    <li><a href="https://www.facebook.com/jusmotoofficial#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="https://x.com/jusmoto1" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                                    
+                                    <li><a href="https://www.instagram.com/p/B9G1oVgppYh/" title="Instagram"><i class="fab fa-instagram"></i></a></li>
                                 </ul>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-6 col-sm-6 col-12">
-                        <div class="footer-widget footer-menu-widget clearfix">
-                            <h4 class="footer-title">Services.</h4>
-                            <div class="footer-menu">
-                                <ul>
-                                    <li><a href="order-tracking.html">Order tracking</a></li>
-                                    <li><a href="wishlist.html">Wish List</a></li>
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="account.html">My account</a></li>
-                                    <li><a href="about.html">Terms & Conditions</a></li>
-                                    <li><a href="about.html">Promotional Offers</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-6 col-sm-6 col-12">
-                        <div class="footer-widget footer-menu-widget clearfix">
-                            <h4 class="footer-title">Customer Care</h4>
-                            <div class="footer-menu">
-                                <ul>
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="account.html">My account</a></li>
-                                    <li><a href="wishlist.html">Wish List</a></li>
-                                    <li><a href="order-tracking.html">Order tracking</a></li>
-                                    <li><a href="faq.html">FAQ</a></li>
-                                    <li><a href="contact.html">Contact us</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6 col-sm-12 col-12">
-                        <div class="footer-widget footer-newsletter-widget">
-                            <h4 class="footer-title">Newsletter</h4>
-                            <p>Subscribe to our weekly Newsletter and receive updates via email.</p>
-                            <div class="footer-newsletter">
-                                <form action="#">
-                                    <input type="email" name="email" placeholder="Email*">
-                                    <div class="btn-wrapper">
-                                        <button class="theme-btn-1 btn" type="submit"><i class="fas fa-location-arrow"></i></button>
-                                    </div>
-                                </form>
-                            </div>
-                            <h5 class="mt-30">We Accept</h5>
-                            <img src="img/icons/payment-4.png" alt="Payment Image">
+                            <p class="mt-20">Connect with us on social media for latest updates and offers.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="ltn__copyright-area ltn__copyright-2 section-bg-2 plr--5">
-            <div class="container-fluid ltn__border-top-2">
-                <div class="row">
-                    <div class="col-md-6 col-12">
-                        <div class="ltn__copyright-design clearfix">
-                            <p>All Rights Reserved @ Company <span class="current-year"></span></p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-12 align-self-center">
-                        <div class="ltn__copyright-menu text-end">
-                            <ul>
-                                <li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="#">Claim</a></li>
-                                <li><a href="#">Privacy & Policy</a></li>
-                            </ul>
-                        </div>
-                    </div>
+       <div class="ltn__copyright-area ltn__copyright-2 section-bg-2 plr--5">
+    <div class="container-fluid ltn__border-top-2">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-12 text-center">
+                <div class="ltn__copyright-design clearfix">
+                    <p>
+                        Developed by 
+                        <a href="https://blackitechs.com/" target="_blank">
+                            Black I Technology and Solutions
+                        </a> 
+                        @ <span class="current-year"></span>
+                    </p>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
     </footer>
     <!-- FOOTER AREA END -->
 

@@ -7706,7 +7706,7 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 
 /* Section Title 2 */
 .ltn__section-title-2 {
-  margin-bottom: 40px; }
+  margin-bottom: 0px; }
   .ltn__section-title-2 .section-subtitle {
     text-transform: uppercase; }
   .ltn__section-title-2 .section-title {
@@ -7719,7 +7719,7 @@ ul.wp-block-latest-posts.is-grid.alignwide {
     border-width: 0 0 0 2px;
     border-style: solid;
     border-color: var(--ltn__secondary-color);
-    max-width: 450px; }
+    max-width: 1200px; }
   .ltn__section-title-2.text-right p {
     padding: 0 30px 0 0;
     border-width: 0 2px 0 0;
@@ -12323,8 +12323,8 @@ input.cart-plus-minus-box {
     Copyright Area
 ---------------------------------------------------- */
 .ltn__copyright-area {
-  padding-top: 30px;
-  padding-bottom: 30px; }
+  padding-top: 0px;
+  padding-bottom: 20px; }
   .ltn__copyright-area .payment-method {
     text-align: right; }
 

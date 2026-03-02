@@ -253,7 +253,7 @@
 
 /* ── Responsive ── */
 @media (max-width: 767px) {
-    .ltn__shop-sidebar-area { margin-bottom: 30px; }
+    .ltn__shop-sidebar-area { margin-bottom: 0px; }
     #shopSearchInput { padding-right: 110px; font-size: 14px; }
 }
 </style>
@@ -490,6 +490,69 @@
 }
 
 
+/* Hide grid icon & showing text on mobile */
+@media (max-width: 767px) {
+
+    .ltn__grid-list-tab-menu {
+        display: none !important;
+    }
+
+    .showing-product-number {
+        display: none !important;
+    }
+
+    /* Make sorting full width */
+    .short-by {
+        width: 100%;
+    }
+
+    .short-by .nice-select {
+        width: 100% !important;
+    }
+}
+/* Center Default Sorting on Mobile */
+@media (max-width: 767px) {
+
+    .ltn__shop-options ul {
+        justify-content: center !important;
+    }
+
+    .short-by {
+        width: auto;
+        text-align: center;
+    }
+
+    .short-by .nice-select {
+        width: 220px !important; /* adjust if needed */
+        margin: 0 auto;
+        display: block;
+    }
+}
+/* Desktop / Tablet Layout Fix */
+.ltn__shop-options ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Remove default spacing issues */
+.ltn__shop-options ul li {
+    margin-bottom: 0 !important;
+}
+
+/* Push sorting to right */
+.short-by {
+    margin-left: auto;
+}
+
+/* Keep dropdown proper width */
+.short-by .nice-select {
+    width: 220px;
+}
+
+
+
+
 
  </style>
 </head>
@@ -514,7 +577,7 @@
                         <div class="ltn__top-bar-menu">
                             <ul>
                                 <li><a href="mailto:hello@jusmoto.com"><i class="fas fa-envelope"></i> hello@jusmoto.com</a></li>
-                                <li><a href="locations.html"><i class="fas fa-map-marker-alt"></i> #12, Murugappa Road, Kotturpuram, Chennai - 600085</a></li>
+                                <li><a href="locations.html"><i class="fas fa-map-marker-alt"></i> 12, Murugappa Road, Kotturpuram, Chennai - 600085</a></li>
                             </ul>
                         </div>
                     </div>
@@ -937,35 +1000,63 @@
     </div>
 </div>
 <!-- PRODUCT DETAILS AREA END -->
-
-
-
-      <!-- FOOTER AREA START -->
-    <footer class="ltn__footer-area  ">
-        <div class="footer-top-area  section-bg-2">
+ 
+  <!-- FOOTER AREA START -->
+    <footer class="ltn__footer-area">
+        <div class="footer-top-area section-bg-2">
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-3 col-md-6 col-sm-6 col-12">
+                    <!-- Column 1: Logo & About -->
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-6">
                         <div class="footer-widget footer-about-widget">
                             <div class="footer-logo">
                                 <div class="site-logo">
                                     <img src="img/header-logo.png" alt="Logo">
                                 </div>
                             </div>
-                            <p>JustMoto – Your trusted partner for hassle-free car service and maintenance.</p>
+                            <p>JusMoto – Your trusted partner for hassle-free car service and maintenance across the city, delivering reliable, affordable, and professional automotive care every time.</p>
+                        </div>
+                    </div>
+                    <!-- Column 2: Quick Links -->
+                    <div class="col-lg-2 col-md-6 col-sm-6 col-6">
+                        <div class="footer-widget footer-menu-widget clearfix">
+                            <h4 class="footer-title">Quick Links</h4>
+                            <div class="footer-menu">
+                                <ul>
+                                    <li><a href="home.html">Home</a></li>
+                                    <li><a href="about-us.html">About</a></li>
+                                    <li><a href="service.html">Services</a></li>
+                                    <li><a href="products.html">Products</a></li>
+                                    <li><a href="contact-us.html">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column 3: Contact Details -->
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                        <div class="footer-widget footer-address-widget">
+                            <h4 class="footer-title">Get in Touch</h4>
                             <div class="footer-address">
                                 <ul>
                                     <li>
                                         <div class="footer-address-icon">
-                                            <i class="icon-placeholder"></i>
+                                            <i class="fas fa-map-marked-alt"></i>
                                         </div>
-                                        <div class="footer-address-info">
-                                            <p>#12, Murugappa Road, Kotturpuram, Chennai - 600085</p>
-                                        </div>
+                                       <div class="footer-address-info">
+    <p>
+        <a href="https://www.google.com/maps/search/?api=1&query=12+Murugappa+Road+Kotturpuram+Chennai+600085" 
+           target="_blank" 
+           style="text-decoration: none; color: inherit;">
+           12, Murugappa Road, Kotturpuram, <br>
+           Chennai - 600085
+        </a>
+    </p>
+</div>
+
                                     </li>
                                     <li>
                                         <div class="footer-address-icon">
-                                            <i class="icon-call"></i>
+                                            <i class="fas fa-phone-volume"></i>
                                         </div>
                                         <div class="footer-address-info">
                                             <p><a href="tel:+917871787196">+91 7871787196</a></p>
@@ -973,7 +1064,7 @@
                                     </li>
                                     <li>
                                         <div class="footer-address-icon">
-                                            <i class="icon-mail"></i>
+                                            <i class="fas fa-envelope-open-text"></i>
                                         </div>
                                         <div class="footer-address-info">
                                             <p><a href="mailto:hello@jusmoto.com">hello@jusmoto.com</a></p>
@@ -981,100 +1072,44 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="ltn__social-media mt-20">
-                                <ul>
-                                    <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
-                                    <li><a href="#" title="Youtube"><i class="fab fa-youtube"></i></a></li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
-                    <div class="col-xl-2 col-md-6 col-sm-6 col-12">
-                        <div class="footer-widget footer-menu-widget clearfix">
-                            <h4 class="footer-title">Company</h4>
-                            <div class="footer-menu">
+                    <!-- Column 4: Follow Us -->
+                    <div class="col-lg-2 col-md-6 col-sm-6 col-6">
+                        <div class="footer-widget footer-social-widget">
+                            <h4 class="footer-title">Follow Us</h4>
+                            <div class="ltn__social-media">
                                 <ul>
-                                    <li><a href="about.html">About</a></li>
-                                    <li><a href="blog.html">Blog</a></li>
-                                    <li><a href="shop.html">All Products</a></li>
-                                    <li><a href="locations.html">Locations Map</a></li>
-                                    <li><a href="faq.html">FAQ</a></li>
-                                    <li><a href="contact.html">Contact us</a></li>
+                                    <li><a href="https://www.facebook.com/jusmotoofficial#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="https://x.com/jusmoto1" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                                    
+                                    <li><a href="https://www.instagram.com/p/B9G1oVgppYh/" title="Instagram"><i class="fab fa-instagram"></i></a></li>
                                 </ul>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-6 col-sm-6 col-12">
-                        <div class="footer-widget footer-menu-widget clearfix">
-                            <h4 class="footer-title">Services.</h4>
-                            <div class="footer-menu">
-                                <ul>
-                                    <li><a href="order-tracking.html">Order tracking</a></li>
-                                    <li><a href="product-wishlist.html">Wish List</a></li>
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="account.html">My account</a></li>
-                                    <li><a href="about.html">Terms & Conditions</a></li>
-                                    <li><a href="about.html">Promotional Offers</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-6 col-sm-6 col-12">
-                        <div class="footer-widget footer-menu-widget clearfix">
-                            <h4 class="footer-title">Customer Care</h4>
-                            <div class="footer-menu">
-                                <ul>
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="account.html">My account</a></li>
-                                    <li><a href="product-wishlist.html">Wish List</a></li>
-                                    <li><a href="order-tracking.html">Order tracking</a></li>
-                                    <li><a href="faq.html">FAQ</a></li>
-                                    <li><a href="contact.html">Contact us</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6 col-sm-12 col-12">
-                        <div class="footer-widget footer-newsletter-widget">
-                            <h4 class="footer-title">Newsletter</h4>
-                            <p>Subscribe to our weekly Newsletter and receive updates via email.</p>
-                            <div class="footer-newsletter">
-                                <form action="#">
-                                    <input type="email" name="email" placeholder="Email*">
-                                    <div class="btn-wrapper">
-                                        <button class="theme-btn-1 btn" type="submit"><i class="fas fa-location-arrow"></i></button>
-                                    </div>
-                                </form>
-                            </div>
-                            <h5 class="mt-30">We Accept</h5>
-                            <img src="img/icons/payment-4.png" alt="Payment Image">
+                            <p class="mt-20">Connect with us on social media for latest updates and offers.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="ltn__copyright-area ltn__copyright-2 section-bg-2 plr--5">
-            <div class="container-fluid ltn__border-top-2">
-                <div class="row">
-                    <div class="col-md-6 col-12">
-                        <div class="ltn__copyright-design clearfix">
-                            <p>All Rights Reserved @ Company <span class="current-year"></span></p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-12 align-self-center">
-                        <div class="ltn__copyright-menu text-end">
-                            <ul>
-                                <li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="#">Claim</a></li>
-                                <li><a href="#">Privacy & Policy</a></li>
-                            </ul>
-                        </div>
-                    </div>
+       <div class="ltn__copyright-area ltn__copyright-2 section-bg-2 plr--5">
+    <div class="container-fluid ltn__border-top-2">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-12 text-center">
+                <div class="ltn__copyright-design clearfix">
+                    <p>
+                        Developed by 
+                        <a href="https://blackitechs.com/" target="_blank">
+                            Black I Technology and Solutions
+                        </a> 
+                        @ <span class="current-year"></span>
+                    </p>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
     </footer>
     <!-- FOOTER AREA END -->
 
@@ -1248,7 +1283,7 @@
                                             <h5><a href="product-details.html">Brake Conversion Kit</a></h5>
                                             <p class="added-cart"><i class="fa fa-check-circle"></i>  Successfully added to your Wishlist</p>
                                             <div class="btn-wrapper">
-                                                <a href="wishlist.html" class="theme-btn-1 btn btn-effect-1">View Wishlist</a>
+                                                <a href="product-wishlist.html" class="theme-btn-1 btn btn-effect-1">View Wishlist</a>
                                             </div>
                                          </div>
                                          <!-- additional-info -->

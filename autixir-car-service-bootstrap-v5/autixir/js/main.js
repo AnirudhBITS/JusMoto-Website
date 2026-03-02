@@ -1552,67 +1552,126 @@
         }
     }
 
-    function renderServices(services) {
-        const container = $('#services-container');
-        const layoutStyle = container.data('layout') || 'style-1';
-        let html = '';
-        
-        services.forEach(service => {
-            const currentPrice = service.discountPrice || service.discount_price;
-            const originalPrice = service.price || service.original_price;
-            
-            let priceHtml = '';
-            if (currentPrice && originalPrice) {
-                priceHtml = `<span>₹${currentPrice}</span> <del>₹${originalPrice}</del>`;
-            } else {
-                priceHtml = `<span>₹${currentPrice || originalPrice}</span>`;
-            }
+  function renderServices(services) {
+    var track = document.getElementById('services-container');
+    if (!track) return;
 
-            const categoryName = (service.category && typeof service.category === 'object') 
-                ? service.category.name 
-                : (service.category || '');
+    var loading = document.getElementById('services-loading');
+    var error   = document.getElementById('services-error');
+    if (loading) loading.style.display = 'none';
+    if (error)   error.style.display   = 'none';
 
-            if (layoutStyle === 'style-2') {
-                // Style used in service.html
-                html += `
-                    <div class="col-lg-4 col-md-6">
-                        <div class="ltn__service-item-2 white-bg">
-                            <div class="service-item-icon">
-                                <img src="${service.image || 'img/slider/slider-banner-service-1.jpg'}" alt="${service.title}">
-                            </div>
-                            <div class="service-item-brief">
-                                ${categoryName ? `<h6 class="ltn__secondary-color">${categoryName}</h6>` : ''}
-                                <h3><a href="service_details.html?id=${service.id}">${service.title}</a></h3>
-                                <ul>
-                                    <li> ${service.description ? service.description.substring(0, 50) + '...' : 'Professional Care'}</li>
-                                    <li> ${priceHtml}</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            } else {
-                // Default style used in home.html — mirrors testimonial card layout
-                html += `
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <div class="ltn__service-item-1">
-                            <div class="service-item-img">
-                                <img src="${service.image || 'img/slider/slider-banner-service-1.jpg'}" alt="${service.title}">
-                            </div>
-                            <div class="service-item-brief">
-                                <h3><a href="service_details.html?id=${service.id}">${service.title}</a></h3>
-                                <p>${service.description}</p>
-                                <div class="product-price">
-                                    ${priceHtml}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-        });
-        container.html(html);
+    var totalSlides = services.length;
+    var vc          = getVisible(); /* from your existing carousel JS */
+
+    var realHTML  = '';
+    var leadHTML  = '';
+    var trailHTML = '';
+
+    for (var i = 0; i < services.length; i++) {
+        var s             = services[i];
+        var num           = (i + 1) < 10 ? '0' + (i + 1) : '' + (i + 1);
+        var img           = s.image || 'img/slider/slider-banner-service-1.jpg';
+        var desc          = s.description || '';
+        if (desc.length > 130) desc = desc.substring(0, 130) + '…';
+
+        var currentPrice  = s.discountPrice || s.discount_price || '';
+        var originalPrice = s.price         || s.original_price || '';
+
+        var priceHtml = '';
+        if (currentPrice && originalPrice) {
+            priceHtml = '<div class="svc-price"><span class="svc-price-now">&#8377;' + currentPrice + '</span>' +
+                        '<del class="svc-price-old">&#8377;' + originalPrice + '</del></div>';
+        } else if (currentPrice || originalPrice) {
+            priceHtml = '<div class="svc-price"><span class="svc-price-now">&#8377;' + (currentPrice || originalPrice) + '</span></div>';
+        }
+
+        var card = '<div class="ltn__service-item-1">' +
+                       '<div class="svc-img-wrap">' +
+                           '<img src="' + img + '" alt="' + s.title + '" loading="lazy">' +
+                       '</div>' +
+                       '<div class="svc-body">' +
+                           '<div class="svc-header">' +
+                               '<h3><a href="service_details.html?id=' + s.id + '">' + s.title + '</a></h3>' +
+                               '<span class="svc-num">' + num + '</span>' +
+                           '</div>' +
+                           '<p>' + desc + '</p>' +
+                           priceHtml +
+                       '</div>' +
+                   '</div>';
+
+        realHTML += '<div class="service-carousel-slide">' + card + '</div>';
     }
+
+    /* leading clones = last vc slides */
+    for (var l = services.length - vc; l < services.length; l++) {
+        var ln  = (l + 1) < 10 ? '0' + (l + 1) : '' + (l + 1);
+        var ls  = services[l];
+        var li  = ls.image || 'img/slider/slider-banner-service-1.jpg';
+        var ld  = ls.description || '';
+        if (ld.length > 130) ld = ld.substring(0, 130) + '…';
+        var lcp = ls.discountPrice || ls.discount_price || '';
+        var lop = ls.price         || ls.original_price || '';
+        var lph = '';
+        if (lcp && lop) lph = '<div class="svc-price"><span class="svc-price-now">&#8377;' + lcp + '</span><del class="svc-price-old">&#8377;' + lop + '</del></div>';
+        else if (lcp || lop) lph = '<div class="svc-price"><span class="svc-price-now">&#8377;' + (lcp || lop) + '</span></div>';
+        leadHTML += '<div class="service-carousel-slide clone">' +
+                        '<div class="ltn__service-item-1">' +
+                            '<div class="svc-img-wrap"><img src="' + li + '" alt="' + ls.title + '" loading="lazy"></div>' +
+                            '<div class="svc-body"><div class="svc-header"><h3><a href="service_details.html?id=' + ls.id + '">' + ls.title + '</a></h3><span class="svc-num">' + ln + '</span></div><p>' + ld + '</p>' + lph + '</div>' +
+                        '</div>' +
+                    '</div>';
+    }
+
+    /* trailing clones = first vc slides */
+    for (var t = 0; t < vc; t++) {
+        var tn  = (t + 1) < 10 ? '0' + (t + 1) : '' + (t + 1);
+        var ts  = services[t];
+        var ti  = ts.image || 'img/slider/slider-banner-service-1.jpg';
+        var td  = ts.description || '';
+        if (td.length > 130) td = td.substring(0, 130) + '…';
+        var tcp = ts.discountPrice || ts.discount_price || '';
+        var top = ts.price         || ts.original_price || '';
+        var tph = '';
+        if (tcp && top) tph = '<div class="svc-price"><span class="svc-price-now">&#8377;' + tcp + '</span><del class="svc-price-old">&#8377;' + top + '</del></div>';
+        else if (tcp || top) tph = '<div class="svc-price"><span class="svc-price-now">&#8377;' + (tcp || top) + '</span></div>';
+        trailHTML += '<div class="service-carousel-slide clone">' +
+                         '<div class="ltn__service-item-1">' +
+                             '<div class="svc-img-wrap"><img src="' + ti + '" alt="' + ts.title + '" loading="lazy"></div>' +
+                             '<div class="svc-body"><div class="svc-header"><h3><a href="service_details.html?id=' + ts.id + '">' + ts.title + '</a></h3><span class="svc-num">' + tn + '</span></div><p>' + td + '</p>' + tph + '</div>' +
+                         '</div>' +
+                     '</div>';
+    }
+
+    track.innerHTML = leadHTML + realHTML + trailHTML;
+
+    /* set slide widths in px */
+    var vp = document.getElementById('serviceViewport') || track.parentElement;
+    var sw = vp.offsetWidth / vc;
+    var slides = document.querySelectorAll('.service-carousel-slide');
+    for (var x = 0; x < slides.length; x++) {
+        slides[x].style.width = sw + 'px';
+    }
+
+    /* position at first real slide */
+    track.style.transition = 'none';
+    track.style.transform  = 'translateX(-' + (vc * sw) + 'px)';
+
+    /* re-init dots and auto if your carousel exposes these */
+    if (typeof makeDots   === 'function') makeDots(totalSlides);
+    if (typeof startAuto  === 'function') startAuto();
+    if (typeof buildDots  === 'function') buildDots(totalSlides);
+    if (typeof initSlider === 'function') initSlider();
+}
+
+function getVisible() {
+    var w = window.innerWidth;
+    if (w <= 480) return 1;
+    if (w <= 767) return 2;
+    return 3;
+}
+
+
 
     /* --------------------------------------------------------
         Dynamic Products Fetching (Car Best Deals)
@@ -2926,27 +2985,74 @@ function renderCheckoutSummary() {
 }
 
 /* ── Wishlist Page ── */
+/* ── Wishlist Page ── */
 function loadWishlistPage() {
     var wishlist  = getWishlist();
     var tableBody = document.getElementById('wishlistTableBody');
     if (!tableBody) return;
+
     tableBody.innerHTML = '';
+
     if (wishlist.length === 0) {
-        tableBody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:40px;">💔 Your wishlist is empty.</td></tr>';
+        tableBody.innerHTML =
+            '<tr>' +
+                '<td colspan="5">' +
+                    '<div class="wishlist-empty-wrapper">' +
+                        '<div class="wishlist-empty-state">' +
+                            '<div class="empty-icon"><i class="far fa-heart"></i></div>' +
+                            '<h3>Your Wishlist is Empty</h3>' +
+                            '<p>Looks like you haven\'t added anything yet.</p>' +
+                            '<a href="products.html" class="theme-btn-1 btn btn-effect-1 mt-3">Continue Shopping</a>' +
+                        '</div>' +
+                    '</div>' +
+                '</td>' +
+            '</tr>';
         return;
     }
+
     wishlist.forEach(function(item, index) {
+
         tableBody.innerHTML +=
             '<tr>' +
-                '<td class="cart-product-remove"><span onclick="removeFromWishlist(' + index + ')" style="cursor:pointer;">x</span></td>' +
-                '<td class="cart-product-image"><a href="product-details.html?id=' + (item.slug || item.id) + '"><img src="' + item.image + '" alt="' + item.title + '"></a></td>' +
-                '<td class="cart-product-info"><h4><a href="product-details.html?id=' + (item.slug || item.id) + '">' + item.title + '</a></h4></td>' +
+
+                /* 🔢 Serial Number — hidden on mobile via CSS */
+                '<td class="cart-serial">' + (index + 1) + '</td>' +
+
+                /* 🖼 Product Image */
+                '<td class="cart-product-image">' +
+                    '<a href="product-details.html?id=' + (item.slug || item.id) + '">' +
+                        '<img src="' + item.image + '" alt="' + item.title + '" width="70">' +
+                    '</a>' +
+                '</td>' +
+
+                /* 📦 Product Title */
+                '<td class="cart-product-info">' +
+                    '<h4>' +
+                        '<a href="product-details.html?id=' + (item.slug || item.id) + '">' +
+                            item.title +
+                        '</a>' +
+                    '</h4>' +
+                '</td>' +
+
+                /* 💰 Price */
                 '<td class="cart-product-price">₹' + item.price.toFixed(2) + '</td>' +
-                '<td class="cart-product-stock">In Stock</td>' +
-                '<td class="cart-product-add-cart"><a class="submit-button-1" href="#" onclick="moveToCart(' + index + '); return false;">Add to Cart</a></td>' +
+
+                /* 🗑 Delete + Add to Cart */
+                '<td class="cart-product-actions">' +
+
+                    '<a class="submit-button-1" href="#" onclick="moveToCart(' + index + '); return false;">Add to Cart</a>' +
+
+                    '<button onclick="removeFromWishlist(' + index + ')" ' +
+                        'style="background:none;border:none;color:#ff3b3b;font-size:18px;cursor:pointer;">' +
+                        '<i class="fas fa-trash"></i>' +
+                    '</button>' +
+
+                '</td>' +
+
             '</tr>';
     });
 }
+
 
 function removeFromWishlist(index) {
     var wishlist = getWishlist();
