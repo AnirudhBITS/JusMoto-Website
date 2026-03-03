@@ -1963,7 +1963,7 @@ async function fetchShopProducts(page, sortBy) {
 
     try {
         var url = API_BASE + '/services?type=1&page=' + page;
-        var response = await fetch(url, { credentials: 'include' });
+        var response = await fetch(url);
         if (!response.ok) throw new Error('API Error: ' + response.status);
 
         var data = await response.json();
@@ -2214,7 +2214,7 @@ async function fetchProductDetails() {
     showProductLoading(true);
 
     try {
-        var response = await fetch(API_BASE + '/services/' + identifier, { credentials: 'include' });
+        var response = await fetch(API_BASE + '/services/' + identifier);
         if (!response.ok) throw new Error('API Error: ' + response.status);
 
         var data = await response.json();
@@ -3073,9 +3073,9 @@ function renderCheckoutSummary() {
 
 function loadWishlistPage() {
 
-    var wishlist  = getWishlist();
+    var wishlist = getWishlist();
     var tableBody = document.getElementById('wishlistTableBody');
-    var grid      = document.getElementById('wishlistGrid');
+    var grid = document.getElementById('wishlistGrid');
 
     if (!tableBody) return;
 
@@ -3123,7 +3123,7 @@ function loadWishlistPage() {
 
     /* ================= RENDER PRODUCTS ================= */
 
-    wishlist.forEach(function(item, index) {
+    wishlist.forEach(function (item, index) {
 
         var productLink = "product-details.html?id=" + (item.slug || item.id);
 
@@ -3239,10 +3239,10 @@ function removeFromWishlist(index) {
 function moveToCart(index) {
 
     var wishlist = getWishlist();
-    var product  = wishlist[index];
-    var cart     = getCart();
+    var product = wishlist[index];
+    var cart = getCart();
 
-    var existing = cart.find(function(i) {
+    var existing = cart.find(function (i) {
         return i.id === product.id;
     });
 
@@ -3428,7 +3428,7 @@ async function initShopPage() {
     showShopLoading(true);
 
     try {
-        var res = await fetch(API_PRODUCTS_URL, { credentials: 'include' });
+        var res = await fetch(API_PRODUCTS_URL);
         var json = await res.json();
         allShopProducts = Array.isArray(json.data) ? json.data : [];
 
