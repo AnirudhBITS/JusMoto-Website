@@ -248,23 +248,31 @@
         /* ---------------------------------------------------------
             9. Tooltip
         --------------------------------------------------------- */
-        $('[data-toggle="tooltip"]').tooltip();
+        if (typeof $.fn.tooltip === 'function') {
+            $('[data-toggle="tooltip"]').tooltip();
+        } else if (typeof bootstrap !== 'undefined' && bootstrap.Tooltip) {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+        }
 
 
         /* --------------------------------------------------------
             10. Nice Select
         --------------------------------------------------------- */
-        $('select').niceSelect();
+        if (typeof $.fn.niceSelect === 'function') {
+            $('select').niceSelect();
+        }
 
         /* ---------------------------------------------------------
             datepicker
         --------------------------------------------------------- */
-
-        $('.ltn__datepicker .input-group.date').datepicker({
-            format: 'mm/dd/yyyy',
-            /* format: 'mm/dd/yyyy', */
-            /* format: 'yyyy/dd/mm', */
-        });
+        if (typeof $.fn.datepicker === 'function') {
+            $('.ltn__datepicker .input-group.date').datepicker({
+                format: 'mm/dd/yyyy',
+            });
+        }
 
 
         /* --------------------------------------------------------
@@ -1895,6 +1903,10 @@
         fetchProducts();
     }
 
+    // Expose for external calls
+    window.fetchServices = fetchServices;
+    window.fetchProducts = fetchProducts;
+
 })(jQuery);
 
 
@@ -1951,7 +1963,7 @@ async function fetchShopProducts(page, sortBy) {
 
     try {
         var url = API_BASE + '/services?type=1&page=' + page;
-        var response = await fetch(url);
+        var response = await fetch(url, { credentials: 'include' });
         if (!response.ok) throw new Error('API Error: ' + response.status);
 
         var data = await response.json();
@@ -2202,7 +2214,7 @@ async function fetchProductDetails() {
     showProductLoading(true);
 
     try {
-        var response = await fetch(API_BASE + '/services/' + identifier);
+        var response = await fetch(API_BASE + '/services/' + identifier, { credentials: 'include' });
         if (!response.ok) throw new Error('API Error: ' + response.status);
 
         var data = await response.json();
@@ -2681,7 +2693,7 @@ async function fetchRelatedProducts(categoryId, currentId) {
         '<p class="mt-15">Loading related products...</p></div>';
 
     try {
-        var relRes = await fetch(API_BASE + '/services?type=1&category_id=' + categoryId);
+        var relRes = await fetch(API_BASE + '/services?type=1&category_id=' + categoryId, { credentials: 'include' });
         if (!relRes.ok) throw new Error('API Error: ' + relRes.status);
 
         var relData = await relRes.json();
@@ -2846,10 +2858,11 @@ function loadMiniCart() {
         var subtotal = 0;
         cart.forEach(function (item, index) {
             subtotal += item.price * item.quantity;
+            var detailsPage = (item.type == 1 || item.category_id == 1) ? 'service_details.html' : 'product-details.html';
             container.innerHTML +=
                 '<div class="mini-cart-item clearfix">' +
                 '<div class="mini-cart-img">' +
-                '<a href="product-details.html?id=' + (item.slug || item.id) + '"><img src="' + item.image + '" alt="' + item.title + '"></a>' +
+                '<a href="' + detailsPage + '?id=' + (item.slug || item.id) + '"><img src="' + item.image + '" alt="' + item.title + '"></a>' +
                 '<span class="mini-cart-item-delete" onclick="removeFromCart(' + index + ')" style="cursor:pointer;"><i class="icon-cancel"></i></span>' +
                 '</div>' +
                 '<div class="mini-cart-info"><h6>' + item.title + '</h6>' +
@@ -2887,7 +2900,7 @@ window.removeFromCart = function (index) {
 /* ── Fetch product then add (shop/related/home cards) ── */
 async function fetchAndActOnProduct(idOrSlug, action) {
     try {
-        var res = await fetch(API_BASE + '/services/' + idOrSlug);
+        var res = await fetch(API_BASE + '/services/' + idOrSlug, { credentials: 'include' });
         if (!res.ok) throw new Error('API Error');
         var data = await res.json();
         var product = data.data || data;
@@ -3304,7 +3317,7 @@ async function initShopPage() {
     showShopLoading(true);
 
     try {
-        var res = await fetch(API_PRODUCTS_URL);
+        var res = await fetch(API_PRODUCTS_URL, { credentials: 'include' });
         var json = await res.json();
         allShopProducts = Array.isArray(json.data) ? json.data : [];
 
