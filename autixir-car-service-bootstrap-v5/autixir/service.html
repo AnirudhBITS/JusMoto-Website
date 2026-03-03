@@ -161,6 +161,7 @@
         }
 
         @media (max-width: 767px) {
+<<<<<<< HEAD
     .ab3-btn {
         display: block;
         margin: 0 auto;
@@ -178,12 +179,33 @@
   
   
 }
+=======
+            .ab3-btn {
+                display: block;
+                margin: 0 auto;
+                text-align: center;
+            }
+>>>>>>> car-04
 
-.about-btn-wrap .ab3-btn {
-    display: inline-block;
-    width: auto !important;
-    padding: 12px 40px;
-}
+            .about-btn-wrap {
+                text-align: left;
+                margin-top: 30px;
+
+            }
+        }
+
+        .about-btn-wrap {
+            text-align: left;
+            margin-top: 30px;
+            margin-left: 30px;
+
+        }
+
+        .about-btn-wrap .ab3-btn {
+            display: inline-block;
+            width: auto !important;
+            padding: 12px 40px;
+        }
 
         /* Unify product card heights in Car Best Deals section */
         .ltn__product-item-3 {
@@ -482,566 +504,626 @@
                 padding-top: 180px !important;
             }
         }
-/* =========================================
+
+        /* =========================================
    CTA SERVICE FORM - FINAL CLEAN VERSION
 ========================================= */
 
-/* Tablet & below */
-@media (max-width: 991px) {
+        /* Tablet & below */
+        @media (max-width: 991px) {
 
-    .ltn__service-form-wrap-area {
-        padding: 60px 15px;
-    }
+            .ltn__service-form-wrap-area {
+                padding: 60px 15px;
+            }
 
-    .ltn__service-form-1 .ltn__service-form-brief,
-    .ltn__service-form-1 .section-title,
-    .ltn__service-form-1 .section-subtitle {
-        text-align: center;
-    }
+            .ltn__service-form-1 .ltn__service-form-brief,
+            .ltn__service-form-1 .section-title,
+            .ltn__service-form-1 .section-subtitle {
+                text-align: center;
+            }
 
-    /* Make form horizontal (2 column layout) */
-    .ltn__service-form-box ul {
-        display: flex !important;
-        flex-wrap: wrap;
-        gap: 12px;
-        padding: 0;
-        margin: 0;
-    }
+            /* Make form horizontal (2 column layout) */
+            .ltn__service-form-box ul {
+                display: flex !important;
+                flex-wrap: wrap;
+                gap: 12px;
+                padding: 0;
+                margin: 0;
+            }
 
-    /* Service + Date = 50% each */
-    .ltn__service-form-box ul li:nth-child(1),
-    .ltn__service-form-box ul li:nth-child(2) {
-        width: calc(100% - 6px) !important;
-    }
-    /* =========================================
+            /* Service + Date = 50% each */
+            .ltn__service-form-box ul li:nth-child(1),
+            .ltn__service-form-box ul li:nth-child(2) {
+                width: calc(100% - 6px) !important;
+            }
+
+            /* =========================================
    CTA SERVICE FORM - FINAL WORKING FIX
 ========================================= */
 
-@media (max-width: 768px) {
+            @media (max-width: 768px) {
 
-    /* Force flex layout */
-    .ltn__service-form-wrap .ltn__service-form-box ul {
-        display: flex !important;
-        flex-wrap: wrap !important;
-        gap: 12px !important;
-    }
+                /* Force flex layout */
+                .ltn__service-form-wrap .ltn__service-form-box ul {
+                    display: flex !important;
+                    flex-wrap: wrap !important;
+                    gap: 12px !important;
+                }
 
-    /* Force 50% width (strong override) */
-    .ltn__service-form-wrap .ltn__service-form-box ul > li:nth-child(1),
-    .ltn__service-form-wrap .ltn__service-form-box ul > li:nth-child(2) {
-        width: 100% !important;
-        flex: 0 0 50% !important;
-        max-width: 100% !important;
-    }
+                /* Force 50% width (strong override) */
+                .ltn__service-form-wrap .ltn__service-form-box ul>li:nth-child(1),
+                .ltn__service-form-wrap .ltn__service-form-box ul>li:nth-child(2) {
+                    width: 100% !important;
+                    flex: 0 0 50% !important;
+                    max-width: 100% !important;
+                }
 
-    /* Button full width */
-    .ltn__service-form-wrap .ltn__service-form-box ul > li:nth-child(3) {
-        width: 100% !important;
-        flex: 0 0 100% !important;
-        max-width: 100% !important;
-    }
+                /* Button full width */
+                .ltn__service-form-wrap .ltn__service-form-box ul>li:nth-child(3) {
+                    width: 100% !important;
+                    flex: 0 0 100% !important;
+                    max-width: 100% !important;
+                }
 
-    /* Nice Select width fix */
-    .ltn__service-form-box .nice-select {
-        width: 100% !important;
-    }
+                /* Nice Select width fix */
+                .ltn__service-form-box .nice-select {
+                    width: 100% !important;
+                }
 
-    /* 🔥 CRITICAL FIX - Dropdown width */
-    .ltn__service-form-box .nice-select .list {
-        width: 100% !important;
-        min-width: 100% !important;
-        left: 0 !important;
-    }
+                /* 🔥 CRITICAL FIX - Dropdown width */
+                .ltn__service-form-box .nice-select .list {
+                    width: 100% !important;
+                    min-width: 100% !important;
+                    left: 0 !important;
+                }
 
-    /* Calendar input fix */
-    .ltn__service-form-box .input-group {
-        width: 100% !important;
-        position: relative;
-    }
+                /* Calendar input fix */
+                .ltn__service-form-box .input-group {
+                    width: 100% !important;
+                    position: relative;
+                }
 
-    .ltn__service-form-box .form-control {
-        width: 100% !important;
-        padding-right: 40px !important;
-    }
+                .ltn__service-form-box .form-control {
+                    width: 100% !important;
+                    padding-right: 40px !important;
+                }
 
-    .ltn__service-form-box .input-group-addon {
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        background: transparent;
-        border: none;
-        pointer-events: none;
-    }
+                .ltn__service-form-box .input-group-addon {
+                    position: absolute;
+                    right: 10px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    background: transparent;
+                    border: none;
+                    pointer-events: none;
+                }
 
-    /* Button full width */
-    .ltn__service-form-box .btn {
-        width: 100% !important;
-    }
-}
-
-
-    /* Button full width */
-    .ltn__service-form-box ul li:nth-child(3) {
-        width: 100% !important;
-    }
-
-    /* Ensure inputs full width */
-    .ltn__service-form-box .nice-select,
-    .ltn__service-form-box .form-control,
-    .ltn__service-form-box .input-group {
-        width: 100% !important;
-    }
-
-    /* ===== FIX CALENDAR ICON OVERLAP ===== */
-
-    .ltn__service-form-box .input-group {
-        position: relative;
-    }
-
-    .ltn__service-form-box .input-group .form-control {
-        padding-right: 45px !important; /* space for icon */
-    }
-
-    .ltn__service-form-box .input-group-addon {
-        position: absolute;
-        right: 12px;
-        top: 50%;
-        transform: translateY(-50%);
-        background: transparent;
-        border: none;
-        z-index: 2;
-    }
-
-    /* Button styling */
-    .ltn__service-form-box .btn {
-        width: 100% !important;
-        display: block;
-        text-align: center;
-    }
-}
+                /* Button full width */
+                .ltn__service-form-box .btn {
+                    width: 100% !important;
+                }
+            }
 
 
-/* Small Mobile */
-@media (max-width: 480px) {
+            /* Button full width */
+            .ltn__service-form-box ul li:nth-child(3) {
+                width: 100% !important;
+            }
 
-    .ltn__service-form-wrap-area {
-        padding: 40px 15px;
-    }
+            /* Ensure inputs full width */
+            .ltn__service-form-box .nice-select,
+            .ltn__service-form-box .form-control,
+            .ltn__service-form-box .input-group {
+                width: 100% !important;
+            }
 
-    .ltn__service-form-1 .section-title {
-        font-size: 22px;
-        line-height: 1.2;
-    }
+            /* ===== FIX CALENDAR ICON OVERLAP ===== */
 
-    .ltn__service-form-1 .section-subtitle {
-        font-size: 13px;
-    }
-}
+            .ltn__service-form-box .input-group {
+                position: relative;
+            }
 
+            .ltn__service-form-box .input-group .form-control {
+                padding-right: 45px !important;
+                /* space for icon */
+            }
 
-        
-/* View All Button */
-.service-btn-wrap {
-    text-align: center;
-    margin-top: 0px;
-}
-.btn-view-all {
-    display: inline-flex;
-    align-items:left;
-    gap: 10px;
-    padding: 14px 35px;
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    white-space: nowrap;
-    background-color: var(--ltn__secondary-color, #e53935);
-    color: #fff !important;
-    border: 2px solid var(--ltn__secondary-color, #e53935);
-    border-radius: 0;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
+            .ltn__service-form-box .input-group-addon {
+                position: absolute;
+                right: 12px;
+                top: 50%;
+                transform: translateY(-50%);
+                background: transparent;
+                border: none;
+                z-index: 2;
+            }
 
-.btn-view-all:hover {
-    background-color: transparent;
-    color: var(--ltn__secondary-color, #e53935) !important;
-}
-
-.btn-view-all svg {
-    transition: transform 0.3s ease;
-}
-
-.btn-view-all:hover svg {
-   
-    transform: translateX(5px);
-}
-
-/* Carousel wrapper */
-.service-carousel-outer {
-    display: flex;
-    align-items: center;
-}
-
-/* Viewport */
-.service-carousel-viewport {
-    overflow: hidden;
-    flex: 1;
-    min-width: 0;
-}
-
-/* Track — NO transition here, JS handles it */
-.service-carousel-track {
-    display: flex;
-    align-items: stretch;
-    will-change: transform;
-}
-
-/* Slides — width set by JS in px, no flex percentage */
-.service-carousel-slide {
-    flex-shrink: 0;
-    padding: 0 10px;
-    box-sizing: border-box;
-}
-
-/* Card */
-.ltn__service-item-1 {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    border-radius: 10px;
-    overflow: hidden;
-    background: transparent;
-}
-
-/* Image */
-.service-item-img {
-    width: 100%;
-    overflow: hidden;
-    flex-shrink: 0;
-}
-.service-item-img img {
-    width: 100%;
-    height: 260px;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.45s ease;
-}
-.ltn__service-item-1:hover .service-item-img img {
-    transform: scale(1.05);
-}
-
-/* White body */
-.service-item-brief {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--white);
-    padding: 22px 22px 24px;
-    border-radius: 0 0 10px 10px;
-    box-shadow: var(--ltn__box-shadow-4, 0 4px 20px rgba(0,0,0,0.08));
-}
-
-/* Number + Title row */
-.service-item-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 12px;
-}
-.service-item-brief h3 {
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 1.3;
-    margin: 0;
-    flex: 1;
-}
-.service-item-brief h3 a {
-    color: var(--ltn__secondary-color);
-    text-decoration: none;
-}
-.service-item-brief h3 a:hover { opacity: 0.85; }
-.service-item-number {
-    font-size: 32px;
-    font-weight: 800;
-    line-height: 1;
-    color: var(--ltn__secondary-color);
-    margin-left: 10px;
-    flex-shrink: 0;
-}
-
-/* Description */
-.service-item-brief p {
-    font-size: 14px;
-    line-height: 1.65;
-    color: var(--ltn__paragraph-color);
-    margin: 0 0 10px;
-    flex: 1;
-}
-
-/* Price */
-.product-price {
-    margin-top: auto;
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--ltn__secondary-color);
-}
-.product-price del {
-    font-size: 14px;
-    margin-left: 8px;
-    opacity: 0.75;
-}
-
-/* Nav buttons */
-.service-nav-btn {
-    flex-shrink: 0;
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    border: 2px solid var(--ltn__secondary-color);
-    background: var(--ltn__secondary-color);
-    color: var(--white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s;
-    padding: 0;
-}
-.service-nav-btn:hover {
-    background: transparent;
-    color: var(--ltn__secondary-color);
-}
-.service-nav-prev { margin-right: 16px; }
-.service-nav-next { margin-left:  16px; }
-
-/* Dots */
-.service-carousel-dots {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 32px;
-}
-.service-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.35);
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    transition: background 0.25s, transform 0.25s;
-}
-.service-dot.active {
-    background: var(--ltn__secondary-color);
-    transform: scale(1.35);
-}
-
-/* View All Button */
-.service-btn-wrap {
-    text-align: center;
-    margin-top: 44px;
-}
-.btn-view-all {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 35px;
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    white-space: nowrap;
-    background-color: var(--ltn__secondary-color, #e53935);
-    color: #fff !important;
-    border: 2px solid var(--ltn__secondary-color, #e53935);
-    border-radius: 0;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.btn-view-all:hover {
-    background-color: transparent;
-    color: var(--ltn__secondary-color, #e53935) !important;
-}
-
-.btn-view-all svg {
-    transition: transform 0.3s ease;
-}
-
-.btn-view-all:hover svg {
-    transform: translateX(5px);
-}
-
-.service-btn-wrap {
-    text-align: center;
-    margin-top: 40px;
-}
-/* Button Responsive */
-.about-btn-wrap {
-    text-align: left;
-   
-}
-
-.about-btn-wrap .ab3-btn {
-    display: inline-block;
-    padding: 12px 35px;
-    width: auto;
-    
-}
-/* Default (Desktop) - Left */
-.about-btn-wrap {
-    text-align: left;
-  
-}
-
-/* Tablet & Mobile */
-@media (max-width: 991px) {
-    .about-btn-wrap {
-        text-align: center;
-    }
-
-    .about-btn-wrap .ab3-btn {
-        display: inline-block;
-        margin: 0 auto;
-    }
-}
+            /* Button styling */
+            .ltn__service-form-box .btn {
+                width: 100% !important;
+                display: block;
+                text-align: center;
+            }
+        }
 
 
-/* Mobile */
-@media (max-width: 767px) {
-    .about-btn-wrap .ab3-btn {
-        text-align: center;
-        width: 80%;
-        margin: 0 auto;
-        padding: 12px 20px;
-    }
-}
+        /* Small Mobile */
+        @media (max-width: 480px) {
 
+            .ltn__service-form-wrap-area {
+                padding: 40px 15px;
+            }
 
-/* Responsive */
-@media (max-width: 767px) {
-    .service-item-img img   { height: 210px; }
-    .service-nav-btn        { width: 38px; height: 38px; }
-    .service-nav-prev       { margin-right: 10px; }
-    .service-nav-next       { margin-left:  10px; }
-    .service-item-brief h3  { font-size: 15px; }
-    .service-item-number    { font-size: 26px; }
-}
-@media (max-width: 480px) {
-    .service-item-img img   { height: 200px; }
-    .service-nav-btn        { width: 34px; height: 34px; }
-    .service-nav-prev       { margin-right: 8px; }
-    .service-nav-next       { margin-left:  8px; }
-}
-@media (max-width: 767px) {
-    .btn-view-all {
-        position: static !important;
-        display: inline-flex;
-        margin-top: 16px;
-    }
-}
-@media (max-width: 991px) {
-    .btn-view-all {
-        position: static !important;
-        display: inline-flex;
-        margin-top: 16px;
-    }
-    .col-lg-12 {
-        text-align: center;
-    }
-}
+            .ltn__service-form-1 .section-title {
+                font-size: 22px;
+                line-height: 1.2;
+            }
 
-@media (max-width: 767px) {
-    .btn-view-all { padding: 8px 18px; font-size: 13px; }
-}
-
-@media (max-width: 480px) {
-    .btn-view-all { padding: 7px 14px; font-size: 12px; }
-}
-
-/* hide mobile button on desktop/tablet */
-.cars-btn-mobile {
-    display: none;
-}
-
-@media (max-width: 991px) {
-    .cars-view-btn {
-        display: none !important;
-    }
-    .cars-btn-mobile {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-    }
-}
+            .ltn__service-form-1 .section-subtitle {
+                font-size: 13px;
+            }
+        }
 
 
 
+        /* View All Button */
+        .service-btn-wrap {
+            text-align: center;
+            margin-top: 0px;
+        }
 
-/* ================================
+        .btn-view-all {
+            display: inline-flex;
+            align-items: left;
+            gap: 10px;
+            padding: 14px 35px;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            background-color: var(--ltn__secondary-color, #e53935);
+            color: #fff !important;
+            border: 2px solid var(--ltn__secondary-color, #e53935);
+            border-radius: 0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-view-all:hover {
+            background-color: transparent;
+            color: var(--ltn__secondary-color, #e53935) !important;
+        }
+
+        .btn-view-all svg {
+            transition: transform 0.3s ease;
+        }
+
+        .btn-view-all:hover svg {
+
+            transform: translateX(5px);
+        }
+
+        /* Carousel wrapper */
+        .service-carousel-outer {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Viewport */
+        .service-carousel-viewport {
+            overflow: hidden;
+            flex: 1;
+            min-width: 0;
+        }
+
+        /* Track — NO transition here, JS handles it */
+        .service-carousel-track {
+            display: flex;
+            align-items: stretch;
+            will-change: transform;
+        }
+
+        /* Slides — width set by JS in px, no flex percentage */
+        .service-carousel-slide {
+            flex-shrink: 0;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        /* Card */
+        .ltn__service-item-1 {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            background: transparent;
+        }
+
+        /* Image */
+        .service-item-img {
+            width: 100%;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .service-item-img img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.45s ease;
+        }
+
+        .ltn__service-item-1:hover .service-item-img img {
+            transform: scale(1.05);
+        }
+
+        /* White body */
+        .service-item-brief {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--white);
+            padding: 22px 22px 24px;
+            border-radius: 0 0 10px 10px;
+            box-shadow: var(--ltn__box-shadow-4, 0 4px 20px rgba(0, 0, 0, 0.08));
+        }
+
+        /* Number + Title row */
+        .service-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .service-item-brief h3 {
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin: 0;
+            flex: 1;
+        }
+
+        .service-item-brief h3 a {
+            color: var(--ltn__secondary-color);
+            text-decoration: none;
+        }
+
+        .service-item-brief h3 a:hover {
+            opacity: 0.85;
+        }
+
+        .service-item-number {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1;
+            color: var(--ltn__secondary-color);
+            margin-left: 10px;
+            flex-shrink: 0;
+        }
+
+        /* Description */
+        .service-item-brief p {
+            font-size: 14px;
+            line-height: 1.65;
+            color: var(--ltn__paragraph-color);
+            margin: 0 0 10px;
+            flex: 1;
+        }
+
+        /* Price */
+        .product-price {
+            margin-top: auto;
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--ltn__secondary-color);
+        }
+
+        .product-price del {
+            font-size: 14px;
+            margin-left: 8px;
+            opacity: 0.75;
+        }
+
+        /* Nav buttons */
+        .service-nav-btn {
+            flex-shrink: 0;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: 2px solid var(--ltn__secondary-color);
+            background: var(--ltn__secondary-color);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            padding: 0;
+        }
+
+        .service-nav-btn:hover {
+            background: transparent;
+            color: var(--ltn__secondary-color);
+        }
+
+        .service-nav-prev {
+            margin-right: 16px;
+        }
+
+        .service-nav-next {
+            margin-left: 16px;
+        }
+
+        /* Dots */
+        .service-carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 32px;
+        }
+
+        .service-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.35);
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: background 0.25s, transform 0.25s;
+        }
+
+        .service-dot.active {
+            background: var(--ltn__secondary-color);
+            transform: scale(1.35);
+        }
+
+        /* View All Button */
+        .service-btn-wrap {
+            text-align: center;
+            margin-top: 44px;
+        }
+
+        .btn-view-all {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 35px;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            background-color: var(--ltn__secondary-color, #e53935);
+            color: #fff !important;
+            border: 2px solid var(--ltn__secondary-color, #e53935);
+            border-radius: 0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-view-all:hover {
+            background-color: transparent;
+            color: var(--ltn__secondary-color, #e53935) !important;
+        }
+
+        .btn-view-all svg {
+            transition: transform 0.3s ease;
+        }
+
+        .btn-view-all:hover svg {
+            transform: translateX(5px);
+        }
+
+        .service-btn-wrap {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        /* Button Responsive */
+        .about-btn-wrap {
+            text-align: left;
+
+        }
+
+        .about-btn-wrap .ab3-btn {
+            display: inline-block;
+            padding: 12px 35px;
+            width: auto;
+
+        }
+
+        /* Default (Desktop) - Left */
+        .about-btn-wrap {
+            text-align: left;
+
+        }
+
+        /* Tablet & Mobile */
+        @media (max-width: 991px) {
+            .about-btn-wrap {
+                text-align: center;
+            }
+
+            .about-btn-wrap .ab3-btn {
+                display: inline-block;
+                margin: 0 auto;
+            }
+        }
+
+
+        /* Mobile */
+        @media (max-width: 767px) {
+            .about-btn-wrap .ab3-btn {
+                text-align: center;
+                width: 80%;
+                margin: 0 auto;
+                padding: 12px 20px;
+            }
+        }
+
+
+        /* Responsive */
+        @media (max-width: 767px) {
+            .service-item-img img {
+                height: 210px;
+            }
+
+            .service-nav-btn {
+                width: 38px;
+                height: 38px;
+            }
+
+            .service-nav-prev {
+                margin-right: 10px;
+            }
+
+            .service-nav-next {
+                margin-left: 10px;
+            }
+
+            .service-item-brief h3 {
+                font-size: 15px;
+            }
+
+            .service-item-number {
+                font-size: 26px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .service-item-img img {
+                height: 200px;
+            }
+
+            .service-nav-btn {
+                width: 34px;
+                height: 34px;
+            }
+
+            .service-nav-prev {
+                margin-right: 8px;
+            }
+
+            .service-nav-next {
+                margin-left: 8px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .btn-view-all {
+                position: static !important;
+                display: inline-flex;
+                margin-top: 16px;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .btn-view-all {
+                position: static !important;
+                display: inline-flex;
+                margin-top: 16px;
+            }
+
+            .col-lg-12 {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .btn-view-all {
+                padding: 8px 18px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .btn-view-all {
+                padding: 7px 14px;
+                font-size: 12px;
+            }
+        }
+
+        /* hide mobile button on desktop/tablet */
+        .cars-btn-mobile {
+            display: none;
+        }
+
+        @media (max-width: 991px) {
+            .cars-view-btn {
+                display: none !important;
+            }
+
+            .cars-btn-mobile {
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
+            }
+        }
+
+
+
+
+        /* ================================
    ABOUT US AREA - MOBILE & TABLET
 ================================ */
-@media (max-width: 991px) {
+        @media (max-width: 991px) {
 
-    /* Flip order: content first, image second */
-    .ltn__about-us-area .row {
-        display: flex;
-        flex-direction: column;
-    }
+            /* Flip order: content first, image second */
+            .ltn__about-us-area .row {
+                display: flex;
+                flex-direction: column;
+            }
 
-    /* Content column - ORDER 1 */
-    .ltn__about-us-area .col-lg-7 {
-        order: 1;
-        margin-bottom: 30px;
-    }
+            /* Content column - ORDER 1 */
+            .ltn__about-us-area .col-lg-7 {
+                order: 1;
+                margin-bottom: 30px;
+            }
 
-    /* Image column - ORDER 2 */
-    .ltn__about-us-area .col-lg-5 {
-        order: 2;
-    }
+            /* Image column - ORDER 2 */
+            .ltn__about-us-area .col-lg-5 {
+                order: 2;
+            }
 
-    /* Center title, subtitle, button */
-    .ltn__about-us-area .section-title-area {
-        text-align: center;
-    }
+            /* Center title, subtitle, button */
+            .ltn__about-us-area .section-title-area {
+                text-align: center;
+            }
 
-    .ltn__about-us-area .section-subtitle {
-        text-align: center;
-        display: block;
-    }
+            .ltn__about-us-area .section-subtitle {
+                text-align: center;
+                display: block;
+            }
 
-    .ltn__about-us-area .section-title {
-        text-align: center;
-    }
+            .ltn__about-us-area .section-title {
+                text-align: center;
+            }
 
-    /* Justify paragraphs */
-    .ltn__about-us-area p {
-        text-align: justify;
-    }
+            /* Justify paragraphs */
+            .ltn__about-us-area p {
+                text-align: justify;
+            }
 
-    /* Center button */
-    .ltn__about-us-area .btn-wrapper {
-        text-align: center;
-    }
+            /* Center button */
+            .ltn__about-us-area .btn-wrapper {
+                text-align: center;
+            }
 
-    /* Image full width */
-    .ltn__about-us-area .about-us-img-wrap {
-        width: 100%;
-    }
+            /* Image full width */
+            .ltn__about-us-area .about-us-img-wrap {
+                width: 100%;
+            }
 
-    .ltn__about-us-area .about-us-img-wrap img {
-        width: 100%;
-        object-fit: cover;
-    }
-}
-@media (max-width: 991px) {
-    .ltn__about-us-area .btn-wrapper {
-        text-align: center !important;
-        display: flex !important;
-        justify-content: center !important;
-        width: 100% !important;
-    }
+            .ltn__about-us-area .about-us-img-wrap img {
+                width: 100%;
+                object-fit: cover;
+            }
+        }
 
+<<<<<<< HEAD
     .ltn__about-us-area .btn-wrapper .btn {
         display: inline-flex !important;
         margin: 0 auto !important;
@@ -1138,6 +1220,27 @@
 }
 
 
+=======
+        @media (max-width: 991px) {
+            .ltn__about-us-area .btn-wrapper {
+                text-align: center !important;
+                display: flex !important;
+                justify-content: center !important;
+                width: 100% !important;
+            }
+
+            .ltn__about-us-area .btn-wrapper .btn {
+                display: inline-flex !important;
+                margin: 0 auto !important;
+                float: none !important;
+            }
+
+            .service-btn-wrap {
+                text-align: center;
+                margin-top: 0px;
+            }
+        }
+>>>>>>> car-04
     </style>
 </head>
 
@@ -1380,23 +1483,27 @@
                 <div class="col-lg-7 align-self-center">
                     <div class="about-us-info-wrap">
                         <div class="section-title-area ltn__section-title-2">
-                            <h6 class="section-subtitle ltn__secondary-color">//  TRUSTED CAR CARE SERVICES</h6>
+                            <h6 class="section-subtitle ltn__secondary-color">// TRUSTED CAR CARE SERVICES</h6>
                             <h1 class="section-title">Reliable & Professional Car Service Across the City</h1>
-                           
+
                         </div>
                         <div class="about-us-info-wrap-inner about-us-info-devide">
-                            
-                            <p> At JusMoto, we provide hassle-free, high-quality car servicing with certified technicians and genuine parts. Our mission is to keep your vehicle running smoothly, safely, and efficiently—without disrupting your schedule. From routine maintenance and emergency repairs to doorstep service, JusMoto ensures transparent pricing and expert care. We combine advanced diagnostics with skilled professionals to deliver reliable, long-lasting results.</p>
+
+                            <p> At JusMoto, we provide hassle-free, high-quality car servicing with certified
+                                technicians and genuine parts. Our mission is to keep your vehicle running smoothly,
+                                safely, and efficiently—without disrupting your schedule. From routine maintenance and
+                                emergency repairs to doorstep service, JusMoto ensures transparent pricing and expert
+                                care. We combine advanced diagnostics with skilled professionals to deliver reliable,
+                                long-lasting results.</p>
 
                         </div>
                     </div>
                     <!-- View All Button -->
-<div class="about-btn-wrap">
-    <a href="service-details.html" 
-       class="btn theme-btn-1 btn-effect-1 ab3-btn">
-        Know More
-    </a>
-</div>
+                    <div class="about-btn-wrap">
+                        <a href="service-details.html" class="btn theme-btn-1 btn-effect-1 ab3-btn">
+                            Know More
+                        </a>
+                    </div>
 
 
                 </div>
@@ -1404,6 +1511,7 @@
         </div>
         <!-- Utilize Mobile Menu End -->
 
+<<<<<<< HEAD
          <!-- BREADCRUMB AREA START -->
     <div class="ltn__breadcrumb-area ltn__breadcrumb-area-2 ltn__breadcrumb-color-white bg-overlay-theme-black-90 bg-image plr--9" data-bs-bg="img/banner/car-1.jpg">
         <div class="container-fluid">
@@ -1650,88 +1758,243 @@
                                     <li><a href="contact-us.html">Contact</a></li>
                                 </ul>
                             </div>
-                        </div>
-                    </div>
-                    <!-- Column 3: Contact Details -->
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                        <div class="footer-widget footer-address-widget">
-                            <h4 class="footer-title">Get in Touch</h4>
-                            <div class="footer-address">
-                                <ul>
-                                    <li>
-                                        <div class="footer-address-icon">
-                                            <i class="fas fa-map-marked-alt"></i>
-                                        </div>
-                                       <div class="footer-address-info">
-    <p>
-        <a href="https://www.google.com/maps/search/?api=1&query=12+Murugappa+Road+Kotturpuram+Chennai+600085" 
-           target="_blank" 
-           style="text-decoration: none; color: inherit;">
-           12, Murugappa Road, Kotturpuram, <br>
-           Chennai - 600085
-        </a>
-    </p>
-</div>
+=======
+        <!-- SERVICE AREA START (Service 1) -->
 
-                                    </li>
-                                    <li>
-                                        <div class="footer-address-icon">
-                                            <i class="fas fa-phone-volume"></i>
-                                        </div>
-                                        <div class="footer-address-info">
-                                            <p><a href="tel:+917871787196">+91 7871787196</a></p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="footer-address-icon">
-                                            <i class="fas fa-envelope-open-text"></i>
-                                        </div>
-                                        <div class="footer-address-info">
-                                            <p><a href="mailto:hello@jusmoto.com">hello@jusmoto.com</a></p>
-                                        </div>
-                                    </li>
-                                </ul>
+        <div class="ltn__service-area ltn__primary-bg before-bg-1 pt-120 pb-120">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-title-area ltn__section-title-2 text-center">
+                            <h6 class="section-subtitle ltn__secondary-color">// Service</h6>
+                            <h1 class="section-title white-color">What We Do</h1>
+>>>>>>> car-04
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carousel Outer -->
+                <div class="service-carousel-outer">
+
+                    <!-- Prev Button -->
+                    <button class="service-nav-btn service-nav-prev" id="servicePrev" aria-label="Previous">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+
+                    <!-- Track Viewport -->
+                    <div class="service-carousel-viewport">
+                        <div class="service-carousel-track" id="services-container">
+
+                            <!-- Loading State -->
+                            <div class="service-carousel-slide d-flex align-items-center justify-content-center w-100"
+                                id="services-loading">
+                                <div class="text-center py-5">
+                                    <div class="spinner-border text-light" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <p class="white-color mt-2">Loading services...</p>
+                                </div>
+                            </div>
+
+                            <!-- Error State -->
+                            <div class="service-carousel-slide d-none text-center py-5 w-100" id="services-error">
+                                <p class="white-color">Failed to load services. Please try again later.</p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Next Button -->
+                    <button class="service-nav-btn service-nav-next" id="serviceNext" aria-label="Next">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+
+                </div><!-- /.service-carousel-outer -->
+
+
+
+                <!-- View All Button -->
+                <div class="service-btn-wrap">
+                    <a href="service.html" class="btn theme-btn-1 btn-effect-1 ab3-btn">
+                        View All Services
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                            stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SERVICE AREA END -->
+
+        <!-- CALL TO ACTION START ( Service Form ) -->
+        <div class="ltn__service-form-wrap-area ltn__service-form-1 bg-image bg-overlay-theme-black-60"
+            data-bs-bg="img/banner/contact-us.jpg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-5 col-lg-12 align-self-center">
+                        <div class="ltn__service-form-brief">
+                            <div class="section-title-area ltn__section-title-2 mb-0">
+                                <h6 class="section-subtitle white-color">// Call To Action</h6>
+                                <h1 class="section-title white-color">Schedule Your Service Today</h1>
                             </div>
                         </div>
                     </div>
-                    <!-- Column 4: Follow Us -->
-                    <div class="col-lg-2 col-md-6 col-sm-6 col-6">
-                        <div class="footer-widget footer-social-widget">
-                            <h4 class="footer-title">Follow Us</h4>
-                            <div class="ltn__social-media">
+                    <div class="col-xl-7 col-lg-12 align-self-center">
+                        <div class="ltn__service-form-wrap ltn__service-form-color-white">
+                            <form action="#" class="ltn__service-form-box">
                                 <ul>
-                                    <li><a href="https://www.facebook.com/jusmotoofficial#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="https://x.com/jusmoto1" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-                                    
-                                    <li><a href="https://www.instagram.com/p/B9G1oVgppYh/" title="Instagram"><i class="fab fa-instagram"></i></a></li>
+                                    <li>
+                                        <select>
+                                            <option>Service Name</option>
+                                            <option>Car Repair</option>
+                                            <option>Engine Repairing</option>
+                                            <option>Oil Change</option>
+                                            <option>Car Wash</option>
+                                        </select>
+                                    </li>
+
+                                    <li>
+                                        <div class="input-item ltn__datepicker">
+                                            <div class="input-group date" data-provide="datepicker">
+                                                <input type="text" name="date" class="form-control" placeholder="DATE">
+                                                <div class="input-group-addon">
+                                                    <i class="far fa-calendar-alt"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="btn-wrapper">
+                                            <button type="submit" class="btn theme-btn-1 btn-effect-1 text-uppercase">
+                                                Check Availability
+                                            </button>
+                                        </div>
+                                    </li>
                                 </ul>
-                            </div>
-                            <p class="mt-20">Connect with us on social media for latest updates and offers.</p>
+                            </form>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-       <div class="ltn__copyright-area ltn__copyright-2 section-bg-2 plr--5">
-    <div class="container-fluid ltn__border-top-2">
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-12 text-center">
-                <div class="ltn__copyright-design clearfix">
-                    <p>
-                        Developed by 
-                        <a href="https://blackitechs.com/" target="_blank">
-                            Black I Technology and Solutions
-                        </a> 
-                        @ <span class="current-year"></span>
-                    </p>
+        <!-- CALL TO ACTION END -->
+
+        <!-- FOOTER AREA START -->
+        <footer class="ltn__footer-area">
+            <div class="footer-top-area section-bg-2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="ltn__breadcrumb-inner ltn__breadcrumb-inner-2 justify-content-between">
+                                <div class="section-title-area ltn__section-title-2">
+                                    <h6 class="section-subtitle ltn__secondary-color">// Welcome to our company</h6>
+                                    <h1 class="section-title white-color">What We Do</h1>
+                                </div>
+                                <div class="ltn__breadcrumb-list">
+                                    <ul>
+                                        <li><a href="home.html">Home</a></li>
+                                        <li><a href="about-us.html">About</a></li>
+                                        <li><a href="service.html">Services</a></li>
+                                        <li><a href="products.html">Products</a></li>
+                                        <li><a href="contact-us.html">Contact</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column 3: Contact Details -->
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                            <div class="footer-widget footer-address-widget">
+                                <h4 class="footer-title">Get in Touch</h4>
+                                <div class="footer-address">
+                                    <ul>
+                                        <li>
+                                            <div class="footer-address-icon">
+                                                <i class="fas fa-map-marked-alt"></i>
+                                            </div>
+                                            <div class="footer-address-info">
+                                                <p>
+                                                    <a href="https://www.google.com/maps/search/?api=1&query=12+Murugappa+Road+Kotturpuram+Chennai+600085"
+                                                        target="_blank" style="text-decoration: none; color: inherit;">
+                                                        12, Murugappa Road, Kotturpuram, <br>
+                                                        Chennai - 600085
+                                                    </a>
+                                                </p>
+                                            </div>
+
+                                        </li>
+                                        <li>
+                                            <div class="footer-address-icon">
+                                                <i class="fas fa-phone-volume"></i>
+                                            </div>
+                                            <div class="footer-address-info">
+                                                <p><a href="tel:+917871787196">+91 7871787196</a></p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="footer-address-icon">
+                                                <i class="fas fa-envelope-open-text"></i>
+                                            </div>
+                                            <div class="footer-address-info">
+                                                <p><a href="mailto:hello@jusmoto.com">hello@jusmoto.com</a></p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column 4: Follow Us -->
+                        <div class="col-lg-2 col-md-6 col-sm-6 col-6">
+                            <div class="footer-widget footer-social-widget">
+                                <h4 class="footer-title">Follow Us</h4>
+                                <div class="ltn__social-media">
+                                    <ul>
+                                        <li><a href="https://www.facebook.com/jusmotoofficial#" title="Facebook"><i
+                                                    class="fab fa-facebook-f"></i></a></li>
+                                        <li><a href="https://x.com/jusmoto1" title="Twitter"><i
+                                                    class="fab fa-twitter"></i></a></li>
+
+                                        <li><a href="https://www.instagram.com/p/B9G1oVgppYh/" title="Instagram"><i
+                                                    class="fab fa-instagram"></i></a></li>
+                                    </ul>
+                                </div>
+                                <p class="mt-20">Connect with us on social media for latest updates and offers.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
+            <div class="ltn__copyright-area ltn__copyright-2 section-bg-2 plr--5">
+                <div class="container-fluid ltn__border-top-2">
+                    <div class="row justify-content-center">
+                        <div class="col-md-6 col-12 text-center">
+                            <div class="ltn__copyright-design clearfix">
+                                <p>
+                                    Developed by
+                                    <a href="https://blackitechs.com/" target="_blank">
+                                        Black I Technology and Solutions
+                                    </a>
+                                    @ <span class="current-year"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    </footer>
-    <!-- FOOTER AREA END -->
+        </footer>
+        <!-- FOOTER AREA END -->
 
     </div>
     <!-- Body main wrapper end -->
@@ -1741,242 +2004,243 @@
     <!-- Main JS -->
     <script src="js/main.js"></script>
 
-    
-<!-- ============================================================
+
+    <!-- ============================================================
      JS — paste just before </body>
      ============================================================ -->
-<script>
-(function () {
+    <script>
+        (function () {
 
-    var _services = [];
-    var _curr     = 0;
-    var _total    = 0;
-    var _sw       = 0;
-    var _timer    = null;
-    var _busy     = false;
-    var AUTO_MS   = 3500;
+            var _services = [];
+            var _curr = 0;
+            var _total = 0;
+            var _sw = 0;
+            var _timer = null;
+            var _busy = false;
+            var AUTO_MS = 3500;
 
-    /* visible cards per breakpoint */
-    function vc() {
-        var w = window.innerWidth;
-        if (w <= 480) return 1;
-        if (w <= 1024) return 2;
-        return 3;
-    }
+            /* visible cards per breakpoint */
+            function vc() {
+                var w = window.innerWidth;
+                if (w <= 480) return 1;
+                if (w <= 1024) return 2;
+                return 3;
+            }
 
-    /* measure viewport and set pixel width on every slide */
-    function measure() {
-        var vp = document.getElementById('serviceViewport') ||
-                 document.querySelector('.service-carousel-viewport');
-        if (!vp) return;
-        _sw = vp.offsetWidth / vc();
-        var slides = document.querySelectorAll('.service-carousel-slide');
-        for (var i = 0; i < slides.length; i++) {
-            slides[i].style.width = _sw + 'px';
-        }
-    }
+            /* measure viewport and set pixel width on every slide */
+            function measure() {
+                var vp = document.getElementById('serviceViewport') ||
+                    document.querySelector('.service-carousel-viewport');
+                if (!vp) return;
+                _sw = vp.offsetWidth / vc();
+                var slides = document.querySelectorAll('.service-carousel-slide');
+                for (var i = 0; i < slides.length; i++) {
+                    slides[i].style.width = _sw + 'px';
+                }
+            }
 
-    /* track index for current logical index */
-    function tIdx() { return _curr + vc(); }
+            /* track index for current logical index */
+            function tIdx() { return _curr + vc(); }
 
-    /* move track without or with animation */
-    function setPos(idx, anim) {
-        var track = document.getElementById('services-container');
-        if (!track) return;
-        track.style.transition = anim ? 'transform 0.5s ease' : 'none';
-        if (!anim) track.offsetHeight;
-        track.style.transform  = 'translateX(-' + (idx * _sw) + 'px)';
-    }
+            /* move track without or with animation */
+            function setPos(idx, anim) {
+                var track = document.getElementById('services-container');
+                if (!track) return;
+                track.style.transition = anim ? 'transform 0.5s ease' : 'none';
+                if (!anim) track.offsetHeight;
+                track.style.transform = 'translateX(-' + (idx * _sw) + 'px)';
+            }
 
-    /* go to logical index — infinite wrap handled by clone jump */
-    function goTo(idx) {
-        if (_busy || _total === 0) return;
-        _busy = true;
-        _curr = ((idx % _total) + _total) % _total;
-        setPos(tIdx(), true);
-        refreshDots();
-    }
+            /* go to logical index — infinite wrap handled by clone jump */
+            function goTo(idx) {
+                if (_busy || _total === 0) return;
+                _busy = true;
+                _curr = ((idx % _total) + _total) % _total;
+                setPos(tIdx(), true);
+                refreshDots();
+            }
 
-    /* after transition ends: jump silently if landed on a clone */
-    function onTransEnd() {
-        var v  = vc();
-        var ti = tIdx();
-        if (ti >= _total + v) {
-            _curr = 0;
-            setPos(v, false);
-        } else if (ti < v) {
-            _curr = _total - 1;
-            setPos(_total - 1 + v, false);
-        }
-        refreshDots();
-        _busy = false;
-    }
+            /* after transition ends: jump silently if landed on a clone */
+            function onTransEnd() {
+                var v = vc();
+                var ti = tIdx();
+                if (ti >= _total + v) {
+                    _curr = 0;
+                    setPos(v, false);
+                } else if (ti < v) {
+                    _curr = _total - 1;
+                    setPos(_total - 1 + v, false);
+                }
+                refreshDots();
+                _busy = false;
+            }
 
-    function refreshDots() {
-        var dots = document.querySelectorAll('.service-dot');
-        for (var i = 0; i < dots.length; i++) {
-            dots[i].classList.toggle('active', i === _curr);
-        }
-    }
+            function refreshDots() {
+                var dots = document.querySelectorAll('.service-dot');
+                for (var i = 0; i < dots.length; i++) {
+                    dots[i].classList.toggle('active', i === _curr);
+                }
+            }
 
-    function makeDots() {
-        var wrap = document.getElementById('service-dots');
-        if (!wrap) return;
-        wrap.innerHTML = '';
-        for (var i = 0; i < _total; i++) {
-            (function (idx) {
-                var btn = document.createElement('button');
-                btn.className = 'service-dot' + (idx === 0 ? ' active' : '');
-                btn.setAttribute('aria-label', 'Slide ' + (idx + 1));
-                btn.addEventListener('click', function () { goTo(idx); resetAuto(); });
-                wrap.appendChild(btn);
-            })(i);
-        }
-    }
+            function makeDots() {
+                var wrap = document.getElementById('service-dots');
+                if (!wrap) return;
+                wrap.innerHTML = '';
+                for (var i = 0; i < _total; i++) {
+                    (function (idx) {
+                        var btn = document.createElement('button');
+                        btn.className = 'service-dot' + (idx === 0 ? ' active' : '');
+                        btn.setAttribute('aria-label', 'Slide ' + (idx + 1));
+                        btn.addEventListener('click', function () { goTo(idx); resetAuto(); });
+                        wrap.appendChild(btn);
+                    })(i);
+                }
+            }
 
-    function startAuto() {
-        stopAuto();
-        _timer = setInterval(function () { goTo(_curr + 1); }, AUTO_MS);
-    }
-    function stopAuto()  { if (_timer) { clearInterval(_timer); _timer = null; } }
-    function resetAuto() { stopAuto(); startAuto(); }
+            function startAuto() {
+                stopAuto();
+                _timer = setInterval(function () { goTo(_curr + 1); }, AUTO_MS);
+            }
+            function stopAuto() { if (_timer) { clearInterval(_timer); _timer = null; } }
+            function resetAuto() { stopAuto(); startAuto(); }
 
-    /* build one card HTML — NO number, NO price */
-    function makeCard(s) {
-        var img  = s.image || 'img/slider/slider-banner-service-1.jpg';
-        var desc = s.description || '';
-        if (desc.length > 130) desc = desc.substring(0, 130) + '\u2026';
+            /* build one card HTML — NO number, NO price */
+            function makeCard(s) {
+                var img = s.image || 'img/slider/slider-banner-service-1.jpg';
+                var desc = s.description || '';
+                if (desc.length > 130) desc = desc.substring(0, 130) + '\u2026';
 
-        return '<div class="ltn__service-item-1">'                                    +
-                   '<div class="service-item-img">'                                    +
-                       '<img src="' + img + '" alt="' + s.title + '" loading="lazy">' +
-                   '</div>'                                                            +
-                   '<div class="service-item-brief">'                                  +
-                       '<div class="service-item-header">'                             +
-                           '<h3><a href="service_details.html?id=' + s.id + '">'       +
-                               s.title                                                 +
-                           '</a></h3>'                                                 +
-                       '</div>'                                                        +
-                       '<p>' + desc + '</p>'                                           +
-                   '</div>'                                                            +
-               '</div>';
-    }
+                return '<div class="ltn__service-item-1">' +
+                    '<div class="service-item-img">' +
+                    '<img src="' + img + '" alt="' + s.title + '" loading="lazy">' +
+                    '</div>' +
+                    '<div class="service-item-brief">' +
+                    '<div class="service-item-header">' +
+                    '<h3><a href="service_details.html?id=' + s.id + '">' +
+                    s.title +
+                    '</a></h3>' +
+                    '</div>' +
+                    '<p>' + desc + '</p>' +
+                    '</div>' +
+                    '</div>';
+            }
 
-    function makeSlide(s, clone) {
-        var cls = clone ? ' clone' : '';
-        return '<div class="service-carousel-slide' + cls + '">' + makeCard(s) + '</div>';
-    }
+            function makeSlide(s, clone) {
+                var cls = clone ? ' clone' : '';
+                return '<div class="service-carousel-slide' + cls + '">' + makeCard(s) + '</div>';
+            }
 
-    /* build full track: [leading clones][real slides][trailing clones] */
-    function buildTrack() {
-        var track = document.getElementById('services-container');
-        if (!track || !_services.length) return;
+            /* build full track: [leading clones][real slides][trailing clones] */
+            function buildTrack() {
+                var track = document.getElementById('services-container');
+                if (!track || !_services.length) return;
 
-        _total   = _services.length;
-        var v    = vc();
-        var real = '', lead = '', trail = '';
+                _total = _services.length;
+                var v = vc();
+                var real = '', lead = '', trail = '';
 
-        for (var i = 0; i < _services.length; i++) {
-            real += makeSlide(_services[i], false);
-        }
-        /* leading clones = last v real slides */
-        for (var l = _services.length - v; l < _services.length; l++) {
-            lead += makeSlide(_services[l], true);
-        }
-        /* trailing clones = first v real slides */
-        for (var t = 0; t < v; t++) {
-            trail += makeSlide(_services[t], true);
-        }
+                for (var i = 0; i < _services.length; i++) {
+                    real += makeSlide(_services[i], false);
+                }
+                /* leading clones = last v real slides */
+                for (var l = _services.length - v; l < _services.length; l++) {
+                    lead += makeSlide(_services[l], true);
+                }
+                /* trailing clones = first v real slides */
+                for (var t = 0; t < v; t++) {
+                    trail += makeSlide(_services[t], true);
+                }
 
-        track.removeEventListener('transitionend', onTransEnd);
-        track.innerHTML = lead + real + trail;
-        track.addEventListener('transitionend', onTransEnd);
+                track.removeEventListener('transitionend', onTransEnd);
+                track.innerHTML = lead + real + trail;
+                track.addEventListener('transitionend', onTransEnd);
 
-        measure();
-        _curr = 0;
-        setPos(v, false);
-        makeDots();
-    }
+                measure();
+                _curr = 0;
+                setPos(v, false);
+                makeDots();
+            }
 
-    /* fetch from API */
-    function fetchServices() {
-        fetch('https://jusmoto.blackitechs.in/api/v1/services?type=0')
-            .then(function (r) {
-                if (!r.ok) throw new Error('HTTP ' + r.status);
-                return r.json();
-            })
-            .then(function (data) {
-                var list = data.data || (Array.isArray(data) ? data : []);
-                if (!list.length) throw new Error('empty');
+            /* fetch from API */
+            function fetchServices() {
+                fetch('https://jusmoto.blackitechs.in/api/v1/services?type=0')
+                    .then(function (r) {
+                        if (!r.ok) throw new Error('HTTP ' + r.status);
+                        return r.json();
+                    })
+                    .then(function (data) {
+                        var list = data.data || (Array.isArray(data) ? data : []);
+                        if (!list.length) throw new Error('empty');
 
-                var loading = document.getElementById('services-loading');
-                var error   = document.getElementById('services-error');
-                if (loading) loading.style.display = 'none';
-                if (error)   error.style.display   = 'none';
+                        var loading = document.getElementById('services-loading');
+                        var error = document.getElementById('services-error');
+                        if (loading) loading.style.display = 'none';
+                        if (error) error.style.display = 'none';
 
-                _services = list;
-                buildTrack();
-                startAuto();
-            })
-            .catch(function (err) {
-                console.error('fetchServices failed:', err);
-                var loading = document.getElementById('services-loading');
-                var error   = document.getElementById('services-error');
-                if (loading) loading.style.display = 'none';
-                if (error)   error.style.display   = 'block';
+                        _services = list;
+                        buildTrack();
+                        startAuto();
+                    })
+                    .catch(function (err) {
+                        console.error('fetchServices failed:', err);
+                        var loading = document.getElementById('services-loading');
+                        var error = document.getElementById('services-error');
+                        if (loading) loading.style.display = 'none';
+                        if (error) error.style.display = 'block';
+                    });
+            }
+
+            /* nav buttons */
+            var pb = document.getElementById('servicePrev');
+            var nb = document.getElementById('serviceNext');
+            if (pb) pb.addEventListener('click', function () { goTo(_curr - 1); resetAuto(); });
+            if (nb) nb.addEventListener('click', function () { goTo(_curr + 1); resetAuto(); });
+
+            /* pause on hover */
+            var outer = document.querySelector('.service-carousel-outer');
+            if (outer) {
+                outer.addEventListener('mouseenter', stopAuto);
+                outer.addEventListener('mouseleave', startAuto);
+            }
+
+            /* touch swipe */
+            var txS = 0;
+            var vp = document.getElementById('serviceViewport') ||
+                document.querySelector('.service-carousel-viewport');
+            if (vp) {
+                vp.addEventListener('touchstart', function (e) {
+                    txS = e.changedTouches[0].screenX;
+                    stopAuto();
+                }, { passive: true });
+                vp.addEventListener('touchend', function (e) {
+                    var diff = txS - e.changedTouches[0].screenX;
+                    if (Math.abs(diff) > 40) goTo(diff > 0 ? _curr + 1 : _curr - 1);
+                    resetAuto();
+                }, { passive: true });
+            }
+
+            /* resize: rebuild with correct clone count for new breakpoint */
+            var rsz;
+            window.addEventListener('resize', function () {
+                clearTimeout(rsz);
+                rsz = setTimeout(function () {
+                    var saved = _curr;
+                    buildTrack();
+                    _curr = saved;
+                    setPos(tIdx(), false);
+                    refreshDots();
+                    startAuto();
+                }, 150);
             });
-    }
 
-    /* nav buttons */
-    var pb = document.getElementById('servicePrev');
-    var nb = document.getElementById('serviceNext');
-    if (pb) pb.addEventListener('click', function () { goTo(_curr - 1); resetAuto(); });
-    if (nb) nb.addEventListener('click', function () { goTo(_curr + 1); resetAuto(); });
+            /* kick off */
+            fetchServices();
 
-    /* pause on hover */
-    var outer = document.querySelector('.service-carousel-outer');
-    if (outer) {
-        outer.addEventListener('mouseenter', stopAuto);
-        outer.addEventListener('mouseleave', startAuto);
-    }
+        })();
+    </script>
 
-    /* touch swipe */
-    var txS = 0;
-    var vp  = document.getElementById('serviceViewport') ||
-              document.querySelector('.service-carousel-viewport');
-    if (vp) {
-        vp.addEventListener('touchstart', function (e) {
-            txS = e.changedTouches[0].screenX;
-            stopAuto();
-        }, { passive: true });
-        vp.addEventListener('touchend', function (e) {
-            var diff = txS - e.changedTouches[0].screenX;
-            if (Math.abs(diff) > 40) goTo(diff > 0 ? _curr + 1 : _curr - 1);
-            resetAuto();
-        }, { passive: true });
-    }
-
-    /* resize: rebuild with correct clone count for new breakpoint */
-    var rsz;
-    window.addEventListener('resize', function () {
-        clearTimeout(rsz);
-        rsz = setTimeout(function () {
-            var saved = _curr;
-            buildTrack();
-            _curr = saved;
-            setPos(tIdx(), false);
-            refreshDots();
-            startAuto();
-        }, 150);
-    });
-
-    /* kick off */
-    fetchServices();
-
-})();
-</script>
-  
 </body>
+
 </html>
 
 </body>

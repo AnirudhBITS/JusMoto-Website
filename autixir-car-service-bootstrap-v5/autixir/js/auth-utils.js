@@ -4,7 +4,7 @@
  */
 
 const AUTH_CONFIG = {
-    API_BASE_URL: 'http://jusmoto.blackitechs.in/api/v1',
+    API_BASE_URL: 'https://jusmoto.blackitechs.in/api/v1',
     DASHBOARD_URL: 'account.html',
     TOKEN_KEY: 'token',
     USER_KEY: 'user'
@@ -17,7 +17,7 @@ class AuthService {
     static setSession(token, user, redirect = false) {
         localStorage.setItem(AUTH_CONFIG.TOKEN_KEY, token);
         localStorage.setItem(AUTH_CONFIG.USER_KEY, JSON.stringify(user));
-        
+
         if (redirect) {
             // Redirect to home page as requested
             window.location.href = 'home.html';
@@ -64,6 +64,7 @@ class AuthService {
                 headers: {
                     'Content-Type': 'application/json'
                 },
+                // credentials: 'include',
                 body: JSON.stringify({ email, password })
             });
 
@@ -75,7 +76,7 @@ class AuthService {
 
             // Backend returns data: { user, accessToken, refreshToken }
             const { accessToken, user } = result.data || result;
-            
+
             return { success: true, accessToken, user };
         } catch (error) {
             console.error('Login Error:', error);
@@ -93,6 +94,7 @@ class AuthService {
                 headers: {
                     'Content-Type': 'application/json'
                 },
+                // credentials: 'include',
                 body: JSON.stringify(userData)
             });
 
@@ -122,10 +124,63 @@ class AuthService {
      * Logout user - Clear session and redirect to home page
      */
     static async logout() {
+        try {
+            await fetch(`${AUTH_CONFIG.API_BASE_URL}/auth/logout`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${this.getToken()}`
+                },
+                credentials: 'include'
+            });
+        } catch (e) {
+            console.error('Logout API error:', e);
+        }
         // Clear local storage
         this.clearSession();
         // Redirect to home page
         window.location.href = 'home.html';
+    }
+
+    /**
+     * Check if a session exists on the server (via cookies)
+     * and synchronize with localStorage
+     */
+    static async checkSession() {
+        try {
+            const response = await fetch(`${AUTH_CONFIG.API_BASE_URL}/auth/me`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include'
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                if (result.success && result.data.user) {
+                    // Update session if it matches a valid user
+                    // We don't have the token here easily from cookies, but we have the user
+                    // On the website, we still use localStorage for UI responsiveness
+                    const user = result.data.user;
+                    localStorage.setItem(AUTH_CONFIG.USER_KEY, JSON.stringify(user));
+                    // If no token in localStorage but session exists on server, 
+                    // we might want to flag it as authenticated
+                    if (!this.isAuthenticated()) {
+                        localStorage.setItem(AUTH_CONFIG.TOKEN_KEY, 'session_active');
+                    }
+                    return true;
+                }
+            } else {
+                // If /me fails, it means no valid session
+                if (this.isAuthenticated()) {
+                    this.clearSession();
+                    this.updateAuthUI();
+                }
+            }
+        } catch (error) {
+            console.error('Session check error:', error);
+        }
+        return false;
     }
 
     /**
@@ -135,7 +190,7 @@ class AuthService {
     static updateAuthUI() {
         const isAuthenticated = this.isAuthenticated();
         const userMenus = document.querySelectorAll('.user-menu ul li ul');
-        
+
         userMenus.forEach(menu => {
             if (isAuthenticated) {
                 menu.innerHTML = `
@@ -202,11 +257,16 @@ class AuthService {
 }
 
 // Automatically update UI on page load
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    // First check session with server
+    await AuthService.checkSession();
+    // Then update UI
     AuthService.updateAuthUI();
-});
 
-// Automatically check session and redirect on login/register pages
-if (window.location.pathname.endsWith('login.html') || window.location.pathname.endsWith('register.html')) {
-    AuthService.checkAndRedirect();
-}
+    // Redirect if already logged in on login/register pages
+    if (window.location.pathname.endsWith('login.html') || window.location.pathname.endsWith('register.html')) {
+        if (AuthService.isAuthenticated()) {
+            window.location.href = 'home.html';
+        }
+    }
+});
