@@ -46,23 +46,23 @@
 [ End table content ]
 ======================================*/
 
-(function($) {
-  "use strict";
+(function ($) {
+    "use strict";
 
-    jQuery(document).ready(function(){
-      
+    jQuery(document).ready(function () {
+
         /* --------------------------------------------------------
             1. Variables
         --------------------------------------------------------- */
         var $window = $(window),
-        $body = $('body');
+            $body = $('body');
 
         /* --------------------------------------------------------
             2. Mobile Menu
         --------------------------------------------------------- */
-         /* ---------------------------------
-            Utilize Function 
-        ----------------------------------- */
+        /* ---------------------------------
+           Utilize Function 
+       ----------------------------------- */
         (function () {
             var $ltn__utilizeToggle = $('.ltn__utilize-toggle'),
                 $ltn__utilize = $('.ltn__utilize'),
@@ -122,13 +122,13 @@
         /* --------------------------------------------------------
             3. Mega Menu
         --------------------------------------------------------- */
-        $('.mega-menu').each(function(){
-            if($(this).children('li').length){
+        $('.mega-menu').each(function () {
+            if ($(this).children('li').length) {
                 var ulChildren = $(this).children('li').length;
-                $(this).addClass('column-'+ulChildren)
+                $(this).addClass('column-' + ulChildren)
             }
         });
-        
+
 
         /* Remove Attribute( href ) from sub-menu title in mega-menu */
         /*
@@ -139,11 +139,11 @@
         /* Mega Munu  */
         // $(".mega-menu").parent().css({"position": "inherit"});
         $(".mega-menu").parent().addClass("mega-menu-parent");
-        
+
 
         /* Add space for Elementor Menu Anchor link */
-        $( window ).on( 'elementor/frontend/init', function() {
-            elementorFrontend.hooks.addFilter( 'frontend/handlers/menu_anchor/scroll_top_distance', function( scrollTop ) {
+        $(window).on('elementor/frontend/init', function () {
+            elementorFrontend.hooks.addFilter('frontend/handlers/menu_anchor/scroll_top_distance', function (scrollTop) {
                 return scrollTop - 75;
             });
         });
@@ -152,45 +152,45 @@
             3-2. Category Menu
         --------------------------------------------------------- */
 
-        $('.ltn__category-menu-title').on('click', function(){
+        $('.ltn__category-menu-title').on('click', function () {
             $('.ltn__category-menu-toggle').slideToggle(500);
-        });	
+        });
 
         /* Category Menu More Item show */
-        $('.ltn__category-menu-more-item-parent').on('click', function(){
+        $('.ltn__category-menu-more-item-parent').on('click', function () {
             $('.ltn__category-menu-more-item-child').slideToggle();
             $(this).toggleClass('rx-change');
 
         });
 
         /* Category Submenu Column Count */
-        $('.ltn__category-submenu').each(function(){
-            if($(this).children('li').length){
+        $('.ltn__category-submenu').each(function () {
+            if ($(this).children('li').length) {
                 var ulChildren = $(this).children('li').length;
-                $(this).addClass('ltn__category-column-no-'+ulChildren)
+                $(this).addClass('ltn__category-column-no-' + ulChildren)
             }
         });
 
         /* Category Menu Responsive */
-        function ltn__CategoryMenuToggle(){
-            $('.ltn__category-menu-toggle .ltn__category-menu-drop > a').on('click', function(){
-            if($(window).width() < 991){
-                $(this).removeAttr('href');
-                var element = $(this).parent('li');
-                if (element.hasClass('open')) {
-                    element.removeClass('open');
-                    element.find('li').removeClass('open');
-                    element.find('ul').slideUp();
+        function ltn__CategoryMenuToggle() {
+            $('.ltn__category-menu-toggle .ltn__category-menu-drop > a').on('click', function () {
+                if ($(window).width() < 991) {
+                    $(this).removeAttr('href');
+                    var element = $(this).parent('li');
+                    if (element.hasClass('open')) {
+                        element.removeClass('open');
+                        element.find('li').removeClass('open');
+                        element.find('ul').slideUp();
+                    }
+                    else {
+                        element.addClass('open');
+                        element.children('ul').slideDown();
+                        element.siblings('li').children('ul').slideUp();
+                        element.siblings('li').removeClass('open');
+                        element.siblings('li').find('li').removeClass('open');
+                        element.siblings('li').find('ul').slideUp();
+                    }
                 }
-                else {
-                    element.addClass('open');
-                    element.children('ul').slideDown();
-                    element.siblings('li').children('ul').slideUp();
-                    element.siblings('li').removeClass('open');
-                    element.siblings('li').find('li').removeClass('open');
-                    element.siblings('li').find('ul').slideUp();
-                }
-            }
             });
             $('.ltn__category-menu-toggle .ltn__category-menu-drop > a').append('<span class="expand"></span>');
         }
@@ -201,8 +201,8 @@
             4. One Page Navigation ( jQuery Easing Plugin )
         --------------------------------------------------------- */
         // jQuery for page scrolling feature - requires jQuery Easing plugin
-        $(function() {
-            $('a.page-scroll').bind('click', function(event) {
+        $(function () {
+            $('a.page-scroll').bind('click', function (event) {
                 var $anchor = $(this);
                 $('html, body').stop().animate({
                     scrollTop: $($anchor.attr('href')).offset().top
@@ -216,7 +216,7 @@
             5. Toogle Search
         -------------------------------------------------------- */
         // Handle click on toggle search button
-        $('.header-search-1').on('click', function() {
+        $('.header-search-1').on('click', function () {
             $('.header-search-1, .header-search-1-form').toggleClass('search-open');
             return false;
         });
@@ -232,10 +232,10 @@
             7. Background Image
         --------------------------------------------------------- */
         var $backgroundImage = $('.bg-image, .bg-image-top');
-        $backgroundImage.each(function() {
+        $backgroundImage.each(function () {
             var $this = $(this),
                 $bgImage = $this.data('bs-bg');
-            $this.css('background-image', 'url('+$bgImage+')');
+            $this.css('background-image', 'url(' + $bgImage + ')');
         });
 
 
@@ -266,12 +266,12 @@
             /* format: 'yyyy/dd/mm', */
         });
 
-        
+
         /* --------------------------------------------------------
             11. Default active and hover item active
         --------------------------------------------------------- */
         var ltn__active_item = $('.ltn__feature-item-6, .ltn__our-journey-wrap ul li, .ltn__pricing-plan-item')
-        ltn__active_item.mouseover(function() {
+        ltn__active_item.mouseover(function () {
             ltn__active_item.removeClass('active');
             $(this).addClass('active');
         });
@@ -319,14 +319,14 @@
                 }
             ]
         });
-                        
+
         /* --------------------------------------------------------
             13. Isotope Gallery Active  ( Gallery / Portfolio )
         -------------------------------------------------------- */
         var $ltnGalleryActive = $('.ltn__gallery-active'),
             $ltnGalleryFilterMenu = $('.ltn__gallery-filter-menu');
         /*Filter*/
-        $ltnGalleryFilterMenu.on( 'click', 'button, a', function() {
+        $ltnGalleryFilterMenu.on('click', 'button, a', function () {
             var $this = $(this),
                 $filterValue = $this.attr('data-filter');
             $ltnGalleryFilterMenu.find('button, a').removeClass('active');
@@ -334,10 +334,10 @@
             $ltnGalleryActive.isotope({ filter: $filterValue });
         });
         /*Grid*/
-        $ltnGalleryActive.each(function(){
+        $ltnGalleryActive.each(function () {
             var $this = $(this),
                 $galleryFilterItem = '.ltn__gallery-item';
-            $this.imagesLoaded( function() {
+            $this.imagesLoaded(function () {
                 $this.isotope({
                     itemSelector: $galleryFilterItem,
                     percentPosition: true,
@@ -383,7 +383,7 @@
                     }
                 }
             ]
-        }).on('afterChange', function(){
+        }).on('afterChange', function () {
             new WOW().init();
         });
         /* --------------------------------------------------------
@@ -411,7 +411,7 @@
                     }
                 }
             ]
-        }).on('afterChange', function(){
+        }).on('afterChange', function () {
             new WOW().init();
         });
 
@@ -1143,7 +1143,7 @@
         /* --------------------------------------------------------
             27. Brand Logo
         --------------------------------------------------------- */
-        if($('.ltn__brand-logo-active').length){
+        if ($('.ltn__brand-logo-active').length) {
             $('.ltn__brand-logo-active').slick({
                 rtl: false,
                 arrows: false,
@@ -1187,7 +1187,7 @@
         /* --------------------------------------------------------
             28. Blog Gallery (Blog Page )
         --------------------------------------------------------- */
-        if($('.ltn__blog-gallery-active').length){
+        if ($('.ltn__blog-gallery-active').length) {
             $('.ltn__blog-gallery-active').slick({
                 rtl: false,
                 arrows: true,
@@ -1227,17 +1227,17 @@
         // $('.ltn__counter').counterUp();
 
         $('.counter').counterUp({
-          delay: 10,
-          time: 2000
+            delay: 10,
+            time: 2000
         });
-        $('.counter').addClass('animated fadeInDownBig');  
+        $('.counter').addClass('animated fadeInDownBig');
         $('h3').addClass('animated fadeIn');
-        
+
 
         /* --------------------------------------------------------
             31. Instagram Feed
         --------------------------------------------------------- */
-        if($('.ltn__instafeed').length){
+        if ($('.ltn__instafeed').length) {
             $.instagramFeed({
                 'username': 'envato',
                 'container': ".ltn__instafeed",
@@ -1304,17 +1304,17 @@
         /* ---------------------------------------------------------
             32. Price Slider
         --------------------------------------------------------- */
-        $( ".slider-range" ).slider({
+        $(".slider-range").slider({
             range: true,
             min: 50,
             max: 5000,
-            values: [ 50, 1500 ],
-            slide: function( event, ui ) {
-                $( ".amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+            values: [50, 1500],
+            slide: function (event, ui) {
+                $(".amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
             }
         });
-        $( ".amount" ).val( "$" + $( ".slider-range" ).slider( "values", 0 ) +
-        " - $" + $( ".slider-range" ).slider( "values", 1 ) ); 
+        $(".amount").val("$" + $(".slider-range").slider("values", 0) +
+            " - $" + $(".slider-range").slider("values", 1));
 
 
         /* --------------------------------------------------------
@@ -1322,16 +1322,16 @@
         -------------------------------------------------------- */
         $(".cart-plus-minus").prepend('<div class="dec qtybutton">-</div>');
         $(".cart-plus-minus").append('<div class="inc qtybutton">+</div>');
-        $(".qtybutton").on("click", function() {
+        $(".qtybutton").on("click", function () {
             var $button = $(this);
             var oldValue = $button.parent().find("input").val();
             if ($button.text() == "+") {
                 var newVal = parseFloat(oldValue) + 1;
-            } 
+            }
             else {
                 if (oldValue > 0) {
                     var newVal = parseFloat(oldValue) - 1;
-                } 
+                }
                 else {
                     newVal = 0;
                 }
@@ -1340,7 +1340,7 @@
         });
 
 
-	    /* --------------------------------------------------------
+        /* --------------------------------------------------------
             34. scrollUp active
         -------------------------------------------------------- */
         $.scrollUp({
@@ -1351,19 +1351,19 @@
         });
 
 
-	    /* --------------------------------------------------------
+        /* --------------------------------------------------------
             35. Parallax active ( About Section  )
         -------------------------------------------------------- */
         /* 
         > 1 page e 2 ta call korle 1 ta kaj kore 
         */
-        if($('.ltn__parallax-effect-active').length){
+        if ($('.ltn__parallax-effect-active').length) {
             var scene = $('.ltn__parallax-effect-active').get(0);
             var parallaxInstance = new Parallax(scene);
         }
 
 
-	    /* --------------------------------------------------------
+        /* --------------------------------------------------------
             36. Testimonial Slider 4
         -------------------------------------------------------- */
         var ltn__testimonial_quote_slider = $('.ltn__testimonial-slider-4-active');
@@ -1479,21 +1479,21 @@
     /* --------------------------------------------------------
         36. Header menu sticky
     -------------------------------------------------------- */
-    $(window).on('scroll',function() {    
+    $(window).on('scroll', function () {
         var scroll = $(window).scrollTop();
         if (scroll < 445) {
             $(".ltn__header-sticky").removeClass("sticky-active");
         } else {
             $(".ltn__header-sticky").addClass("sticky-active");
         }
-    }); 
+    });
 
 
-    $(window).on('load',function(){
+    $(window).on('load', function () {
         /*-----------------
             preloader
         ------------------*/
-        if($('#preloader').length){
+        if ($('#preloader').length) {
             var preLoder = $("#preloader");
             preLoder.fadeOut(1000);
 
@@ -1503,7 +1503,7 @@
     });
 
 
-  
+
     /* --------------------------------------------------------
         Dynamic Services Fetching
     -------------------------------------------------------- */
@@ -1519,7 +1519,7 @@
         try {
             console.log('Fetching services from: https://jusmoto.blackitechs.in/api/v1/services?type=0');
             const response = await fetch('https://jusmoto.blackitechs.in/api/v1/services?type=0');
-            
+
             if (!response.ok) {
                 console.error(`API Error: ${response.status} ${response.statusText}`);
                 throw new Error(`Network response was not ok: ${response.status}`);
@@ -1527,11 +1527,11 @@
 
             const data = await response.json();
             console.log('Services API Plain Response:', data);
-            
+
             // Robustly extract services array
             const services = data.data || (Array.isArray(data) ? data : []);
             console.log('Extracted Services Array:', services);
-            
+
             if (services.length === 0) {
                 console.warn('No services found in the API response.');
             }
@@ -1541,7 +1541,7 @@
             error.addClass('d-none');
         } catch (err) {
             console.error('Error fetching services:', err);
-            
+
             if (err.name === 'TypeError' && err.message === 'Failed to fetch') {
                 console.error('CRITICAL: Failed to fetch. Check if the backend server (port 3000) is running AND if CORS is enabled.');
                 error.find('p').text('Connection failed. Please check if the API server is running and CORS is enabled.');
@@ -1552,14 +1552,25 @@
         }
     }
 
-  function renderServices(services) {
-    var track = document.getElementById('services-container');
-    if (!track) return;
+    function renderServices(services) {
+        const container = $('#services-container');
+        const layoutStyle = container.data('layout') || 'style-1';
+        let html = '';
 
-    var loading = document.getElementById('services-loading');
-    var error   = document.getElementById('services-error');
-    if (loading) loading.style.display = 'none';
-    if (error)   error.style.display   = 'none';
+        services.forEach(service => {
+            const currentPrice = service.discountPrice || service.discount_price;
+            const originalPrice = service.price || service.original_price;
+
+            let priceHtml = '';
+            if (currentPrice && originalPrice) {
+                priceHtml = `<span>₹${currentPrice}</span> <del>₹${originalPrice}</del>`;
+            } else {
+                priceHtml = `<span>₹${currentPrice || originalPrice}</span>`;
+            }
+
+            const categoryName = (service.category && typeof service.category === 'object')
+                ? service.category.name
+                : (service.category || '');
 
     var totalSlides = services.length;
     var vc          = getVisible(); /* from your existing carousel JS */
@@ -1688,7 +1699,7 @@ function getVisible() {
         try {
             console.log('Fetching products from: https://jusmoto.blackitechs.in/api/v1/services?type=1');
             const response = await fetch('https://jusmoto.blackitechs.in/api/v1/services?type=1');
-            
+
             if (!response.ok) {
                 console.error(`API Error: ${response.status} ${response.statusText}`);
                 throw new Error(`Network response was not ok: ${response.status}`);
@@ -1696,11 +1707,11 @@ function getVisible() {
 
             const data = await response.json();
             console.log('Products API Plain Response:', data);
-            
+
             // Robustly extract products array
             const products = data.data || (Array.isArray(data) ? data : []);
             console.log('Extracted Products Array:', products);
-            
+
             if (products.length === 0) {
                 console.warn('No products found in the API response.');
                 loading.addClass('d-none');
@@ -1711,10 +1722,10 @@ function getVisible() {
             // Group products by category
             const groupedProducts = products.reduce((acc, product) => {
                 // Check if category is an object and extract name, otherwise use category string or 'Other'
-                const category = (product.category && typeof product.category === 'object') 
-                    ? product.category.name 
+                const category = (product.category && typeof product.category === 'object')
+                    ? product.category.name
                     : (product.category || 'Other');
-                
+
                 if (!acc[category]) acc[category] = [];
                 acc[category].push(product);
                 return acc;
@@ -1730,17 +1741,17 @@ function getVisible() {
 
             renderProductTabs(categories);
             renderProductsByCategory(groupedProducts);
-            
+
             loading.addClass('d-none');
             tabsLoading.addClass('d-none');
             error.addClass('d-none');
-            
+
             // Initialize Slick sliders for dynamic content
             initDynamicProductSliders();
 
         } catch (err) {
             console.error('Error fetching products:', err);
-            
+
             if (err.name === 'TypeError' && err.message === 'Failed to fetch') {
                 console.error('CRITICAL: Failed to fetch products. Check CORS and server status.');
             }
@@ -1754,24 +1765,24 @@ function getVisible() {
     function renderProductTabs(categories) {
         const tabMenu = $('#product-category-tabs');
         let html = '';
-        
+
         categories.forEach((category, index) => {
             const isActive = index === 0 ? 'active show' : '';
             const categoryId = category.toLowerCase().replace(/\s+/g, '_');
             html += `<a class="${isActive}" data-bs-toggle="tab" href="#tab_${categoryId}">${category}</a>`;
         });
-        
+
         tabMenu.html(html);
     }
 
     function renderProductsByCategory(groupedProducts) {
         const tabContent = $('#product-tab-content');
         let html = '';
-        
+
         Object.entries(groupedProducts).forEach(([category, products], index) => {
             const isActive = index === 0 ? 'active show' : '';
             const categoryId = category.toLowerCase().replace(/\s+/g, '_');
-            
+
             html += `
                 <div class="tab-pane fade ${isActive}" id="tab_${categoryId}">
                     <div class="ltn__product-tab-content-inner">
@@ -1782,7 +1793,7 @@ function getVisible() {
                 </div>
             `;
         });
-        
+
         tabContent.html(html);
     }
 
@@ -1791,7 +1802,7 @@ function getVisible() {
         const originalPrice = product.price || product.original_price;
         const badge = product.badge || 'New';
         const identifier = product.slug || product.id;
-        
+
         let priceHtml = '';
         if (currentPrice && originalPrice) {
             priceHtml = `<span>₹${currentPrice}</span> <del>₹${originalPrice}</del>`;
@@ -1896,54 +1907,43 @@ function getVisible() {
 })(jQuery);
 
 
-    /* ============================================================
-        API BASE URL
-    ============================================================ */
-    var API_BASE = 'https://jusmoto.blackitechs.in/api/v1';
+/* ============================================================
+    API BASE URL
+============================================================ */
+var API_BASE = 'https://jusmoto.blackitechs.in/api/v1';
 
 
-    /* ============================================================
-        SHARED HELPER: Generate Star Icons from rating (0-5)
-    ============================================================ */
-    function generateStarIcons(rating) {
-        var html = '';
-        var r = parseFloat(rating) || 0;
-        for (var i = 1; i <= 5; i++) {
-            if (i <= Math.floor(r)) {
-                html += '<li><a href="#"><i class="fas fa-star"></i></a></li>';
-            } else if (i - r < 1 && i - r > 0) {
-                html += '<li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>';
-            } else {
-                html += '<li><a href="#"><i class="far fa-star"></i></a></li>';
-            }
-        }
-        return html;
-    }
+/* ============================================================
+    SHARED HELPER: Generate Star Icons from rating (0-5)
+============================================================ */
+function generateStarIcons(rating) {
+    return '';
+}
 
-    /* ============================================================
-        SHARED HELPER: Calculate discount badge
-        e.g. price=6500, discount_price=5800 → "Sale -11%"
-    ============================================================ */
-    function getBadgeLabel(price, discountPrice) {
-        var p = parseFloat(price);
-        var d = parseFloat(discountPrice);
-        if (!p || !d || d >= p) return null;
-        var percent = Math.round(((p - d) / p) * 100);
-        return 'Sale -' + percent + '%';
-    }
+/* ============================================================
+    SHARED HELPER: Calculate discount badge
+    e.g. price=6500, discount_price=5800 → "Sale -11%"
+============================================================ */
+function getBadgeLabel(price, discountPrice) {
+    var p = parseFloat(price);
+    var d = parseFloat(discountPrice);
+    if (!p || !d || d >= p) return null;
+    var percent = Math.round(((p - d) / p) * 100);
+    return 'Sale -' + percent + '%';
+}
 
 
-    
 
 
-    /* ============================================================
-        39. Shop Page Products Fetching (shop.html)
-        Requires: #liton_product_grid and #liton_product_list in HTML
-        Products auto-populate grid & list view with API data
-        Pagination & sorting also handled dynamically
-    ============================================================ */
- async function fetchShopProducts(page, sortBy) {
-    page   = page   || 1;
+
+/* ============================================================
+    39. Shop Page Products Fetching (shop.html)
+    Requires: #liton_product_grid and #liton_product_list in HTML
+    Products auto-populate grid & list view with API data
+    Pagination & sorting also handled dynamically
+============================================================ */
+async function fetchShopProducts(page, sortBy) {
+    page = page || 1;
     sortBy = sortBy || '';
 
     var gridContainer = $('#liton_product_grid .ltn__product-grid-view .row');
@@ -1963,25 +1963,25 @@ function getVisible() {
         var response = await fetch(url);
         if (!response.ok) throw new Error('API Error: ' + response.status);
 
-      var data       = await response.json();
-var products   = Array.isArray(data.data) ? data.data : [];
+        var data = await response.json();
+        var products = Array.isArray(data.data) ? data.data : [];
 
-console.log('Pagination from API:', data.pagination); // check this in browser console
+        console.log('Pagination from API:', data.pagination); // check this in browser console
 
-var pagination = data.pagination || {};
+        var pagination = data.pagination || {};
 
-// If API doesn't return pagination, build it manually
-if (!pagination.totalPages) {
-    var perPage = 12; // adjust to however many your API returns per page
-    var totalCount = pagination.total || products.length;
-    pagination = {
-        total:       totalCount,
-        totalPages:  Math.ceil(totalCount / perPage) || 1,
-        page:        page,
-        hasPrevPage: page > 1,
-        hasNextPage: page < Math.ceil(totalCount / perPage)
-    };
-}
+        // If API doesn't return pagination, build it manually
+        if (!pagination.totalPages) {
+            var perPage = 12; // adjust to however many your API returns per page
+            var totalCount = pagination.total || products.length;
+            pagination = {
+                total: totalCount,
+                totalPages: Math.ceil(totalCount / perPage) || 1,
+                page: page,
+                hasPrevPage: page > 1,
+                hasNextPage: page < Math.ceil(totalCount / perPage)
+            };
+        }
 
         if (products.length === 0) {
             gridContainer.html('<div class="col-12 text-center py-40"><p>No products found.</p></div>');
@@ -1992,23 +1992,23 @@ if (!pagination.totalPages) {
 
         // ── CLIENT-SIDE SORTING ──
         if (sortBy === 'price_asc') {
-            products.sort(function(a, b) {
+            products.sort(function (a, b) {
                 var aPrice = parseFloat(a.discount_price || a.price || 0);
                 var bPrice = parseFloat(b.discount_price || b.price || 0);
                 return aPrice - bPrice;
             });
         } else if (sortBy === 'price_desc') {
-            products.sort(function(a, b) {
+            products.sort(function (a, b) {
                 var aPrice = parseFloat(a.discount_price || a.price || 0);
                 var bPrice = parseFloat(b.discount_price || b.price || 0);
                 return bPrice - aPrice;
             });
         } else if (sortBy === 'newest') {
-            products.sort(function(a, b) {
+            products.sort(function (a, b) {
                 return new Date(b.created_at || 0) - new Date(a.created_at || 0);
             });
         } else if (sortBy === 'popularity') {
-            products.sort(function(a, b) {
+            products.sort(function (a, b) {
                 return parseFloat(b.average_rating || 0) - parseFloat(a.average_rating || 0);
             });
         }
@@ -2030,24 +2030,24 @@ if (!pagination.totalPages) {
     }
 }
 
-    /* -- Shop: Grid Card -- */
-    function renderShopGridCard(product) {
-        var price      = parseFloat(product.price || 0);
-        var discPrice  = parseFloat(product.discount_price || 0);
-        var finalPrice = (discPrice > 0 && discPrice < price) ? discPrice : price;
-        var hasDiscount = discPrice > 0 && discPrice < price;
-        var badge      = getBadgeLabel(price, discPrice);
-        var identifier = product.slug || product.id;
+/* -- Shop: Grid Card -- */
+function renderShopGridCard(product) {
+    var price = parseFloat(product.price || 0);
+    var discPrice = parseFloat(product.discount_price || 0);
+    var finalPrice = (discPrice > 0 && discPrice < price) ? discPrice : price;
+    var hasDiscount = discPrice > 0 && discPrice < price;
+    var badge = getBadgeLabel(price, discPrice);
+    var identifier = product.slug || product.id;
 
-        var badgeHtml = badge
-            ? `<div class="product-badge"><ul><li class="sale-badge">${badge}</li></ul></div>`
-            : '';
+    var badgeHtml = badge
+        ? `<div class="product-badge"><ul><li class="sale-badge">${badge}</li></ul></div>`
+        : '';
 
-        var priceHtml = hasDiscount
-            ? `<span>₹${finalPrice.toFixed(2)}</span> <del>₹${price.toFixed(2)}</del>`
-            : `<span>₹${finalPrice.toFixed(2)}</span>`;
+    var priceHtml = hasDiscount
+        ? `<span>₹${finalPrice.toFixed(2)}</span> <del>₹${price.toFixed(2)}</del>`
+        : `<span>₹${finalPrice.toFixed(2)}</span>`;
 
-        return `
+    return `
             <div class="col-xl-3 col-lg-4 col-sm-6 col-6">
                 <div class="ltn__product-item ltn__product-item-3 text-center">
                     <div class="product-img">
@@ -2072,26 +2072,26 @@ if (!pagination.totalPages) {
                     </div>
                 </div>
             </div>`;
-    }
+}
 
-    /* -- Shop: List Card -- */
-    function renderShopListCard(product) {
-        var price      = parseFloat(product.price || 0);
-        var discPrice  = parseFloat(product.discount_price || 0);
-        var finalPrice = (discPrice > 0 && discPrice < price) ? discPrice : price;
-        var hasDiscount = discPrice > 0 && discPrice < price;
-        var badge      = getBadgeLabel(price, discPrice);
-        var identifier = product.slug || product.id;
+/* -- Shop: List Card -- */
+function renderShopListCard(product) {
+    var price = parseFloat(product.price || 0);
+    var discPrice = parseFloat(product.discount_price || 0);
+    var finalPrice = (discPrice > 0 && discPrice < price) ? discPrice : price;
+    var hasDiscount = discPrice > 0 && discPrice < price;
+    var badge = getBadgeLabel(price, discPrice);
+    var identifier = product.slug || product.id;
 
-        var badgeHtml = badge
-            ? `<div class="product-badge"><ul><li class="sale-badge">${badge}</li></ul></div>`
-            : '';
+    var badgeHtml = badge
+        ? `<div class="product-badge"><ul><li class="sale-badge">${badge}</li></ul></div>`
+        : '';
 
-        var priceHtml = hasDiscount
-            ? `<span>₹${finalPrice.toFixed(2)}</span> <del>₹${price.toFixed(2)}</del>`
-            : `<span>₹${finalPrice.toFixed(2)}</span>`;
+    var priceHtml = hasDiscount
+        ? `<span>₹${finalPrice.toFixed(2)}</span> <del>₹${price.toFixed(2)}</del>`
+        : `<span>₹${finalPrice.toFixed(2)}</span>`;
 
-        return `
+    return `
             <div class="col-lg-12">
                 <div class="ltn__product-item ltn__product-item-3">
                     <div class="product-img">
@@ -2117,11 +2117,11 @@ if (!pagination.totalPages) {
                     </div>
                 </div>
             </div>`;
-    }
+}
 
-    /* -- Shop: Pagination -- */
-  function renderShopPagination(pagination, currentPage) {
-    var total   = pagination.totalPages || 1;
+/* -- Shop: Pagination -- */
+function renderShopPagination(pagination, currentPage) {
+    var total = pagination.totalPages || 1;
     var hasPrev = currentPage > 1;
     var hasNext = currentPage < total;
 
@@ -2150,201 +2150,201 @@ if (!pagination.totalPages) {
     $('.ltn__pagination').html(html);
 }
 
-    /* -- Shop: Showing X of Y results -- */
-    function updateShowingText(pagination, count) {
-        var total = pagination.total || count;
-        $('.showing-product-number span').text('Showing ' + count + ' of ' + total + ' results');
-    }
+/* -- Shop: Showing X of Y results -- */
+function updateShowingText(pagination, count) {
+    var total = pagination.total || count;
+    $('.showing-product-number span').text('Showing ' + count + ' of ' + total + ' results');
+}
 
-    /* -- Shop: Sort dropdown value → API param -- */
-    function getSortParam(label) {
-        var map = {
-            'Sort by popularity'         : 'popularity',
-            'Sort by new arrivals'       : 'newest',
-            'Sort by price: low to high' : 'price_asc',
-            'Sort by price: high to low' : 'price_desc'
-        };
-        return map[label] || '';
-    }
+/* -- Shop: Sort dropdown value → API param -- */
+function getSortParam(label) {
+    var map = {
+        'Sort by popularity': 'popularity',
+        'Sort by new arrivals': 'newest',
+        'Sort by price: low to high': 'price_asc',
+        'Sort by price: high to low': 'price_desc'
+    };
+    return map[label] || '';
+}
 
-    /* -- Shop: Pagination click -- */
-    $(document).on('click', '.page-btn', function(e) {
-        e.preventDefault();
-        var page = parseInt($(this).data('page'));
-        if (!page || page < 1) return;
-        var sortLabel = $('.short-by select').val();
-        fetchShopProducts(page, getSortParam(sortLabel));
-        $('html, body').animate({ scrollTop: $('.ltn__product-area').offset().top - 80 }, 400);
-    });
+/* -- Shop: Pagination click -- */
+$(document).on('click', '.page-btn', function (e) {
+    e.preventDefault();
+    var page = parseInt($(this).data('page'));
+    if (!page || page < 1) return;
+    var sortLabel = $('.short-by select').val();
+    fetchShopProducts(page, getSortParam(sortLabel));
+    $('html, body').animate({ scrollTop: $('.ltn__product-area').offset().top - 80 }, 400);
+});
 
 /* -- Shop: Sort dropdown change (nice-select compatible) -- */
-$(document).on('click', '.short-by .nice-select .option', function() {
+$(document).on('click', '.short-by .nice-select .option', function () {
     var sortValue = $(this).data('value');
     fetchShopProducts(1, sortValue);
 });
 
 /* -- Also keep the regular change handler as fallback -- */
-$(document).on('change', '#sort-select', function() {
+$(document).on('change', '#sort-select', function () {
     fetchShopProducts(1, $(this).val());
 });
 
 
-    /* ============================================================
-        40. Product Details Page Fetching (product-details.html)
-        Reads ?id= or ?slug= from URL and calls /api/v1/services/:id
-        Populates: title, price, images, rating, category,
-                   description, reviews, FAQs, specs, includes
-    ============================================================ */
-    function getProductIdentifier() {
-        var params = new URLSearchParams(window.location.search);
-        return params.get('id') || params.get('slug') || null;
+/* ============================================================
+    40. Product Details Page Fetching (product-details.html)
+    Reads ?id= or ?slug= from URL and calls /api/v1/services/:id
+    Populates: title, price, images, rating, category,
+               description, reviews, FAQs, specs, includes
+============================================================ */
+function getProductIdentifier() {
+    var params = new URLSearchParams(window.location.search);
+    return params.get('id') || params.get('slug') || null;
+}
+
+async function fetchProductDetails() {
+    var identifier = getProductIdentifier();
+    if (!identifier) {
+        console.error('No product ID/slug in URL.');
+        showProductError('Product not found.');
+        return;
     }
 
-    async function fetchProductDetails() {
-        var identifier = getProductIdentifier();
-        if (!identifier) {
-            console.error('No product ID/slug in URL.');
-            showProductError('Product not found.');
-            return;
-        }
+    showProductLoading(true);
 
-        showProductLoading(true);
+    try {
+        var response = await fetch(API_BASE + '/services/' + identifier);
+        if (!response.ok) throw new Error('API Error: ' + response.status);
 
-        try {
-            var response = await fetch(API_BASE + '/services/' + identifier);
-            if (!response.ok) throw new Error('API Error: ' + response.status);
+        var data = await response.json();
+        var product = data.data || data;
 
-            var data    = await response.json();
-            var product = data.data || data;
+        if (!product || !product.id) throw new Error('Invalid product data.');
 
-            if (!product || !product.id) throw new Error('Invalid product data.');
+        renderProductDetails(product);
+        renderProductReviews(product.reviews || [], product.average_rating || 0);
+        renderProductFAQs(product.faqs || []);
+        renderProductSpecifications(product.specifications || []);
+        renderProductIncludes(product.includes || []);
 
-            renderProductDetails(product);
-            renderProductReviews(product.reviews || [], product.average_rating || 0);
-            renderProductFAQs(product.faqs || []);
-            renderProductSpecifications(product.specifications || []);
-            renderProductIncludes(product.includes || []);
+        // ── SET CURRENT PRODUCT FOR CART/WISHLIST ──
+        currentProduct = product;
 
-            // ── SET CURRENT PRODUCT FOR CART/WISHLIST ──
-            currentProduct = product;
+        showProductLoading(false);
 
-            showProductLoading(false);
-
-        } catch (err) {
-            console.error('Error fetching product details:', err);
-            showProductLoading(false);
-            showProductError('Failed to load product. Please try again.');
-        }
+    } catch (err) {
+        console.error('Error fetching product details:', err);
+        showProductLoading(false);
+        showProductError('Failed to load product. Please try again.');
     }
+}
 
-    function renderProductDetails(product) {
-        // Title
-        $('.ltn__shop-details-inner h3').text(product.title || 'Product');
-        $('.ltn__breadcrumb-title').text(product.title || 'Product');
+function renderProductDetails(product) {
+    // Title
+    $('.ltn__shop-details-inner h3').text(product.title || 'Product');
+    $('.ltn__breadcrumb-title').text(product.title || 'Product');
 
-        // Price
-        var price      = parseFloat(product.price || 0);
-        var discPrice  = parseFloat(product.discount_price || 0);
-        var finalPrice = (discPrice > 0 && discPrice < price) ? discPrice : price;
-        var hasDiscount = discPrice > 0 && discPrice < price;
+    // Price
+    var price = parseFloat(product.price || 0);
+    var discPrice = parseFloat(product.discount_price || 0);
+    var finalPrice = (discPrice > 0 && discPrice < price) ? discPrice : price;
+    var hasDiscount = discPrice > 0 && discPrice < price;
 
-        var priceHtml = hasDiscount
-            ? `<span>₹${finalPrice.toFixed(2)}</span> <del>₹${price.toFixed(2)}</del>`
-            : `<span>₹${finalPrice.toFixed(2)}</span>`;
+    var priceHtml = hasDiscount
+        ? `<span>₹${finalPrice.toFixed(2)}</span> <del>₹${price.toFixed(2)}</del>`
+        : `<span>₹${finalPrice.toFixed(2)}</span>`;
 
-        $('.modal-product-info .product-price, .shop-details-info .product-price').html(priceHtml);
+    $('.modal-product-info .product-price, .shop-details-info .product-price').html(priceHtml);
 
-        // Rating
-        var avgRating   = parseFloat(product.average_rating || 0);
-        var reviewCount = (product.reviews || []).length || product.review_count || 0;
-        $('.modal-product-info .product-ratting ul').html(
-            generateStarIcons(avgRating) +
-            `<li class="review-total"><a href="#"> ( ${reviewCount} Reviews )</a></li>`
-        );
+    // Rating
+    var avgRating = parseFloat(product.average_rating || 0);
+    var reviewCount = (product.reviews || []).length || product.review_count || 0;
+    $('.modal-product-info .product-ratting ul').html(
+        generateStarIcons(avgRating) +
+        `<li class="review-total"><a href="#"> ( ${reviewCount} Reviews )</a></li>`
+    );
 
-        // Category
-        var categoryName = (product.category && typeof product.category === 'object')
-            ? product.category.name : (product.category || 'General');
-        $('.modal-product-info .modal-product-meta span').html(`<a href="#">${categoryName}</a>`);
+    // Category
+    var categoryName = (product.category && typeof product.category === 'object')
+        ? product.category.name : (product.category || 'General');
+    $('.modal-product-info .modal-product-meta span').html(`<a href="#">${categoryName}</a>`);
 
-        // Description
-        if (product.description) {
-            $('#liton_tab_details_1_1 .ltn__shop-details-tab-content-inner').html(`
+    // Description
+    if (product.description) {
+        $('#liton_tab_details_1_1 .ltn__shop-details-tab-content-inner').html(`
                 <h4 class="title-2">${product.title}</h4>
                 <p>${product.description}</p>`);
-        }
-
-        // Images
-        renderProductImages(product);
     }
 
-    function renderProductImages(product) {
-        var largeImgContainer = $('.ltn__shop-details-large-img');
-        var smallImgContainer = $('.ltn__shop-details-small-img');
-        if (!largeImgContainer.length) return;
+    // Images
+    renderProductImages(product);
+}
 
-        var images = [];
-        if (product.image) images.push(product.image);
-        if (product.gallery_images && Array.isArray(product.gallery_images)) {
-            product.gallery_images.forEach(function(img) {
-                var url = typeof img === 'object' ? (img.url || img.image) : img;
-                if (url && !images.includes(url)) images.push(url);
-            });
-        }
+function renderProductImages(product) {
+    var largeImgContainer = $('.ltn__shop-details-large-img');
+    var smallImgContainer = $('.ltn__shop-details-small-img');
+    if (!largeImgContainer.length) return;
 
-        if (images.length === 0) return;
-
-        // Destroy existing slick before re-init
-        if (largeImgContainer.hasClass('slick-initialized')) largeImgContainer.slick('unslick');
-        if (smallImgContainer.hasClass('slick-initialized')) smallImgContainer.slick('unslick');
-
-        var largeHtml = '', smallHtml = '';
-        images.forEach(function(imgUrl) {
-            largeHtml += `<div class="single-large-img"><a href="${imgUrl}" data-rel="lightcase:myCollection"><img src="${imgUrl}" alt="Product Image"></a></div>`;
-            smallHtml += `<div class="single-small-img"><img src="${imgUrl}" alt="Product Image"></div>`;
+    var images = [];
+    if (product.image) images.push(product.image);
+    if (product.gallery_images && Array.isArray(product.gallery_images)) {
+        product.gallery_images.forEach(function (img) {
+            var url = typeof img === 'object' ? (img.url || img.image) : img;
+            if (url && !images.includes(url)) images.push(url);
         });
-
-        largeImgContainer.html(largeHtml);
-        smallImgContainer.html(smallHtml);
-
-        // Re-init slick
-        largeImgContainer.slick({ slidesToShow: 1, slidesToScroll: 1, arrows: false, fade: true, asNavFor: '.ltn__shop-details-small-img' });
-        smallImgContainer.slick({
-            slidesToShow: 4, slidesToScroll: 1, asNavFor: '.ltn__shop-details-large-img',
-            dots: false, arrows: true, focusOnSelect: true,
-            prevArrow: '<a class="slick-prev"><i class="fas fa-arrow-left"></i></a>',
-            nextArrow: '<a class="slick-next"><i class="fas fa-arrow-right"></i></a>'
-        });
-
-        // Re-init lightcase
-        $('a[data-rel^=lightcase]').lightcase({ transition: 'elastic', swipe: true, maxWidth: 1170, maxHeight: 600 });
     }
 
-    function renderProductReviews(reviews, avgRating) {
-        var reviewsTab = $('#liton_tab_details_1_2 .ltn__shop-details-tab-content-inner');
-        if (!reviewsTab.length) return;
+    if (images.length === 0) return;
 
-        reviewsTab.find('.product-ratting ul').first().html(
-            generateStarIcons(avgRating) +
-            `<li class="review-total"><a href="#"> ( ${reviews.length} Reviews )</a></li>`
-        );
+    // Destroy existing slick before re-init
+    if (largeImgContainer.hasClass('slick-initialized')) largeImgContainer.slick('unslick');
+    if (smallImgContainer.hasClass('slick-initialized')) smallImgContainer.slick('unslick');
 
-        var commentList = reviewsTab.find('.ltn__comment-inner ul');
-        if (!commentList.length) return;
+    var largeHtml = '', smallHtml = '';
+    images.forEach(function (imgUrl) {
+        largeHtml += `<div class="single-large-img"><a href="${imgUrl}" data-rel="lightcase:myCollection"><img src="${imgUrl}" alt="Product Image"></a></div>`;
+        smallHtml += `<div class="single-small-img"><img src="${imgUrl}" alt="Product Image"></div>`;
+    });
 
-        if (reviews.length === 0) {
-            commentList.html('<li><p>No reviews yet. Be the first to review!</p></li>');
-            return;
-        }
+    largeImgContainer.html(largeHtml);
+    smallImgContainer.html(smallHtml);
 
-        var html = '';
-        reviews.forEach(function(review) {
-            var userName = (review.user && review.user.name) ? review.user.name : (review.name || 'Anonymous');
-            var userImg  = (review.user && review.user.avatar) ? review.user.avatar : 'img/testimonial/1.jpg';
-            var comment  = review.comment || review.review || '';
-            var date     = review.created_at ? new Date(review.created_at).toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
+    // Re-init slick
+    largeImgContainer.slick({ slidesToShow: 1, slidesToScroll: 1, arrows: false, fade: true, asNavFor: '.ltn__shop-details-small-img' });
+    smallImgContainer.slick({
+        slidesToShow: 4, slidesToScroll: 1, asNavFor: '.ltn__shop-details-large-img',
+        dots: false, arrows: true, focusOnSelect: true,
+        prevArrow: '<a class="slick-prev"><i class="fas fa-arrow-left"></i></a>',
+        nextArrow: '<a class="slick-next"><i class="fas fa-arrow-right"></i></a>'
+    });
 
-            html += `
+    // Re-init lightcase
+    $('a[data-rel^=lightcase]').lightcase({ transition: 'elastic', swipe: true, maxWidth: 1170, maxHeight: 600 });
+}
+
+function renderProductReviews(reviews, avgRating) {
+    var reviewsTab = $('#liton_tab_details_1_2 .ltn__shop-details-tab-content-inner');
+    if (!reviewsTab.length) return;
+
+    reviewsTab.find('.product-ratting ul').first().html(
+        generateStarIcons(avgRating) +
+        `<li class="review-total"><a href="#"> ( ${reviews.length} Reviews )</a></li>`
+    );
+
+    var commentList = reviewsTab.find('.ltn__comment-inner ul');
+    if (!commentList.length) return;
+
+    if (reviews.length === 0) {
+        commentList.html('<li><p>No reviews yet. Be the first to review!</p></li>');
+        return;
+    }
+
+    var html = '';
+    reviews.forEach(function (review) {
+        var userName = (review.user && review.user.name) ? review.user.name : (review.name || 'Anonymous');
+        var userImg = (review.user && review.user.avatar) ? review.user.avatar : 'img/testimonial/1.jpg';
+        var comment = review.comment || review.review || '';
+        var date = review.created_at ? new Date(review.created_at).toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
+
+        html += `
                 <li>
                     <div class="ltn__comment-item clearfix">
                         <div class="ltn__commenter-img"><img src="${userImg}" alt="${userName}"></div>
@@ -2356,19 +2356,19 @@ $(document).on('change', '#sort-select', function() {
                         </div>
                     </div>
                 </li>`;
-        });
-        commentList.html(html);
-    }
+    });
+    commentList.html(html);
+}
 
-    function renderProductFAQs(faqs) {
-        var faqContainer = $('#product-faqs-container');
-        if (!faqContainer.length || faqs.length === 0) return;
+function renderProductFAQs(faqs) {
+    var faqContainer = $('#product-faqs-container');
+    if (!faqContainer.length || faqs.length === 0) return;
 
-        var html = '<div class="ltn__faq-inner ltn__faq-inner-2"><div id="accordion_faqs">';
-        faqs.forEach(function(faq, index) {
-            var collapseId = 'faq_item_' + index;
-            var isShow     = index === 0 ? 'show' : '';
-            html += `
+    var html = '<div class="ltn__faq-inner ltn__faq-inner-2"><div id="accordion_faqs">';
+    faqs.forEach(function (faq, index) {
+        var collapseId = 'faq_item_' + index;
+        var isShow = index === 0 ? 'show' : '';
+        html += `
                 <div class="card">
                     <h6 class="${index === 0 ? '' : 'collapsed'} ltn__card-title" data-bs-toggle="collapse" data-bs-target="#${collapseId}" aria-expanded="${index === 0}">
                         ${faq.question || faq.title || 'FAQ'}
@@ -2377,100 +2377,91 @@ $(document).on('change', '#sort-select', function() {
                         <div class="card-body"><p>${faq.answer || faq.content || ''}</p></div>
                     </div>
                 </div>`;
-        });
-        html += '</div></div>';
-        faqContainer.html(html);
-    }
+    });
+    html += '</div></div>';
+    faqContainer.html(html);
+}
 
-    function renderProductSpecifications(specifications) {
-        var specContainer = $('#product-specifications-container');
-        if (!specContainer.length || specifications.length === 0) return;
+function renderProductSpecifications(specifications) {
+    var specContainer = $('#product-specifications-container');
+    if (!specContainer.length || specifications.length === 0) return;
 
-        var html = '<table class="table"><tbody>';
-        specifications.forEach(function(spec) {
-            html += `<tr><th>${spec.key || spec.name || ''}</th><td>${spec.value || ''}</td></tr>`;
-        });
-        html += '</tbody></table>';
-        specContainer.html(html);
-    }
+    var html = '<table class="table"><tbody>';
+    specifications.forEach(function (spec) {
+        html += `<tr><th>${spec.key || spec.name || ''}</th><td>${spec.value || ''}</td></tr>`;
+    });
+    html += '</tbody></table>';
+    specContainer.html(html);
+}
 
-    function renderProductIncludes(includes) {
-        var includesContainer = $('#product-includes-container');
-        if (!includesContainer.length || includes.length === 0) return;
+function renderProductIncludes(includes) {
+    var includesContainer = $('#product-includes-container');
+    if (!includesContainer.length || includes.length === 0) return;
 
-        var html = '<ul class="ltn__list-item-2 ltn__list-item-2-before">';
-        includes.forEach(function(item) {
-            var text = typeof item === 'object' ? (item.name || item.title || item.text) : item;
-            html += `<li><i class="fas fa-check-circle"></i> ${text}</li>`;
-        });
-        html += '</ul>';
-        includesContainer.html(html);
-    }
+    var html = '<ul class="ltn__list-item-2 ltn__list-item-2-before">';
+    includes.forEach(function (item) {
+        var text = typeof item === 'object' ? (item.name || item.title || item.text) : item;
+        html += `<li><i class="fas fa-check-circle"></i> ${text}</li>`;
+    });
+    html += '</ul>';
+    includesContainer.html(html);
+}
 
-    function showProductLoading(show) {
-        if (show) {
-            $('#product-details-loading').removeClass('d-none');
-            $('.ltn__shop-details-inner').addClass('d-none');
-        } else {
-            $('#product-details-loading').addClass('d-none');
-            $('.ltn__shop-details-inner').removeClass('d-none');
-        }
-    }
-
-    function showProductError(message) {
-        $('#product-details-error').removeClass('d-none').find('p').text(message);
+function showProductLoading(show) {
+    if (show) {
+        $('#product-details-loading').removeClass('d-none');
         $('.ltn__shop-details-inner').addClass('d-none');
+    } else {
+        $('#product-details-loading').addClass('d-none');
+        $('.ltn__shop-details-inner').removeClass('d-none');
     }
+}
+
+function showProductError(message) {
+    $('#product-details-error').removeClass('d-none').find('p').text(message);
+    $('.ltn__shop-details-inner').addClass('d-none');
+}
 
 
-    /* ============================================================
-        Initialize all dynamic sections based on page containers
-    ============================================================ */
-    // Home page: Services section
-    if ($('#services-container').length) {
-        fetchServices();
-    }
+/* ============================================================
+    Initialize all dynamic sections based on page containers
+============================================================ */
+// Home page: Services section
+if ($('#services-container').length) {
+    fetchServices();
+}
 
-    // Home page: Products tab section
-    if ($('#product-category-tabs').length) {
-        fetchProducts();
-    }
+// Home page: Products tab section
+if ($('#product-category-tabs').length) {
+    fetchProducts();
+}
 
-    // Shop listing page
-    if ($('#liton_product_grid').length) {
-        fetchShopProducts(1);
-    }
+// Shop listing page
+if ($('#liton_product_grid').length) {
+    fetchShopProducts(1);
+}
 
-    // Product details page
-    if ($('.ltn__shop-details-area').length) {
-        fetchProductDetails();
-    }
+// Product details page
+if ($('.ltn__shop-details-area').length) {
+    fetchProductDetails();
+}
 
-    // Expose globally for retry buttons / external use
-    window.fetchShopProducts    = fetchShopProducts;
-    window.fetchProductDetails  = fetchProductDetails;
+// Expose globally for retry buttons / external use
+window.fetchShopProducts = fetchShopProducts;
+window.fetchProductDetails = fetchProductDetails;
 
-(jQuery);
+// (jQuery); removed due to syntax error
+
 
 
 // ─── PRODUCT DETAILS - API FETCH ──────────────────────────────────────────────
 
 function generateStars(rating, maxStars = 5) {
-    let starsHtml = "";
-    for (let i = 1; i <= maxStars; i++) {
-        if (i <= Math.floor(rating)) {
-            starsHtml += `<li><a href="#"><i class="fas fa-star"></i></a></li>`;
-        } else if (i === Math.ceil(rating) && rating % 1 !== 0) {
-            starsHtml += `<li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>`;
-        } else {
-            starsHtml += `<li><a href="#"><i class="far fa-star"></i></a></li>`;
-        }
-    }
-    return starsHtml;
+    return "";
 }
 
 async function fetchProductDetails() {
-   
+
     const params = new URLSearchParams(window.location.search);
     const idOrSlug = params.get("id") || params.get("slug");
 
@@ -2492,27 +2483,10 @@ async function fetchProductDetails() {
 
 function populateProductDetails(data) {
     // Gallery Images
-    const images = data.gallery_images?.length > 0 ? data.gallery_images : [data.image];
-    const largeImgContainer = document.querySelector(".ltn__shop-details-large-img");
-    const smallImgContainer = document.querySelector(".ltn__shop-details-small-img");
-
-    if (largeImgContainer) {
-        largeImgContainer.innerHTML = images.map(img => `
-            <div class="single-large-img">
-                <a href="${img}" data-rel="lightcase:myCollection">
-                    <img src="${img}" alt="${data.title}">
-                </a>
-            </div>`).join("");
-    }
-    if (smallImgContainer) {
-        smallImgContainer.innerHTML = images.map(img => `
-            <div class="single-small-img">
-                <img src="${img}" alt="${data.title}">
-            </div>`).join("");
-    }
+    renderProductImages(data);
 
     // Title
-    const titleEl = document.querySelector(".modal-product-info h3");
+    const titleEl = document.querySelector(".modal-product-info h3, .shop-details-info h3");
     if (titleEl) titleEl.textContent = data.title;
 
     // Price
@@ -2525,13 +2499,7 @@ function populateProductDetails(data) {
                 : ""}`;
     }
 
-    // Star Rating
-    const rating = parseFloat(data.average_rating) || 0;
-    const reviewCount = data.review_count || 0;
-    const starsWithCount = generateStars(rating) + `<li class="review-total"><a href="#"> ( ${reviewCount} Reviews )</a></li>`;
-    document.querySelectorAll(".product-ratting ul").forEach(ul => {
-        ul.innerHTML = starsWithCount;
-    });
+    // Star Rating Removed
 
     // Category
     const categorySpan = document.querySelector(".modal-product-meta span");
@@ -2544,10 +2512,10 @@ function populateProductDetails(data) {
 
     // Max Qty
     const qtyInput = document.querySelector(".cart-plus-minus-box");
- if (qtyInput) {
-    qtyInput.value = 1;
-    qtyInput.setAttribute('max', data.max_qty || 99);
-}
+    if (qtyInput) {
+        qtyInput.value = 1;
+        qtyInput.setAttribute('max', data.max_qty || 99);
+    }
 
 
     // Description Tab
@@ -2556,28 +2524,64 @@ function populateProductDetails(data) {
         let html = `<h4 class="title-2">${data.title}</h4><p>${data.description}</p>`;
 
         if (data.includes?.length > 0) {
-            html += `<h5>What's Included</h5><ul>`;
-            data.includes.forEach(item => { html += `<li>✔ ${item.title}</li>`; });
+            html += `<h5 class="mt-30">What's Included</h5><ul class="ltn__list-item-2">`;
+            data.includes.forEach(item => { html += `<li><i class="fas fa-check-circle text-success"></i> ${item.title}</li>`; });
             html += `</ul>`;
         }
         if (data.excludes?.length > 0) {
-            html += `<h5>Not Included</h5><ul>`;
-            data.excludes.forEach(item => { html += `<li>✖ ${item.title}</li>`; });
+            html += `<h5 class="mt-30 text-danger">Not Included</h5><ul class="ltn__list-item-2">`;
+            data.excludes.forEach(item => { html += `<li><i class="fas fa-times-circle text-danger"></i> ${item.title}</li>`; });
             html += `</ul>`;
         }
+
+        // Specifications Table
         if (data.specifications?.length > 0) {
-            html += `<h5>Specifications</h5><table class="table ltn__table-responsive">`;
-            data.specifications.forEach(spec => { html += `<tr><th>${spec.title}</th><td>${spec.value}</td></tr>`; });
-            html += `</table>`;
+            html += `<h5 class="mt-30">Specifications</h5><div class="table-responsive">
+                    <table class="table table-bordered ltn__table-responsive">
+                    <tbody>`;
+            data.specifications.forEach(spec => { html += `<tr><th style="width: 30%; background: #f9f9f9;">${spec.title}</th><td>${spec.value}</td></tr>`; });
+            html += `</tbody></table></div>`;
         }
-        if (data.additional_info?.length > 0) {
-            data.additional_info.forEach(info => { html += `<h5>${info.title}</h5><p>${info.description}</p>`; });
-        }
+
+        // FAQs
         if (data.faqs?.length > 0) {
-            html += `<h5>Frequently Asked Questions</h5>`;
-            data.faqs.forEach(faq => { html += `<div class="ltn__faq-item"><strong>Q: ${faq.question}</strong><p>A: ${faq.answer}</p></div>`; });
+            html += `<h5 class="mt-40">Frequently Asked Questions</h5>
+                    <div class="ltn__faq-inner ltn__faq-inner-2 mt-20">
+                        <div id="product_faq_accordion">`;
+            data.faqs.forEach((faq, index) => {
+                const itemId = `faq-item-${index + 1}`;
+                html += `
+                    <div class="card">
+                        <h6 class="${index === 0 ? '' : 'collapsed'} ltn__card-title" 
+                            data-bs-toggle="collapse" 
+                            data-bs-target="#${itemId}" 
+                            aria-expanded="${index === 0 ? 'true' : 'false'}">
+                            ${faq.question}
+                        </h6>
+                        <div id="${itemId}" class="collapse ${index === 0 ? 'show' : ''}" data-parent="#product_faq_accordion">
+                            <div class="card-body">
+                                <p>${faq.answer}</p>
+                            </div>
+                        </div>
+                    </div>`;
+            });
+            html += `</div></div>`;
         }
         descTab.innerHTML = html;
+    }
+
+    // Sidebar Dynamic Content
+    const sidebarInfoContainer = document.getElementById("sidebar-dynamic-info-container");
+    if (sidebarInfoContainer && data.additional_info?.length > 0) {
+        let sidebarHtml = "";
+        data.additional_info.forEach(info => {
+            sidebarHtml += `
+                <div class="widget ltn__sidebar-dynamic-widget">
+                    <h4 class="ltn__widget-title">${info.title}</h4>
+                    <p style="font-size: 15px; line-height: 1.6;">${info.description}</p>
+                </div>`;
+        });
+        sidebarInfoContainer.innerHTML = sidebarHtml;
     }
 
     // Reviews Tab
@@ -2610,6 +2614,9 @@ function populateProductDetails(data) {
     if (data.category_id) {
         fetchRelatedProducts(data.category_id, data.id);
     }
+
+    // ── Sync Cart UI ──
+    updateProductCartUI(data);
 }
 
 
@@ -2628,29 +2635,18 @@ function getBadgeLabel(price, discPrice) {
 }
 
 function generateStarIcons(rating) {
-    var r = parseFloat(rating) || 0;
-    var html = '';
-    for (var i = 1; i <= 5; i++) {
-        if (r >= i) {
-            html += '<li><a href="#"><i class="fas fa-star"></i></a></li>';
-        } else if (r >= i - 0.5) {
-            html += '<li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>';
-        } else {
-            html += '<li><a href="#"><i class="far fa-star"></i></a></li>';
-        }
-    }
-    return html;
+    return '';
 }
 
 function renderRelatedProductCard(product) {
-    var price     = parseFloat(product.price || 0);
+    var price = parseFloat(product.price || 0);
     var discPrice = parseFloat(product.discount_price || 0);
 
     // Only treat as discounted if discount_price is LESS than price
     var hasDiscount = discPrice > 0 && discPrice < price;
-    var finalPrice  = hasDiscount ? discPrice : price;
-    var badgeLabel  = getBadgeLabel(price, discPrice);
-    var identifier  = product.slug || product.id;
+    var finalPrice = hasDiscount ? discPrice : price;
+    var badgeLabel = getBadgeLabel(price, discPrice);
+    var identifier = product.slug || product.id;
 
     var badgeHtml = '<div class="product-badge"><ul><li class="sale-badge">' + badgeLabel + '</li></ul></div>';
 
@@ -2664,24 +2660,24 @@ function renderRelatedProductCard(product) {
 
     return '<div class="col-lg-12">' +
         '<div class="ltn__product-item ltn__product-item-3 text-center">' +
-            '<div class="product-img">' +
-                '<a href="product-details.html?id=' + identifier + '">' +
-                    '<img src="' + imgSrc + '" alt="' + product.title + '">' +
-                '</a>' +
-                badgeHtml +
-                '<div class="product-hover-action"><ul>' +
-                  
-                    '<li><a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal" data-product-id="' + identifier + '"><i class="fas fa-shopping-cart"></i></a></li>' +
-                    '<li><a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal" data-product-id="' + identifier + '"><i class="far fa-heart"></i></a></li>' +
-                '</ul></div>' +
-            '</div>' +
-            '<div class="product-info">' +
-                '<div class="product-ratting"><ul>' + generateStarIcons(product.average_rating) + '</ul></div>' +
-                '<h2 class="product-title"><a href="product-details.html?id=' + identifier + '">' + product.title + '</a></h2>' +
-                '<div class="product-price">' + priceHtml + '</div>' +
-            '</div>' +
+        '<div class="product-img">' +
+        '<a href="product-details.html?id=' + identifier + '">' +
+        '<img src="' + imgSrc + '" alt="' + product.title + '">' +
+        '</a>' +
+        badgeHtml +
+        '<div class="product-hover-action"><ul>' +
+
+        '<li><a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal" data-product-id="' + identifier + '"><i class="fas fa-shopping-cart"></i></a></li>' +
+        '<li><a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal" data-product-id="' + identifier + '"><i class="far fa-heart"></i></a></li>' +
+        '</ul></div>' +
         '</div>' +
-    '</div>';
+        '<div class="product-info">' +
+        '<div class="product-ratting"><ul>' + generateStarIcons(product.average_rating) + '</ul></div>' +
+        '<h2 class="product-title"><a href="product-details.html?id=' + identifier + '">' + product.title + '</a></h2>' +
+        '<div class="product-price">' + priceHtml + '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>';
 }
 
 async function fetchRelatedProducts(categoryId, currentId) {
@@ -2697,11 +2693,11 @@ async function fetchRelatedProducts(categoryId, currentId) {
         var relRes = await fetch(API_BASE + '/services?type=1&category_id=' + categoryId);
         if (!relRes.ok) throw new Error('API Error: ' + relRes.status);
 
-        var relData  = await relRes.json();
+        var relData = await relRes.json();
         var products = Array.isArray(relData.data) ? relData.data : [];
 
         // Exclude the current product
-        products = products.filter(function(p) { return p.id !== currentId; });
+        products = products.filter(function (p) { return p.id !== currentId; });
 
         if (products.length === 0) {
             container.innerHTML = '<div class="col-12 text-center py-40"><p>No related products found.</p></div>';
@@ -2710,7 +2706,7 @@ async function fetchRelatedProducts(categoryId, currentId) {
 
         // Render up to 6 products
         container.innerHTML = products.slice(0, 6)
-            .map(function(p) { return renderRelatedProductCard(p); })
+            .map(function (p) { return renderRelatedProductCard(p); })
             .join('');
 
         // Re-init Slick slider
@@ -2753,9 +2749,9 @@ window.fetchRelatedProducts = fetchRelatedProducts;
 var currentProduct = null;
 
 /* ── Storage ── */
-function getCart()       { try { return JSON.parse(localStorage.getItem('cart')     || '[]'); } catch(e) { return []; } }
-function saveCart(c)     { localStorage.setItem('cart',     JSON.stringify(c)); }
-function getWishlist()   { try { return JSON.parse(localStorage.getItem('wishlist') || '[]'); } catch(e) { return []; } }
+function getCart() { try { return JSON.parse(localStorage.getItem('cart') || '[]'); } catch (e) { return []; } }
+function saveCart(c) { localStorage.setItem('cart', JSON.stringify(c)); }
+function getWishlist() { try { return JSON.parse(localStorage.getItem('wishlist') || '[]'); } catch (e) { return []; } }
 function saveWishlist(w) { localStorage.setItem('wishlist', JSON.stringify(w)); }
 
 function addToCart(product, qty) {
@@ -2763,8 +2759,8 @@ function addToCart(product, qty) {
     qty = parseInt(qty) || 1;
     var maxQty = parseInt(product.max_qty) || 99;
     var price = parseFloat(product.discount_price || product.final_price || product.price || 0);
-    var cart  = getCart();
-    var existing = cart.find(function(i) { return i.id === product.id; });
+    var cart = getCart();
+    var existing = cart.find(function (i) { return i.id === product.id; });
 
     if (existing) {
         var newQty = existing.quantity + qty;
@@ -2796,7 +2792,7 @@ function addToCart(product, qty) {
 function addToWishlist(product) {
     if (!product) return;
     var wishlist = getWishlist();
-    var already  = !!wishlist.find(function(i) { return i.id === product.id; });
+    var already = !!wishlist.find(function (i) { return i.id === product.id; });
     if (!already) {
         wishlist.push({ id: product.id, slug: product.slug || '', title: product.title, price: parseFloat(product.discount_price || product.final_price || product.price || 0), image: product.image || 'img/product/1.png' });
         saveWishlist(wishlist);
@@ -2823,10 +2819,24 @@ function updateWishlistModal(product, alreadyIn) {
 
 /* ── Header badge counts ── */
 function updateCartUI() {
-    var count = getCart().reduce(function(s, i) { return s + i.quantity; }, 0);
+    var count = getCart().reduce(function (s, i) { return s + i.quantity; }, 0);
+
+    // Desktop Badge
     var el = document.getElementById('cartCount');
     if (el) el.innerText = count;
+
+    // Mobile Header Badge
+    var elMobile = document.getElementById('cartCountMobile');
+    if (elMobile) elMobile.innerText = count;
+
     $('.mini-cart-item-count').text(count);
+
+    // Update count in mobile menu/header options if they exist
+    var mobileCartBadge = document.querySelector('.ltn__utilize-buttons .fas.fa-shopping-cart + sup');
+    if (mobileCartBadge) mobileCartBadge.innerText = count;
+
+    var headerCartBadge = document.querySelector('.mini-cart-icon sup');
+    if (headerCartBadge) headerCartBadge.innerText = count;
 }
 function updateWishlistCount() {
     var count = getWishlist().length;
@@ -2837,54 +2847,68 @@ function updateWishlistCount() {
 
 /* ── Mini Cart Sidebar ── */
 function loadMiniCart() {
-    var cart       = getCart();
-    var container  = document.getElementById('miniCartContainer');
+    var cart = getCart();
+    var container = document.getElementById('miniCartContainer');
     var subtotalEl = document.querySelector('.mini-cart-sub-total span');
     if (container) {
         container.innerHTML = '';
         var subtotal = 0;
-        cart.forEach(function(item, index) {
+        cart.forEach(function (item, index) {
             subtotal += item.price * item.quantity;
             container.innerHTML +=
                 '<div class="mini-cart-item clearfix">' +
-                    '<div class="mini-cart-img">' +
-                        '<a href="product-details.html?id=' + (item.slug || item.id) + '"><img src="' + item.image + '" alt="' + item.title + '"></a>' +
-                        '<span class="mini-cart-item-delete" onclick="removeFromCart(' + index + ')" style="cursor:pointer;"><i class="icon-cancel"></i></span>' +
-                    '</div>' +
-                    '<div class="mini-cart-info"><h6>' + item.title + '</h6>' +
-                        '<span class="mini-cart-quantity">' + item.quantity + ' x ₹' + item.price.toFixed(2) + '</span>' +
-                    '</div>' +
+                '<div class="mini-cart-img">' +
+                '<a href="product-details.html?id=' + (item.slug || item.id) + '"><img src="' + item.image + '" alt="' + item.title + '"></a>' +
+                '<span class="mini-cart-item-delete" onclick="removeFromCart(' + index + ')" style="cursor:pointer;"><i class="icon-cancel"></i></span>' +
+                '</div>' +
+                '<div class="mini-cart-info"><h6>' + item.title + '</h6>' +
+                '<span class="mini-cart-quantity">' + item.quantity + ' x ' +
+                '<span class="color-red" style="color:var(--ltn__secondary-color); font-weight:700;">₹' + item.price.toFixed(2) + '</span></span>' +
+                '</div>' +
                 '</div>';
         });
-        if (subtotalEl) subtotalEl.innerText = '₹' + subtotal.toFixed(2);
+        if (subtotalEl) {
+            subtotalEl.innerHTML = '<span class="color-red" style="color:var(--ltn__secondary-color); font-weight:700;">₹' + subtotal.toFixed(2) + '</span>';
+        }
+
+        // Update footer buttons if they exist
+        var miniCartFooter = container.parentElement.querySelector('.mini-cart-footer');
+        if (miniCartFooter) {
+            var buttons = miniCartFooter.querySelectorAll('.btn-wrapper a');
+            if (buttons.length >= 2) {
+                buttons[0].setAttribute('href', 'Product-cart.html');
+                buttons[1].setAttribute('href', 'product-checkout.html');
+            }
+        }
     }
     updateCartUI();
 }
 
 /* ── Remove from mini cart ── */
-function removeFromCart(index) {
+window.removeFromCart = function (index) {
     var cart = getCart();
     cart.splice(index, 1);
     saveCart(cart);
     loadMiniCart();
+    if (document.getElementById('cartTableBody')) loadCartPage();
 }
 
 /* ── Fetch product then add (shop/related/home cards) ── */
 async function fetchAndActOnProduct(idOrSlug, action) {
     try {
-        var res     = await fetch(API_BASE + '/services/' + idOrSlug);
+        var res = await fetch(API_BASE + '/services/' + idOrSlug);
         if (!res.ok) throw new Error('API Error');
-        var data    = await res.json();
+        var data = await res.json();
         var product = data.data || data;
         if (action === 'cart') { addToCart(product, 1); }
-        else                   { addToWishlist(product); }
-    } catch(err) { console.error('fetchAndActOnProduct error:', err); }
+        else { addToWishlist(product); }
+    } catch (err) { console.error('fetchAndActOnProduct error:', err); }
 }
 
 /* ── Cart Page ── */
 function loadCartPage() {
-    var cart             = getCart();
-    var tableBody        = document.getElementById('cartTableBody');
+    var cart = getCart();
+    var tableBody = document.getElementById('cartTableBody');
     var cartTotalsSection = document.querySelector('.shoping-cart-total');
     if (!tableBody) return;
     tableBody.innerHTML = '';
@@ -2895,26 +2919,38 @@ function loadCartPage() {
     }
     if (cartTotalsSection) cartTotalsSection.style.display = 'block';
     var subtotal = 0;
-    cart.forEach(function(item, index) {
-        var price   = parseFloat(item.price);
-        var qty     = parseInt(item.quantity);
+    cart.forEach(function (item, index) {
+        var price = parseFloat(item.price);
+        var qty = parseInt(item.quantity);
         var lineTot = price * qty;
         subtotal += lineTot;
         tableBody.insertAdjacentHTML('beforeend',
             '<tr>' +
-                '<td class="cart-product-remove"><span onclick="removeCartItem(' + index + ')" style="cursor:pointer;">x</span></td>' +
-                '<td class="cart-product-image"><img src="' + item.image + '" alt="' + item.title + '"></td>' +
-                '<td class="cart-product-info"><h4>' + item.title + '</h4></td>' +
-                '<td class="cart-product-price">₹' + price.toFixed(2) + '</td>' +
-                '<td class="cart-product-quantity"><div class="cart-plus-minus"><input type="number" value="' + qty + '" min="1" class="cart-plus-minus-box" data-index="' + index + '"></div></td>' +
-                '<td class="cart-product-subtotal">₹' + lineTot.toFixed(2) + '</td>' +
+            '<td class="cart-product-remove" style="vertical-align:middle;">' +
+            '<button class="cart-remove-btn" onclick="removeCartItem(' + index + ')" title="Remove item"><i class="fas fa-trash-alt"></i></button>' +
+            '</td>' +
+            '<td class="cart-product-image" style="vertical-align:middle;">' +
+            '<img src="' + item.image + '" alt="' + item.title + '">' +
+            '</td>' +
+            '<td class="cart-product-info" style="vertical-align:middle;">' +
+            '<h4 style="margin:0;font-size:15px;font-weight:600;line-height:1.4;">' + item.title + '</h4>' +
+            '</td>' +
+            '<td class="cart-product-price" style="vertical-align:middle;">₹' + price.toFixed(2) + '</td>' +
+            '<td class="cart-product-quantity" style="vertical-align:middle;">' +
+            '<div class="cart-qty-stepper">' +
+            '<button class="qty-stepper-btn" onclick="updateQuantity(' + index + ', ' + Math.max(1, qty - 1) + ')" title="Decrease">−</button>' +
+            '<input type="number" value="' + qty + '" min="1" class="cart-plus-minus-box" data-index="' + index + '">' +
+            '<button class="qty-stepper-btn" onclick="updateQuantity(' + index + ', ' + (qty + 1) + ')" title="Increase">+</button>' +
+            '</div>' +
+            '</td>' +
+            '<td class="cart-product-subtotal" style="vertical-align:middle;">₹' + lineTot.toFixed(2) + '</td>' +
             '</tr>'
         );
     });
     updateCartTotals(subtotal);
 }
 
-function removeCartItem(index) {
+window.removeCartItem = function (index) {
     var cart = getCart();
     cart.splice(index, 1);
     saveCart(cart);
@@ -2922,7 +2958,8 @@ function removeCartItem(index) {
     loadMiniCart();
 }
 
-function updateQuantity(index, qty) {
+
+window.updateQuantity = function (index, qty) {
     var cart = getCart();
     qty = parseInt(qty);
     if (isNaN(qty) || qty < 1) qty = 1;
@@ -2941,19 +2978,17 @@ function updateQuantity(index, qty) {
 
     cart[index].quantity = qty;
     saveCart(cart);
-    var rows = document.querySelectorAll('#cartTableBody tr');
-    if (rows[index]) rows[index].querySelector('.cart-product-subtotal').innerText = '₹' + (parseFloat(cart[index].price) * qty).toFixed(2);
-    recalculateCartTotal();
+    loadCartPage();
     loadMiniCart();
 }
 
 function recalculateCartTotal() {
-    updateCartTotals(getCart().reduce(function(s, i) { return s + parseFloat(i.price) * parseInt(i.quantity); }, 0));
+    updateCartTotals(getCart().reduce(function (s, i) { return s + parseFloat(i.price) * parseInt(i.quantity); }, 0));
 }
 
 function updateCartTotals(subtotal) {
     var shipping = subtotal > 0 ? 15 : 0;
-    var tbody    = document.querySelector('.shoping-cart-total tbody');
+    var tbody = document.querySelector('.shoping-cart-total tbody');
     if (!tbody) return;
     tbody.innerHTML =
         '<tr><td>Cart Subtotal</td><td>₹' + subtotal.toFixed(2) + '</td></tr>' +
@@ -2962,9 +2997,52 @@ function updateCartTotals(subtotal) {
         '<tr><td><strong>Order Total</strong></td><td><strong>₹' + (subtotal + shipping).toFixed(2) + '</strong></td></tr>';
 }
 
+/* ── Product Details Cart UI Sync ── */
+function updateProductCartUI(product) {
+    if (!product) return;
+    var cart = getCart();
+    var item = cart.find(function (i) { return i.id === product.id; });
+    var initialState = document.getElementById('cart-state-initial');
+    var addedState = document.getElementById('cart-state-added');
+    var qtyVal = document.getElementById('current-product-qty');
+
+    if (item) {
+        if (initialState) initialState.style.display = 'none';
+        if (addedState) addedState.style.display = 'flex';
+        if (qtyVal) qtyVal.innerText = item.quantity;
+    } else {
+        if (initialState) initialState.style.display = 'block';
+        if (addedState) addedState.style.display = 'none';
+    }
+}
+
+window.updateCurrentProductQty = function (delta) {
+    if (!currentProduct) return;
+    var cart = getCart();
+    var index = cart.findIndex(function (i) { return i.id === currentProduct.id; });
+    if (index === -1) return;
+
+    var newQty = cart[index].quantity + delta;
+    if (newQty <= 0) {
+        cart.splice(index, 1);
+    } else {
+        var maxQty = parseInt(currentProduct.max_qty) || 99;
+        if (newQty > maxQty) {
+            alert('Sorry! Only ' + maxQty + ' units available.');
+            newQty = maxQty;
+        }
+        cart[index].quantity = newQty;
+    }
+
+    saveCart(cart);
+    loadMiniCart();
+    updateProductCartUI(currentProduct);
+};
+
+
 /* ── Checkout Page ── */
 function renderCheckoutSummary() {
-    var cart   = getCart();
+    var cart = getCart();
     var $tbody = $('.ltn__checkout-area .ltn__order-overview table tbody, #checkout-product-summary');
     if (!$tbody.length) return;
     if (cart.length === 0) {
@@ -2972,7 +3050,7 @@ function renderCheckoutSummary() {
         return;
     }
     var html = '', subTotal = 0;
-    cart.forEach(function(item) {
+    cart.forEach(function (item) {
         var line = item.price * item.quantity;
         subTotal += line;
         html += '<tr><td class="ltn__product-title"><a href="product-details.html?id=' + (item.slug || item.id) + '">' + item.title + '</a> <strong class="product-quantity">× ' + item.quantity + '</strong></td><td class="ltn__product-total">₹' + line.toFixed(2) + '</td></tr>';
@@ -2987,7 +3065,7 @@ function renderCheckoutSummary() {
 /* ── Wishlist Page ── */
 /* ── Wishlist Page ── */
 function loadWishlistPage() {
-    var wishlist  = getWishlist();
+    var wishlist = getWishlist();
     var tableBody = document.getElementById('wishlistTableBody');
     if (!tableBody) return;
 
@@ -3062,11 +3140,11 @@ function removeFromWishlist(index) {
     updateWishlistCount();
 }
 
-function moveToCart(index) {
+window.moveToCart = function (index) {
     var wishlist = getWishlist();
-    var product  = wishlist[index];
-    var cart     = getCart();
-    var existing = cart.find(function(i) { return i.id === product.id; });
+    var product = wishlist[index];
+    var cart = getCart();
+    var existing = cart.find(function (i) { return i.id === product.id; });
     if (existing) { existing.quantity += 1; }
     else { cart.push({ id: product.id, slug: product.slug || '', title: product.title, price: product.price, image: product.image, quantity: 1 }); }
     saveCart(cart);
@@ -3078,16 +3156,16 @@ function moveToCart(index) {
 }
 
 /* ── SINGLE DOMContentLoaded for all page inits ── */
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     loadMiniCart();
     updateWishlistCount();
     if (document.getElementById('top-rated-products-list')) fetchTopRatedProducts();
-    if (document.getElementById('cartTableBody'))           loadCartPage();
-    if (document.getElementById('wishlistTableBody'))       loadWishlistPage();
-    if (document.querySelector('.ltn__checkout-area'))      renderCheckoutSummary();
+    if (document.getElementById('cartTableBody')) loadCartPage();
+    if (document.getElementById('wishlistTableBody')) loadWishlistPage();
+    if (document.querySelector('.ltn__checkout-area')) renderCheckoutSummary();
 
     /* Cart page: quantity input */
-    document.addEventListener('input', function(e) {
+    document.addEventListener('input', function (e) {
         if (e.target.classList.contains('cart-plus-minus-box')) {
             var idx = e.target.getAttribute('data-index');
             if (idx !== null) updateQuantity(parseInt(idx), e.target.value);
@@ -3095,9 +3173,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     /* Cart page: +/- buttons */
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
         if (e.target.classList.contains('qtybutton')) {
-            setTimeout(function() {
+            setTimeout(function () {
                 var input = e.target.parentElement.querySelector('.cart-plus-minus-box');
                 if (!input) return;
                 var idx = input.getAttribute('data-index');
@@ -3108,25 +3186,25 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /* ── jQuery click handlers ── */
-$(document).ready(function() {
+$(document).ready(function () {
     /* Product Details: Add to Cart */
-    $(document).on('click', '.ltn__product-details-menu-2 a[data-bs-target="#add_to_cart_modal"]', function() {
+    $(document).on('click', '.ltn__product-details-menu-2 a[data-bs-target="#add_to_cart_modal"]', function () {
         if (!currentProduct) return;
         var qty = parseInt($('.cart-plus-minus-box').val()) || 1;
         addToCart(currentProduct, qty);
     });
     /* Product Details: Wishlist */
-    $(document).on('click', '.ltn__product-details-menu-3 a[data-bs-target="#liton_wishlist_modal"]', function() {
+    $(document).on('click', '.ltn__product-details-menu-3 a[data-bs-target="#liton_wishlist_modal"]', function () {
         if (!currentProduct) return;
         addToWishlist(currentProduct);
     });
     /* Shop/Related/Home cards: Add to Cart */
-    $(document).on('click', 'a[data-bs-target="#add_to_cart_modal"][data-product-id]', function() {
+    $(document).on('click', 'a[data-bs-target="#add_to_cart_modal"][data-product-id]', function () {
         var id = $(this).data('product-id');
         if (id) fetchAndActOnProduct(id, 'cart');
     });
     /* Shop/Related/Home cards: Wishlist */
-    $(document).on('click', 'a[data-bs-target="#liton_wishlist_modal"][data-product-id]', function() {
+    $(document).on('click', 'a[data-bs-target="#liton_wishlist_modal"][data-product-id]', function () {
         var id = $(this).data('product-id');
         if (id) fetchAndActOnProduct(id, 'wishlist');
     });
@@ -3135,49 +3213,50 @@ $(document).ready(function() {
 
 // ── Star Rating Helper (required by fetchTopRatedProducts) ──
 function generateStars(rating) {
-    var stars = '<ul>';
-    rating = Math.round(rating || 5);
-    for (var i = 1; i <= 5; i++) {
-        stars += i <= rating ? '<li><i class="fas fa-star"></i></li>' : '<li><i class="far fa-star"></i></li>';
-    }
-    return stars + '</ul>';
+    return '<ul></ul>';
 }
 
 // ── Fetch & Render Featured (Top Rated) Products ──
 async function fetchTopRatedProducts() {
     try {
         var response = await fetch('https://jusmoto.blackitechs.in/api/v1/services?type=1');
-        var result   = await response.json();
+        var result = await response.json();
         if (!result.success) return;
         var container = document.getElementById('top-rated-products-list');
         if (!container) return;
 
-        var list = result.data.filter(function(p) { return p.is_featured == 1; });
+        var list = result.data.filter(function (p) { return p.is_featured == 1; });
 
         container.innerHTML = '';
-        list.forEach(function(product) {
-            var identifier   = product.slug || product.id;
-            var imgSrc       = product.image || 'img/product/1.png';
-            var price        = parseFloat(product.price || 0);
-            var discPrice    = parseFloat(product.discount_price || 0);
+        list.forEach(function (product) {
+            var identifier = product.slug || product.id;
+            var imgSrc = product.image || 'img/product/1.png';
+            var price = parseFloat(product.price || 0);
+            var discPrice = parseFloat(product.discount_price || 0);
             var displayPrice = (discPrice > 0 && discPrice < price) ? discPrice : price;
-            var hasDiscount  = discPrice > 0 && discPrice < price;
+            var hasDiscount = discPrice > 0 && discPrice < price;
 
             container.innerHTML +=
                 '<li><div class="top-rated-product-item clearfix">' +
-                    '<div class="top-rated-product-img">' +
-                        '<a href="product-details.html?id=' + identifier + '">' +
-                            '<img src="' + imgSrc + '" alt="' + product.title + '">' +
-                        '</a>' +
-                    '</div>' +
-                    '<div class="top-rated-product-info">' +
-                        '<div class="product-ratting">' + generateStars(product.average_rating) + '</div>' +
-                        '<h6><a href="product-details.html?id=' + identifier + '">' + product.title + '</a></h6>' +
-                        '<div class="product-price">' +
-                            '<span>₹' + displayPrice.toFixed(2) + '</span>' +
-                            (hasDiscount ? '<del>₹' + price.toFixed(2) + '</del>' : '') +
-                        '</div>' +
-                    '</div>' +
+                '<div class="top-rated-product-img">' +
+                '<a href="product-details.html?id=' + identifier + '">' +
+                '<img src="' + imgSrc + '" alt="' + product.title + '">' +
+                '</a>' +
+                '</div>' +
+                '<div class="top-rated-product-info">' +
+                '<div class="product-ratting">' + generateStars(product.average_rating) + '</div>' +
+                '<h6><a href="product-details.html?id=' + identifier + '">' + product.title + '</a></h6>' +
+                '<div class="product-price">' +
+                '<span>₹' + displayPrice.toFixed(2) + '</span>' +
+                (hasDiscount ? '<del>₹' + price.toFixed(2) + '</del>' : '') +
+                '</div>' +
+                '<div class="product-hover-action">' +
+                '<ul>' +
+                '<li><a href="#" title="Add to Cart" data-bs-toggle="modal" data-bs-target="#add_to_cart_modal" data-product-id="' + identifier + '"><i class="fas fa-shopping-cart"></i></a></li>' +
+                '<li><a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal" data-product-id="' + identifier + '"><i class="far fa-heart"></i></a></li>' +
+                '</ul>' +
+                '</div>' +
+                '</div>' +
                 '</div></li>';
         });
     } catch (err) {
@@ -3185,27 +3264,27 @@ async function fetchTopRatedProducts() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     if (document.getElementById('top-rated-products-list')) {
         fetchTopRatedProducts();
     }
 });
 
 /* ── Global exports ── */
-window.addToCart             = addToCart;
-window.addToWishlist         = addToWishlist;
-window.removeFromCart        = removeFromCart;
-window.removeCartItem        = removeCartItem;
-window.removeFromWishlist    = removeFromWishlist;
-window.moveToCart            = moveToCart;
-window.updateQuantity        = updateQuantity;
-window.getCart               = getCart;
-window.getWishlist           = getWishlist;
-window.loadMiniCart          = loadMiniCart;
-window.loadCartPage          = loadCartPage;
-window.loadWishlistPage      = loadWishlistPage;
+window.addToCart = addToCart;
+window.addToWishlist = addToWishlist;
+window.removeFromCart = removeFromCart;
+window.removeCartItem = removeCartItem;
+window.removeFromWishlist = removeFromWishlist;
+window.moveToCart = moveToCart;
+window.updateQuantity = updateQuantity;
+window.getCart = getCart;
+window.getWishlist = getWishlist;
+window.loadMiniCart = loadMiniCart;
+window.loadCartPage = loadCartPage;
+window.loadWishlistPage = loadWishlistPage;
 window.renderCheckoutSummary = renderCheckoutSummary;
-window.fetchRelatedProducts  = fetchRelatedProducts;
+window.fetchRelatedProducts = fetchRelatedProducts;
 
 /* ================================================================
    SHOP PAGE: SEARCH + CATEGORY FILTER
@@ -3216,16 +3295,16 @@ var API_PRODUCTS_URL = 'https://jusmoto.blackitechs.in/api/v1/services?type=1';
 
 // ── Shared filter state ──
 var shopFilter = {
-    search:   '',
+    search: '',
     category: 'all',  // category id or 'all'
     maxPrice: 10000,
-    page:     1,
-    sort:     ''
+    page: 1,
+    sort: ''
 };
 
 // ── Store all products locally for client-side filtering ──
 var allShopProducts = [];
-var shopCategories  = {}; // { id: { name, count } }
+var shopCategories = {}; // { id: { name, count } }
 
 /* ----------------------------------------------------------------
    INIT: Fetch all products once, build sidebar, render
@@ -3234,7 +3313,7 @@ async function initShopPage() {
     showShopLoading(true);
 
     try {
-        var res  = await fetch(API_PRODUCTS_URL);
+        var res = await fetch(API_PRODUCTS_URL);
         var json = await res.json();
         allShopProducts = Array.isArray(json.data) ? json.data : [];
 
@@ -3242,7 +3321,7 @@ async function initShopPage() {
         setMaxPrice();
         applyFiltersAndRender();
 
-    } catch(err) {
+    } catch (err) {
         console.error('initShopPage error:', err);
         showShopError();
     }
@@ -3254,9 +3333,9 @@ async function initShopPage() {
 function buildCategoryFilter() {
     shopCategories = { all: { name: 'All Products', count: allShopProducts.length } };
 
-    allShopProducts.forEach(function(p) {
+    allShopProducts.forEach(function (p) {
         if (p.category) {
-            var id   = p.category.id;
+            var id = p.category.id;
             var name = p.category.name;
             if (!shopCategories[id]) shopCategories[id] = { name: name, count: 0 };
             shopCategories[id].count++;
@@ -3269,16 +3348,16 @@ function buildCategoryFilter() {
     var html = '<li class="active" data-cat="all" onclick="selectCategory(\'all\', this)">' +
         '<a>All Products <span class="cat-count-badge" id="cat-badge-all">' + shopCategories.all.count + '</span></a></li>';
 
-    Object.entries(shopCategories).forEach(function(entry) {
-        var id  = entry[0];
+    Object.entries(shopCategories).forEach(function (entry) {
+        var id = entry[0];
         var cat = entry[1];
         if (id === 'all') return;
         html += '<li data-cat="' + id + '" onclick="selectCategory(\'' + id + '\', this)">' +
             '<a>' +
-                '<span><i class="fas fa-chevron-right" style="font-size:10px;margin-right:6px;opacity:.5;"></i>' + cat.name + '</span>' +
-                '<span class="cat-count-badge">' + cat.count + '</span>' +
+            '<span><i class="fas fa-chevron-right" style="font-size:10px;margin-right:6px;opacity:.5;"></i>' + cat.name + '</span>' +
+            '<span class="cat-count-badge">' + cat.count + '</span>' +
             '</a>' +
-        '</li>';
+            '</li>';
     });
 
     ul.innerHTML = html;
@@ -3288,7 +3367,7 @@ function buildCategoryFilter() {
    SET PRICE RANGE MAX FROM DATA
 ---------------------------------------------------------------- */
 function setMaxPrice() {
-    var maxP = Math.max.apply(null, allShopProducts.map(function(p) {
+    var maxP = Math.max.apply(null, allShopProducts.map(function (p) {
         return parseFloat(p.discount_price || p.price || 0);
     }));
     var rounded = Math.ceil((maxP || 10000) / 1000) * 1000;
@@ -3303,13 +3382,13 @@ function setMaxPrice() {
 /* ----------------------------------------------------------------
    CATEGORY SELECT
 ---------------------------------------------------------------- */
-window.selectCategory = function(catId, el) {
-    document.querySelectorAll('#sidebar-category-list li').forEach(function(li) {
+window.selectCategory = function (catId, el) {
+    document.querySelectorAll('#sidebar-category-list li').forEach(function (li) {
         li.classList.remove('active');
     });
     el.classList.add('active');
     shopFilter.category = catId;
-    shopFilter.page     = 1;
+    shopFilter.page = 1;
     applyFiltersAndRender();
     updateActiveFiltersUI();
 };
@@ -3320,7 +3399,7 @@ window.selectCategory = function(catId, el) {
 function doShopSearch() {
     var val = document.getElementById('shopSearchInput').value.trim();
     shopFilter.search = val;
-    shopFilter.page   = 1;
+    shopFilter.page = 1;
 
     var clearBtn = document.getElementById('searchClearBtn');
     if (clearBtn) clearBtn.style.display = val ? 'inline-block' : 'none';
@@ -3329,7 +3408,7 @@ function doShopSearch() {
     updateActiveFiltersUI();
 }
 
-window.clearShopSearch = function() {
+window.clearShopSearch = function () {
     document.getElementById('shopSearchInput').value = '';
     shopFilter.search = '';
     document.getElementById('searchClearBtn').style.display = 'none';
@@ -3337,18 +3416,18 @@ window.clearShopSearch = function() {
     updateActiveFiltersUI();
 };
 
-window.clearAllFilters = function() {
+window.clearAllFilters = function () {
     // Reset state
-    shopFilter.search   = '';
+    shopFilter.search = '';
     shopFilter.category = 'all';
-    shopFilter.page     = 1;
+    shopFilter.page = 1;
 
     // Reset UI
     document.getElementById('shopSearchInput').value = '';
     document.getElementById('searchClearBtn').style.display = 'none';
 
     // Reset category list
-    document.querySelectorAll('#sidebar-category-list li').forEach(function(li) {
+    document.querySelectorAll('#sidebar-category-list li').forEach(function (li) {
         li.classList.toggle('active', li.dataset.cat === 'all');
     });
 
@@ -3373,7 +3452,7 @@ function applyFiltersAndRender() {
 
     // 1. Category
     if (shopFilter.category !== 'all') {
-        list = list.filter(function(p) {
+        list = list.filter(function (p) {
             return p.category && String(p.category.id) === String(shopFilter.category);
         });
     }
@@ -3381,15 +3460,15 @@ function applyFiltersAndRender() {
     // 2. Search
     var q = shopFilter.search.toLowerCase();
     if (q) {
-        list = list.filter(function(p) {
-            return (p.title         && p.title.toLowerCase().includes(q))        ||
-                   (p.description   && p.description.toLowerCase().includes(q))  ||
-                   (p.category && p.category.name && p.category.name.toLowerCase().includes(q));
+        list = list.filter(function (p) {
+            return (p.title && p.title.toLowerCase().includes(q)) ||
+                (p.description && p.description.toLowerCase().includes(q)) ||
+                (p.category && p.category.name && p.category.name.toLowerCase().includes(q));
         });
     }
 
     // 3. Price
-    list = list.filter(function(p) {
+    list = list.filter(function (p) {
         var price = parseFloat(p.discount_price || p.price || 0);
         return price <= shopFilter.maxPrice;
     });
@@ -3397,27 +3476,27 @@ function applyFiltersAndRender() {
     // 4. Sort
     var sort = shopFilter.sort;
     if (sort === 'price_asc') {
-        list.sort(function(a, b) {
+        list.sort(function (a, b) {
             return parseFloat(a.discount_price || a.price || 0) - parseFloat(b.discount_price || b.price || 0);
         });
     } else if (sort === 'price_desc') {
-        list.sort(function(a, b) {
+        list.sort(function (a, b) {
             return parseFloat(b.discount_price || b.price || 0) - parseFloat(a.discount_price || a.price || 0);
         });
     } else if (sort === 'newest') {
-        list.sort(function(a, b) { return new Date(b.created_at || 0) - new Date(a.created_at || 0); });
+        list.sort(function (a, b) { return new Date(b.created_at || 0) - new Date(a.created_at || 0); });
     } else if (sort === 'popularity') {
-        list.sort(function(a, b) { return parseFloat(b.average_rating || 0) - parseFloat(a.average_rating || 0); });
+        list.sort(function (a, b) { return parseFloat(b.average_rating || 0) - parseFloat(a.average_rating || 0); });
     }
 
     // 5. Paginate
-    var perPage    = 12;
+    var perPage = 12;
     var totalCount = list.length;
     var totalPages = Math.max(1, Math.ceil(totalCount / perPage));
     if (shopFilter.page > totalPages) shopFilter.page = 1;
 
-    var start  = (shopFilter.page - 1) * perPage;
-    var paged  = list.slice(start, start + perPage);
+    var start = (shopFilter.page - 1) * perPage;
+    var paged = list.slice(start, start + perPage);
 
     // 6. Render
     renderFilteredProducts(paged, q);
@@ -3448,7 +3527,7 @@ function renderFilteredProducts(products, searchQuery) {
             '<h5>No products found</h5>' +
             '<p>Try adjusting your search term or selecting a different category.</p>' +
             '<button class="btn theme-btn-1 mt-10" onclick="clearAllFilters()">Clear Filters</button>' +
-        '</div>';
+            '</div>';
         gridContainer.innerHTML = noResultsHtml;
         if (listContainer) listContainer.innerHTML = noResultsHtml;
         return;
@@ -3456,10 +3535,10 @@ function renderFilteredProducts(products, searchQuery) {
 
     // Use your existing renderShopGridCard / renderShopListCard if available
     if (typeof renderShopGridCard === 'function') {
-        var gridHtml = products.map(function(p) {
+        var gridHtml = products.map(function (p) {
             return highlightProductCard(renderShopGridCard(p), searchQuery);
         }).join('');
-        var listHtml = products.map(function(p) {
+        var listHtml = products.map(function (p) {
             return highlightProductCard(renderShopListCard(p), searchQuery);
         }).join('');
         gridContainer.innerHTML = gridHtml;
@@ -3471,7 +3550,7 @@ function renderFilteredProducts(products, searchQuery) {
 function highlightProductCard(html, query) {
     if (!query) return html;
     // Only highlight inside product-title tags
-    return html.replace(/(<h2 class="product-title">[\s\S]*?<\/h2>)/g, function(match) {
+    return html.replace(/(<h2 class="product-title">[\s\S]*?<\/h2>)/g, function (match) {
         var re = new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
         return match.replace(re, '<mark style="background:rgba(255,90,0,.15);color:#ff5a00;border-radius:3px;padding:0 2px;">$1</mark>');
     });
@@ -3514,7 +3593,7 @@ function renderShopPaginationFiltered(totalPages, currentPage) {
 ---------------------------------------------------------------- */
 function updateActiveFiltersUI() {
     var widget = document.getElementById('activeFiltersWidget');
-    var list   = document.getElementById('activeFiltersList');
+    var list = document.getElementById('activeFiltersList');
     if (!widget || !list) return;
 
     var chips = '';
@@ -3538,7 +3617,7 @@ function updateActiveFiltersUI() {
 ---------------------------------------------------------------- */
 function showShopLoading(show) {
     var gridContainer = document.querySelector('#liton_product_grid .ltn__product-grid-view .row') ||
-                        document.getElementById('grid-product-row');
+        document.getElementById('grid-product-row');
     if (!gridContainer) return;
     if (show) {
         gridContainer.innerHTML = '<div class="col-12 text-center py-60">' +
@@ -3549,7 +3628,7 @@ function showShopLoading(show) {
 
 function showShopError() {
     var gridContainer = document.querySelector('#liton_product_grid .ltn__product-grid-view .row') ||
-                        document.getElementById('grid-product-row');
+        document.getElementById('grid-product-row');
     if (gridContainer) {
         gridContainer.innerHTML = '<div class="col-12 text-center py-40">' +
             '<p class="text-danger">Failed to load products. Please try again.</p>' +
@@ -3560,7 +3639,10 @@ function showShopError() {
 /* ----------------------------------------------------------------
    EVENT LISTENERS
 ---------------------------------------------------------------- */
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
+    // Initial UI load
+    if (typeof loadMiniCart === 'function') loadMiniCart();
+    if (typeof updateWishlistCount === 'function') updateWishlistCount();
 
     // Search: button click
     var searchBtn = document.getElementById('shopSearchBtn');
@@ -3569,7 +3651,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Search: Enter key
     var searchInput = document.getElementById('shopSearchInput');
     if (searchInput) {
-        searchInput.addEventListener('keyup', function(e) {
+        searchInput.addEventListener('keyup', function (e) {
             if (e.key === 'Enter') { doShopSearch(); return; }
             // Live search (debounced 350ms)
             clearTimeout(window._shopSearchDebounce);
@@ -3580,12 +3662,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Price range
     var priceRange = document.getElementById('sidebarPriceRange');
     if (priceRange) {
-        priceRange.addEventListener('input', function() {
+        priceRange.addEventListener('input', function () {
             shopFilter.maxPrice = parseInt(this.value);
             var label = document.getElementById('sidebarPriceLabel');
             if (label) label.textContent = 'Up to ₹' + shopFilter.maxPrice.toLocaleString('en-IN');
             clearTimeout(window._priceDebounce);
-            window._priceDebounce = setTimeout(function() {
+            window._priceDebounce = setTimeout(function () {
                 shopFilter.page = 1;
                 applyFiltersAndRender();
                 updateActiveFiltersUI();
@@ -3594,21 +3676,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Sort select (nice-select: option click)
-    $(document).on('click', '.short-by .nice-select .option', function() {
+    $(document).on('click', '.short-by .nice-select .option', function () {
         shopFilter.sort = $(this).data('value');
         shopFilter.page = 1;
         applyFiltersAndRender();
     });
 
     // Sort select (native fallback)
-    $(document).on('change', '#sort-select', function() {
+    $(document).on('change', '#sort-select', function () {
         shopFilter.sort = $(this).val();
         shopFilter.page = 1;
         applyFiltersAndRender();
     });
 
     // Filtered pagination clicks
-    $(document).on('click', '.filter-page-btn', function(e) {
+    $(document).on('click', '.filter-page-btn', function (e) {
         e.preventDefault();
         var page = parseInt($(this).data('page'));
         if (!page || page < 1) return;
@@ -3622,7 +3704,26 @@ document.addEventListener('DOMContentLoaded', function() {
         initShopPage();
     }
 
-    
+    /* ── Global click listener for any button with data-product-id (shop/home/related) ── */
+    $(document).on('click', '[data-product-id]', function (e) {
+        var id = $(this).data('product-id');
+        var isWishlist = $(this).attr('title') === 'Wishlist' || $(this).find('.fa-heart').length > 0;
+        if (id) {
+            if (typeof fetchAndActOnProduct === 'function') {
+                fetchAndActOnProduct(id, isWishlist ? 'wishlist' : 'cart');
+            }
+        }
+    });
+
+    // Dynamic Add to Cart Button (Product Details)
+    $(document).on('click', '.ltn__add-to-cart-btn-dynamic', function (e) {
+        e.preventDefault();
+        if (typeof currentProduct !== 'undefined' && currentProduct) {
+            addToCart(currentProduct, 1);
+            updateProductCartUI(currentProduct);
+        }
+    });
+
 });
 
 

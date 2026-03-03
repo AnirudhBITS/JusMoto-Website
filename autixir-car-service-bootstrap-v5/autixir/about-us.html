@@ -19,119 +19,206 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- Responsive css -->
     <link rel="stylesheet" href="css/responsive.css">
+    <!-- Custom overrides -->
+    <link rel="stylesheet" href="css/custom.css">
+    <style>
+        /* Modern Header Styles */
+        .modern-search-container {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            overflow: hidden;
+            padding: 0 4px 0 14px;
+            margin-right: 6px;
+        }
+
+        .modern-search-container input {
+            background: transparent !important;
+            border: none !important;
+            outline: none !important;
+            color: #fff !important;
+            font-size: 13px;
+            width: 140px;
+            padding: 6px 8px !important;
+        }
+
+        .modern-search-container input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .modern-search-container button {
+            background: var(--ltn__secondary-color);
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            cursor: pointer;
+            flex-shrink: 0;
+            font-size: 13px;
+        }
+
+        .modern-icon-btn {
+            display: inline-flex !important;
+            align-items: center;
+            justify-content: center;
+            width: 38px !important;
+            height: 38px !important;
+            border-radius: 50% !important;
+            background: rgba(255, 255, 255, 0.12) !important;
+            border: 1px solid rgba(255, 255, 255, 0.25) !important;
+            color: #fff !important;
+            font-size: 16px !important;
+            transition: background 0.25s, border-color 0.25s !important;
+            margin: 0 3px !important;
+        }
+
+        .modern-icon-btn:hover {
+            background: var(--ltn__secondary-color) !important;
+            border-color: var(--ltn__secondary-color) !important;
+        }
+
+        .modern-cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--ltn__secondary-color);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        @media (max-width: 1199px) {
+            .modern-search-container {
+                display: none !important;
+            }
+        }
+    </style>
 
     <style>
         /* ==================================================
    LARGE DEVICES (1200px ↓)
 ================================================== */
 
-@media (max-width: 1199px) {
+        @media (max-width: 1199px) {
 
-    .ltn__main-menu ul {
-        gap: 18px;
-    }
+            .ltn__main-menu ul {
+                gap: 18px;
+            }
 
-}
+        }
 
-/* ==================================================
+        /* ==================================================
    TABLET DEVICES (991px ↓)
 ================================================== */
 
-@media (max-width: 991px) {
+        @media (max-width: 991px) {
 
-    /* Hide desktop menu */
-    .header-menu-column {
-        display: none;
-    }
+            /* Hide desktop menu */
+            .header-menu-column {
+                display: none;
+            }
 
-    /* Show mobile menu */
-    .mobile-menu-toggle {
-        display: block;
-    }
+            /* Show mobile menu */
+            .mobile-menu-toggle {
+                display: block;
+            }
 
-    /* Hide support */
-    .get-support {
-        display: none;
-    }
+            /* Hide support */
+            .get-support {
+                display: none;
+            }
 
-    .site-logo-wrap {
-        width: 100%;
-        justify-content: space-between;
-    }
+            .site-logo-wrap {
+                width: 100%;
+                justify-content: space-between;
+            }
 
-}
+        }
 
-/* ==================================================
+        /* ==================================================
    MOBILE DEVICES (767px ↓)
 ================================================== */
 
-@media (max-width: 767px) {
+        @media (max-width: 767px) {
 
-    /* TOP BAR STACK */
-    .ltn__header-top-area .row {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
-    }
+            /* TOP BAR STACK */
+            .ltn__header-top-area .row {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
 
-    .top-bar-right {
-        justify-content: center;
-    }
+            .top-bar-right {
+                justify-content: center;
+            }
 
-    .ltn__top-bar-menu ul {
-        justify-content: center;
-    }
+            .ltn__top-bar-menu ul {
+                justify-content: center;
+            }
 
-    .ltn__social-media ul {
-        justify-content: center;
-    }
+            .ltn__social-media ul {
+                justify-content: center;
+            }
 
-    /* HEADER MIDDLE */
-    .ltn__header-middle-area .row {
-        flex-wrap: nowrap;
-    }
+            /* HEADER MIDDLE */
+            .ltn__header-middle-area .row {
+                flex-wrap: nowrap;
+            }
 
-    .site-logo img {
-        max-width: 150px;
-    }
+            .site-logo img {
+                max-width: 150px;
+            }
 
-}
+        }
 
-/* ==================================================
+        /* ==================================================
    SMALL MOBILE (575px ↓)
 ================================================== */
 
-@media (max-width: 575px) {
+        @media (max-width: 575px) {
 
-    .ltn__top-bar-menu ul {
-        flex-direction: column;
-        gap: 5px;
-    }
+            .ltn__top-bar-menu ul {
+                flex-direction: column;
+                gap: 5px;
+            }
 
-    .site-logo img {
-        max-width: 130px;
-    }
+            .site-logo img {
+                max-width: 130px;
+            }
 
-}
+        }
 
-/* ==================================================
+        /* ==================================================
    EXTRA SMALL MOBILE (480px ↓)
 ================================================== */
 
-@media (max-width: 480px) {
+        @media (max-width: 480px) {
 
-    .ltn__top-bar-menu li a {
-        font-size: 13px;
-    }
+            .ltn__top-bar-menu li a {
+                font-size: 13px;
+            }
 
-    .ltn__social-media ul {
-        gap: 8px;
-    }
+            .ltn__social-media ul {
+                gap: 8px;
+            }
 
-    .mobile-menu-toggle svg {
-        width: 35px;
-        height: 35px;
-    }
+            .mobile-menu-toggle svg {
+                width: 35px;
+                height: 35px;
+            }
 
 }
 .ltn__breadcrumb-area {
@@ -178,20 +265,25 @@
 }
 
 
-/* =========================================
+        .ltn__breadcrumb-area {
+            background-color: var(--section-bg-1);
+            margin-bottom: 40px;
+        }
+
+        /* =========================================
    ABOUT US SECTION - FULL RESPONSIVE
 ========================================= */
 
-/* ---------- DEFAULT / DESKTOP (>992px) ---------- */
-.ltn__about-us-area {
-    padding-top: 40px !important;
-    padding-bottom: 90px !important;
-}
+        /* ---------- DEFAULT / DESKTOP (>992px) ---------- */
+        .ltn__about-us-area {
+            padding-top: 40px !important;
+            padding-bottom: 90px !important;
+        }
 
-.ltn__about-us-area .section-title-area h1,
-.ltn__about-us-area .section-title-area h6 {
-    text-align: left;
-}
+        .ltn__about-us-area .section-title-area h1,
+        .ltn__about-us-area .section-title-area h6 {
+            text-align: left;
+        }
 
 .ltn__about-us-area p {
     text-align: justify;
@@ -199,367 +291,376 @@
     margin-top: 30px;
 }
 
-.about-us-img-wrap {
-    position: relative;
-}
+        .about-us-img-wrap {
+            position: relative;
+        }
 
-.about-us-img-wrap img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-}
-
-
-
-.about-us-img-info-inner h1 {
-    font-size: 40px;
-    margin-bottom: 0;
-    font-weight: 700;
-}
-
-.about-us-img-info-inner h6 {
-    margin: 0;
-    font-size: 16px;
-}
+        .about-us-img-wrap img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
 
 
-/* ---------- TABLET (768px - 991px) ---------- */
-@media (min-width: 768px) and (max-width: 991px) {
-    .ltn__about-us-area {
-        padding-top: 30px !important;
-        padding-bottom: 30px !important;
-    }
 
-    .ltn__about-us-area .row {
-        display: flex;
-        flex-wrap: nowrap; /* Keep left-right layout */
-        align-items: center;
-    }
+        .about-us-img-info-inner h1 {
+            font-size: 40px;
+            margin-bottom: 0;
+            font-weight: 700;
+        }
 
-    .ltn__about-us-area .col-lg-6 {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
+        .about-us-img-info-inner h6 {
+            margin: 0;
+            font-size: 16px;
+        }
 
-    /* Image left, content right */
-    .ltn__about-us-area .col-lg-6:nth-child(1) {
-        order: 1;
-    }
-    .ltn__about-us-area .col-lg-6:nth-child(2) {
-        order: 2;
-        text-align: left;
-    }
 
-    .about-us-img-info {
-        bottom: 20px;
-        right: 20px;
-        padding: 15px 20px;
-    }
+        /* ---------- TABLET (768px - 991px) ---------- */
+        @media (min-width: 768px) and (max-width: 991px) {
+            .ltn__about-us-area {
+                padding-top: 30px !important;
+                padding-bottom: 30px !important;
+            }
 
-    .about-us-img-info-inner h1 {
-        font-size: 32px;
-    }
+            .ltn__about-us-area .row {
+                display: flex;
+                flex-wrap: nowrap;
+                /* Keep left-right layout */
+                align-items: center;
+            }
 
-    .ltn__about-us-area .btn-wrapper {
-        text-align: left;
-        margin-top: 0;
-    }
-}
+            .ltn__about-us-area .col-lg-6 {
+                flex: 0 0 50%;
+                max-width: 50%;
+            }
 
-/* ---------- MOBILE (<768px) ---------- */
-@media (max-width: 767px) {
-    .ltn__about-us-area {
-        padding-top: 25px !important;
-        padding-bottom: 25px !important;
-    }
+            /* Image left, content right */
+            .ltn__about-us-area .col-lg-6:nth-child(1) {
+                order: 1;
+            }
 
-    /* Stack columns vertically */
-    .ltn__about-us-area .row {
-        display: flex;
-        flex-direction: column;
-    }
+            .ltn__about-us-area .col-lg-6:nth-child(2) {
+                order: 2;
+                text-align: left;
+            }
 
-    /* Content first */
-    .ltn__about-us-area .col-lg-6:nth-child(2) {
-        order: 1;
-        margin-bottom: 20px;
-        text-align: center;
-    }
+            .about-us-img-info {
+                bottom: 20px;
+                right: 20px;
+                padding: 15px 20px;
+            }
 
-    /* Image second */
-    .ltn__about-us-area .col-lg-6:nth-child(1) {
-        order: 2;
-    }
+            .about-us-img-info-inner h1 {
+                font-size: 32px;
+            }
 
-    .ltn__about-us-area .section-title-area h1,
-    .ltn__about-us-area .section-title-area h6 {
-        text-align: center !important;
-    }
+            .ltn__about-us-area .btn-wrapper {
+                text-align: left;
+                margin-top: 0;
+            }
+        }
 
-    .ltn__about-us-area p {
-        text-align: justify !important;
-    }
+        /* ---------- MOBILE (<768px) ---------- */
+        @media (max-width: 767px) {
+            .ltn__about-us-area {
+                padding-top: 25px !important;
+                padding-bottom: 25px !important;
+            }
 
-    .ltn__about-us-area .btn-wrapper {
-        text-align: center;
-        margin-top: 15px;
-    }
+            /* Stack columns vertically */
+            .ltn__about-us-area .row {
+                display: flex;
+                flex-direction: column;
+            }
 
-    .about-us-img-info {
-        bottom: 15px;
-        right: 15px;
-        padding: 12px 15px;
-    }
+            /* Content first */
+            .ltn__about-us-area .col-lg-6:nth-child(2) {
+                order: 1;
+                margin-bottom: 20px;
+                text-align: center;
+            }
 
-    .about-us-img-info-inner h1 {
-        font-size: 28px;
-    }
+            /* Image second */
+            .ltn__about-us-area .col-lg-6:nth-child(1) {
+                order: 2;
+            }
 
-    .about-us-img-info-inner h6 {
-        font-size: 14px;
-    }
+            .ltn__about-us-area .section-title-area h1,
+            .ltn__about-us-area .section-title-area h6 {
+                text-align: center !important;
+            }
 
-    .section-title {
-        font-size: 26px;
-    }
-}
+            .ltn__about-us-area p {
+                text-align: justify !important;
+            }
 
-/* ---------- SMALL MOBILE (<575px) ---------- */
-@media (max-width: 575px) {
-    .ltn__about-us-area {
-        padding-top: 20px !important;
-        padding-bottom: 20px !important;
-    }
+            .ltn__about-us-area .btn-wrapper {
+                text-align: center;
+                margin-top: 15px;
+            }
 
-    .about-us-img-info {
-        bottom: 10px;
-        right: 10px;
-        padding: 10px 12px;
-    }
+            .about-us-img-info {
+                bottom: 15px;
+                right: 15px;
+                padding: 12px 15px;
+            }
 
-    .about-us-img-info-inner h1 {
-        font-size: 24px;
-    }
+            .about-us-img-info-inner h1 {
+                font-size: 28px;
+            }
 
-    .section-title {
-        font-size: 22px;
-    }
-}
+            .about-us-img-info-inner h6 {
+                font-size: 14px;
+            }
 
-/* =========================================
+            .section-title {
+                font-size: 26px;
+            }
+        }
+
+        /* ---------- SMALL MOBILE (<575px) ---------- */
+        @media (max-width: 575px) {
+            .ltn__about-us-area {
+                padding-top: 20px !important;
+                padding-bottom: 20px !important;
+            }
+
+            .about-us-img-info {
+                bottom: 10px;
+                right: 10px;
+                padding: 10px 12px;
+            }
+
+            .about-us-img-info-inner h1 {
+                font-size: 24px;
+            }
+
+            .section-title {
+                font-size: 22px;
+            }
+        }
+
+        /* =========================================
    FEATURE AREA - FULL RESPONSIVE (Left-aligned text)
 ========================================= */
 
-/* ---------- DEFAULT / DESKTOP (>992px) ---------- */
-.ltn__feature-area .ltn__feature-item {
-    text-align: left; /* Left align text by default */
-}
+        /* ---------- DEFAULT / DESKTOP (>992px) ---------- */
+        .ltn__feature-area .ltn__feature-item {
+            text-align: left;
+            /* Left align text by default */
+        }
 
-.ltn__feature-item .ltn__feature-icon {
-    font-size: 50px;
-    color: #ff6f61;
-    margin-bottom: 15px;
-}
+        .ltn__feature-item .ltn__feature-icon {
+            font-size: 50px;
+            color: #ff6f61;
+            margin-bottom: 15px;
+        }
 
-.ltn__feature-item h3 {
-    font-size: 22px;
-    margin-bottom: 10px;
-}
+        .ltn__feature-item h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
 
-.ltn__feature-item p {
-    font-size: 15px;
-    line-height: 1.6;
-}
+        .ltn__feature-item p {
+            font-size: 15px;
+            line-height: 1.6;
+        }
 
-/* ---------- TABLET (768px - 991px) ---------- */
-@media (min-width: 768px) and (max-width: 991px) {
-    .ltn__feature-area .col-lg-4 {
-        flex: 0 0 50%;
-        max-width: 50%;
-        padding-left: 10px;
-        padding-right: 10px;
-        margin-bottom: 20px;
-    }
+        /* ---------- TABLET (768px - 991px) ---------- */
+        @media (min-width: 768px) and (max-width: 991px) {
+            .ltn__feature-area .col-lg-4 {
+                flex: 0 0 50%;
+                max-width: 50%;
+                padding-left: 10px;
+                padding-right: 10px;
+                margin-bottom: 20px;
+            }
 
-    .ltn__feature-item {
-        text-align: left; /* Keep left aligned on tablet */
-    }
+            .ltn__feature-item {
+                text-align: left;
+                /* Keep left aligned on tablet */
+            }
 
-    .ltn__feature-item h3 {
-        font-size: 20px;
-    }
+            .ltn__feature-item h3 {
+                font-size: 20px;
+            }
 
-    .ltn__feature-item p {
-        font-size: 14px;
-    }
+            .ltn__feature-item p {
+                font-size: 14px;
+            }
 
-    .ltn__feature-item .ltn__feature-icon {
-        font-size: 45px;
-    }
-}
+            .ltn__feature-item .ltn__feature-icon {
+                font-size: 45px;
+            }
+        }
 
-/* ---------- MOBILE (<768px) ---------- */
-@media (max-width: 767px) {
-    .ltn__feature-area .col-lg-4,
-    .ltn__feature-area .col-sm-6,
-    .ltn__feature-area .col-12 {
-        flex: 0 0 100%;
-        max-width: 100%;
-        padding-left: 10px;
-        padding-right: 10px;
-        margin-bottom: 20px;
-    }
+        /* ---------- MOBILE (<768px) ---------- */
+        @media (max-width: 767px) {
 
-    .ltn__feature-item {
-        text-align: left; /* Keep left aligned on mobile */
-    }
+            .ltn__feature-area .col-lg-4,
+            .ltn__feature-area .col-sm-6,
+            .ltn__feature-area .col-12 {
+                flex: 0 0 100%;
+                max-width: 100%;
+                padding-left: 10px;
+                padding-right: 10px;
+                margin-bottom: 20px;
+            }
 
-    .ltn__feature-item h3 {
-        font-size: 18px;
-    }
+            .ltn__feature-item {
+                text-align: left;
+                /* Keep left aligned on mobile */
+            }
 
-    .ltn__feature-item p {
-        font-size: 14px;
-    }
+            .ltn__feature-item h3 {
+                font-size: 18px;
+            }
 
-    .ltn__feature-item .ltn__feature-icon {
-        font-size: 40px;
-    }
-}
+            .ltn__feature-item p {
+                font-size: 14px;
+            }
 
-/* ---------- SMALL MOBILE (<575px) ---------- */
-@media (max-width: 575px) {
-    .ltn__feature-item h3 {
-        font-size: 16px;
-    }
+            .ltn__feature-item .ltn__feature-icon {
+                font-size: 40px;
+            }
+        }
 
-    .ltn__feature-item p {
-        font-size: 13px;
-    }
+        /* ---------- SMALL MOBILE (<575px) ---------- */
+        @media (max-width: 575px) {
+            .ltn__feature-item h3 {
+                font-size: 16px;
+            }
 
-    .ltn__feature-item .ltn__feature-icon {
-        font-size: 35px;
-    }
-}
+            .ltn__feature-item p {
+                font-size: 13px;
+            }
 
-/* ================================
+            .ltn__feature-item .ltn__feature-icon {
+                font-size: 35px;
+            }
+        }
+
+        /* ================================
    LAPTOP (992px – 1199px)
 ================================ */
-@media (max-width: 1199px) {
-    .section-title-area h1 {
-        font-size: 36px;
-    }
+        @media (max-width: 1199px) {
+            .section-title-area h1 {
+                font-size: 36px;
+            }
 
-    .ltn__video-bg-img {
-        height: 420px;
-    }
-}
-/* ================================
+            .ltn__video-bg-img {
+                height: 420px;
+            }
+        }
+
+        /* ================================
    TABLET (768px – 991px)
    Stack Layout (Content First)
 ================================ */
-@media (max-width: 991px) and (min-width: 768px) {
+        @media (max-width: 991px) and (min-width: 768px) {
 
-    .ltn__progress-bar-area {
-        padding: 80px 0;
-    }
+            .ltn__progress-bar-area {
+                padding: 80px 0;
+            }
 
-    /* Make single column */
-    .ltn__progress-bar-area .col-lg-6 {
-        width: 100%;
-        max-width: 100%;
-        flex: 0 0 100%;
-    }
+            /* Make single column */
+            .ltn__progress-bar-area .col-lg-6 {
+                width: 100%;
+                max-width: 100%;
+                flex: 0 0 100%;
+            }
 
-    /* Content Section */
-    .ltn__progress-bar-wrap {
-        padding-right: 0;
-        margin-bottom: 40px;
-        text-align: left;
-    }
+            /* Content Section */
+            .ltn__progress-bar-wrap {
+                padding-right: 0;
+                margin-bottom: 40px;
+                text-align: left;
+            }
 
-    .section-title-area h1 {
-        font-size: 32px;
-        text-align: center;
-    }
+            .section-title-area h1 {
+                font-size: 32px;
+                text-align: center;
+            }
 
-    .section-title-area p {
-        text-align: justify;
-    }
-    .section-subtitle{
-        text-align: center;
-    }
+            .section-title-area p {
+                text-align: justify;
+            }
 
-    /* Video Section */
-    .ltn__video-bg-img {
-        height: 350px;
-        margin-left: 0;
-    }
-}
-/* ================================
+            .section-subtitle {
+                text-align: center;
+            }
+
+            /* Video Section */
+            .ltn__video-bg-img {
+                height: 350px;
+                margin-left: 0;
+            }
+        }
+
+        /* ================================
    MOBILE (Below 768px)
    Stack Layout + Center Heading
 ================================ */
-@media (max-width: 767px) {
+        @media (max-width: 767px) {
 
-    .ltn__progress-bar-area {
-        padding: 60px 0;
-    }
+            .ltn__progress-bar-area {
+                padding: 60px 0;
+            }
 
-    .ltn__progress-bar-area .col-lg-6 {
-        width: 100%;
-    }
+            .ltn__progress-bar-area .col-lg-6 {
+                width: 100%;
+            }
 
-    .ltn__progress-bar-wrap {
-        padding-right: 0;
-        text-align: center;
-    }
+            .ltn__progress-bar-wrap {
+                padding-right: 0;
+                text-align: center;
+            }
 
-    .section-title-area h1 {
-        font-size: 24px;
-        text-align: center;
-    }
+            .section-title-area h1 {
+                font-size: 24px;
+                text-align: center;
+            }
 
-    .section-title-area p {
-        text-align: justify;
-        font-size: 15px;
-    }
+            .section-title-area p {
+                text-align: justify;
+                font-size: 15px;
+            }
 
-    .ltn__progress-bar-item p {
-        text-align: left;
-    }
+            .ltn__progress-bar-item p {
+                text-align: left;
+            }
 
-    .ltn__video-bg-img {
-        height: 280px;
-        margin-top: 30px;
-        margin-left: 0;
-    }
+            .ltn__video-bg-img {
+                height: 280px;
+                margin-top: 30px;
+                margin-left: 0;
+            }
 
-    .progress-bar span {
-        font-size: 12px;
-        top: -22px;
-    }
-}
+            .progress-bar span {
+                font-size: 12px;
+                top: -22px;
+            }
+        }
 
-/* ================================
+        /* ================================
    EXTRA SMALL MOBILE (Below 480px)
 ================================ */
-@media (max-width: 480px) {
+        @media (max-width: 480px) {
 
-    .section-title-area h1 {
-        font-size: 20px;
-    }
+            .section-title-area h1 {
+                font-size: 20px;
+            }
 
-    .section-title-area p {
-        font-size: 14px;
-    }
+            .section-title-area p {
+                font-size: 14px;
+            }
 
-    .ltn__video-icon-2 {
-        width: 55px;
-        height: 55px;
-        line-height: 55px;
-        font-size: 16px;
-    }
+            .ltn__video-icon-2 {
+                width: 55px;
+                height: 55px;
+                line-height: 55px;
+                font-size: 16px;
+            }
 
     .ltn__video-bg-img {
         height: 220px;
@@ -732,9 +833,9 @@
 /* Mobile: 1 column + center image properly */
 @media (max-width: 767px) {
 
-    .ltn__testimonial-slider-3-active .col-lg-12 {
-        width: 100%;
-    }
+            .ltn__testimonial-slider-3-active .col-lg-12 {
+                width: 100%;
+            }
 
     .ltn__testimonial-item-4 {
         text-align: center;
@@ -775,321 +876,225 @@
 
     <!-- Add your site or application content here -->
 
-<!-- Body main wrapper start -->
-<div class="body-wrapper">
+    <!-- Body main wrapper start -->
+    <div class="body-wrapper">
 
-   <!-- HEADER AREA START (header-4) -->
-    <header class="ltn__header-area ltn__header-4 ltn__header-6 ltn__header-transparent gradient-color-2">
-        <!-- ltn__header-top-area start -->
-        <div class="ltn__header-top-area top-area-color-white">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-7">
-                        <div class="ltn__top-bar-menu">
-                            <ul>
-                                <li><a href="mailto:hello@jusmoto.com"><i class="fas fa-envelope"></i> hello@jusmoto.com</a></li>
-                                <li><a href="locations.html"><i class="fas fa-map-marker-alt"></i> 12, Murugappa Road, Kotturpuram, Chennai - 600085</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="top-bar-right text-end">
+        <!-- HEADER AREA START (header-4) -->
+        <header class="ltn__header-area ltn__header-4 ltn__header-6 ltn__header-transparent gradient-color-2">
+            <!-- ltn__header-top-area start -->
+            <div class="ltn__header-top-area top-area-color-white">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-7">
                             <div class="ltn__top-bar-menu">
                                 <ul>
-                                    <li>
-                                        <!-- ltn__language-menu -->
-                                        <div class="ltn__drop-menu ltn__currency-menu ltn__language-menu">
-                                            <ul>
-                                                <li><a href="#" class="dropdown-toggle"><span class="active-currency">English</span></a>
-                                                    <ul>
-                                                        <li><a href="#">Arabic</a></li>
-                                                        <li><a href="#">Bengali</a></li>
-                                                        <li><a href="#">Chinese</a></li>
-                                                        <li><a href="#">English</a></li>
-                                                        <li><a href="#">French</a></li>
-                                                        <li><a href="#">Hindi</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <!-- ltn__social-media -->
-                                        <div class="ltn__social-media">
-                                            <ul>
-                                                <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                                                <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-                                                
-                                                <li><a href="#" title="Instagram"><i class="fab fa-instagram"></i></a></li>
-                                                <li><a href="#" title="Dribbble"><i class="fab fa-dribbble"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
+                                    <li><a href="mailto:hello@jusmoto.com"><i class="fas fa-envelope"></i>
+                                            hello@jusmoto.com</a></li>
+                                    <li><a href="locations.html"><i class="fas fa-map-marker-alt"></i> #12, Murugappa
+                                            Road, Kotturpuram, Chennai - 600085</a></li>
                                 </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="top-bar-right text-end">
+                                <div class="ltn__top-bar-menu">
+                                    <ul>
+                                        <li>
+                                            <!-- ltn__social-media -->
+                                            <div class="ltn__social-media">
+                                                <ul>
+                                                    <li><a href="#" title="Facebook"><i
+                                                                class="fab fa-facebook-f"></i></a></li>
+                                                    <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                                                    </li>
+                                                    <li><a href="#" title="Instagram"><i
+                                                                class="fab fa-instagram"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- ltn__header-top-area end -->
-        <!-- ltn__header-middle-area start -->
-        <div class="ltn__header-middle-area ltn__header-sticky ltn__sticky-bg-black ltn__logo-right-menu-option">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div class="site-logo-wrap">
-                            <div class="site-logo">
-                                <a href="home.html"><img src="img/header-logo.png" alt="Logo"></a>
+            <!-- ltn__header-top-area end -->
+            <!-- ltn__header-middle-area start -->
+            <div class="ltn__header-middle-area ltn__header-sticky ltn__sticky-bg-black ltn__logo-right-menu-option">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="site-logo-wrap">
+                                <div class="site-logo">
+                                    <a href="home.html"><img src="img/header-logo.png" alt="Logo"></a>
+                                </div>
+                                <div class="get-support clearfix get-support-color-white">
+                                    <div class="get-support-icon">
+                                        <i class="icon-call"></i>
+                                    </div>
+                                    <div class="get-support-info">
+                                        <h6>Get Support</h6>
+                                        <h4><a href="tel:+917871787196">+91 7871787196</a></h4>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="get-support clearfix get-support-color-white">
-                                <div class="get-support-icon">
-                                    <i class="icon-call"></i>
-                                </div>
-                                <div class="get-support-info">
-                                    <h6>Get Support</h6>
-                                    <h4><a href="tel:+917871787196">+91 7871787196</a></h4>
-                                </div>
+                        </div>
+                        <div class="col header-menu-column menu-color-white">
+                            <div class="header-menu d-none d-xl-block">
+                                <nav>
+                                    <div class="ltn__main-menu">
+                                        <ul>
+                                            <li><a href="home.html">Home</a>
+                                            </li>
+                                            <li><a href="about-us.html">About</a>
+                                            </li>
+                                            <li><a href="service.html">Services</a>
+                                            </li>
+                                            <li><a href="products.html">Products</a>
+                                            </li>
+                                            <li><a href="contact-us.html">Contact</a>
+                                            </li>
+                                            <div class="ltn__header-options ltn__header-options-2">
+                                                <!-- Modern Search Pill -->
+                                                <div class="modern-search-container">
+                                                    <form action="#">
+                                                        <input type="text" name="search" placeholder="Search..." />
+                                                        <button type="submit"><i class="icon-search"></i></button>
+                                                    </form>
+                                                </div>
+                                                <!-- User Account btn -->
+                                                <div class="ltn__drop-menu user-menu">
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#" class="modern-icon-btn"><i
+                                                                    class="icon-user"></i></a>
+                                                            <ul>
+                                                                <li><a href="login.html"><i
+                                                                            class="fas fa-sign-in-alt"></i> Sign
+                                                                        in</a></li>
+                                                                <li><a href="register.html"><i
+                                                                            class="fas fa-user-plus"></i>
+                                                                        Register</a></li>
+                                                                <li><a href="account.html"><i
+                                                                            class="fas fa-user-circle"></i> My
+                                                                        Account</a></li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <!-- Modern Mini Cart btn -->
+                                                <div class="mini-cart-icon" style="position:relative;">
+                                                    <a href="#ltn__utilize-cart-menu"
+                                                        class="ltn__utilize-toggle modern-icon-btn">
+                                                        <i class="icon-shopping-cart"></i>
+                                                    </a>
+                                                    <sup id="cartCount"
+                                                        class="mini-cart-item-count modern-cart-badge">0</sup>
+                                                </div>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </nav>
                             </div>
                         </div>
                     </div>
-                    <div class="col header-menu-column menu-color-white">
-                        <div class="header-menu d-none d-xl-block">
-                            <nav>
-                                <div class="ltn__main-menu">
-                                    <ul>
-                                        <li><a href="home.html">Home</a>
-                                        </li>
-                                        <li><a href="about-us.html">About</a>
-                                        </li>
-                                        <li><a href="service.html">Services</a>
-                                        </li>
-                                        <li><a href="products.html">Products</a>
-                                        </li>
-                                        <li><a href="contact-us.html">Contact</a>
-                                        </li>
- <div class="ltn__header-options ltn__header-options-2">
-                        <!-- header-search-1 -->
-                        <div class="header-search-wrap">
-                            <div class="header-search-1">
-                                <div class="search-icon">
-                                    <i class="icon-search for-search-show"></i>
-                                    <i class="icon-cancel  for-search-close"></i>
-                                </div>
+                    <!-- MOBILE OPTIONS (Cart) -->
+                    <div class="col-auto d-xl-none">
+                        <div class="ltn__header-options ltn__header-options-2"
+                            style="background: transparent; box-shadow: none; padding: 0; margin-right: 15px;">
+                            <div class="mini-cart-icon" style="position:relative;">
+                                <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle modern-icon-btn">
+                                    <i class="icon-shopping-cart"></i>
+                                </a>
+                                <sup id="cartCountMobile" class="mini-cart-item-count modern-cart-badge">0</sup>
                             </div>
-                            <div class="header-search-1-form">
-                                <form id="#" method="get"  action="#">
-                                    <input type="text" name="search" value="" placeholder="Search here..."/>
-                                    <button type="submit">
-                                        <span><i class="icon-search"></i></span>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- user-menu -->
-                        <div class="ltn__drop-menu user-menu">
-                            <ul>
-                                <li>
-                                    <a href="#"><i class="icon-user"></i></a>
-                                    <ul>
-                                        <li><a href="login.html">Sign in</a></li>
-                                        <li><a href="register.html">Register</a></li>
-                                        <li><a href="account.html">My Account</a></li>
-                                        <li><a href="product-wishlist.html">Wishlist</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- mini-cart -->
-                        <div class="mini-cart-icon">
-                            <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
-                                <i class="icon-shopping-cart"></i>
-                                <sup>2</sup>
-                            </a>
-                        </div>
-                        <!-- mini-cart -->
-                                    </ul>
-                                </div>
-                            </nav>
                         </div>
                     </div>
                     <!-- Mobile Menu Button -->
                     <div class="mobile-menu-toggle menu-btn-white menu-btn-border--- d-xl-none">
                         <a href="#ltn__utilize-mobile-menu" class="ltn__utilize-toggle">
                             <svg viewBox="0 0 800 600">
-                                <path d="M300,220 C300,220 520,220 540,220 C740,220 640,540 520,420 C440,340 300,200 300,200" id="top"></path>
+                                <path
+                                    d="M300,220 C300,220 520,220 540,220 C740,220 640,540 520,420 C440,340 300,200 300,200"
+                                    id="top"></path>
                                 <path d="M300,320 L540,320" id="middle"></path>
-                                <path d="M300,210 C300,210 520,210 540,210 C740,210 640,530 520,410 C440,330 300,190 300,190" id="bottom" transform="translate(480, 320) scale(1, -1) translate(-480, -318) "></path>
+                                <path
+                                    d="M300,210 C300,210 520,210 540,210 C740,210 640,530 520,410 C440,330 300,190 300,190"
+                                    id="bottom" transform="translate(480, 320) scale(1, -1) translate(-480, -318) ">
+                                </path>
                             </svg>
                         </a>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- ltn__header-middle-area end -->
-    </header>
-    <!-- HEADER AREA END -->
+        </header>
+        <!-- HEADER AREA END -->
 
-    <!-- Utilize Cart Menu Start -->
-    <div id="ltn__utilize-cart-menu" class="ltn__utilize ltn__utilize-cart-menu">
-        <div class="ltn__utilize-menu-inner ltn__scrollbar">
-            <div class="ltn__utilize-menu-head">
-                <span class="ltn__utilize-menu-title">Cart</span>
-                <button class="ltn__utilize-close">×</button>
-            </div>
-            <div class="mini-cart-product-area ltn__scrollbar">
-                <div class="mini-cart-item clearfix">
-                    <div class="mini-cart-img">
-                        <a href="#"><img src="img/product/1.png" alt="Image"></a>
-                        <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
-                    </div>
-                    <div class="mini-cart-info">
-                        <h6><a href="#">Wheel Bearing Retainer</a></h6>
-                        <span class="mini-cart-quantity">1 x ₹65.00</span>
-                    </div>
+        <!-- Utilize Cart Menu Start -->
+        <div id="ltn__utilize-cart-menu" class="ltn__utilize ltn__utilize-cart-menu">
+            <div class="ltn__utilize-menu-inner ltn__scrollbar">
+                <div class="ltn__utilize-menu-head">
+                    <span class="ltn__utilize-menu-title">Cart</span>
+                    <button class="ltn__utilize-close">×</button>
                 </div>
-                <div class="mini-cart-item clearfix">
-                    <div class="mini-cart-img">
-                        <a href="#"><img src="img/product/2.png" alt="Image"></a>
-                        <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
-                    </div>
-                    <div class="mini-cart-info">
-                        <h6><a href="#">Brake Conversion Kit</a></h6>
-                        <span class="mini-cart-quantity">1 x ₹85.00</span>
-                    </div>
-                </div>
-                <div class="mini-cart-item clearfix">
-                    <div class="mini-cart-img">
-                        <a href="#"><img src="img/product/3.png" alt="Image"></a>
-                        <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
-                    </div>
-                    <div class="mini-cart-info">
-                        <h6><a href="#">OE Replica Wheels</a></h6>
-                        <span class="mini-cart-quantity">1 x ₹92.00</span>
-                    </div>
-                </div>
-                <div class="mini-cart-item clearfix">
-                    <div class="mini-cart-img">
-                        <a href="#"><img src="img/product/4.png" alt="Image"></a>
-                        <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
-                    </div>
-                    <div class="mini-cart-info">
-                        <h6><a href="#">Shock Mount Insulator</a></h6>
-                        <span class="mini-cart-quantity">1 x ₹68.00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="mini-cart-footer">
-                <div class="mini-cart-sub-total">
-                    <h5>Subtotal: <span>₹310.00</span></h5>
-                </div>
-                <div class="btn-wrapper">
-                    <a href="cart.html" class="theme-btn-1 btn btn-effect-1">View Cart</a>
-                    <a href="cart.html" class="theme-btn-2 btn btn-effect-2">Checkout</a>
-                </div>
-                <p>Free Shipping on All Orders Over ₹100!</p>
-            </div>
+                <div class="mini-cart-product-area ltn__scrollbar" id="miniCartContainer">
 
-        </div>
-    </div>
-    <!-- Utilize Cart Menu End -->
-
-    <!-- Utilize Mobile Menu Start -->
-    <div id="ltn__utilize-mobile-menu" class="ltn__utilize ltn__utilize-mobile-menu">
-        <div class="ltn__utilize-menu-inner ltn__scrollbar">
-            <div class="ltn__utilize-menu-head">
-                <div class="site-logo">
-                    <a href="index.html"><img src="img/header-logo.png" alt="Logo"></a>
-                </div>
-                <button class="ltn__utilize-close">×</button>
-            </div>
-            <div class="ltn__utilize-menu-search-form">
-                <form action="#">
-                    <input type="text" placeholder="Search...">
-                    <button><i class="fas fa-search"></i></button>
-                </form>
-            </div>
-            <div class="ltn__utilize-menu">
-                <ul>
-                    <li><a href="#">Home</a>
-                    </li>
-                    <li><a href="#">About</a>
-                    </li>
-                    <li><a href="#">Shop</a>
-                    </li>
-                    <li><a href="#">News</a>
-                    </li>
-                    <li><a href="#">Pages</a>
-                    </li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <div class="ltn__utilize-buttons ltn__utilize-buttons-2">
-                <ul>
-                    <li>
-                        <a href="account.html" title="My Account">
-                            <span class="utilize-btn-icon">
-                                <i class="far fa-user"></i>
-                            </span>
-                            My Account
-                        </a>
-                    </li>
-                    <li>
-                         <a href="product-wishlist.html" title="Wishlist">
-                            <span class="utilize-btn-icon">
-                                <i class="far fa-heart"></i>
-                                <sup>3</sup>
-                            </span>
-                            Wishlist
-                        </a>
-                    </li>
-                    <li>
-                        <a href="cart.html" title="Shoping Cart">
-                            <span class="utilize-btn-icon">
-                                <i class="fas fa-shopping-cart"></i>
-                                <sup>5</sup>
-                            </span>
-                            Shoping Cart
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="ltn__social-media-2">
-                <ul>
-                    <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                    <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-                    <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
-                    <li><a href="#" title="Instagram"><i class="fab fa-instagram"></i></a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!-- Utilize Mobile Menu End -->
-
-    <div class="ltn__utilize-overlay"></div>
-
-    <!-- BREADCRUMB AREA START -->
-    <div class="ltn__breadcrumb-area ltn__breadcrumb-area-2 ltn__breadcrumb-color-white bg-overlay-theme-black-60 bg-image" data-bs-bg="img/slider/about-banner2.webp">
-        <div class="container" style="margin-top: -30px;">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="ltn__breadcrumb-inner ltn__breadcrumb-inner-2 justify-content-between">
-                        <div class="section-title-area ltn__section-title-2">
-                            <h6 class="section-subtitle ltn__secondary-color">// Trusted Mechanics</h6>
-                            <h1 class="section-title white-color">About Us</h1>
+                    <div class="mini-cart-item clearfix">
+                        <div class="mini-cart-img">
+                            <a href="#"><img src="img/product/1.png" alt="Image"></a>
+                            <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
                         </div>
-                        <div class="ltn__breadcrumb-list">
-                            <ul>
-                                <li><a href="home.html" style="color: white;">Home</a></li>
-                                <li>About Us</li>
-                            </ul>
+                        <div class="mini-cart-info">
+                            <h6><a href="#">Wheel Bearing Retainer</a></h6>
+                            <span class="mini-cart-quantity">1 x ₹65.00</span>
+                        </div>
+                    </div>
+                    <div class="mini-cart-item clearfix">
+                        <div class="mini-cart-img">
+                            <a href="#"><img src="img/product/2.png" alt="Image"></a>
+                            <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
+                        </div>
+                        <div class="mini-cart-info">
+                            <h6><a href="#">Brake Conversion Kit</a></h6>
+                            <span class="mini-cart-quantity">1 x ₹85.00</span>
+                        </div>
+                    </div>
+                    <div class="mini-cart-item clearfix">
+                        <div class="mini-cart-img">
+                            <a href="#"><img src="img/product/3.png" alt="Image"></a>
+                            <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
+                        </div>
+                        <div class="mini-cart-info">
+                            <h6><a href="#">OE Replica Wheels</a></h6>
+                            <span class="mini-cart-quantity">1 x ₹92.00</span>
+                        </div>
+                    </div>
+                    <div class="mini-cart-item clearfix">
+                        <div class="mini-cart-img">
+                            <a href="#"><img src="img/product/4.png" alt="Image"></a>
+                            <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
+                        </div>
+                        <div class="mini-cart-info">
+                            <h6><a href="#">Shock Mount Insulator</a></h6>
+                            <span class="mini-cart-quantity">1 x ₹68.00</span>
                         </div>
                     </div>
                 </div>
+                <div class="mini-cart-footer">
+                    <div class="mini-cart-sub-total">
+                        <h5>Subtotal: <span>₹310.00</span></h5>
+                    </div>
+                    <div class="btn-wrapper">
+                        <a href="Product-cart.html" class="theme-btn-1 btn btn-effect-1">View Cart</a>
+                        <a href="product-checkout.html" class="theme-btn-2 btn btn-effect-2">Checkout</a>
+                    </div>
+                    <p>Free Shipping on All Orders Over ₹100!</p>
+                </div>
+
             </div>
         </div>
-    </div>
-    <!-- BREADCRUMB AREA END -->
+        <!-- Utilize Cart Menu End -->
 
      <!-- ABOUT US AREA START -->
     <div class="ltn__about-us-area pb-100">
@@ -1626,7 +1631,7 @@ Delivering reliability, transparency, and performance you can trust every mile.<
     <!-- FOOTER AREA END -->
 
     </div>
-<!-- Body main wrapper end -->
+    <!-- Body main wrapper end -->
 
     <!-- preloader area start -->
     <div class="preloader" id="preloader">
@@ -1643,6 +1648,7 @@ Delivering reliability, transparency, and performance you can trust every mile.<
     <script src="js/plugins.js"></script>
     <!-- Main JS -->
     <script src="js/main.js"></script>
-  
+
 </body>
+
 </html>

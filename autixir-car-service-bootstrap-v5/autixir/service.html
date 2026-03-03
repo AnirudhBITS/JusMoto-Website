@@ -22,40 +22,137 @@
     <!-- Custom overrides -->
     <link rel="stylesheet" href="css/custom.css">
     <style>
+        /* Modern Header Styles */
+        .modern-search-container {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            overflow: hidden;
+            padding: 0 4px 0 14px;
+            margin-right: 6px;
+        }
+
+        .modern-search-container input {
+            background: transparent !important;
+            border: none !important;
+            outline: none !important;
+            color: #fff !important;
+            font-size: 13px;
+            width: 140px;
+            padding: 6px 8px !important;
+        }
+
+        .modern-search-container input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .modern-search-container button {
+            background: var(--ltn__secondary-color);
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            cursor: pointer;
+            flex-shrink: 0;
+            font-size: 13px;
+        }
+
+        .modern-icon-btn {
+            display: inline-flex !important;
+            align-items: center;
+            justify-content: center;
+            width: 38px !important;
+            height: 38px !important;
+            border-radius: 50% !important;
+            background: rgba(255, 255, 255, 0.12) !important;
+            border: 1px solid rgba(255, 255, 255, 0.25) !important;
+            color: #fff !important;
+            font-size: 16px !important;
+            transition: background 0.25s, border-color 0.25s !important;
+            margin: 0 3px !important;
+        }
+
+        .modern-icon-btn:hover {
+            background: var(--ltn__secondary-color) !important;
+            border-color: var(--ltn__secondary-color) !important;
+        }
+
+        .modern-cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--ltn__secondary-color);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        @media (max-width: 1199px) {
+            .modern-search-container {
+                display: none !important;
+            }
+        }
+    </style>
+    <style>
         /* Unify service section image sizes and content alignment */
         .ltn__service-item-1 {
             height: 100%;
             display: flex;
             flex-direction: column;
             background-color: var(--white);
-            margin-bottom: 10px; /* Base margin */
+            margin-bottom: 10px;
+            /* Base margin */
         }
+
         .ltn__service-item-1 .service-item-img img {
             width: 100%;
-            height: 280px; /* Uniform height for service images */
+            height: 280px;
+            /* Uniform height for service images */
             object-fit: cover;
         }
+
         .ltn__service-item-1 .service-item-brief {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
+
         .ltn__service-item-1 .service-item-brief h3 {
-            min-height: 50px; /* Reduced title height */
-            margin-bottom: 2px; /* Reduced margin above description */
+            min-height: 50px;
+            /* Reduced title height */
+            margin-bottom: 2px;
+            /* Reduced margin above description */
             display: flex;
             align-items: center;
         }
+
         .ltn__service-item-1 .service-item-brief p {
-            min-height: 80px; /* Unify description height */
-            margin-bottom: 10px; /* Reduced space below description */
+            min-height: 80px;
+            /* Unify description height */
+            margin-bottom: 10px;
+            /* Reduced space below description */
         }
+
         .ltn__service-item-1 .product-price {
             margin-top: auto;
             font-size: 20px;
             font-weight: 700;
             color: var(--ltn__secondary-color);
         }
+
         .ltn__service-item-1 .product-price del {
             font-size: 20px;
             margin-left: 10px;
@@ -96,25 +193,33 @@
             background-color: var(--white);
             border: 2px solid var(--border-color-8);
         }
+
         .ltn__product-item-3 .product-img {
             flex-shrink: 0;
         }
+
         .ltn__product-item-3 .product-img img {
             width: 100%;
-            height: 250px; /* Uniform height for product images */
+            height: 250px;
+            /* Uniform height for product images */
             object-fit: contain;
             background-color: #f8f8f8;
-            position: relative; /* Ensure z-index works */
-            z-index: 1; /* Bring image to front */
+            position: relative;
+            /* Ensure z-index works */
+            z-index: 1;
+            /* Bring image to front */
         }
+
         .ltn__product-item-3 .product-info {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             padding: 20px 20px 15px !important;
         }
+
         .ltn__product-item-3 .product-title {
-            min-height: 44px; /* Unify title height for 2 lines */
+            min-height: 44px;
+            /* Unify title height for 2 lines */
             margin-bottom: 10px !important;
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -123,6 +228,7 @@
             overflow: hidden;
             font-size: 16px !important;
         }
+
         .ltn__product-item-3 .product-price {
             margin-top: auto;
         }
@@ -131,11 +237,13 @@
         .ltn__testimonial-slider-2-active .slick-track {
             display: flex !important;
         }
+
         .ltn__testimonial-slider-2-active .slick-slide {
             height: inherit !important;
             display: flex !important;
             justify-content: center;
         }
+
         .ltn__testimonial-item-3 {
             display: flex;
             flex-direction: column;
@@ -145,12 +253,15 @@
             background-color: transparent !important;
             box-shadow: none !important;
         }
+
         .ltn__testimonial-item-3 .ltn__testimonial-img img {
             width: 100%;
-            height: 280px; /* Uniform height for testimonial background images */
+            height: 280px;
+            /* Uniform height for testimonial background images */
             object-fit: cover;
             border-radius: 10px 10px 0 0;
         }
+
         .ltn__testimonial-item-3 .ltn__testimoni-info {
             flex-grow: 1;
             display: flex;
@@ -163,15 +274,18 @@
             position: relative;
             border-radius: 10px;
         }
+
         .ltn__testimonial-item-3 .ltn__testimoni-info p {
             flex-grow: 1;
             margin-bottom: 20px;
         }
+
         .ltn__testimoni-info-inner {
             margin-top: auto;
             display: flex;
             align-items: center;
         }
+
         .ltn__testimoni-info-inner .ltn__testimoni-img img {
             width: 60px !important;
             height: 60px !important;
@@ -180,21 +294,41 @@
             margin-right: 15px;
             margin-bottom: 0;
         }
+
         .ltn__testimoni-bg-icon {
             bottom: 15px !important;
         }
 
         /* Responsive adjustments for 1024px, 768px, and Mobile */
         @media (max-width: 1024px) {
-            .pt-120 { padding-top: 80px !important; }
-            .pb-120 { padding-bottom: 80px !important; }
-            .pt-100 { padding-top: 60px !important; }
-            .pb-250 { padding-bottom: 120px !important; }
-            .pb-50 { padding-bottom: 30px !important; }
-            
+            .pt-120 {
+                padding-top: 80px !important;
+            }
+
+            .pb-120 {
+                padding-bottom: 80px !important;
+            }
+
+            .pt-100 {
+                padding-top: 60px !important;
+            }
+
+            .pb-250 {
+                padding-bottom: 120px !important;
+            }
+
+            .pb-50 {
+                padding-bottom: 30px !important;
+            }
+
             /* Revert testimonial section padding to fix arrow overlap */
-            .ltn__testimonial-area.pt-120 { padding-top: 120px !important; }
-            .ltn__testimonial-area.pb-120 { padding-bottom: 120px !important; }
+            .ltn__testimonial-area.pt-120 {
+                padding-top: 120px !important;
+            }
+
+            .ltn__testimonial-area.pb-120 {
+                padding-bottom: 120px !important;
+            }
 
             /* Banner image resize */
             .ltn__slider-area .slide-item-img img {
@@ -202,6 +336,7 @@
                 height: auto;
                 margin: 0 auto;
             }
+
             .ltn__slider-area .slide-item-info {
                 margin-bottom: 30px;
             }
@@ -216,9 +351,11 @@
                 opacity: 1 !important;
                 visibility: visible !important;
             }
+
             .slick-arrow-3 .slick-next {
                 right: 15px !important;
             }
+
             .slick-arrow-3 .slick-prev {
                 right: 75px !important;
             }
@@ -230,8 +367,14 @@
                 visibility: visible !important;
                 z-index: 2;
             }
-            .slick-arrow-1 .slick-prev { left: 15px !important; }
-            .slick-arrow-1 .slick-next { right: 15px !important; }
+
+            .slick-arrow-1 .slick-prev {
+                left: 15px !important;
+            }
+
+            .slick-arrow-1 .slick-next {
+                right: 15px !important;
+            }
 
             /* CTA Section Responsive */
             .ltn__service-form-1 .ltn__service-form-brief {
@@ -242,15 +385,31 @@
         }
 
         @media (max-width: 768px) {
-            .pt-120 { padding-top: 60px !important; }
-            .pb-120 { padding-bottom: 60px !important; }
-            .pb-250 { padding-bottom: 80px !important; }
-            .pb-80 {padding-top:20px !important;}
+            .pt-120 {
+                padding-top: 60px !important;
+            }
 
-            
+            .pb-120 {
+                padding-bottom: 60px !important;
+            }
+
+            .pb-250 {
+                padding-bottom: 80px !important;
+            }
+
+            .pb-80 {
+                padding-top: 20px !important;
+            }
+
+
             /* Keep testimonial padding consistent for arrow spacing */
-            .ltn__testimonial-area.pt-120 { padding-top: 120px !important; }
-            .ltn__testimonial-area.pb-120 { padding-bottom: 120px !important; }
+            .ltn__testimonial-area.pt-120 {
+                padding-top: 120px !important;
+            }
+
+            .ltn__testimonial-area.pb-120 {
+                padding-bottom: 120px !important;
+            }
 
             .ltn__slider-area .slide-item-img img {
                 max-width: 90%;
@@ -258,11 +417,22 @@
         }
 
         @media (max-width: 480px) {
-            .pt-120 { padding-top: 50px !important; }
-            .pb-120 { padding-bottom: 50px !important; }
-            .pt-100 { padding-top: 40px !important; }
-            .pb-250 { padding-bottom: 60px !important; }
-            
+            .pt-120 {
+                padding-top: 50px !important;
+            }
+
+            .pb-120 {
+                padding-bottom: 50px !important;
+            }
+
+            .pt-100 {
+                padding-top: 40px !important;
+            }
+
+            .pb-250 {
+                padding-bottom: 60px !important;
+            }
+
             /* Keep testimonial arrows consistent on small mobile */
             .slick-arrow-3 .slick-arrow {
                 top: -110px !important;
@@ -273,9 +443,11 @@
                 opacity: 1 !important;
                 visibility: visible !important;
             }
+
             .slick-arrow-3 .slick-next {
                 right: 15px !important;
             }
+
             .slick-arrow-3 .slick-prev {
                 right: 75px !important;
             }
@@ -291,9 +463,11 @@
                 max-width: 300px;
                 margin: 0 auto 10px;
             }
+
             .ltn__service-form-box ul li {
                 width: 100%;
             }
+
             .ltn__service-form-box .btn {
                 width: 100%;
             }
@@ -303,6 +477,7 @@
                 padding-top: 180px !important;
                 padding-bottom: 50px !important;
             }
+
             .ltn__slide-item-2 {
                 padding-top: 180px !important;
             }
@@ -887,398 +1062,234 @@
 
     <!-- Add your site or application content here -->
 
-<!-- Body main wrapper start -->
-<div class="body-wrapper">
+    <!-- Body main wrapper start -->
+    <div class="body-wrapper">
 
-  <!-- HEADER AREA START (header-4) -->
-    <header class="ltn__header-area ltn__header-4 ltn__header-6 ltn__header-transparent gradient-color-2">
-        <!-- ltn__header-top-area start -->
-        <div class="ltn__header-top-area top-area-color-white">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-7">
-                        <div class="ltn__top-bar-menu">
-                            <ul>
-                                <li><a href="mailto:hello@jusmoto.com"><i class="fas fa-envelope"></i> hello@jusmoto.com</a></li>
-                                <li><a href="locations.html"><i class="fas fa-map-marker-alt"></i> 12, Murugappa Road, Kotturpuram, Chennai - 600085</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="top-bar-right text-end">
+        <!-- HEADER AREA START (header-4) -->
+        <header class="ltn__header-area ltn__header-4 ltn__header-6 ltn__header-transparent gradient-color-2">
+            <!-- ltn__header-top-area start -->
+            <div class="ltn__header-top-area top-area-color-white">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-7">
                             <div class="ltn__top-bar-menu">
                                 <ul>
-                                    <li>
-                                        <!-- ltn__language-menu -->
-                                        <div class="ltn__drop-menu ltn__currency-menu ltn__language-menu">
-                                            <ul>
-                                                <li><a href="#" class="dropdown-toggle"><span class="active-currency">English</span></a>
-                                                    <ul>
-                                                        <li><a href="#">Arabic</a></li>
-                                                        <li><a href="#">Bengali</a></li>
-                                                        <li><a href="#">Chinese</a></li>
-                                                        <li><a href="#">English</a></li>
-                                                        <li><a href="#">French</a></li>
-                                                        <li><a href="#">Hindi</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <!-- ltn__social-media -->
-                                        <div class="ltn__social-media">
-                                            <ul>
-                                                <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                                                <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-                                                
-                                                <li><a href="#" title="Instagram"><i class="fab fa-instagram"></i></a></li>
-                                                <li><a href="#" title="Dribbble"><i class="fab fa-dribbble"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
+                                    <li><a href="mailto:hello@jusmoto.com"><i class="fas fa-envelope"></i>
+                                            hello@jusmoto.com</a></li>
+                                    <li><a href="locations.html"><i class="fas fa-map-marker-alt"></i> #12, Murugappa
+                                            Road, Kotturpuram, Chennai - 600085</a></li>
                                 </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="top-bar-right text-end">
+                                <div class="ltn__top-bar-menu">
+                                    <ul>
+                                        <li>
+                                            <!-- ltn__social-media -->
+                                            <div class="ltn__social-media">
+                                                <ul>
+                                                    <li><a href="#" title="Facebook"><i
+                                                                class="fab fa-facebook-f"></i></a></li>
+                                                    <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                                                    </li>
+                                                    <li><a href="#" title="Instagram"><i
+                                                                class="fab fa-instagram"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- ltn__header-top-area end -->
-        <!-- ltn__header-middle-area start -->
-        <div class="ltn__header-middle-area ltn__header-sticky ltn__sticky-bg-black ltn__logo-right-menu-option">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div class="site-logo-wrap">
-                            <div class="site-logo">
-                                <a href="home.html"><img src="img/header-logo.png" alt="Logo"></a>
+            <!-- ltn__header-top-area end -->
+            <!-- ltn__header-middle-area start -->
+            <div class="ltn__header-middle-area ltn__header-sticky ltn__sticky-bg-black ltn__logo-right-menu-option">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="site-logo-wrap">
+                                <div class="site-logo">
+                                    <a href="home.html"><img src="img/header-logo.png" alt="Logo"></a>
+                                </div>
+                                <div class="get-support clearfix get-support-color-white">
+                                    <div class="get-support-icon">
+                                        <i class="icon-call"></i>
+                                    </div>
+                                    <div class="get-support-info">
+                                        <h6>Get Support</h6>
+                                        <h4><a href="tel:+917871787196">+91 7871787196</a></h4>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="get-support clearfix get-support-color-white">
-                                <div class="get-support-icon">
-                                    <i class="icon-call"></i>
-                                </div>
-                                <div class="get-support-info">
-                                    <h6>Get Support</h6>
-                                    <h4><a href="tel:+917871787196">+91 7871787196</a></h4>
-                                </div>
+                        </div>
+                        <div class="col header-menu-column menu-color-white">
+                            <div class="header-menu d-none d-xl-block">
+                                <nav>
+                                    <div class="ltn__main-menu">
+                                        <ul>
+                                            <li><a href="home.html">Home</a>
+                                            </li>
+                                            <li><a href="about-us.html">About</a>
+                                            </li>
+                                            <li><a href="service.html">Services</a>
+                                            </li>
+                                            <li><a href="products.html">Products</a>
+                                            </li>
+                                            <li><a href="contact-us.html">Contact</a>
+                                            </li>
+                                            <div class="ltn__header-options ltn__header-options-2">
+                                                <!-- Modern Search Pill -->
+                                                <div class="modern-search-container">
+                                                    <form action="#">
+                                                        <input type="text" name="search" placeholder="Search..." />
+                                                        <button type="submit"><i class="icon-search"></i></button>
+                                                    </form>
+                                                </div>
+                                                <!-- User Account btn -->
+                                                <div class="ltn__drop-menu user-menu">
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#" class="modern-icon-btn"><i
+                                                                    class="icon-user"></i></a>
+                                                            <ul>
+                                                                <li><a href="login.html"><i
+                                                                            class="fas fa-sign-in-alt"></i> Sign
+                                                                        in</a></li>
+                                                                <li><a href="register.html"><i
+                                                                            class="fas fa-user-plus"></i>
+                                                                        Register</a></li>
+                                                                <li><a href="account.html"><i
+                                                                            class="fas fa-user-circle"></i> My
+                                                                        Account</a></li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <!-- Modern Mini Cart btn -->
+                                                <div class="mini-cart-icon" style="position:relative;">
+                                                    <a href="#ltn__utilize-cart-menu"
+                                                        class="ltn__utilize-toggle modern-icon-btn">
+                                                        <i class="icon-shopping-cart"></i>
+                                                    </a>
+                                                    <sup id="cartCount"
+                                                        class="mini-cart-item-count modern-cart-badge">0</sup>
+                                                </div>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </nav>
                             </div>
                         </div>
                     </div>
-                    <div class="col header-menu-column menu-color-white">
-                        <div class="header-menu d-none d-xl-block">
-                            <nav>
-                                <div class="ltn__main-menu">
-                                    <ul>
-                                        <li><a href="home.html">Home</a>
-                                        </li>
-                                        <li><a href="about-us.html">About</a>
-                                        </li>
-                                        <li><a href="service.html">Services</a>
-                                        </li>
-                                        <li><a href="products.html">Products</a>
-                                        </li>
-                                        <li><a href="contact-us.html">Contact</a>
-                                        </li>
- <div class="ltn__header-options ltn__header-options-2">
-                        <!-- header-search-1 -->
-                        <div class="header-search-wrap">
-                            <div class="header-search-1">
-                                <div class="search-icon">
-                                    <i class="icon-search for-search-show"></i>
-                                    <i class="icon-cancel  for-search-close"></i>
-                                </div>
+                    <!-- MOBILE OPTIONS (Cart) -->
+                    <div class="col-auto d-xl-none">
+                        <div class="ltn__header-options ltn__header-options-2"
+                            style="background: transparent; box-shadow: none; padding: 0; margin-right: 15px;">
+                            <div class="mini-cart-icon" style="position:relative;">
+                                <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle modern-icon-btn">
+                                    <i class="icon-shopping-cart"></i>
+                                </a>
+                                <sup id="cartCountMobile" class="mini-cart-item-count modern-cart-badge">0</sup>
                             </div>
-                            <div class="header-search-1-form">
-                                <form id="#" method="get"  action="#">
-                                    <input type="text" name="search" value="" placeholder="Search here..."/>
-                                    <button type="submit">
-                                        <span><i class="icon-search"></i></span>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- user-menu -->
-                        <div class="ltn__drop-menu user-menu">
-                            <ul>
-                                <li>
-                                    <a href="#"><i class="icon-user"></i></a>
-                                    <ul>
-                                        <li><a href="login.html">Sign in</a></li>
-                                        <li><a href="register.html">Register</a></li>
-                                        <li><a href="account.html">My Account</a></li>
-                                        <li><a href="product-wishlist.html">Wishlist</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- mini-cart -->
-                        <div class="mini-cart-icon">
-                            <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
-                                <i class="icon-shopping-cart"></i>
-                                <sup>2</sup>
-                            </a>
-                        </div>
-                        <!-- mini-cart -->
-                                    </ul>
-                                </div>
-                            </nav>
                         </div>
                     </div>
                     <!-- Mobile Menu Button -->
                     <div class="mobile-menu-toggle menu-btn-white menu-btn-border--- d-xl-none">
                         <a href="#ltn__utilize-mobile-menu" class="ltn__utilize-toggle">
                             <svg viewBox="0 0 800 600">
-                                <path d="M300,220 C300,220 520,220 540,220 C740,220 640,540 520,420 C440,340 300,200 300,200" id="top"></path>
+                                <path
+                                    d="M300,220 C300,220 520,220 540,220 C740,220 640,540 520,420 C440,340 300,200 300,200"
+                                    id="top"></path>
                                 <path d="M300,320 L540,320" id="middle"></path>
-                                <path d="M300,210 C300,210 520,210 540,210 C740,210 640,530 520,410 C440,330 300,190 300,190" id="bottom" transform="translate(480, 320) scale(1, -1) translate(-480, -318) "></path>
+                                <path
+                                    d="M300,210 C300,210 520,210 540,210 C740,210 640,530 520,410 C440,330 300,190 300,190"
+                                    id="bottom" transform="translate(480, 320) scale(1, -1) translate(-480, -318) ">
+                                </path>
                             </svg>
                         </a>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- ltn__header-middle-area end -->
-    </header>
-    <!-- HEADER AREA END -->
-    
-    <!-- Utilize Cart Menu Start -->
-    <div id="ltn__utilize-cart-menu" class="ltn__utilize ltn__utilize-cart-menu">
-        <div class="ltn__utilize-menu-inner ltn__scrollbar">
-            <div class="ltn__utilize-menu-head">
-                <span class="ltn__utilize-menu-title">Cart</span>
-                <button class="ltn__utilize-close">×</button>
-            </div>
-            <div class="mini-cart-product-area ltn__scrollbar">
-                <div class="mini-cart-item clearfix">
-                    <div class="mini-cart-img">
-                        <a href="#"><img src="img/product/1.png" alt="Image"></a>
-                        <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
-                    </div>
-                    <div class="mini-cart-info">
-                        <h6><a href="#">Wheel Bearing Retainer</a></h6>
-                        <span class="mini-cart-quantity">1 x $65.00</span>
-                    </div>
-                </div>
-                <div class="mini-cart-item clearfix">
-                    <div class="mini-cart-img">
-                        <a href="#"><img src="img/product/2.png" alt="Image"></a>
-                        <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
-                    </div>
-                    <div class="mini-cart-info">
-                        <h6><a href="#">Brake Conversion Kit</a></h6>
-                        <span class="mini-cart-quantity">1 x $85.00</span>
-                    </div>
-                </div>
-                <div class="mini-cart-item clearfix">
-                    <div class="mini-cart-img">
-                        <a href="#"><img src="img/product/3.png" alt="Image"></a>
-                        <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
-                    </div>
-                    <div class="mini-cart-info">
-                        <h6><a href="#">OE Replica Wheels</a></h6>
-                        <span class="mini-cart-quantity">1 x $92.00</span>
-                    </div>
-                </div>
-                <div class="mini-cart-item clearfix">
-                    <div class="mini-cart-img">
-                        <a href="#"><img src="img/product/4.png" alt="Image"></a>
-                        <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
-                    </div>
-                    <div class="mini-cart-info">
-                        <h6><a href="#">Shock Mount Insulator</a></h6>
-                        <span class="mini-cart-quantity">1 x $68.00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="mini-cart-footer">
-                <div class="mini-cart-sub-total">
-                    <h5>Subtotal: <span>$310.00</span></h5>
-                </div>
-                <div class="btn-wrapper">
-                    <a href="cart.html" class="theme-btn-1 btn btn-effect-1">View Cart</a>
-                    <a href="cart.html" class="theme-btn-2 btn btn-effect-2">Checkout</a>
-                </div>
-                <p>Free Shipping on All Orders Over $100!</p>
-            </div>
+        </header>
+        <!-- HEADER AREA END -->
 
-        </div>
-    </div>
-    <!-- Utilize Cart Menu End -->
-
-    <!-- Utilize Mobile Menu Start -->
-    <div id="ltn__utilize-mobile-menu" class="ltn__utilize ltn__utilize-mobile-menu">
-        <div class="ltn__utilize-menu-inner ltn__scrollbar">
-            <div class="ltn__utilize-menu-head">
-                <div class="site-logo">
-                    <a href="index.html"><img src="img/logo.png" alt="Logo"></a>
+        <!-- Utilize Cart Menu Start -->
+        <div id="ltn__utilize-cart-menu" class="ltn__utilize ltn__utilize-cart-menu">
+            <div class="ltn__utilize-menu-inner ltn__scrollbar">
+                <div class="ltn__utilize-menu-head">
+                    <span class="ltn__utilize-menu-title">Cart</span>
+                    <button class="ltn__utilize-close">×</button>
                 </div>
-                <button class="ltn__utilize-close">×</button>
-            </div>
-            <div class="ltn__utilize-menu-search-form">
-                <form action="#">
-                    <input type="text" placeholder="Search...">
-                    <button><i class="fas fa-search"></i></button>
-                </form>
-            </div>
-            <div class="ltn__utilize-menu">
-                <ul>
-                    <li><a href="#">Home</a>
-                        <ul class="sub-menu">
-                            <li><a href="index.html">Home Style - 01</a></li>
-                            <li><a href="index-2.html">Home Style - 02</a></li>
-                            <li><a href="index-3.html">Home Style - 03</a></li>
-                            <li><a href="index-4.html">Home Style - 04</a></li>
-                            <li><a href="index-5.html">Home Style - 05 <span class="menu-item-badge">video</span></a></li>
-                            <li><a href="index-6.html">Home Style - 06</a></li>
-                            <li><a href="index-7.html">Home Style - 07</a></li>
-                            <li><a href="index-8.html">Home Style - 08 <span class="menu-item-badge">Map</span></a></li>
-                            <li><a href="index-9.html">Home Style - 09</a></li>
-                            <li><a href="index-10.html">Home Style - 10</a></li>
-                            <li><a href="index-11.html">Home Style - 11</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">About</a>
-                        <ul class="sub-menu">
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="service.html">Services</a></li>
-                            <li><a href="service-details.html">Service Details</a></li>
-                            <li><a href="portfolio.html">Portfolio</a></li>
-                            <li><a href="portfolio-2.html">Portfolio - 02</a></li>
-                            <li><a href="portfolio-details.html">Portfolio Details</a></li>
-                            <li><a href="team.html">Team</a></li>
-                            <li><a href="team-details.html">Team Details</a></li>
-                            <li><a href="faq.html">FAQ</a></li>
-                            <li><a href="locations.html">Google Map Locations</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Shop</a>
-                        <ul class="sub-menu">
-                            <li><a href="shop.html">Shop</a></li>
-                            <li><a href="shop-grid.html">Shop Grid</a></li>
-                            <li><a href="shop-left-sidebar.html">Shop Left sidebar</a></li>
-                            <li><a href="shop-right-sidebar.html">Shop right sidebar</a></li>
-                            <li><a href="product-details.html">Shop details </a></li>
-                            <li><a href="product-details-2.html">Shop details 02</a></li>
-                            <li><a href="shop-car-grid.html">Shop Car Grid</a></li>
-                            <li><a href="shop-car-left-sidebar.html">Shop Car Left sidebar</a></li>
-                            <li><a href="shop-car-right-sidebar.html">Shop Car right sidebar</a></li>
-                            <li><a href="product-details-3.html">Shop Car details </a></li>
-                            <li><a href="cart.html">Cart</a></li>
-                            <li><a href="product-wishlist.html">Wishlist</a></li>
-                            <li><a href="product-checkout.html">Checkout</a></li>
-                            <li><a href="order-tracking.html">Order Tracking</a></li>
-                            <li><a href="account.html">My Account</a></li>
-                            <li><a href="login.html">Sign in</a></li>
-                            <li><a href="register.html">Register</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">News</a>
-                        <ul class="sub-menu">
-                            <li><a href="blog.html">News</a></li>
-                            <li><a href="blog-grid.html">News Grid</a></li>
-                            <li><a href="blog-left-sidebar.html">News Left sidebar</a></li>
-                            <li><a href="blog-right-sidebar.html">News Right sidebar</a></li>
-                            <li><a href="blog-details.html">News details</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Pages</a>
-                        <ul class="sub-menu">
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="service.html">Services</a></li>
-                            <li><a href="service-details.html">Service Details</a></li>
-                            <li><a href="portfolio.html">Portfolio</a></li>
-                            <li><a href="portfolio-2.html">Portfolio - 02</a></li>
-                            <li><a href="portfolio-details.html">Portfolio Details</a></li>
-                            <li><a href="team.html">Team</a></li>
-                            <li><a href="team-details.html">Team Details</a></li>
-                            <li><a href="faq.html">FAQ</a></li>
-                            <li><a href="history.html">History</a></li>
-                            <li><a href="appointment.html">Appointment</a></li>
-                            <li><a href="locations.html">Google Map Locations</a></li>
-                            <li><a href="404.html">404</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                            <li><a href="coming-soon.html">Coming Soon</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <div class="ltn__utilize-buttons ltn__utilize-buttons-2">
-                <ul>
-                    <li>
-                        <a href="account.html" title="My Account">
-                            <span class="utilize-btn-icon">
-                                <i class="far fa-user"></i>
-                            </span>
-                            My Account
-                        </a>
-                    </li>
-                    <li>
-                         <a href="product-wishlist.html" title="Wishlist">
-                            <span class="utilize-btn-icon">
-                                <i class="far fa-heart"></i>
-                                <sup>3</sup>
-                            </span>
-                            Wishlist
-                        </a>
-                    </li>
-                    <li>
-                        <a href="cart.html" title="Shoping Cart">
-                            <span class="utilize-btn-icon">
-                                <i class="fas fa-shopping-cart"></i>
-                                <sup>5</sup>
-                            </span>
-                            Shoping Cart
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="ltn__social-media-2">
-                <ul>
-                    <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                    <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-                    <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
-                    <li><a href="#" title="Instagram"><i class="fab fa-instagram"></i></a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!-- Utilize Mobile Menu End -->
+                <div class="mini-cart-product-area ltn__scrollbar" id="miniCartContainer">
 
-    <div class="ltn__utilize-overlay"></div>
-
-    <!-- BREADCRUMB AREA START -->
-    <div class="ltn__breadcrumb-area ltn__breadcrumb-area-2 ltn__breadcrumb-color-white bg-overlay-theme-black-90 bg-image" data-bs-bg="img/banner/8091.webp">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="ltn__breadcrumb-inner ltn__breadcrumb-inner-2 justify-content-between">
-                        <div class="section-title-area ltn__section-title-2">
-                            <h6 class="section-subtitle ltn__secondary-color">//  Expert Solutions</h6>
-                            <h1 class="section-title white-color">Services</h1>
+                    <div class="mini-cart-item clearfix">
+                        <div class="mini-cart-img">
+                            <a href="#"><img src="img/product/1.png" alt="Image"></a>
+                            <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
                         </div>
-                        <div class="ltn__breadcrumb-list">
-                            <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li>Service</li>
-                            </ul>
+                        <div class="mini-cart-info">
+                            <h6><a href="#">Wheel Bearing Retainer</a></h6>
+                            <span class="mini-cart-quantity">1 x ₹65.00</span>
+                        </div>
+                    </div>
+                    <div class="mini-cart-item clearfix">
+                        <div class="mini-cart-img">
+                            <a href="#"><img src="img/product/2.png" alt="Image"></a>
+                            <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
+                        </div>
+                        <div class="mini-cart-info">
+                            <h6><a href="#">Brake Conversion Kit</a></h6>
+                            <span class="mini-cart-quantity">1 x ₹85.00</span>
+                        </div>
+                    </div>
+                    <div class="mini-cart-item clearfix">
+                        <div class="mini-cart-img">
+                            <a href="#"><img src="img/product/3.png" alt="Image"></a>
+                            <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
+                        </div>
+                        <div class="mini-cart-info">
+                            <h6><a href="#">OE Replica Wheels</a></h6>
+                            <span class="mini-cart-quantity">1 x ₹92.00</span>
+                        </div>
+                    </div>
+                    <div class="mini-cart-item clearfix">
+                        <div class="mini-cart-img">
+                            <a href="#"><img src="img/product/4.png" alt="Image"></a>
+                            <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
+                        </div>
+                        <div class="mini-cart-info">
+                            <h6><a href="#">Shock Mount Insulator</a></h6>
+                            <span class="mini-cart-quantity">1 x ₹68.00</span>
                         </div>
                     </div>
                 </div>
+                <div class="mini-cart-footer">
+                    <div class="mini-cart-sub-total">
+                        <h5>Subtotal: <span>₹310.00</span></h5>
+                    </div>
+                    <div class="btn-wrapper">
+                        <a href="Product-cart.html" class="theme-btn-1 btn btn-effect-1">View Cart</a>
+                        <a href="product-checkout.html" class="theme-btn-2 btn btn-effect-2">Checkout</a>
+                    </div>
+                    <p>Free Shipping on All Orders Over ₹100!</p>
+                </div>
+
             </div>
         </div>
-    </div>
-    <!-- BREADCRUMB AREA END -->
+        <!-- Utilize Cart Menu End -->
 
-    <!-- ABOUT US AREA START -->
-    <div class="ltn__about-us-area pb-70">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 align-self-center">
-                    <div class="about-us-img-wrap ltn__img-shape-left  about-img-left">
-                        <img src="img/slider/slider-banner-service-1.jpg" alt="Image">
+        <!-- Utilize Mobile Menu Start -->
+        <div id="ltn__utilize-mobile-menu" class="ltn__utilize ltn__utilize-mobile-menu">
+            <div class="ltn__utilize-menu-inner ltn__scrollbar">
+                <div class="ltn__utilize-menu-head">
+                    <div class="site-logo">
+                        <a href="home.html"><img src="img/header-logo.png" alt="Logo"></a>
                     </div>
+                    <button class="ltn__utilize-close">×</button>
                 </div>
                 <div class="col-lg-7 align-self-center">
                     <div class="about-us-info-wrap">
@@ -1305,8 +1316,7 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!-- ABOUT US AREA END -->
+        <!-- Utilize Mobile Menu End -->
 
       <!-- SERVICE AREA START (Service 1) -->
   
@@ -1445,22 +1455,13 @@
         <div class="footer-top-area section-bg-2">
             <div class="container">
                 <div class="row">
-                    <!-- Column 1: Logo & About -->
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-6">
-                        <div class="footer-widget footer-about-widget">
-                            <div class="footer-logo">
-                                <div class="site-logo">
-                                    <img src="img/header-logo.png" alt="Logo">
-                                </div>
+                    <div class="col-lg-12">
+                        <div class="ltn__breadcrumb-inner ltn__breadcrumb-inner-2 justify-content-between">
+                            <div class="section-title-area ltn__section-title-2">
+                                <h6 class="section-subtitle ltn__secondary-color">// Welcome to our company</h6>
+                                <h1 class="section-title white-color">What We Do</h1>
                             </div>
-                            <p>JusMoto – Your trusted partner for hassle-free car service and maintenance across the city, delivering reliable, affordable, and professional automotive care every time.</p>
-                        </div>
-                    </div>
-                    <!-- Column 2: Quick Links -->
-                    <div class="col-lg-2 col-md-6 col-sm-6 col-6">
-                        <div class="footer-widget footer-menu-widget clearfix">
-                            <h4 class="footer-title">Quick Links</h4>
-                            <div class="footer-menu">
+                            <div class="ltn__breadcrumb-list">
                                 <ul>
                                     <li><a href="home.html">Home</a></li>
                                     <li><a href="about-us.html">About</a></li>
@@ -1552,8 +1553,308 @@
     </footer>
     <!-- FOOTER AREA END -->
 
-</div>
-<!-- Body main wrapper end -->
+        <!-- VIDEO AREA START -->
+        <div class="ltn__video-popup-area ltn__video-popup-margin-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 offset-lg-1">
+                        <div class="ltn__video-bg-img ltn__video-popup-height-600 bg-overlay-black-50--- bg-image"
+                            data-bs-bg="img/bg/16.jpg">
+                            <a class="ltn__video-icon-2 ltn__video-icon-2-border---"
+                                href="https://www.youtube.com/embed/X7R-q9rsrtU?autoplay=1&showinfo=0"
+                                data-rel="lightcase:myCollection">
+                                <i class="fa fa-play"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- VIDEO AREA END -->
+
+        <!-- BLOG AREA START (blog-4) -->
+        <div class="ltn__blog-area pt-115 pb-90">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-title-area ltn__section-title-2 text-center">
+                            <h6 class="section-subtitle ltn__secondary-color">// blog & insights</h6>
+                            <h1 class="section-title">News Feeds<span>.</span></h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row  ltn__blog-slider-one-active slick-arrow-1">
+                    <div class="col-lg-12">
+                        <div class="ltn__blog-item ltn__blog-item-4 bg-image" data-bs-bg="img/blog/1.jpg">
+                            <div class="ltn__blog-brief">
+                                <div class="ltn__blog-meta">
+                                    <ul>
+                                        <li class="ltn__blog-author">
+                                            <a href="#"><i class="far fa-user"></i>by: Admin</a>
+                                        </li>
+                                        <li class="ltn__blog-tags">
+                                            <a href="#"><i class="fas fa-tags"></i>Services</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <h3 class="ltn__blog-title"><a href="blog-details.html">Electric Car Maintenance,
+                                        Servicing & Repairs</a></h3>
+                                <p>Lorem ipsum labore et dolore mag na aliqua. Ut enim ad minim veniam, quis nostrud
+                                    exercitation ullamco.</p>
+                                <div class="ltn__blog-meta-btn">
+                                    <div class="ltn__blog-meta">
+                                        <ul>
+                                            <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i> June 24, 2020
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="ltn__blog-btn">
+                                        <a href="blog-details.html">Read more</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="ltn__blog-item ltn__blog-item-4 bg-image" data-bs-bg="img/blog/2.jpg">
+                            <div class="ltn__blog-brief">
+                                <div class="ltn__blog-meta">
+                                    <ul>
+                                        <li class="ltn__blog-author">
+                                            <a href="#"><i class="far fa-user"></i>by: Admin</a>
+                                        </li>
+                                        <li class="ltn__blog-tags">
+                                            <a href="#"><i class="fas fa-tags"></i>Services</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <h3 class="ltn__blog-title"><a href="blog-details.html">Common Engine Oil Problems and
+                                        Solutions</a></h3>
+                                <p>Lorem ipsum labore et dolore mag na aliqua. Ut enim ad minim veniam, quis nostrud
+                                    exercitation ullamco.</p>
+                                <div class="ltn__blog-meta-btn">
+                                    <div class="ltn__blog-meta">
+                                        <ul>
+                                            <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i> June 24, 2020
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="ltn__blog-btn">
+                                        <a href="blog-details.html">Read more</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="ltn__blog-item ltn__blog-item-4 bg-image" data-bs-bg="img/blog/3.jpg">
+                            <div class="ltn__blog-brief">
+                                <div class="ltn__blog-meta">
+                                    <ul>
+                                        <li class="ltn__blog-author">
+                                            <a href="#"><i class="far fa-user"></i>by: Admin</a>
+                                        </li>
+                                        <li class="ltn__blog-tags">
+                                            <a href="#"><i class="fas fa-tags"></i>Services</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <h3 class="ltn__blog-title"><a href="blog-details.html">How to Prepare for your First
+                                        Track Day!</a></h3>
+                                <p>Lorem ipsum labore et dolore mag na aliqua. Ut enim ad minim veniam, quis nostrud
+                                    exercitation ullamco.</p>
+                                <div class="ltn__blog-meta-btn">
+                                    <div class="ltn__blog-meta">
+                                        <ul>
+                                            <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i> June 24, 2020
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="ltn__blog-btn">
+                                        <a href="blog-details.html">Read more</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="ltn__blog-item ltn__blog-item-4 bg-image" data-bs-bg="img/blog/4.jpg">
+                            <div class="ltn__blog-brief">
+                                <div class="ltn__blog-meta">
+                                    <ul>
+                                        <li class="ltn__blog-author">
+                                            <a href="#"><i class="far fa-user"></i>by: Admin</a>
+                                        </li>
+                                        <li class="ltn__blog-tags">
+                                            <a href="#"><i class="fas fa-tags"></i>Services</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <h3 class="ltn__blog-title"><a href="blog-details.html">The branch of biology that deals
+                                        with the normal.</a></h3>
+                                <p>Lorem ipsum labore et dolore mag na aliqua. Ut enim ad minim veniam, quis nostrud
+                                    exercitation ullamco.</p>
+                                <div class="ltn__blog-meta-btn">
+                                    <div class="ltn__blog-meta">
+                                        <ul>
+                                            <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i> June 24, 2020
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="ltn__blog-btn">
+                                        <a href="blog-details.html">Read more</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="ltn__blog-item ltn__blog-item-4">
+                            <div class="ltn__blog-brief">
+                                <div class="ltn__blog-meta">
+                                    <ul>
+                                        <li class="ltn__blog-author">
+                                            <a href="#"><i class="far fa-user"></i>by: Admin</a>
+                                        </li>
+                                        <li class="ltn__blog-tags">
+                                            <a href="#"><i class="fas fa-tags"></i>Services</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <h3 class="ltn__blog-title"><a href="blog-details.html">How to: Make Your Tires Last
+                                        Longer</a></h3>
+                                <p>Lorem ipsum labore et dolore mag na aliqua. Ut enim ad minim veniam, quis nostrud
+                                    exercitation ullamco.</p>
+                                <div class="ltn__blog-meta-btn">
+                                    <div class="ltn__blog-meta">
+                                        <ul>
+                                            <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i> June 24, 2020
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="ltn__blog-btn">
+                                        <a href="blog-details.html">Read more</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- BLOG AREA END -->
+
+        <!-- FOOTER AREA START -->
+        <footer class="ltn__footer-area">
+            <div class="footer-top-area section-bg-2">
+                <div class="container">
+                    <div class="row">
+                        <!-- Column 1: Logo & About -->
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-6">
+                            <div class="footer-widget footer-about-widget">
+                                <div class="footer-logo">
+                                    <div class="site-logo">
+                                        <img src="img/header-logo.png" alt="Logo">
+                                    </div>
+                                </div>
+                                <p>JusMoto – Your trusted partner for hassle-free car service and maintenance across the
+                                    city, delivering reliable, affordable, and professional automotive care every time.
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Column 2: Quick Links -->
+                        <div class="col-lg-2 col-md-6 col-sm-6 col-6">
+                            <div class="footer-widget footer-menu-widget clearfix">
+                                <h4 class="footer-title">Quick Links</h4>
+                                <div class="footer-menu">
+                                    <ul>
+                                        <li><a href="home.html">Home</a></li>
+                                        <li><a href="about.html">About</a></li>
+                                        <li><a href="service.html">Services</a></li>
+                                        <li><a href="#">Products</a></li>
+                                        <li><a href="contact-us.html">Contact</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column 3: Contact Details -->
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                            <div class="footer-widget footer-address-widget">
+                                <h4 class="footer-title">Get in Touch</h4>
+                                <div class="footer-address">
+                                    <ul>
+                                        <li>
+                                            <div class="footer-address-icon">
+                                                <i class="fas fa-map-marked-alt"></i>
+                                            </div>
+                                            <div class="footer-address-info">
+                                                <p>#12, Murugappa Road, Kotturpuram, <br>Chennai - 600085</p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="footer-address-icon">
+                                                <i class="fas fa-phone-volume"></i>
+                                            </div>
+                                            <div class="footer-address-info">
+                                                <p><a href="tel:+917871787196">+91 7871787196</a></p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="footer-address-icon">
+                                                <i class="fas fa-envelope-open-text"></i>
+                                            </div>
+                                            <div class="footer-address-info">
+                                                <p><a href="mailto:hello@jusmoto.com">hello@jusmoto.com</a></p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column 4: Follow Us -->
+                        <div class="col-lg-2 col-md-6 col-sm-6 col-6">
+                            <div class="footer-widget footer-social-widget">
+                                <h4 class="footer-title">Follow Us</h4>
+                                <div class="ltn__social-media">
+                                    <ul>
+                                        <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                                        <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
+                                        <li><a href="#" title="Instagram"><i class="fab fa-instagram"></i></a></li>
+                                    </ul>
+                                </div>
+                                <p class="mt-20">Connect with us on social media for latest updates and offers.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ltn__copyright-area ltn__copyright-2 section-bg-2 plr--5">
+                <div class="container-fluid ltn__border-top-2">
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <div class="ltn__copyright-design clearfix">
+                                <p>Developed by <a href="https://blackitechs.com/" target="_blank">Black I Technology
+                                        and Solutions</a> @ <span class="current-year"></span></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12 align-self-center">
+                            <div class="ltn__copyright-menu text-end">
+                                <ul>
+                                    <li><a href="#">Terms & Conditions</a></li>
+                                    <li><a href="#">Claim</a></li>
+                                    <li><a href="#">Privacy & Policy</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- FOOTER AREA END -->
+
+    </div>
+    <!-- Body main wrapper end -->
 
     <!-- All JS Plugins -->
     <script src="js/plugins.js"></script>
@@ -1798,3 +2099,6 @@
 </body>
 </html>
 
+</body>
+
+</html>
