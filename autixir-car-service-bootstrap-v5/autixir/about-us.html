@@ -107,6 +107,8 @@
         }
     </style>
 
+    
+
     <style>
         /* ==================================================
    LARGE DEVICES (1200px ↓)
@@ -288,7 +290,7 @@
 .ltn__about-us-area p {
     text-align: justify;
     line-height: 1.7;
-    margin-top: 30px;
+    margin-top: 10px;
 }
 
         .about-us-img-wrap {
@@ -864,6 +866,144 @@
     opacity: 1 !important;
 }
 
+.ltn__feature-info p{
+    color: black;
+}
+
+/* ===== FORCE WHITE BACKGROUND ===== */
+.custom-feature-area {
+    background: #ffffff !important;
+}
+
+/* Remove theme overlay if applied */
+.custom-feature-area::before,
+.custom-feature-area::after {
+    display: none !important;
+}
+
+/* Subtitle Red */
+.custom-feature-area .section-subtitle {
+    color: #e53935 !important;
+    font-weight: 600;
+}
+
+/* Main Title Black */
+.custom-feature-area .section-title {
+    color: #000000 !important;
+}
+
+/* Card Background White */
+.custom-feature-area .ltn__feature-item {
+    background: #ffffff !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border-radius: 12px;
+    padding: 30px 25px;
+    transition: all 0.3s ease;
+}
+
+/* Card Hover */
+.custom-feature-area .ltn__feature-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* Card Title Black */
+.custom-feature-area .ltn__feature-item h3,
+.custom-feature-area .ltn__feature-item h3 a {
+    color: #000000 !important;
+}
+
+/* Card Content Black */
+.custom-feature-area .ltn__feature-item p {
+    color: #000000 !important;
+}
+
+/* Icon Red */
+.custom-feature-area .ltn__feature-icon i {
+    color: #e53935 !important;
+    font-size: 40px;
+}
+/* ===== ICON DEFAULT STYLE ===== */
+.custom-feature-area .ltn__feature-icon span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #f5f5f5;
+    transition: all 0.3s ease;
+}
+
+.custom-feature-area .ltn__feature-icon i {
+    color: #e53935 !important;
+    font-size: 28px;
+    transition: all 0.3s ease;
+}
+
+
+/* ===== HOVER EFFECT ===== */
+.custom-feature-area .ltn__feature-item:hover .ltn__feature-icon span {
+    background: #e53935;
+}
+
+.custom-feature-area .ltn__feature-item:hover .ltn__feature-icon i {
+    color: #ffffff !important;
+}
+/* ===== FORCE WHITE BACKGROUND ===== */
+.custom-feature-area {
+    background: #ffffff !important;
+}
+
+/* Remove theme overlay if applied */
+.custom-feature-area::before,
+.custom-feature-area::after {
+    display: none !important;
+}
+
+/* Subtitle Red */
+.custom-feature-area .section-subtitle {
+    color: #e53935 !important;
+    font-weight: 600;
+}
+
+/* Main Title Black */
+.custom-feature-area .section-title {
+    color: #000000 !important;
+}
+
+/* Card Background White */
+.custom-feature-area .ltn__feature-item {
+    background: #ffffff !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border-radius: 12px;
+    padding: 30px 25px;
+    transition: all 0.3s ease;
+}
+
+/* Card Hover */
+.custom-feature-area .ltn__feature-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* Card Title Black */
+.custom-feature-area .ltn__feature-item h3,
+.custom-feature-area .ltn__feature-item h3 a {
+    color: #000000 !important;
+}
+
+/* Card Content Black */
+.custom-feature-area .ltn__feature-item p {
+    color: #000000 !important;
+}
+
+/* Icon Red */
+.custom-feature-area .ltn__feature-icon i {
+    color: #e53935 !important;
+    font-size: 40px;
+}
+
 
 
     </style>
@@ -1096,6 +1236,30 @@
         </div>
         <!-- Utilize Cart Menu End -->
 
+
+         <!-- BREADCRUMB AREA START -->
+    <div class="ltn__breadcrumb-area ltn__breadcrumb-area-2 ltn__breadcrumb-color-white bg-overlay-theme-black-90 bg-image plr--9" data-bs-bg="img/banner/8091.webp">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ltn__breadcrumb-inner ltn__breadcrumb-inner-2 justify-content-between">
+                        <div class="section-title-area ltn__section-title-2">
+                            <h6 class="section-subtitle ltn__secondary-color">//  Trusted Mechanism</h6>
+                            <h1 class="section-title white-color">About Us</h1>
+                        </div>
+                        <div class="ltn__breadcrumb-list">
+                            <ul>
+                                <li><a href="home.html">Home</a></li>
+                                <li>About Us</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BREADCRUMB AREA END -->
+
      <!-- ABOUT US AREA START -->
     <div class="ltn__about-us-area pb-100">
         <div class="container">
@@ -1117,7 +1281,7 @@
                         <div class="section-title-area ltn__section-title-2">
                             <h6 class="section-subtitle ltn__secondary-color">// About Us</h6>
                             <h1 class="section-title">Reliable Service at Your Doorstep<span></span></h1>
-                            <p>Jusmoto makes bike and car servicing easy with hassle-free pickup and drop.</p>
+                            <p>Jusmoto makes bike and car servicing easy with hassle-free pickup and drop. We ensure reliable service, transparent pricing, and complete peace of mind for every ride.</p>
                         </div>
 
                         <p>We connect you with trusted service experts, offer real-time service tracking through our app, and provide transparent, customized solutions at affordable prices.
@@ -1135,7 +1299,8 @@ With skilled technicians and reliable support, Jusmoto ensures quality service a
         </div>
     </div>
 <!-- FEATURE AREA START -->
-<div class="ltn__feature-area section-bg-1 pt-80 pb-40">
+<div class="ltn__feature-area custom-feature-area pt-80 pb-60">
+
     <div class="container">
 
         <!-- Section Title -->
@@ -1160,10 +1325,10 @@ With skilled technicians and reliable support, Jusmoto ensures quality service a
                         <div class="ltn__feature-icon">
                             <span><i class="icon-car-parts-3"></i></span>
                         </div>
-                        <h3><a href="service-details.html">All Automobile Needs</a></h3>
+                        <h3 style=""><a href="service-details.html">All Automobile Needs</a></h3>
                     </div>
                     <div class="ltn__feature-info">
-                        <p>
+                        <p style="color: black;">
                             Jusmoto caters to all the automobile needs of your bike and car,
                             making vehicle service completely hassle-free for you.
                         </p>

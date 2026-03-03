@@ -3053,75 +3053,162 @@ function renderCheckoutSummary() {
     $tbody.html(html);
 }
 
-/* ── Wishlist Page ── */
-/* ── Wishlist Page ── */
+
+/* ───────────────────────────────── */
+/*           WISHLIST PAGE           */
+/* ───────────────────────────────── */
+
 function loadWishlistPage() {
-    var wishlist = getWishlist();
+
+    var wishlist  = getWishlist();
     var tableBody = document.getElementById('wishlistTableBody');
+    var grid      = document.getElementById('wishlistGrid');
+
     if (!tableBody) return;
 
     tableBody.innerHTML = '';
+    if (grid) grid.innerHTML = '';
+
+    /* ================= EMPTY STATE ================= */
 
     if (wishlist.length === 0) {
-        tableBody.innerHTML =
-            '<tr>' +
-            '<td colspan="5">' +
-            '<div class="wishlist-empty-wrapper">' +
-            '<div class="wishlist-empty-state">' +
-            '<div class="empty-icon"><i class="far fa-heart"></i></div>' +
-            '<h3>Your Wishlist is Empty</h3>' +
-            '<p>Looks like you haven\'t added anything yet.</p>' +
-            '<a href="products.html" class="theme-btn-1 btn btn-effect-1 mt-3">Continue Shopping</a>' +
-            '</div>' +
-            '</div>' +
-            '</td>' +
-            '</tr>';
+
+        tableBody.innerHTML = `
+        <tr>
+            <td colspan="5">
+                <div class="wishlist-empty-wrapper">
+                    <div class="wishlist-empty-icon">
+                        <i class="far fa-heart"></i>
+                    </div>
+                    <h3>Your Wishlist is Empty</h3>
+                    <p>Looks like you haven't added anything yet.</p>
+                    <a href="shop.html" class="wishlist-shop-btn">
+                        Continue Shopping
+                    </a>
+                </div>
+            </td>
+        </tr>
+        `;
+
+        if (grid) {
+            grid.innerHTML = `
+            <div class="wishlist-empty-wrapper" style="grid-column: span 2;">
+                <div class="wishlist-empty-icon">
+                    <i class="far fa-heart"></i>
+                </div>
+                <h3>Your Wishlist is Empty</h3>
+                <p>Looks like you haven't added anything yet.</p>
+                <a href="shop.html" class="wishlist-shop-btn">
+                    Continue Shopping
+                </a>
+            </div>
+            `;
+        }
+
         return;
     }
 
-    wishlist.forEach(function (item, index) {
+    /* ================= RENDER PRODUCTS ================= */
 
-        tableBody.innerHTML +=
-            '<tr>' +
+    wishlist.forEach(function(item, index) {
 
-            /* 🔢 Serial Number — hidden on mobile via CSS */
-            '<td class="cart-serial">' + (index + 1) + '</td>' +
+        var productLink = "product-details.html?id=" + (item.slug || item.id);
 
-            /* 🖼 Product Image */
-            '<td class="cart-product-image">' +
-            '<a href="product-details.html?id=' + (item.slug || item.id) + '">' +
-            '<img src="' + item.image + '" alt="' + item.title + '" width="70">' +
-            '</a>' +
-            '</td>' +
+        /* ---------- DESKTOP TABLE ---------- */
 
-            /* 📦 Product Title */
-            '<td class="cart-product-info">' +
-            '<h4>' +
-            '<a href="product-details.html?id=' + (item.slug || item.id) + '">' +
-            item.title +
-            '</a>' +
-            '</h4>' +
-            '</td>' +
+        tableBody.innerHTML += `
+        <tr>
 
-            /* 💰 Price */
-            '<td class="cart-product-price">₹' + item.price.toFixed(2) + '</td>' +
+            <td class="cart-serial">${index + 1}</td>
 
-            /* 🗑 Delete + Add to Cart */
-            '<td class="cart-product-actions">' +
+            <td class="cart-product-image">
+                <a href="${productLink}">
+                    <img src="${item.image}" alt="${item.title}" width="70">
+                </a>
+            </td>
 
-            '<a class="submit-button-1" href="#" onclick="moveToCart(' + index + '); return false;">Add to Cart</a>' +
+            <td class="cart-product-info">
+                <h4>
+                    <a href="${productLink}">
+                        ${item.title}
+                    </a>
+                </h4>
+            </td>
 
-            '<button onclick="removeFromWishlist(' + index + ')" ' +
-            'style="background:none;border:none;color:#ff3b3b;font-size:18px;cursor:pointer;">' +
-            '<i class="fas fa-trash"></i>' +
-            '</button>' +
+            <td class="cart-product-price">
+                ₹${item.price.toFixed(2)}
+            </td>
 
-            '</td>' +
+            <td class="cart-product-actions">
 
-            '</tr>';
+                <a class="submit-button-1"
+                   href="#"
+                   onclick="moveToCart(${index}); return false;">
+                   Add to Cart
+                </a>
+
+                <button onclick="removeFromWishlist(${index})"
+                        style="background:none;border:none;color:#ff3b3b;font-size:18px;cursor:pointer;">
+                    <i class="fas fa-trash"></i>
+                </button>
+
+            </td>
+
+        </tr>
+        `;
+
+        /* ---------- MOBILE GRID (MEESHO STYLE) ---------- */
+
+        if (grid) {
+            grid.innerHTML += `
+            <div class="wishlist-card">
+
+                <div class="wishlist-img-wrapper">
+                    <a href="${productLink}">
+                        <img src="${item.image}" alt="${item.title}">
+                    </a>
+                </div>
+
+                <div class="wishlist-content">
+
+                    <h4>
+                        <a href="${productLink}" style="text-decoration:none;color:#000;">
+                            ${item.title}
+                        </a>
+                    </h4>
+
+                    <div class="price">
+                        ₹${item.price.toFixed(2)}
+                    </div>
+
+                    <div class="wishlist-actions">
+
+                        <a href="#"
+                           class="mobile-add-btn"
+                           onclick="moveToCart(${index}); return false;">
+                           Add to Cart
+                        </a>
+
+                        <button class="mobile-delete-btn"
+                                onclick="removeFromWishlist(${index})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+            `;
+        }
+
     });
 }
 
+
+/* ───────────────────────────────── */
+/*        REMOVE FROM WISHLIST       */
+/* ───────────────────────────────── */
 
 function removeFromWishlist(index) {
     var wishlist = getWishlist();
@@ -3131,20 +3218,44 @@ function removeFromWishlist(index) {
     updateWishlistCount();
 }
 
-window.moveToCart = function (index) {
+
+/* ───────────────────────────────── */
+/*           MOVE TO CART            */
+/* ───────────────────────────────── */
+
+function moveToCart(index) {
+
     var wishlist = getWishlist();
-    var product = wishlist[index];
-    var cart = getCart();
-    var existing = cart.find(function (i) { return i.id === product.id; });
-    if (existing) { existing.quantity += 1; }
-    else { cart.push({ id: product.id, slug: product.slug || '', title: product.title, price: product.price, image: product.image, quantity: 1 }); }
+    var product  = wishlist[index];
+    var cart     = getCart();
+
+    var existing = cart.find(function(i) {
+        return i.id === product.id;
+    });
+
+    if (existing) {
+        existing.quantity += 1;
+    } else {
+        cart.push({
+            id: product.id,
+            slug: product.slug || '',
+            title: product.title,
+            price: product.price,
+            image: product.image,
+            quantity: 1
+        });
+    }
+
     saveCart(cart);
+
     wishlist.splice(index, 1);
     saveWishlist(wishlist);
+
     loadWishlistPage();
     loadMiniCart();
     updateWishlistCount();
 }
+
 
 /* ── SINGLE DOMContentLoaded for all page inits ── */
 document.addEventListener('DOMContentLoaded', function () {
