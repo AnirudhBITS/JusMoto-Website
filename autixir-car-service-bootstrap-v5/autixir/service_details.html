@@ -866,6 +866,195 @@
     <script src="js/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+(function () {
+    // ── 1. Get ID from URL ──────────────────────────────────────────
+    var params = new URLSearchParams(window.location.search);
+    var serviceId = params.get('id');
+
+    if (!serviceId) {
+        showError('No service ID found in URL.');
+        return;
+    }
+
+    // ── 2. Fetch single service ─────────────────────────────────────
+    fetch('https://jusmoto.blackitechs.in/api/v1/services/' + serviceId)
+        .then(function (r) {
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            return r.json();
+        })
+        .then(function (res) {
+            // API may wrap in { data: {...} } or return directly
+            var s = res.data || res;
+            renderDetail(s);
+        })
+        .catch(function (err) {
+            console.error('service_details fetch failed:', err);
+            showError('Failed to load service details. Please try again.');
+        });
+
+    // ── 3. Render all sections ──────────────────────────────────────
+    function renderDetail(s) {
+
+        // Main image
+        var img = document.getElementById('service-main-image');
+        if (img && s.image) img.src = s.image;
+
+        // Title
+        setText('service-title', s.title || 'Service Details');
+
+        // Description (allow HTML from API)
+        var descEl = document.getElementById('service-description');
+        if (descEl) descEl.innerHTML = s.description || '';
+
+        // Page <title>
+        document.title = (s.title || 'Service') + ' | JusMoto';
+
+        // ── Pricing ──
+        var priceMain = document.getElementById('service-price-main');
+        var priceOld  = document.getElementById('service-old-price');
+        var current   = s.discountPrice || s.discount_price || s.price || '';
+        var original  = (s.discountPrice || s.discount_price) ? (s.price || s.original_price || '') : '';
+
+        if (priceMain) priceMain.textContent = current ? '₹' + current : 'Contact Us';
+        if (priceOld) {
+            if (original) {
+                priceOld.textContent = '₹' + original;
+                priceOld.style.display = 'block';
+            } else {
+                priceOld.style.display = 'none';
+            }
+        }
+
+        // Category label
+        setText('category-name', s.category || s.type || 'CAR SERVICE');
+
+        // ── Includes list ──
+        renderList('includes-list', s.includes || s.included || []);
+
+        // ── Excludes list ──
+        renderList('excludes-list', s.excludes || s.excluded || []);
+
+        // ── Specifications sidebar ──
+        renderSpecs('specifications-list', s.specifications || s.specs || []);
+
+        // ── Gallery ──
+        renderGallery('gallery-container', s.gallery || s.images || []);
+
+        // ── FAQ accordion ──
+        renderFAQ('faq-accordion', s.faqs || s.faq || []);
+
+        // ── Service Excellence / additional info ──
+        renderAdditional('additional-info-container', s.additionalInfo || s.additional_info || s.highlights || []);
+    }
+
+    // ── Helpers ─────────────────────────────────────────────────────
+
+    function setText(id, val) {
+        var el = document.getElementById(id);
+        if (el) el.textContent = val;
+    }
+
+    // Renders a plain <ul> list from an array of strings or {label} objects
+    function renderList(id, items) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        if (!items.length) {
+            el.innerHTML = '<li class="text-muted">Not specified</li>';
+            return;
+        }
+        el.innerHTML = items.map(function (item) {
+            var text = typeof item === 'string' ? item : (item.label || item.name || item.text || JSON.stringify(item));
+            return '<li><i class="fas fa-check-circle text-success mr-2"></i>' + text + '</li>';
+        }).join('');
+    }
+
+    // Renders key-value spec rows
+    function renderSpecs(id, specs) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        if (!specs.length) {
+            el.innerHTML = '<p class="text-muted">No specifications available.</p>';
+            return;
+        }
+        el.innerHTML = specs.map(function (sp) {
+            var label = sp.label || sp.key || sp.name || '';
+            var value = sp.value || sp.val || '';
+            return '<div class="spec-row d-flex justify-content-between py-1 border-bottom">' +
+                '<span class="font-weight-bold">' + label + '</span>' +
+                '<span>' + value + '</span>' +
+                '</div>';
+        }).join('');
+    }
+
+    // Renders image gallery
+    function renderGallery(id, images) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        if (!images.length) {
+            el.innerHTML = '<p class="text-muted col-12">No gallery images available.</p>';
+            return;
+        }
+        el.innerHTML = images.map(function (img) {
+            var src = typeof img === 'string' ? img : (img.url || img.image || img.src || '');
+            return '<div class="col-md-4 col-sm-6 mb-20">' +
+                '<a href="' + src + '" data-lightbox="service-gallery">' +
+                '<img src="' + src + '" alt="Gallery" class="img-fluid" style="border-radius:8px;object-fit:cover;height:180px;width:100%;">' +
+                '</a></div>';
+        }).join('');
+    }
+
+    // Renders Bootstrap accordion FAQ
+    function renderFAQ(id, faqs) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        if (!faqs.length) {
+            el.innerHTML = '<p class="text-muted">No FAQs available.</p>';
+            return;
+        }
+        el.innerHTML = faqs.map(function (faq, i) {
+            var q = faq.question || faq.q || '';
+            var a = faq.answer   || faq.a || '';
+            var collapseId = 'faq-collapse-' + i;
+            var headingId  = 'faq-heading-'  + i;
+            return '<div class="card mb-2">' +
+                '<div class="card-header" id="' + headingId + '">' +
+                '<button class="btn btn-link font-weight-bold text-left w-100 ' + (i > 0 ? 'collapsed' : '') + '" ' +
+                    'data-toggle="collapse" data-target="#' + collapseId + '" ' +
+                    'aria-expanded="' + (i === 0 ? 'true' : 'false') + '" ' +
+                    'aria-controls="' + collapseId + '">' +
+                    q +
+                '</button></div>' +
+                '<div id="' + collapseId + '" class="collapse ' + (i === 0 ? 'show' : '') + '" ' +
+                    'aria-labelledby="' + headingId + '" data-parent="#' + id + '">' +
+                '<div class="card-body">' + a + '</div>' +
+                '</div></div>';
+        }).join('');
+    }
+
+    // Renders "Service Excellence" bullet highlights
+    function renderAdditional(id, items) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        if (!items.length) {
+            el.innerHTML = '<p class="text-muted">No additional information.</p>';
+            return;
+        }
+        el.innerHTML = '<ul class="ltn__list-item-2 ltn__list-item-2-before">' +
+            items.map(function (item) {
+                var text = typeof item === 'string' ? item : (item.label || item.text || item.name || '');
+                return '<li>' + text + '</li>';
+            }).join('') +
+            '</ul>';
+    }
+
+    function showError(msg) {
+        var body = document.querySelector('.ltn__service-details-inner');
+        if (body) body.innerHTML = '<div class="alert alert-danger mt-4">' + msg + '</div>';
+    }
+
+})();
+</script>
+    <script>
         $(document).ready(function () {
             const urlParams = new URLSearchParams(window.location.search);
             const serviceId = urlParams.get('id');
